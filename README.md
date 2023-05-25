@@ -4,9 +4,9 @@
 
 Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUBA
 
-## Grupo {N}
+## Grupo T5
 
-* **Integrante 1** - [integrante1](https://github.com/integrante1)
+* **Felipe Sanchez Cabjolsky - 106419** - [fcabjolsky](https://github.com/fcabjolsky)
 * **Integrante 2** - [integrante2](https://github.com/integrante2)
 * **Integrante 3** - [integrante3](https://github.com/integrante3)
 * **Integrante 4** - [integrante4](https://github.com/integrante4)
