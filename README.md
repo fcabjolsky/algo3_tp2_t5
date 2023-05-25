@@ -10,7 +10,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 * **Mateo Riat Sapulia - 106031** -[Mriat30](https://github.com/Mriat30)
 * **Maria Zanatta - 108148** - [mariazanatta](https://github.com/mariazanatta)
 * **Camila Lucia Avalos - 108567** - [Caluav](https://github.com/Caluav)
-
+* **Lisandro Roman - 107274** - [lisandroman123](https://github.com/lisandroman123)
 Corrector: **{Corrector}**
 
 ## Aplicación
