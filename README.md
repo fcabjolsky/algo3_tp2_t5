@@ -8,7 +8,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 
 * **Felipe Sanchez Cabjolsky - 106419** - [fcabjolsky](https://github.com/fcabjolsky)
 * **Mateo Riat Sapulia - 106031** -[Mriat30](https://github.com/Mriat30)
-* **Integrante 3** - [integrante3](https://github.com/integrante3)
+* **Maria Zanatta - 108148** - [mariazanatta](https://github.com/mariazanatta)
 * **Integrante 4** - [integrante4](https://github.com/integrante4)
 
 Corrector: **{Corrector}**
