@@ -1,5 +1,5 @@
 
-package Model;
+package edu.fiuba.algo3.entrega_1;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
