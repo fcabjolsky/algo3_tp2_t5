@@ -1,6 +1,8 @@
 
 package edu.fiuba.algo3.entrega_1;
 import edu.fiuba.algo3.Jugador;
+import edu.fiuba.algo3.NoDisponeDeSuficientesCreditos;
+import edu.fiuba.algo3.Defensa;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Rule;
