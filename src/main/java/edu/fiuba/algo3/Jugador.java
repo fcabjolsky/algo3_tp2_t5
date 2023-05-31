@@ -30,6 +30,14 @@ public class Jugador {
             throw new NoDisponeDeSuficientesCreditos();
         }
     }
+
+    public void sumarCreditos(int creditos){
+        this.creditos += creditos;
+    }
+
+    public void perderVida(int danio){
+        this.vida -= danio;
+    }
     
     
 }
