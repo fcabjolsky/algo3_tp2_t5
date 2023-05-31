@@ -30,4 +30,12 @@ public class JugadorTest {
         assertThrows(NoDisponeDeSuficientesCreditos.class, () -> jugador.construir(torreBlanca));
 
     }
+
+    public void AlDestruirUnEnemigoSeLeAsignaAlJugadorLosCreditosCorrespondientes(){
+        Jugador jugador = new Jugador();
+        Enemigo hormiga = Mockito.mock(Enemigo.class);
+        Enemigo araña = Mockito.mock(Enemigo.class);
+
+
+    }
 }
