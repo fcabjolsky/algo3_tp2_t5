@@ -26,7 +26,7 @@ public class JugadorTest {
     public void elJugadorSoloConstruyeSiTieneSuficientesCreditos() throws Exception {
         Jugador jugador = new Jugador();
         Defensa torreBlanca = mock(Defensa.class);
-        when(torreBlanca.costoDeConstruccion()).thenReturn(200);
+        when(torreBlanca.puedeConstruir(100)).thenReturn(false);
         thrown.expect(NoDisponeDeSuficientesCreditos.class);
         jugador.construir(torreBlanca);
     }
