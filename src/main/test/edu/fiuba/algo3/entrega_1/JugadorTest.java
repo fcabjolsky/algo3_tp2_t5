@@ -1,6 +1,6 @@
 
 package edu.fiuba.algo3.entrega_1;
-
+import edu.fiuba.algo3.Jugador;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Rule;
