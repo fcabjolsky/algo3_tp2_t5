@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.Arania;
-import edu.fiuba.algo3.AraniaMuerta;
+import edu.fiuba.algo3.EnemigoMuerto;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -41,6 +41,6 @@ public class AraniaTest {
 
         arania.recibirDanio(2);
 
-        assertThrows(AraniaMuerta.class, () -> arania.recibirDanio(2));
+        assertThrows(EnemigoMuerto.class, () -> arania.recibirDanio(2));
     }
 }

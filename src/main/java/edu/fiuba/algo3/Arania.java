@@ -1,15 +1,9 @@
 package edu.fiuba.algo3;
 
-public class Arania {
-    private int energia = 2;
-    public void recibirDanio(int unDanio) {
-        if (this.estaMuerta()) {
-            throw new AraniaMuerta();
-        }
-        this.energia -= unDanio;
+public class Arania extends Enemigo {
+
+    public Arania() {
+        this.energia = 2;
     }
 
-    public boolean estaMuerta() {
-        return this.energia <= 0;
-    }
 }

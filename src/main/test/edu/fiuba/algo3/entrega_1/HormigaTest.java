@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.entrega_1;
 
+import edu.fiuba.algo3.EnemigoMuerto;
 import edu.fiuba.algo3.Hormiga;
-import edu.fiuba.algo3.HormigaMuerta;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -41,6 +41,6 @@ public class HormigaTest {
 
         hormiga.recibirDanio(2);
 
-        assertThrows(HormigaMuerta.class, () -> hormiga.recibirDanio(2));
+        assertThrows(EnemigoMuerto.class, () -> hormiga.recibirDanio(2));
     }
 }
