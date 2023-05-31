@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-public interface Enemigo {
+public abstract class Enemigo {
 
-    void recibirDanio();
+    public abstract void recibirDanio();
 }
