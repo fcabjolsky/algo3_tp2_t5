@@ -1,4 +1,4 @@
-package Model;
+package edu.fiuba.algo3;
 
 import java.util.ArrayList;
 import java.util.List;
