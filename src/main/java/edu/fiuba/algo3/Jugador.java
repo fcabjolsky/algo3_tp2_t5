@@ -22,15 +22,14 @@ public class Jugador {
     }
     
     public void construir(Defensa defensa) throws Exception{
-        if (this.puedeConstruir(defensa.costoDeConstruccion())) {
-            Defensa nuevaDefensa = defensa.construir();
+        if (defensa.puedeConstruir(this.creditos)) {
+            Defensa nuevaDefensa = defensa.construir(this);
             defensas.add(nuevaDefensa);
         }
         else{
             throw new NoDisponeDeSuficientesCreditos();
         }
     }
-    
     
     
 }
