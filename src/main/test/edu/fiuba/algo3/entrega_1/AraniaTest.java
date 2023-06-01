@@ -1,12 +1,16 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.Arania;
-import edu.fiuba.algo3.EnemigoMuerto;
-import edu.fiuba.algo3.Posicion;
-import edu.fiuba.algo3.Rango;
+import edu.fiuba.algo3.modelo.Arania;
+import edu.fiuba.algo3.modelo.EnemigoMuerto;
+import edu.fiuba.algo3.modelo.Hormiga;
+import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Rango;
+import edu.fiuba.algo3.modelo.Pasarela;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
@@ -66,5 +70,18 @@ public class AraniaTest {
         when(r.estaEnRango(p)).thenReturn(false);
 
         assertFalse(arania.estaEnRango(r));
+    }
+    @Test
+    public void araniaSeMueveApasarelaCorrespondiente() {
+	    Posicion p0 = new Posicion(0, 0);
+		Posicion p2 = new Posicion(2,0);
+		
+		Pasarela pasarelaLargada = new Pasarela(p0);
+		Pasarela pasarelaSiguiente = new Pasarela(p2);
+		
+		Arania arania = new Arania(p0);
+		
+		arania.avanzar(p2);
+		assertEquals(pasarelaSiguiente.getPosicion(), arania.getPosicion());
     }
 }
