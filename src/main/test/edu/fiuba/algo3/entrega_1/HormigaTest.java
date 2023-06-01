@@ -72,9 +72,9 @@ public class HormigaTest {
 
         assertFalse(hormiga.estaEnRango(r));
     }
-    
+    /*
     public void hormigaAvanzaAlaParcelaCorrespondiente() {
-    	/*
+    	
     	 * necesito una lista de parcelas, entonces es mas facil de saber cual es la siguiente
     	 * tengo que hacer que el enemigo se mueva. enemigo avanzar()
     	 * 
@@ -95,7 +95,7 @@ public class HormigaTest {
     	 * y le pasa una lista de parcelas? 
     	 * o le pide la posicion y con eso hace algo
     	 *
-    	 * */
+    	 * 
     	Posicion p0 = new Posicion(0, 0);
     	Posicion p1 = new Posicion(1,0);
     	
@@ -107,6 +107,6 @@ public class HormigaTest {
     	hormiga.avanzar(p1);
     	assertEquals(pasarelaSiguiente.getPosicion(), hormiga.getPosicion());	
     	
-    }
+    }*/
     
 }
