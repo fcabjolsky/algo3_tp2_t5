@@ -20,9 +20,9 @@ public class TierraTest {
     public void esPosibleConstruirDefensasSobreTierraVacia() {    	
     	//Arrange
     
-    	Tierra nuevaTierra = new Tierra();	
+    	Tierra nuevaTierra = new Tierra();
     	
-    	Torre unaTorre = new Torre();
+    	Torre unaTorre = new Torre(0);
     	
     	//Act - Assert
     	
@@ -36,9 +36,9 @@ public class TierraTest {
     	
     	Tierra nuevaTierra = new Tierra();
     	
-    	Torre torrePrimera = new Torre();
+    	Torre torrePrimera = new Torre(0);
     	
-    	Torre torreSegunda = new Torre();
+    	Torre torreSegunda = new Torre(0);
     	 
     	
     	//Act
