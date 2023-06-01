@@ -24,7 +24,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void elJugadorSoloConstruyeSiTieneSuficientesCreditos(){
+    public void NoSePuedenConstruirDefensasSiElJugadorNoDisponeDeSuficientesCreditos(){
         Jugador jugador = new Jugador();
         Defensa torreBlanca = Mockito.mock(Defensa.class);
         Posicion posicion = new Posicion(1,2);
