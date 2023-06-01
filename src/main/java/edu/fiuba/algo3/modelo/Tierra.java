@@ -9,7 +9,7 @@ public class Tierra {
 	
 	
 	private Boolean puedoConstruir(){
-		//checkear que el atributo este lleno ¿Como hago eso?
+		
 		if(this.defensa!=null) {
 			return false;
 		}
