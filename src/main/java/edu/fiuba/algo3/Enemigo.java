@@ -2,6 +2,7 @@ package edu.fiuba.algo3;
 
 public abstract class Enemigo {
     protected int energia;
+    protected int recompensa;
     private Posicion posicion;
 
     public Enemigo(Posicion posicion) {
@@ -21,4 +22,6 @@ public abstract class Enemigo {
     public boolean estaEnRango(Rango unRango) {
         return unRango.estaEnRango(this.posicion);
     }
+
+    public abstract void morir(Jugador jugador, Contador cantidadDeMuertes);
 }
