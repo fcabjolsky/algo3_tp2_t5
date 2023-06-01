@@ -1,11 +1,11 @@
 package edu.fiuba.algo3.entrega_1;
 
 
-import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.Posicion;
 import edu.fiuba.algo3.modelo.Pasarela;
-import edu.fiuba.algo3.modelo.Hormiga;
-import edu.fiuba.algo3.modelo.Rango;
-import edu.fiuba.algo3.modelo.EnemigoMuerto;
+import edu.fiuba.algo3.Hormiga;
+import edu.fiuba.algo3.Rango;
+import edu.fiuba.algo3.EnemigoMuerto;
 
 
 import org.junit.jupiter.api.Test;
