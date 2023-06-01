@@ -9,11 +9,7 @@ public class Tierra {
 	
 	
 	private Boolean puedoConstruir(){
-		
-		if(this.defensa!=null) {
-			return false;
-		}
-		return true;
+		return this.defensa!=null;
 	}
 	
 	public Boolean agregarDefensa(Defensa defensa){
