@@ -2,6 +2,7 @@
 package edu.fiuba.algo3.entrega_1;
 import edu.fiuba.algo3.Jugador;
 import edu.fiuba.algo3.Defensa;
+import edu.fiuba.algo3.Posicion;
 import edu.fiuba.algo3.NoDisponeDeSuficientesCreditos;
 
 import org.junit.jupiter.api.Test;
