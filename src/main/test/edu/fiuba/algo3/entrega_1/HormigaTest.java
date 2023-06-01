@@ -1,9 +1,12 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.*;
+import edu.fiuba.algo3.modelo.Pasarela;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
@@ -64,4 +67,41 @@ public class HormigaTest {
 
         assertFalse(hormiga.estaEnRango(r));
     }
+    
+    public void hormigaAvanzaAlaParcelaCorrespondiente() {
+    	/*
+    	 * necesito una lista de parcelas, entonces es mas facil de saber cual es la siguiente
+    	 * tengo que hacer que el enemigo se mueva. enemigo avanzar()
+    	 * 
+    	 * las parcelas tienen una posicion, la parcela inicial tiene que tener una posicion
+    	 * (0,0)
+    	 * 
+    	 * la parcela siguiente puede estar en (0,1) -> (1,0) -> (-1,0) -> (0,-1)
+    	 * Es decir la parcela inicial, puede estar en cualquier borde de la pantalla
+    	 * 
+    	 * 
+    	 * Por simpleza la voy a colocar en la derecha de la hormiga () porque estos son test
+    	 * de la hormiga
+    	 * 
+    	 * Este problema se reduce al usar una linkedList entonces la lista siempre va hacia
+    	 * delante
+    	 * 
+    	 * El mapa tiene que mover a los enemigos, entonces le dice a enemigo avanzar
+    	 * y le pasa una lista de parcelas? 
+    	 * o le pide la posicion y con eso hace algo
+    	 *
+    	 * */
+    	Posicion p0 = new Posicion(0, 0);
+    	Posicion p1 = new Posicion(1,0);
+    	
+    	Pasarela pasarelaLargada = new Pasarela(p0);
+    	Pasarela pasarelaSiguiente = new Pasarela(p1);
+    	
+    	Hormiga hormiga = new Hormiga(p0);
+    	
+    	hormiga.avanzar(p1);
+    	assertEquals(pasarelaSiguiente.getPosicion(), hormiga.getPosicion());	
+    	
+    }
+    
 }
