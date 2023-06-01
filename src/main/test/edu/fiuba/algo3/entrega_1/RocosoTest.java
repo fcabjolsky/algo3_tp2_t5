@@ -15,7 +15,7 @@ public class RocosoTest {
     	
     	Rocoso nuevoRocoso = new Rocoso();
     	
-    	Torre torrePrimera = new Torre();
+    	Torre torrePrimera = new Torre(0);
     	
     	
     	//Act - Assert

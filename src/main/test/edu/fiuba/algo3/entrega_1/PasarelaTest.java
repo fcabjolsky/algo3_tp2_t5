@@ -14,7 +14,7 @@ public class PasarelaTest {
     	
     	Pasarela nuevoRocoso = new Pasarela();
     	
-    	Torre torrePrimera = new Torre();
+    	Torre torrePrimera = new Torre(0);
     	
     	
     	//Act - Assert
