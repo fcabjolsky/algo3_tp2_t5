@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
-public class Torre {
+
+public class Torre implements Defensa{
 
     private EstadoTorre estado;
 
@@ -14,4 +15,5 @@ public class Torre {
     public void defender(Enemigo enemigo){
         estado.defender(enemigo);
     }
+
 }
