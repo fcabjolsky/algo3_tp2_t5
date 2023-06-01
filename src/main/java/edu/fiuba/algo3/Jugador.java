@@ -21,7 +21,7 @@ public class Jugador {
       return costo< this.creditos;
     }
     
-    public void construir(Defensa defensa, Posicion posicion) throws Exception{
+    public void construir(Defensa defensa, Posicion posicion){
         if (defensa.puedeConstruir(this.creditos)) {
             Defensa nuevaDefensa = defensa.construir(this, posicion);
             defensas.add(nuevaDefensa);
