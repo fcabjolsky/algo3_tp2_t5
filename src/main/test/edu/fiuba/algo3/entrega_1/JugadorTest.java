@@ -26,8 +26,9 @@ public class JugadorTest {
     public void elJugadorSoloConstruyeSiTieneSuficientesCreditos(){
         Jugador jugador = new Jugador();
         Defensa torreBlanca = Mockito.mock(Defensa.class);
+        Posicion posicion = new Posicion(1,2);
         Mockito.when(torreBlanca.puedeConstruir(100)).thenReturn(false);
-        assertThrows(NoDisponeDeSuficientesCreditos.class, () -> jugador.construir(torreBlanca));
+        assertThrows(NoDisponeDeSuficientesCreditos.class, () -> jugador.construir(torreBlanca, posicion));
 
     }
 
