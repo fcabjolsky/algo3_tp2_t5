@@ -3,7 +3,6 @@ package edu.fiuba.algo3;
 import javafx.geometry.Pos;
 
 public class Rango {
-
     private int radio;
     private final Posicion posicion;
 
