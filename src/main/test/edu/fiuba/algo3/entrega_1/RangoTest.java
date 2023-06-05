@@ -13,7 +13,7 @@ public class RangoTest {
     @Test
     public void unRangoCalculaSatisfactoriamenteSiAlcanzaUnObjetivo() {
 
-        Rango rango = new Rango(3, new Plateada(new Posicion(0, 0)));
+        Rango rango = new Rango(3, new Posicion(0,0));
         Posicion posicionObjetivo = new Posicion(2, 1);
 
         Assertions.assertTrue(rango.estaEnRango(posicionObjetivo));
@@ -23,7 +23,7 @@ public class RangoTest {
     @Test
     public void unRangoCalculaSatisfactoriamenteSiNoAlcanzaUnObjetivo() {
 
-        Rango rango = new Rango(3, new Plateada(new Posicion(0, 0)));
+        Rango rango = new Rango(3, new Posicion(0,0));
         Posicion posicionObjetivo = new Posicion(4, 1);
 
         Assertions.assertFalse(rango.estaEnRango(posicionObjetivo));

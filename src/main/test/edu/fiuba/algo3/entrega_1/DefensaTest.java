@@ -13,8 +13,6 @@ public class DefensaTest {
        Torre defensa = new Blanca(new Posicion(0,0));
        Enemigo enemigoEnRango = new Hormiga(new Posicion(2 ,1));
 
-       defensa.defender(enemigoEnRango);
-
        Assertions.assertDoesNotThrow(() -> defensa.defender(enemigoEnRango));
 
     }
@@ -33,8 +31,6 @@ public class DefensaTest {
         Torre defensa = new Plateada(new Posicion(0,0));
         Enemigo enemigoEnRango = new Hormiga(new Posicion(2 ,1));
 
-        defensa.defender(enemigoEnRango);
-
         Assertions.assertDoesNotThrow(() -> defensa.defender(enemigoEnRango));
 
     }
@@ -46,7 +42,7 @@ public class DefensaTest {
 
         Assertions.assertThrows(EnemigoFueraDeRango.class,() -> defensa.defender(enemigoFueraDeRango));
     }
-    
+
 }
 
 

@@ -5,15 +5,20 @@ import javafx.geometry.Pos;
 public class Rango {
 
     private int radio;
-    private final Defensa defensa;
+    private final Posicion posicion;
 
 
-    public Rango(int radio, Defensa defensa) {
+    public Rango(int radio, Posicion posicion) {
         this.radio = radio;
-        this.defensa = defensa;
+        this.posicion = posicion;
+
+    }
+
+    public Posicion posicion() {
+        return this.posicion;
     }
 
     public boolean estaEnRango(Posicion posicionObjetivo) {
-        return this.radio >= defensa.posicion().calcularDistanciaA(posicionObjetivo);
+        return this.radio >= this.posicion.calcularDistanciaA(posicionObjetivo);
     }
 }

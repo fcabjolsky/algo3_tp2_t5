@@ -5,12 +5,6 @@ public abstract class Torre implements Defensa {
     protected Rango rango;
     protected int danio;
 
-    private  Posicion posicion;
-
-    public Torre(Posicion posicion) {
-        this.posicion = posicion;
-    }
-
     @Override
     public void defender(Enemigo enemigo) {
         if(enemigo.estaEnRango(this.rango)) {
@@ -22,6 +16,6 @@ public abstract class Torre implements Defensa {
     }
 
     public Posicion posicion() {
-        return this.posicion;
+        return this.rango.posicion();
     }
 }
