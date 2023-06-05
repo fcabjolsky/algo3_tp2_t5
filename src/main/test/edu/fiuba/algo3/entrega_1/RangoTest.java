@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.entrega_1;
 
+import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Rango;
 import org.junit.jupiter.api.Assertions;
 import edu.fiuba.algo3.*;
 import org.junit.jupiter.api.Test;

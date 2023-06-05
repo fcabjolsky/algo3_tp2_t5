@@ -1,6 +1,10 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.*;
+import edu.fiuba.algo3.modelo.EnemigoMuerto;
+import edu.fiuba.algo3.modelo.Hormiga;
+import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Rango;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
