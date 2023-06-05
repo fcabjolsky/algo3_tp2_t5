@@ -1,7 +1,6 @@
 package edu.fiuba.algo3;
 
 public class Posicion {
-
     private int coordenadaX;
 
     private int coordenadaY;
