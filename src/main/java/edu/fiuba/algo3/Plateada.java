@@ -10,4 +10,8 @@ public class Plateada extends Torre {
         return true;
     }
 
+    @Override
+    public Defensa construir(Jugador jugador, Posicion posicion) {
+        return null;
+    }
 }
