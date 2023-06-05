@@ -6,4 +6,8 @@ public class Plateada extends Torre {
         this.rango = new Rango(5, posicion);
     }
 
+    public boolean puedeConstruir(int creditos){
+        return true;
+    }
+
 }

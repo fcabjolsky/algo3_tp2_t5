@@ -6,6 +6,9 @@ public class Blanca extends Torre {
         this.rango = new Rango(3, posicion);
     }
 
+    public boolean puedeConstruir(int creditos) {
+        return true;
+    }
 
 
 }

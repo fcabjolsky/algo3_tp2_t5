@@ -18,4 +18,5 @@ public abstract class Torre implements Defensa {
     public Posicion posicion() {
         return this.rango.posicion();
     }
+
 }
