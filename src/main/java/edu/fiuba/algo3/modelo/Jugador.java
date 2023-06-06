@@ -9,6 +9,14 @@ public class Jugador {
     int creditos = 100;
     List <Defensa> defensas = new ArrayList();
 
+    public Jugador() {
+    }
+
+    public Jugador(int vida, int creditos) {
+        this.vida = vida;
+        this.creditos = creditos;
+    }
+
     public int getVida() {
         return vida;
     }
@@ -38,6 +46,14 @@ public class Jugador {
     public void perderVida(int danio){
         this.vida -= danio;
     }
-    
-    
+
+
+    public boolean equals(Object jugador) {
+        Jugador jugadorComparado = (Jugador)jugador;
+        if (this.creditos == jugadorComparado.creditos && this.vida == jugadorComparado.vida){
+            return true;
+        }
+        return false;
+    }
+
 }
