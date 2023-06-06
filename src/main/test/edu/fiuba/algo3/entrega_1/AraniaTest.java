@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Rango;
 import edu.fiuba.algo3.modelo.Pasarela;
 
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 

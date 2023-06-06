@@ -16,4 +16,5 @@ public class Arania extends Enemigo {
     	return this.posicion;
     }
     
+
 }

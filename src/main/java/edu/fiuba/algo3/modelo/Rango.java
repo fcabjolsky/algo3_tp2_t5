@@ -1,17 +1,23 @@
 package edu.fiuba.algo3.modelo;
 
+import javafx.geometry.Pos;
+
 public class Rango {
     private int radio;
+    private final Posicion posicion;
 
-    private int getRadio() {
-        return this.radio;
-    }
 
-    public Rango(int radio) {
+    public Rango(int radio, Posicion posicion) {
         this.radio = radio;
+        this.posicion = posicion;
+
     }
 
-    public boolean estaEnRango(Posicion posicion) {
-        return true;
+    public Posicion posicion() {
+        return this.posicion;
+    }
+
+    public boolean estaEnRango(Posicion posicionObjetivo) {
+        return this.radio >= this.posicion.calcularDistanciaA(posicionObjetivo);
     }
 }

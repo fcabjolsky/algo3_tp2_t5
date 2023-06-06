@@ -5,6 +5,7 @@ public abstract class Enemigo {
     protected Posicion posicion;
     protected int velocidad;
 
+
     public Enemigo(Posicion posicion) {
         this.posicion = posicion;
     }
