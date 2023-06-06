@@ -5,4 +5,13 @@ public class Hormiga extends Enemigo {
         super(posicion);
         this.energia = 1;
     }
+
+    public void morir(Jugador jugador, Contador cantidadDehormigasMuertas){
+        cantidadDehormigasMuertas.aumentar();
+        if (cantidadDehormigasMuertas.esIgual(11)){
+            jugador.sumarCreditos(2);
+        }else{
+            jugador.sumarCreditos(1);
+        }
+    }
 }
