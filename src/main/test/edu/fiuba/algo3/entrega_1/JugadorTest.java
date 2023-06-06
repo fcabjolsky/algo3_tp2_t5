@@ -30,13 +30,44 @@ public class JugadorTest {
     }
 
     @Test
+    public void SePuedeConstruirUnaTorreBlancaSiSeTienenSuficientesCreditosYEstosSeGastan(){
+        Jugador jugador = new Jugador(20, 100);
+        Posicion posicion = new Posicion(1,2);
+        Jugador jugadorEsperado = new Jugador(20, 90);
+        TorreBlanca torreBlanca = new TorreBlanca(1, 10);
+
+        jugador.construir(torreBlanca, posicion);
+
+        assertEquals(jugadorEsperado, jugador);
+
+    }
+
+
+    @Test
     public void NoSePuedeConstruirUnaTorrePlateadaSiNoSeDisponeDeSuficientesCreditos(){
         Jugador jugador = new Jugador(20, 5);
         Posicion posicion = new Posicion(1,2);
-        TorrePlateada torrePlateada = new TorrePlateada(1, 20);
+        TorrePlateada torrePlateada = new TorrePlateada(2, 20);
         assertThrows(NoDisponeDeSuficientesCreditos.class, () -> jugador.construir(torrePlateada, posicion));
 
     }
+
+    @Test
+    public void SePuedeConstruirUnaTorrePlateadaSiSeTienenSuficientesCreditosYEstosSeGastan(){
+        Jugador jugador = new Jugador(20, 100);
+        Posicion posicionBlanca = new Posicion(1,2);
+        Posicion posicionPlateada = new Posicion(1,3);
+        Jugador jugadorEsperado = new Jugador(20, 70);
+        TorrePlateada torrePlateada = new TorrePlateada(2, 20);
+        TorreBlanca torreBlanca = new TorreBlanca(1, 10);
+
+        jugador.construir(torrePlateada, posicionPlateada);
+        jugador.construir(torreBlanca, posicionBlanca);
+
+        assertEquals(jugadorEsperado, jugador);
+
+    }
+
     @Test
     public void AlDestruir3EnemigosHormigasSeLeAsignanAlJugadorLosCreditosCorrespondientes(){
         Jugador jugador = new Jugador();
