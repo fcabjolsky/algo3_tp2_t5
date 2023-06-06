@@ -2,7 +2,9 @@ package edu.fiuba.algo3.modelo;
 
 public abstract class Enemigo {
     protected int energia;
-    private Posicion posicion;
+    protected Posicion posicion;
+    protected int velocidad;
+
 
     public Enemigo(Posicion posicion) {
         this.posicion = posicion;
@@ -23,4 +25,13 @@ public abstract class Enemigo {
     }
 
     public abstract void morir(Jugador jugador, Contador cantidadDeMuertes);
+  
+    public Posicion obtenerPosicion() {
+        return this.posicion;
+    }
+
+    public void avanzar(Posicion posicion) {
+        this.posicion = posicion;
+    }
+  
 }

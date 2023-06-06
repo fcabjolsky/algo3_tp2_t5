@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.TorreBlanca;
 import org.junit.jupiter.api.Test;
 
+import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Pasarela;
 import edu.fiuba.algo3.modelo.Torre;
 
@@ -13,12 +14,10 @@ public class PasarelaTest {
 	@Test
     public void noEsPosibleConstruirDefesasSobrePasarela() {
     	//Arrange
-    	
-    	Pasarela nuevoRocoso = new Pasarela();
-
-		Torre unaTorreBlanca = new TorreBlanca(new Posicion(2, 5));
-    	
-    	
+      Posicion p = new Posicion(0,0);
+		  Torre unaTorreBlanca = new TorreBlanca();
+    	Pasarela nuevoRocoso = new Pasarela(p);
+    	    	
     	//Act - Assert
     	
     	assertFalse(nuevoRocoso.agregarDefensa(unaTorreBlanca));

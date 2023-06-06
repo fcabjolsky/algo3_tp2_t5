@@ -8,10 +8,6 @@ import org.mockito.Mockito;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JugadorTest {
-
-    public JugadorTest() {
-    }
-
     @Test
     public void elJugadorEmpiezaConLaVidaYcreditosCorrectos() {
         Jugador jugador = new Jugador();
@@ -118,4 +114,16 @@ public class JugadorTest {
         assertNotEquals(jugadorOriginal, jugador);
     }
 
+    @Test
+    public void luegoDeRecibir20DanioElJugadorEstaMuerto() {
+        Jugador jugador = new Jugador();
+        jugador.perderVida(20);
+        assert(jugador.estaMuerto());
+    }
+
+    @Test
+    public void jugadorRecienCreadoNoEstaMuerto() {
+        Jugador jugador = new Jugador();
+        assertFalse(jugador.estaMuerto());
+    }
 }

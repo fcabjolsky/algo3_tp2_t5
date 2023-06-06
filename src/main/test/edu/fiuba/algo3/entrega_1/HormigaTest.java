@@ -1,13 +1,19 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.*;
-import edu.fiuba.algo3.modelo.EnemigoMuerto;
-import edu.fiuba.algo3.modelo.Hormiga;
+
 import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Pasarela;
+import edu.fiuba.algo3.modelo.Hormiga;
 import edu.fiuba.algo3.modelo.Rango;
+import edu.fiuba.algo3.modelo.EnemigoMuerto;
+import edu.fiuba.algo3.*;
+
+
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
@@ -68,4 +74,20 @@ public class HormigaTest {
 
         assertFalse(hormiga.estaEnRango(r));
     }
+    @Test
+    public void hormigaAvanzaAlaParcelaCorrespondiente() {
+    	 
+    	Posicion p0 = new Posicion(0, 0);
+    	Posicion p1 = new Posicion(1,0);
+    	
+    	Pasarela pasarelaLargada = new Pasarela(p0);
+    	Pasarela pasarelaSiguiente = new Pasarela(p1);
+    	
+    	Hormiga hormiga = new Hormiga(p0);
+    	
+    	hormiga.avanzar(p1);
+    	assertEquals(pasarelaSiguiente.getPosicion(), hormiga.getPosicion());	
+    	
+    }
+    
 }

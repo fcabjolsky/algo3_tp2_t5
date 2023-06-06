@@ -5,9 +5,9 @@ import java.util.List;
 
 
 public class Jugador {
-    int vida = 20;
-    int creditos = 100;
-    List <Defensa> defensas = new ArrayList();
+    private int vida = 20;
+    private int creditos = 100;
+    private List <Defensa> defensas = new ArrayList();
 
     public Jugador() {
     }
@@ -51,13 +51,16 @@ public class Jugador {
         this.vida -= danio;
     }
 
-
     public boolean equals(Object jugador) {
         Jugador jugadorComparado = (Jugador)jugador;
         if (this.creditos == jugadorComparado.creditos && this.vida == jugadorComparado.vida){
             return true;
         }
         return false;
+    }
+  
+    public boolean estaMuerto() {
+       return this.vida <= 0;
     }
 
 }
