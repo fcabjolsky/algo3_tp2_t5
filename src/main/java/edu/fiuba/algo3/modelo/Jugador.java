@@ -5,9 +5,9 @@ import java.util.List;
 
 
 public class Jugador {
-    int vida = 20;
-    int creditos = 100;
-    List <Defensa> defensas = new ArrayList();
+    private int vida = 20;
+    private int creditos = 100;
+    private List <Defensa> defensas = new ArrayList();
 
     public int getVida() {
         return vida;
@@ -37,6 +37,10 @@ public class Jugador {
 
     public void perderVida(int danio){
         this.vida -= danio;
+    }
+
+    public boolean estaMuerto() {
+       return this.vida <= 0;
     }
     
     
