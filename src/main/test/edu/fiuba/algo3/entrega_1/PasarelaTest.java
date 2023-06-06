@@ -2,6 +2,8 @@ package edu.fiuba.algo3.entrega_1;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.TorreBlanca;
 import org.junit.jupiter.api.Test;
 
 import edu.fiuba.algo3.modelo.Pasarela;
@@ -13,12 +15,12 @@ public class PasarelaTest {
     	//Arrange
     	
     	Pasarela nuevoRocoso = new Pasarela();
-    	
-    	Torre torrePrimera = new Torre(0);
+
+		Torre unaTorreBlanca = new TorreBlanca(new Posicion(2, 5));
     	
     	
     	//Act - Assert
     	
-    	assertFalse(nuevoRocoso.agregarDefensa(torrePrimera));
+    	assertFalse(nuevoRocoso.agregarDefensa(unaTorreBlanca));
     }
 }
