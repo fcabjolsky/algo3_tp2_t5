@@ -6,6 +6,7 @@ public class Arania extends Enemigo {
         super(posicion);
         this.energia = 2;
         this.velocidad = 2;
+        this.danio = 2;
     }
     
     

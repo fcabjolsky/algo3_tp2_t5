@@ -4,6 +4,7 @@ public abstract class Enemigo {
     protected int energia;
     protected Posicion posicion;
     protected int velocidad;
+    protected int danio;
 
 
     public Enemigo(Posicion posicion) {
@@ -31,4 +32,9 @@ public abstract class Enemigo {
     public void avanzar(Posicion posicion) {
         this.posicion = posicion;
     }
+    
+    public void atacar(Jugador jugador) {
+    	jugador.perderVida(danio);
+    }
+   
 }
