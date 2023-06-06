@@ -23,4 +23,12 @@ public abstract class Enemigo {
     public boolean estaEnRango(Rango unRango) {
         return unRango.estaEnRango(this.posicion);
     }
+
+    public Posicion obtenerPosicion() {
+        return this.posicion;
+    }
+
+    public void avanzar(Posicion posicion) {
+        this.posicion = posicion;
+    }
 }

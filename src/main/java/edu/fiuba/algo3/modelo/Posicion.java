@@ -9,7 +9,7 @@ public class Posicion {
        return this.coordenadaX;
     }
 
-    private int getCoordenadaY() {
+    public int getCoordenadaY() {
         return this.coordenadaY;
     }
 
