@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Posicion;
+
 public class Hormiga extends Enemigo {
     public Hormiga(Posicion posicion) {
         super(posicion);
