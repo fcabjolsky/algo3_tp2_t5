@@ -15,10 +15,11 @@ public class Mapa {
     }
 
     public void agregarEnemigo(Enemigo enemigo1) {
+        enemigo1.avanzar(this.obtenerPosicionPasarelaInicial());
         this.enemigo1 = enemigo1;
     }
 
-    public Posicion obtenerPosicionPasarelaInicial() {
+    private Posicion obtenerPosicionPasarelaInicial() {
         return this.pasarelas.get(0).getPosicion();
     }
 

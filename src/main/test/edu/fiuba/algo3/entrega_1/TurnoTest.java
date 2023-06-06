@@ -17,8 +17,7 @@ public class TurnoTest {
         pasarelas.add(new Pasarela(new Posicion(0, 1)));
         Mapa mapa = new Mapa(pasarelas, new ArrayList<Rocoso>(), new ArrayList<Tierra>());
 
-        Posicion pInicial = mapa.obtenerPosicionPasarelaInicial();
-        Enemigo enemigo1 = new Hormiga(pInicial);
+        Enemigo enemigo1 = new Hormiga(new Posicion(0, 0));
         mapa.agregarEnemigo(enemigo1);
         Turno turno = new Turno(jugador, mapa);
         turno.moverEnemigos();
