@@ -21,4 +21,6 @@ public abstract class Enemigo {
     public boolean estaEnRango(Rango unRango) {
         return unRango.estaEnRango(this.posicion);
     }
+
+    public abstract void morir(Jugador jugador, Contador cantidadDeMuertes);
 }
