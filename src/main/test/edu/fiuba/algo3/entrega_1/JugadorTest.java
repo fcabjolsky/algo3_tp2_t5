@@ -1,12 +1,6 @@
 
 package edu.fiuba.algo3.entrega_1;
-import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.Defensa;
-import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.Hormiga;
-import edu.fiuba.algo3.modelo.Arania;
-import edu.fiuba.algo3.modelo.Contador;
-import edu.fiuba.algo3.modelo.NoDisponeDeSuficientesCreditos;
+import edu.fiuba.algo3.modelo.*;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -27,12 +21,20 @@ public class JugadorTest {
     }
 
     @Test
-    public void NoSePuedenConstruirDefensasSiElJugadorNoDisponeDeSuficientesCreditos(){
-        Jugador jugador = new Jugador();
-        Defensa torreBlanca = Mockito.mock(Defensa.class);
+    public void NoSePuedeConstruirUnaTorreBlancaSiNoSeDisponeDeSuficientesCreditos(){
+        Jugador jugador = new Jugador(20, 5);
         Posicion posicion = new Posicion(1,2);
-        Mockito.when(torreBlanca.puedeConstruir(100)).thenReturn(false);
+        TorreBlanca torreBlanca = new TorreBlanca(1, 10);
         assertThrows(NoDisponeDeSuficientesCreditos.class, () -> jugador.construir(torreBlanca, posicion));
+
+    }
+
+    @Test
+    public void NoSePuedeConstruirUnaTorrePlateadaSiNoSeDisponeDeSuficientesCreditos(){
+        Jugador jugador = new Jugador(20, 5);
+        Posicion posicion = new Posicion(1,2);
+        TorrePlateada torrePlateada = new TorrePlateada(1, 20);
+        assertThrows(NoDisponeDeSuficientesCreditos.class, () -> jugador.construir(torrePlateada, posicion));
 
     }
     @Test
