@@ -1,21 +1,25 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.Enemigo;
-import edu.fiuba.algo3.modelo.Pasarela;
-import edu.fiuba.algo3.modelo.Posicion;
+import java.util.List;
 
 public class Mapa {
     private Enemigo enemigo1;
+    private List<Pasarela> pasarelas;
+    private List<Rocoso> rocosos;
+    private List<Tierra> tierras;
 
-    public void agregarParcela(Pasarela pasarela) {
+    public Mapa(List<Pasarela> pasarelas, List<Rocoso> rocosos, List<Tierra> tierras) {
+        this.pasarelas = pasarelas;
+        this.rocosos = rocosos;
+        this.tierras = tierras;
     }
 
     public void agregarEnemigo(Enemigo enemigo1) {
         this.enemigo1 = enemigo1;
     }
 
-    public Posicion obtenerPoscionInicial() {
-        return new Posicion(0, 0);
+    public Posicion obtenerPosicionPasarelaInicial() {
+        return this.pasarelas.get(0).getPosicion();
     }
 
     public void pasarTurno() {
