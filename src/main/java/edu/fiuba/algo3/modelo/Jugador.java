@@ -26,7 +26,7 @@ public class Jugador {
     }
     
     public boolean puedeConstruir(int costo){
-      return costo< this.creditos;
+      return (costo <= this.creditos);
     }
     
     public void construir(Defensa defensa, Posicion posicion){
@@ -41,6 +41,10 @@ public class Jugador {
 
     public void sumarCreditos(int creditos){
         this.creditos += creditos;
+    }
+
+    public void restarCreditos(int creditos){
+        this.creditos -= creditos;
     }
 
     public void perderVida(int danio){
