@@ -15,8 +15,7 @@ public class Mapa {
     }
 
     public void agregarEnemigo(Enemigo enemigo1) {
-        enemigo1.avanzar(this.obtenerPosicionPasarelaInicial());
-        this.enemigo1 = enemigo1;
+        pasarelas.get(0).agregarEnemigo(enemigo1);
     }
 
     private Posicion obtenerPosicionPasarelaInicial() {
@@ -24,6 +23,8 @@ public class Mapa {
     }
 
     public void pasarTurno() {
-        this.enemigo1.avanzar(new Posicion(0, 1));
+        for (int i = 0; i < pasarelas.size()-1; i++){
+            pasarelas.get(i).moverEnemigosA(pasarelas.get(i+1));
+        }
     }
 }

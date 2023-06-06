@@ -5,9 +5,11 @@ public abstract class Enemigo {
     protected Posicion posicion;
     protected int velocidad;
 
+    protected int contadorAvance;
 
     public Enemigo(Posicion posicion) {
         this.posicion = posicion;
+        this.contadorAvance = -1;
     }
     public void recibirDanio(int unDanio) {
         if (this.estaMuerta()) {
@@ -30,5 +32,12 @@ public abstract class Enemigo {
 
     public void avanzar(Posicion posicion) {
         this.posicion = posicion;
+        this.contadorAvance++;
     }
+
+    public boolean enMovimiento(){
+        return (contadorAvance < velocidad);
+    }
+
+
 }
