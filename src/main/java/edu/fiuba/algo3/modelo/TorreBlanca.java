@@ -8,8 +8,8 @@ public class TorreBlanca extends Torre {
         this.rango = new Rango(3, posicion);
     }
 
-    public TorreBlanca(int tiempoDeConstruccion, int costo) {
-        super(tiempoDeConstruccion, costo);
+    public TorreBlanca() {
+        super(1, 10);
     }
 
     public Defensa construir(Jugador jugador, Posicion posicion) {

@@ -7,8 +7,8 @@ public class TorrePlateada extends Torre{
         this.rango = new Rango(5, posicion);
     }
 
-    public TorrePlateada(int tiempoDeConstruccion, int costo) {
-        super(tiempoDeConstruccion, costo);
+    public TorrePlateada() {
+        super(2, 20);
     }
 
     public Defensa construir(Jugador jugador, Posicion posicion) {

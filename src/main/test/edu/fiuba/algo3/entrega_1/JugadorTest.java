@@ -24,7 +24,7 @@ public class JugadorTest {
     public void NoSePuedeConstruirUnaTorreBlancaSiNoSeDisponeDeSuficientesCreditos(){
         Jugador jugador = new Jugador(20, 5);
         Posicion posicion = new Posicion(1,2);
-        TorreBlanca torreBlanca = new TorreBlanca(1, 10);
+        TorreBlanca torreBlanca = new TorreBlanca();
         assertThrows(NoDisponeDeSuficientesCreditos.class, () -> jugador.construir(torreBlanca, posicion));
 
     }
@@ -34,7 +34,7 @@ public class JugadorTest {
         Jugador jugador = new Jugador(20, 100);
         Posicion posicion = new Posicion(1,2);
         Jugador jugadorEsperado = new Jugador(20, 90);
-        TorreBlanca torreBlanca = new TorreBlanca(1, 10);
+        TorreBlanca torreBlanca = new TorreBlanca();
 
         jugador.construir(torreBlanca, posicion);
 
@@ -47,7 +47,7 @@ public class JugadorTest {
     public void NoSePuedeConstruirUnaTorrePlateadaSiNoSeDisponeDeSuficientesCreditos(){
         Jugador jugador = new Jugador(20, 5);
         Posicion posicion = new Posicion(1,2);
-        TorrePlateada torrePlateada = new TorrePlateada(2, 20);
+        TorrePlateada torrePlateada = new TorrePlateada();
         assertThrows(NoDisponeDeSuficientesCreditos.class, () -> jugador.construir(torrePlateada, posicion));
 
     }
@@ -58,8 +58,8 @@ public class JugadorTest {
         Posicion posicionBlanca = new Posicion(1,2);
         Posicion posicionPlateada = new Posicion(1,3);
         Jugador jugadorEsperado = new Jugador(20, 70);
-        TorrePlateada torrePlateada = new TorrePlateada(2, 20);
-        TorreBlanca torreBlanca = new TorreBlanca(1, 10);
+        TorrePlateada torrePlateada = new TorrePlateada();
+        TorreBlanca torreBlanca = new TorreBlanca();
 
         jugador.construir(torrePlateada, posicionPlateada);
         jugador.construir(torreBlanca, posicionBlanca);
