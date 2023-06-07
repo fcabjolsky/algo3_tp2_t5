@@ -26,6 +26,8 @@ public abstract class Enemigo {
         return unRango.estaEnRango(this.posicion);
     }
 
+    public abstract void morir(Jugador jugador, Contador cantidadDeMuertes);
+  
     public Posicion obtenerPosicion() {
         return this.posicion;
     }
@@ -38,9 +40,8 @@ public abstract class Enemigo {
         this.posicion = siguientePosicion;
         this.contadorAvance++;
     }
-
+  
     public void resetearAvance(){
         this.contadorAvance = 0;
     }
-
 }

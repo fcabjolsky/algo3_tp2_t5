@@ -1,15 +1,12 @@
 package edu.fiuba.algo3.entrega_1;
 
+import edu.fiuba.algo3.modelo.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.*;
 
 import java.util.List;
-
-import edu.fiuba.algo3.modelo.Tierra;
-import edu.fiuba.algo3.modelo.Torre;
-
 
 
 public class TierraTest {
@@ -22,11 +19,11 @@ public class TierraTest {
     
     	Tierra nuevaTierra = new Tierra();
     	
-    	Torre unaTorre = new Torre(0);
+    	Torre unaTorreBlanca = new TorreBlanca(new Posicion(2, 5));
     	
     	//Act - Assert
     	
-    	assert(nuevaTierra.agregarDefensa(unaTorre));
+    	assert(nuevaTierra.agregarDefensa(unaTorreBlanca));
     	
     }
     
@@ -35,20 +32,20 @@ public class TierraTest {
     	//Arrange
     	
     	Tierra nuevaTierra = new Tierra();
-    	
-    	Torre torrePrimera = new Torre(0);
-    	
-    	Torre torreSegunda = new Torre(0);
+
+		Torre unaTorreBlanca = new TorreBlanca(new Posicion(2, 5));
+
+		Torre unaTorrePlateada = new TorrePlateada(new Posicion(2, 10));
     	 
     	
     	//Act
     	
-    	nuevaTierra.agregarDefensa(torrePrimera);
+    	nuevaTierra.agregarDefensa(unaTorreBlanca);
     	
     	
     	//Assert
     	
-    	assertFalse(nuevaTierra.agregarDefensa(torreSegunda));
+    	assertFalse(nuevaTierra.agregarDefensa(unaTorrePlateada));
     }
 
 }

@@ -3,20 +3,21 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.EstadoTorre;
 import edu.fiuba.algo3.modelo.TorreEnConstruccion;
 
-public class Torre implements Defensa {
+public abstract class Torre implements Defensa {
 
     protected Rango rango;
     protected int danio;
 
     private EstadoTorre estado;
+    protected int costo;
 
-    public Torre (int tiempoDeConstruccion){
-        estado = new TorreEnConstruccion(tiempoDeConstruccion);
+    public Torre (int tiempoDeConstruccion, int costo){
+        this.estado = new TorreEnConstruccion(tiempoDeConstruccion);
+        this.costo = costo;
     }
 
-    @Override
-    public Defensa construir(Jugador jugador, Posicion posicion) {
-        return null;
+    public int getCosto() {
+        return this.costo;
     }
 
     @Override
@@ -30,9 +31,8 @@ public class Torre implements Defensa {
         }
     }
 
-    @Override
     public boolean puedeConstruir(int creditos) {
-        return false;
+        return (this.costo <= creditos);
     }
 
 
@@ -44,5 +44,6 @@ public class Torre implements Defensa {
     public Posicion posicion() {
         return this.rango.posicion();
     }
+
 
 }

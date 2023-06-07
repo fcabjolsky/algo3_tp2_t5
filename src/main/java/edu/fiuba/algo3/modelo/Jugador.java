@@ -9,6 +9,14 @@ public class Jugador {
     private int creditos = 100;
     private List <Defensa> defensas = new ArrayList();
 
+    public Jugador() {
+    }
+
+    public Jugador(int vida, int creditos) {
+        this.vida = vida;
+        this.creditos = creditos;
+    }
+
     public int getVida() {
         return vida;
     }
@@ -18,7 +26,7 @@ public class Jugador {
     }
     
     public boolean puedeConstruir(int costo){
-      return costo< this.creditos;
+      return (costo <= this.creditos);
     }
     
     public void construir(Defensa defensa, Posicion posicion){
@@ -35,13 +43,24 @@ public class Jugador {
         this.creditos += creditos;
     }
 
+    public void restarCreditos(int creditos){
+        this.creditos -= creditos;
+    }
+
     public void perderVida(int danio){
         this.vida -= danio;
     }
 
+    public boolean equals(Object jugador) {
+        Jugador jugadorComparado = (Jugador)jugador;
+        if (this.creditos == jugadorComparado.creditos && this.vida == jugadorComparado.vida){
+            return true;
+        }
+        return false;
+    }
+  
     public boolean estaMuerto() {
        return this.vida <= 0;
     }
-    
-    
+
 }

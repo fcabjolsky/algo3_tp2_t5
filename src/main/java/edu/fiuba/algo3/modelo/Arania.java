@@ -7,10 +7,22 @@ public class Arania extends Enemigo {
         this.energia = 2;
         this.velocidad = 2;
     }
+  
+    private int darRecompensa(){
+        int recompensa = (int)(Math.random()*10+1);
+        return recompensa;
+    }
 
-    public Posicion getPosicion() {
-    	return this.posicion;
+    public void morir(Jugador jugador, Contador muertesDeArañas){
+        jugador.sumarCreditos(darRecompensa());
+    }
+  
+    public void avanzar(Posicion siguientePosicion){
+    	this.posicion = siguientePosicion;
     }
     
-
+  public Posicion getPosicion() {
+    	return this.posicion;
+    }
+   
 }

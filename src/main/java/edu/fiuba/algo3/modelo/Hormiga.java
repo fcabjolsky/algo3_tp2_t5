@@ -17,4 +17,13 @@ public class Hormiga extends Enemigo {
     public Posicion getPosicion() {
     	return this.posicion;
     }
+
+    public void morir(Jugador jugador, Contador cantidadDehormigasMuertas){
+        cantidadDehormigasMuertas.aumentar();
+        if (cantidadDehormigasMuertas.esMayorA(10)){
+            jugador.sumarCreditos(2);
+        }else{
+            jugador.sumarCreditos(1);
+        }
+    }
 }
