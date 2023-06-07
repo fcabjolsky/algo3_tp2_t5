@@ -16,9 +16,10 @@ public class TorreBlanca extends Torre {
         TorreBlanca torreADevolver = new TorreBlanca(posicion);
         if (jugador.puedeConstruir(super.costo)){
             jugador.restarCreditos(super.costo);
-             torreADevolver = new TorreBlanca(posicion);
+             return (new TorreBlanca(posicion));
+        }else{
+            throw new NoDisponeDeSuficientesCreditos();
         }
-        return torreADevolver;
     }
 
 }

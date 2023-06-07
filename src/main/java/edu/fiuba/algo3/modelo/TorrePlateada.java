@@ -12,11 +12,10 @@ public class TorrePlateada extends Torre{
     }
 
     public Defensa construir(Jugador jugador, Posicion posicion) {
-        TorrePlateada torreADevolver = new TorrePlateada(posicion);
         if (jugador.puedeConstruir(super.costo)){
             jugador.restarCreditos(super.costo);
-            torreADevolver = new TorrePlateada(posicion);
+            return (new TorrePlateada(posicion));
         }
-        return torreADevolver;
+        throw new NoDisponeDeSuficientesCreditos();
     }
 }
