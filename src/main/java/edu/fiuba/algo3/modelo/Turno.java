@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.List;
+
 public class Turno {
 
     private final Jugador jugador;
@@ -12,5 +14,19 @@ public class Turno {
 
     public void moverEnemigos() {
         this.mapa.pasarTurno();
+    }
+
+    public void defenderseDeEnemigos() {
+        List<Defensa> defensas = this.jugador.obtenerDefensas();
+        for (Defensa defensa: defensas) {
+            defensa.defender(this.mapa);
+        }
+    }
+
+    public void construirDefensas() {
+        List<Defensa> defensas = this.jugador.obtenerDefensas();
+        for (Defensa defensa: defensas) {
+            defensa.avanzarTurno();
+        }
     }
 }

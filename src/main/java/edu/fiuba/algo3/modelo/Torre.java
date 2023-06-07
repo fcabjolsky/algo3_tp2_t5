@@ -3,17 +3,21 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.EstadoTorre;
 import edu.fiuba.algo3.modelo.TorreEnConstruccion;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public abstract class Torre implements Defensa {
 
-    protected Rango rango;
+    public Rango rango;
     protected int danio;
 
     private EstadoTorre estado;
     protected int costo;
 
-    public Torre (int tiempoDeConstruccion, int costo){
+    public Torre (int tiempoDeConstruccion, int costo, int danio){
         this.estado = new TorreEnConstruccion(tiempoDeConstruccion);
         this.costo = costo;
+        this.danio = danio;
     }
 
     public int getCosto() {
@@ -21,14 +25,8 @@ public abstract class Torre implements Defensa {
     }
 
     @Override
-    public void defender(Enemigo enemigo) {
-        if(enemigo.estaEnRango(this.rango)) {
-            estado.defender(enemigo, this.danio);
-
-        }
-        else {
-            throw new EnemigoFueraDeRango();
-        }
+    public void defender(Mapa mapa) {
+        this.estado.defender(mapa, this.danio, this.rango);
     }
 
     public boolean puedeConstruir(int creditos) {
@@ -36,6 +34,7 @@ public abstract class Torre implements Defensa {
     }
 
 
+    @Override
     public void avanzarTurno(){
         estado = estado.avanzarTurno();
     }

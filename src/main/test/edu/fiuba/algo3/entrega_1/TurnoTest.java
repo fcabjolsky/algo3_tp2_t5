@@ -25,4 +25,23 @@ public class TurnoTest {
 
         assertEquals(0, nuevaPoscion.calcularDistanciaA(new Posicion(0, 1)));
     }
+
+    @Test
+    public void pasarTurnoYUnaTorreAtacaAUnEnemigo() {
+        Jugador jugador = new Jugador();
+        Torre torre = new TorreBlanca();
+        jugador.construir(torre, new Posicion(1,1));
+        ArrayList<Pasarela> pasarelas = new ArrayList<Pasarela>();
+        pasarelas.add(new Pasarela(new Posicion(0, 0)));
+        pasarelas.add(new Pasarela(new Posicion(0, 1)));
+        Mapa mapa = new Mapa(pasarelas, new ArrayList<Rocoso>(), new ArrayList<Tierra>());
+
+        Enemigo enemigo1 = new Hormiga(new Posicion(0, 0));
+        mapa.agregarEnemigo(enemigo1);
+        Turno turno = new Turno(jugador, mapa);
+        turno.construirDefensas();
+        turno.defenderseDeEnemigos();
+        assert(enemigo1.estaMuerta());
+
+    }
 }

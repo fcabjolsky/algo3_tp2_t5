@@ -15,8 +15,9 @@ public class CasoDeUso2 {
 
         TorreBlanca torre = new TorreBlanca(posicion);
         Enemigo enemigo = new Hormiga(posicion);
+        Mapa mapa = Mockito.mock(Mapa.class);
 
-        assertThrows(DefensaNoOperativa.class, () -> torre.defender(enemigo));
+        assertThrows(DefensaNoOperativa.class, () -> torre.defender(mapa));
 
     }
 
@@ -29,7 +30,8 @@ public class CasoDeUso2 {
 
         torre.avanzarTurno();
 
-        assertDoesNotThrow(() -> torre.defender(enemigo));
+        Mapa mapa = Mockito.mock(Mapa.class);
+        assertDoesNotThrow(() -> torre.defender(mapa));
     }
 
     @Test
@@ -39,7 +41,8 @@ public class CasoDeUso2 {
         TorrePlateada torre = new TorrePlateada(posicion);
         Enemigo enemigo = new Hormiga(posicion);
 
-        assertThrows(DefensaNoOperativa.class, () -> torre.defender(enemigo));
+        Mapa mapa = Mockito.mock(Mapa.class);
+        assertThrows(DefensaNoOperativa.class, () -> torre.defender(mapa));
 
     }
 
@@ -52,8 +55,9 @@ public class CasoDeUso2 {
         torre.avanzarTurno();
 
         Enemigo enemigo = new Hormiga(posicion);
+        Mapa mapa = Mockito.mock(Mapa.class);
 
-        assertThrows(DefensaNoOperativa.class, () -> torre.defender(enemigo));
+        assertThrows(DefensaNoOperativa.class, () -> torre.defender(mapa));
     }
 
     @Test
@@ -66,6 +70,7 @@ public class CasoDeUso2 {
         torre.avanzarTurno();
         torre.avanzarTurno();
 
-        assertDoesNotThrow(() -> torre.defender(enemigo));
+        Mapa mapa = Mockito.mock(Mapa.class);
+        assertDoesNotThrow(() -> torre.defender(mapa));
     }
 }
