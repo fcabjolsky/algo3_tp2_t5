@@ -7,8 +7,8 @@ public class Contador {
         actual += 1;
     }
 
-    public boolean esIgual(int numero){
-        return this.actual == numero;
+    public boolean esMayorA(int numero){
+        return this.actual > numero;
     }
 
 }
