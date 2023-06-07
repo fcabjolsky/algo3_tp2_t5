@@ -7,6 +7,7 @@ public class Arania extends Enemigo {
         this.energia = 2;
         this.velocidad = 2;
     }
+  
     private int darRecompensa(){
         int recompensa = (int)(Math.random()*10+1);
         return recompensa;
@@ -19,7 +20,9 @@ public class Arania extends Enemigo {
     public void avanzar(Posicion siguientePosicion){
     	this.posicion = siguientePosicion;
     }
-    public Posicion getPosicion() {
+    
+  public Posicion getPosicion() {
     	return this.posicion;
     }
+   
 }
