@@ -29,11 +29,27 @@ public class Pasarela {
 	}
 
 	public void moverEnemigosA(Pasarela otraPasarela){
+		List<Enemigo> enMovimiento = new ArrayList<>();
+		List<Enemigo> estaticos = new ArrayList<>();
+
 		for (Enemigo enemigo : enemigos){
 			if(enemigo.enMovimiento()){
-				otraPasarela.agregarEnemigo(enemigo);
+				enMovimiento.add(enemigo);
+			}else{
+				estaticos.add(enemigo);
 			}
 		}
+
+		for (Enemigo enemigo : enMovimiento){
+			otraPasarela.agregarEnemigo(enemigo);
+		}
+
+		this.enemigos = estaticos;
+
+		for (Enemigo enemigo : enemigos){
+			enemigo.resetearAvance();
+		}
+
 	}
 
 }

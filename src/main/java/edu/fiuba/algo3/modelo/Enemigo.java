@@ -30,14 +30,17 @@ public abstract class Enemigo {
         return this.posicion;
     }
 
-    public void avanzar(Posicion posicion) {
-        this.posicion = posicion;
-        this.contadorAvance++;
-    }
-
     public boolean enMovimiento(){
         return (contadorAvance < velocidad);
     }
 
+    public void avanzar(Posicion siguientePosicion) {
+        this.posicion = siguientePosicion;
+        this.contadorAvance++;
+    }
+
+    public void resetearAvance(){
+        this.contadorAvance = 0;
+    }
 
 }
