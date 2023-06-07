@@ -23,7 +23,7 @@ public class Hormiga extends Enemigo {
 
     public void morir(Jugador jugador, Contador cantidadDehormigasMuertas){
         cantidadDehormigasMuertas.aumentar();
-        if (cantidadDehormigasMuertas.esIgual(11)){
+        if (cantidadDehormigasMuertas.esMayorA(10)){
             jugador.sumarCreditos(2);
         }else{
             jugador.sumarCreditos(1);
