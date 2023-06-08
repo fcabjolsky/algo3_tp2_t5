@@ -2,12 +2,12 @@ package edu.fiuba.algo3.entrega_1;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import edu.fiuba.algo3.modelo.Posicion;
+import com.tngtech.archunit.lang.ArchRule;
+import edu.fiuba.algo3.modelo.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.Pasarela;
-import edu.fiuba.algo3.modelo.Torre;
 
 public class PasarelaTest {
 	@Test
@@ -24,4 +24,27 @@ public class PasarelaTest {
     	
     	assertFalse(nuevoRocoso.agregarDefensa(torrePrimera));
     }
+
+	@Test
+	public void unaPasarelaDevuelveFalsoSiNoTieneEnemigos() {
+
+		Pasarela pasarela = new Pasarela(new Posicion(0,0));
+
+		boolean resultado = pasarela.contieneEnemigos();
+
+		Assertions.assertFalse(resultado);
+	}
+
+	@Test
+	public void unaPasarelaDevuelveFalsoSiTodosLosEnemigosQueContieneEstanMuertos() {
+
+		Pasarela pasarela = new Pasarela(new Posicion(1,1));
+		Enemigo hormigaMuerta = new Hormiga(new Posicion(1, 1));
+		hormigaMuerta.recibirDanio(1);
+		pasarela.agregarEnemigo(hormigaMuerta);
+
+		boolean resultado = pasarela.contieneEnemigos();
+
+		Assertions.assertFalse(resultado);
+	}
 }
