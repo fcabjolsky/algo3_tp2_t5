@@ -26,4 +26,13 @@ public class Mapa {
     public void pasarTurno() {
         this.enemigo1.avanzar(new Posicion(0, 1));
     }
+
+    public boolean contieneEnemigos() {
+        for(Pasarela pasarela : this.pasarelas) {
+            if(pasarela.contieneEnemigos()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
