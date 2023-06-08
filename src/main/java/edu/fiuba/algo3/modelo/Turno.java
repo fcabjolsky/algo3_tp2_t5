@@ -13,4 +13,11 @@ public class Turno {
     public void moverEnemigos() {
         this.mapa.pasarTurno();
     }
+
+    public boolean ganoLaPartida() {
+        return !this.mapa.contieneEnemigos();
+    }
+
 }
+
+
