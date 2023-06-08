@@ -26,7 +26,7 @@ public class DefensaTest {
        List<Enemigo> enemigos = new ArrayList<>();
        enemigos.add(enemigoEnRango);
        Mapa mapa = Mockito.mock(Mapa.class);
-       when(mapa.obtenerEnemigosEnRango(defensa.rango)).thenReturn(enemigos);
+       when(mapa.obtenerEnemigosEnRango(defensa.rango())).thenReturn(enemigos);
 
        defensa.defender(mapa);
        assert(enemigoEnRango.estaMuerta());
@@ -39,7 +39,7 @@ public class DefensaTest {
         Enemigo enemigoFueraDeRango = new Hormiga(new Posicion(10,1));
         List<Enemigo> enemigos = new ArrayList<>();
         Mapa mapa = Mockito.mock(Mapa.class);
-        when(mapa.obtenerEnemigosEnRango(defensa.rango)).thenReturn(enemigos);
+        when(mapa.obtenerEnemigosEnRango(defensa.rango())).thenReturn(enemigos);
 
         defensa.defender(mapa);
 
@@ -56,7 +56,7 @@ public class DefensaTest {
         List<Enemigo> enemigos = new ArrayList<>();
         enemigos.add(enemigoEnRango);
         Mapa mapa = Mockito.mock(Mapa.class);
-        when(mapa.obtenerEnemigosEnRango(defensa.rango)).thenReturn(enemigos);
+        when(mapa.obtenerEnemigosEnRango(defensa.rango())).thenReturn(enemigos);
 
         defensa.defender(mapa);
         assert(enemigoEnRango.estaMuerta());
@@ -72,7 +72,7 @@ public class DefensaTest {
         Enemigo enemigoFueraDeRango = new Hormiga(new Posicion(10,1));
         List<Enemigo> enemigos = new ArrayList<>();
         Mapa mapa = Mockito.mock(Mapa.class);
-        when(mapa.obtenerEnemigosEnRango(defensa.rango)).thenReturn(enemigos);
+        when(mapa.obtenerEnemigosEnRango(defensa.rango())).thenReturn(enemigos);
 
         defensa.defender(mapa);
 

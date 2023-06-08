@@ -75,6 +75,18 @@ public class TurnoTest {
     }
 
     @Test
+    public void seConstruyeUnaTorreBlancaYNoEstaOperativa(){
+        Jugador jugador = new Jugador();
+        Torre torre = new TorreBlanca();
+        jugador.construir(torre, new Posicion(1,1));
+        Mapa mapa = new Mapa(new ArrayList<>(), new ArrayList<Rocoso>(), new ArrayList<Tierra>());
+        Turno turno = new Turno(jugador, mapa);
+
+        assertThrows(DefensaNoOperativa.class, () -> turno.defenderseDeEnemigos());
+
+    }
+
+    @Test
     public void seConstruyeUnaTorreBlancaPasaUnTurnoYEstaOperativa(){
         Jugador jugador = new Jugador();
         Torre torre = new TorreBlanca();

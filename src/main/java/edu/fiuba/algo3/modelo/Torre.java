@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 
 public abstract class Torre implements Defensa {
 
-    public Rango rango;
+    protected Rango rango;
     protected int danio;
 
-    private EstadoTorre estado;
+    protected EstadoTorre estado;
     protected int costo;
 
     public Torre (int tiempoDeConstruccion, int costo, int danio){
@@ -44,5 +44,7 @@ public abstract class Torre implements Defensa {
         return this.rango.posicion();
     }
 
-
+    public Rango rango(){
+        return this.rango;
+    }
 }
