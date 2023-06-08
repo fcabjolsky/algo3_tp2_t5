@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.Posicion;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Pasarela {
@@ -52,4 +53,11 @@ public class Pasarela {
 
 	}
 
+	public boolean estaEnRango(Rango unRango) {
+		return unRango.estaEnRango(this.posicion);
+	}
+
+	public List<Enemigo> obtenerEnemigos() {
+		return this.enemigos;
+	}
 }

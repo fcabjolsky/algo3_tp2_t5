@@ -4,12 +4,12 @@ public class TorreBlanca extends Torre {
 
 
     public TorreBlanca(Posicion posicion) {
-        super(1, 10);
+        super(1, 10, 1);
         this.rango = new Rango(3, posicion);
     }
 
     public TorreBlanca() {
-        super(1, 10);
+        super(1, 10, 1);
     }
 
     public Defensa construir(Jugador jugador, Posicion posicion) {

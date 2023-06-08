@@ -63,4 +63,7 @@ public class Jugador {
        return this.vida <= 0;
     }
 
+    public List<Defensa> obtenerDefensas() {
+        return this.defensas;
+    }
 }

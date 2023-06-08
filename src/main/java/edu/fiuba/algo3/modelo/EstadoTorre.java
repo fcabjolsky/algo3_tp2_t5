@@ -2,6 +2,6 @@ package edu.fiuba.algo3.modelo;
 
 public interface EstadoTorre {
 
-    void defender(Enemigo enemigo, int danio);
+    void defender(Mapa mapa, int danio, Rango rango);
     EstadoTorre avanzarTurno();
 }
