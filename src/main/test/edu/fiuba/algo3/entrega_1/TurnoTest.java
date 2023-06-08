@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class TurnoTest {
@@ -44,4 +44,49 @@ public class TurnoTest {
         assert(enemigo1.estaMuerta());
 
     }
+
+    @Test
+    public void seConstruyeUnaTorrePlateadaPasaUnTurnoYNoEstaOperativa(){
+        Jugador jugador = new Jugador();
+        Torre torre = new TorrePlateada();
+        jugador.construir(torre, new Posicion(1,1));
+        Mapa mapa = new Mapa(new ArrayList<>(), new ArrayList<Rocoso>(), new ArrayList<Tierra>());
+        Turno turno = new Turno(jugador, mapa);
+
+        turno.construirDefensas();
+
+        assertThrows(DefensaNoOperativa.class, () -> turno.defenderseDeEnemigos());
+
+    }
+
+    @Test
+    public void seConstruyeUnaTorrePlateadaPasanDosTurnosYEstaOperativa(){
+        Jugador jugador = new Jugador();
+        Torre torre = new TorrePlateada();
+        jugador.construir(torre, new Posicion(1,1));
+        Mapa mapa = new Mapa(new ArrayList<>(), new ArrayList<Rocoso>(), new ArrayList<Tierra>());
+        Turno turno = new Turno(jugador, mapa);
+
+        turno.construirDefensas();
+        turno.construirDefensas();
+
+        assertDoesNotThrow(() -> turno.defenderseDeEnemigos());
+
+    }
+
+    @Test
+    public void seConstruyeUnaTorreBlancaPasaUnTurnoYEstaOperativa(){
+        Jugador jugador = new Jugador();
+        Torre torre = new TorreBlanca();
+        jugador.construir(torre, new Posicion(1,1));
+        Mapa mapa = new Mapa(new ArrayList<>(), new ArrayList<Rocoso>(), new ArrayList<Tierra>());
+        Turno turno = new Turno(jugador, mapa);
+
+        turno.construirDefensas();
+
+        assertDoesNotThrow(() -> turno.defenderseDeEnemigos());
+
+    }
+
+
 }
