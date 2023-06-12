@@ -1,9 +1,11 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,6 +29,32 @@ public class TurnoTest {
     }
 
     @Test
+    public void unJugadorQueEliminaTodosLosEnemigosDevuelveVerdadero() {
+        Mapa mapa = new Mapa(new ArrayList<Pasarela>(), new ArrayList<Rocoso>(), new ArrayList<Tierra>());
+        Turno turno = new Turno(new Jugador(), mapa);
+
+        boolean resultado = turno.ganoLaPartida();
+
+        Assertions.assertTrue(resultado);
+    }
+
+    @Test
+    public void unJugadorQueMatoATodosLosEnemigosDevuelveVerdadero() {
+        List<Pasarela> pasarelas = new ArrayList<>();
+        Pasarela pasarela = new Pasarela(new Posicion(1,1));
+        Enemigo hormigaMuerta = new Hormiga(new Posicion(1, 1));
+        hormigaMuerta.recibirDanio(1);
+        pasarela.agregarEnemigo(hormigaMuerta);
+        pasarelas.add(pasarela);
+
+        Mapa mapa = new Mapa(pasarelas, new ArrayList<Rocoso>(), new ArrayList<Tierra>());
+        Turno turno = new Turno(new Jugador(), mapa);
+
+        boolean resultado = turno.ganoLaPartida();
+
+        Assertions.assertTrue(resultado);
+    }
+  
     public void pasarTurnoYUnaTorreAtacaAUnEnemigo() {
         Jugador jugador = new Jugador();
         Torre torre = new TorreBlanca();
@@ -99,6 +127,5 @@ public class TurnoTest {
         assertDoesNotThrow(() -> turno.defenderseDeEnemigos());
 
     }
-
 
 }

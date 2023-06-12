@@ -16,6 +16,11 @@ public class Turno {
         this.mapa.pasarTurno();
     }
 
+
+    public boolean ganoLaPartida() {
+        return !this.mapa.contieneEnemigos();
+    }
+
     public void defenderseDeEnemigos() {
         List<Defensa> defensas = this.jugador.obtenerDefensas();
         for (Defensa defensa: defensas) {
@@ -30,3 +35,5 @@ public class Turno {
         }
     }
 }
+
+

@@ -34,4 +34,13 @@ public class Mapa {
         }
         return enemigos;
     }
+
+    public boolean contieneEnemigos() {
+        for(Pasarela pasarela : this.pasarelas) {
+            if(pasarela.contieneEnemigos()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
