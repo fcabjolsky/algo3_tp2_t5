@@ -11,7 +11,7 @@ public class TorreEnConstruccion implements EstadoTorre {
     }
 
     @Override
-    public void defender(Enemigo enemigo, int danio) {
+    public void defender(Mapa mapa, int danio, Rango rango) {
         throw new DefensaNoOperativa();
     }
 

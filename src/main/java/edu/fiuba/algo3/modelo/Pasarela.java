@@ -3,13 +3,16 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.Posicion;
 
 import java.util.ArrayList;
+
+import java.util.Collection;
+
 import java.util.List;
 
 public class Pasarela {
 
-	private List<Enemigo> enemigos;
+  private List<Enemigo> enemigos;
 
-	private Posicion posicion;
+  private Posicion posicion;
 
 	public Pasarela(Posicion posicion) {
 		this.posicion = posicion;
@@ -41,5 +44,37 @@ public class Pasarela {
 	public void agregarEnemigo(Enemigo enemigo){
 		this.enemigos.add(enemigo);
 		enemigo.avanzar(this.posicion);
+	}
+
+	public void moverEnemigosA(Pasarela otraPasarela){
+		List<Enemigo> enMovimiento = new ArrayList<>();
+		List<Enemigo> estaticos = new ArrayList<>();
+
+		for (Enemigo enemigo : enemigos){
+			if(enemigo.enMovimiento()){
+				enMovimiento.add(enemigo);
+			}else{
+				estaticos.add(enemigo);
+			}
+		}
+
+		for (Enemigo enemigo : enMovimiento){
+			otraPasarela.agregarEnemigo(enemigo);
+		}
+
+		this.enemigos = estaticos;
+
+		for (Enemigo enemigo : enemigos){
+			enemigo.resetearAvance();
+		}
+
+	}
+
+	public boolean estaEnRango(Rango unRango) {
+		return unRango.estaEnRango(this.posicion);
+	}
+
+	public List<Enemigo> obtenerEnemigos() {
+		return this.enemigos;
 	}
 }
