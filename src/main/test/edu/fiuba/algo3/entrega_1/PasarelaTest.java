@@ -2,9 +2,7 @@ package edu.fiuba.algo3.entrega_1;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import com.tngtech.archunit.lang.ArchRule;
 import edu.fiuba.algo3.modelo.*;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import edu.fiuba.algo3.modelo.Posicion;
@@ -32,7 +30,7 @@ public class PasarelaTest {
 
 		boolean resultado = pasarela.contieneEnemigos();
 
-		Assertions.assertFalse(resultado);
+		assertFalse(resultado);
 	}
 
 	@Test
@@ -45,6 +43,6 @@ public class PasarelaTest {
 
 		boolean resultado = pasarela.contieneEnemigos();
 
-		Assertions.assertFalse(resultado);
+		assertFalse(resultado);
 	}
 }
