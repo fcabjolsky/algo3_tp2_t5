@@ -22,4 +22,12 @@ public class MapaTest {
 
         assertThrows(ElFormatoDeJSONNoEsValido.class, () -> mapa.obtenerInformacionDelMapa());
     }
+    
+    @Test 
+    public void losElementosLeidosDelJsonSeCorrespondenConUnObjetoDelMapa() {
+    	
+    	//crear las parcelas correspondientes	
+    	
+    }
+    
 }
