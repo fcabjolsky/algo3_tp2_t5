@@ -2,21 +2,29 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Posicion;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import java.util.Collection;
 
 import java.util.List;
 
-public class Pasarela {
+public class Pasarela implements Observador{
+	private AgregadorDeEnemigos observable;
+  	private List<Enemigo> enemigos;
+  	private Posicion posicion;
 
-  private List<Enemigo> enemigos;
-
-  private Posicion posicion;
 
 	public Pasarela(Posicion posicion) {
 		this.posicion = posicion;
 		this.enemigos = new ArrayList<>();
+	}
+
+	public Pasarela(Posicion posicion, AgregadorDeEnemigos observable) {
+		this.posicion = posicion;
+		this.enemigos = new ArrayList<>();
+		this.observable = observable;
+		observable.agregarObservador(this);
 	}
 
 	public boolean agregarDefensa(Defensa defensa){
@@ -77,4 +85,14 @@ public class Pasarela {
 	public List<Enemigo> obtenerEnemigos() {
 		return this.enemigos;
 	}
+
+	public void actualizar(){
+		observable.agregarEnemigosAObservador(this.enemigos, this.posicion);
+	}
+
+	public boolean laCantidadDeEnemigosEsIgualA(int numeroDeEnemigos){
+		return ((int)enemigos.size() == numeroDeEnemigos);
+	}
+
+
 }
