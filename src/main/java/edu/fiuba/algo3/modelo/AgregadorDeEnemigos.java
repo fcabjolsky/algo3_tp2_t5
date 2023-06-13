@@ -35,16 +35,20 @@ public class AgregadorDeEnemigos{
     }
 
     public void obtenerInformacionDeNuevosEnemigos(int numeroDeTurno) {
-        boolean finalizado = false;
+        
         int index = numeroDeTurno - 1;
         try {
             JSONArray jsonArray = new JSONArray(this.informacionDeEnemigos);
-            while (index < jsonArray.length() && !finalizado){
+            if ( index >= jsonArray.length() ) {
+            	index = index - ((index/jsonArray.length()) * jsonArray.length());
+            }
+            
                 JSONObject objeto = jsonArray.getJSONObject(index);
                 this.hormigasNuevas = objeto.getJSONObject("enemigos").getInt("hormiga");
                 this.araniasNuevas = objeto.getJSONObject("enemigos").getInt("arana");
-                finalizado = true;
-            }
+
+           
+            
             notificarAObservadores();
         } catch (JSONException e) {
             throw new ElFormatoDeJSONNoEsValido();
