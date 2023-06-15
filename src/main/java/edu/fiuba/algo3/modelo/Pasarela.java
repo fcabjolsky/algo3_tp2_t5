@@ -93,6 +93,9 @@ public class Pasarela implements Observador{
 	public boolean laCantidadDeEnemigosEsIgualA(int numeroDeEnemigos){
 		return ((int)enemigos.size() == numeroDeEnemigos);
 	}
-
+	
+	public void setObservable(AgregadorDeEnemigos observable) {
+		this.observable = observable;
+	}
 
 }

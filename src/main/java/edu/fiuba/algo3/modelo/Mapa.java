@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Mapa {
-    private Enemigo enemigo1;
+    
     private List<Pasarela> pasarelas;
     private List<Rocoso> rocosos;
     private List<Tierra> tierras;
@@ -22,7 +22,7 @@ public class Mapa {
         this.rocosos = rocosos;
         this.tierras = tierras;
     }
-
+    
     public void agregarEnemigo(Enemigo enemigo1) {
         pasarelas.get(0).agregarEnemigo(enemigo1);
     }
@@ -50,5 +50,16 @@ public class Mapa {
             }
         }
         return false;
+    }
+    
+    public List<Pasarela> getPasarelas(){
+    	return this.pasarelas;
+    }
+    public List<Rocoso> getRocoso(){
+    	return this.rocosos;
+    }
+    
+    public List<Tierra> getTierra(){
+    	return this.tierras;
     }
 }
