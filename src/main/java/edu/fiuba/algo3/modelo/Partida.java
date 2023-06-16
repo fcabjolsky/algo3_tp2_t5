@@ -13,7 +13,11 @@ public class Partida {
         this.jugador = jugador;
         this.turno = new Turno(jugador, mapa);
     }
-
+    public void jugar() {
+        while (!this.turno.ganoLaPartida()) {
+            this.turno
+        }
+    }
     public String juegoGanado() {
         if (this.turno.ganoLaPartida()) {
             return "GANASTE";
