@@ -34,6 +34,10 @@ public class Turno {
             defensa.avanzarTurno();
         }
     }
+
+    public void avanzarTurno() {
+
+    }
 }
 
 
