@@ -9,8 +9,7 @@ import java.util.Collection;
 
 import java.util.List;
 
-public class Pasarela implements Observador{
-	private AgregadorDeEnemigos observable;
+public class Pasarela{
   	private List<Enemigo> enemigos;
   	private Posicion posicion;
 
@@ -18,13 +17,6 @@ public class Pasarela implements Observador{
 	public Pasarela(Posicion posicion) {
 		this.posicion = posicion;
 		this.enemigos = new ArrayList<>();
-	}
-
-	public Pasarela(Posicion posicion, AgregadorDeEnemigos observable) {
-		this.posicion = posicion;
-		this.enemigos = new ArrayList<>();
-		this.observable = observable;
-		observable.agregarObservador(this);
 	}
 
 	public boolean agregarDefensa(Defensa defensa){
@@ -86,13 +78,8 @@ public class Pasarela implements Observador{
 		return this.enemigos;
 	}
 
-	public void actualizar(){
-		observable.agregarEnemigosAObservador(this.enemigos, this.posicion);
-	}
-
 	public boolean laCantidadDeEnemigosEsIgualA(int numeroDeEnemigos){
 		return ((int)enemigos.size() == numeroDeEnemigos);
 	}
-
 
 }
