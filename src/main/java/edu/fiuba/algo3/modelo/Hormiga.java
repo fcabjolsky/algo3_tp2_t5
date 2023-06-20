@@ -7,6 +7,7 @@ public class Hormiga extends Enemigo {
         super(posicion);
         this.energia = 1;
         this.velocidad = 1;
+        this.danio = 1;
     }
 
     
