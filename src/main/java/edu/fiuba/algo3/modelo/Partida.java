@@ -19,6 +19,7 @@ public class Partida extends Observable {
         this.mapa = mapa;
         this.jugador = jugador;
         this.turno = new Turno(jugador, mapa);
+        this.agregarObservador(logger);
         turno.agregarObservador(this.logger);
     }
 
