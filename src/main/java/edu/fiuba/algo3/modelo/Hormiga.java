@@ -26,4 +26,10 @@ public class Hormiga extends Enemigo {
             jugador.sumarCreditos(1);
         }
     }
+
+    @Override
+    public String toString() {
+        return "hormiga";
+    }
+
 }

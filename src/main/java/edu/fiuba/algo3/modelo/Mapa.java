@@ -24,7 +24,8 @@ public class Mapa {
     }
     
     public void agregarEnemigo(Enemigo enemigo1) {
-        pasarelas.get(0).agregarEnemigo(enemigo1);
+        pasarelas.stream().findFirst().get().agregarEnemigo(enemigo1);
+        //pasarelas.get(0).agregarEnemigo(enemigo1);
     }
 
     public void pasarTurno() {

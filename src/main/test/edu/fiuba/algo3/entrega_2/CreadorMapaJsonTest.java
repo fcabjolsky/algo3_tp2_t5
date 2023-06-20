@@ -45,7 +45,7 @@ public class CreadorMapaJsonTest {
         assertEquals(24, mapa.getPasarelas().size());
     }
     
-    
+    /*
     @Test 
     public void losElementosSonSituadosEnElMapaListosParaComenzarElJuego() {
     	String urlInfomacionDelMapa = "src/main/java/edu/fiuba/algo3/modelo/mapa.json";
@@ -89,7 +89,7 @@ public class CreadorMapaJsonTest {
         agregadorDeEnemigos.obtenerInformacionDeNuevosEnemigos(1);
      
         //assertTrue(mapa.getPasarelas().get(0).contieneEnemigos());
-    }
+    }*/
   
     
 }

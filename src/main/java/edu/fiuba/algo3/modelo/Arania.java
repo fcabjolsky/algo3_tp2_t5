@@ -24,5 +24,10 @@ public class Arania extends Enemigo {
   public Posicion getPosicion() {
     	return this.posicion;
     }
-   
+
+    @Override
+    public String toString() {
+        return "arana";
+    }
+
 }
