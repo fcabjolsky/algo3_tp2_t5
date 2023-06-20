@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import javafx.geometry.Pos;
 
 public class Rango {
     private int radio;
