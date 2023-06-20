@@ -44,4 +44,12 @@ public abstract class Enemigo {
     public void resetearAvance(){
         this.contadorAvance = 0;
     }
+
+    public void agregarEnemigoAMapa(String especie, Mapa mapa, int cantidad){
+        if ((this.toString()).equalsIgnoreCase(especie)){
+            for (int i = 0; i < cantidad; i++) {
+                mapa.agregarEnemigo(this);
+            }
+        }
+    }
 }
