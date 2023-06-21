@@ -57,12 +57,6 @@ public class Mapa {
         pasarelas.get(0).recibirEnemigo(enemigo1);
     }
 
-    public void pasarTurno() {
-        for (int i = 0; i < pasarelas.size()-1; i++){
-            pasarelas.get(i).moverEnemigosA(pasarelas.get(i+1));
-        }
-    }
-
     public boolean contieneEnemigos() {
         for(Pasarela pasarela : this.pasarelas) {
             if(pasarela.contieneEnemigos()) {

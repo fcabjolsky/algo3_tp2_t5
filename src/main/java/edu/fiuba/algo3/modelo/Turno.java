@@ -12,8 +12,9 @@ public class Turno {
        this.mapa = mapa;
     }
 
-    public void moverEnemigos() {
-        this.mapa.pasarTurno();
+    private void moverEnemigos() {
+        ProcesoDeMovimiento procesoDeMovimiento = new ProcesoDeMovimiento();
+        procesoDeMovimiento.procesarMovimiento(this.mapa.obtenerParcelasTransitables());
     }
 
 
@@ -21,22 +22,21 @@ public class Turno {
         return !this.mapa.contieneEnemigos();
     }
 
-    public void defenderseDeEnemigos() {
-        List<Defensa> defensas = this.jugador.obtenerDefensas();
-        for (Defensa defensa: defensas) {
-            defensa.defender(this.mapa);
-        }
+    private void defenderseDeEnemigos() {
+        ProcesoDeDefensa procesoDeDefensa = new ProcesoDeDefensa();
+        procesoDeDefensa.procesarDefensa(this.mapa.obtenerPasarelasConEnemigos(), this.jugador.obtenerDefensas());
     }
 
-    public void construirDefensas() {
+    private void construirDefensas() {
         List<Defensa> defensas = this.jugador.obtenerDefensas();
         for (Defensa defensa: defensas) {
             defensa.avanzarTurno();
         }
     }
 
-    public void avanzarTurno() {
-
+    public void siguienteTurno() {
+        this.moverEnemigos();
+        this.defenderseDeEnemigos();
     }
 }
 

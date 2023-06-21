@@ -11,5 +11,5 @@ public interface Defensa {
     public void avanzarTurno();
 
     public boolean estaEnRango(Posicion unaPosicion);
-    
+
 }

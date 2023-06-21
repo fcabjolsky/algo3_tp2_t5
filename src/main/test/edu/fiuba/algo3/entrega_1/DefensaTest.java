@@ -1,49 +1,41 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.*;
 import edu.fiuba.algo3.modelo.*;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.mockito.Mockito.when;
+
 
 
 public class DefensaTest {
-
 
     @Test
     public void unaTorreBlancaAtacaSatisfactoriamenteUnEnemigoQueEstaEnRango() {
        Torre defensa = new TorreBlanca(new Posicion(0,0));
        defensa.avanzarTurno();
        defensa.avanzarTurno();
+       Pasarela unaPasarela = new Pasarela(new Posicion(2 ,1));
+       unaPasarela.recibirEnemigo(new Hormiga());
 
-       Enemigo enemigoEnRango = new Hormiga(new Posicion(2 ,1));
-       List<Enemigo> enemigos = new ArrayList<>();
-       enemigos.add(enemigoEnRango);
-       Mapa mapa = Mockito.mock(Mapa.class);
-       when(mapa.obtenerEnemigosEnRango(defensa.rango())).thenReturn(enemigos);
+       if(unaPasarela.defensaEstaEnRango(defensa)) {
+           defensa.defender(unaPasarela.obtenerEnemigoAAtacar());
+       }
 
-       defensa.defender(mapa);
-       assert(enemigoEnRango.estaMuerta());
+       assertFalse(unaPasarela.contieneEnemigos());
     }
 
     @Test
     public void intentarAtacarUnEnemigoFueraDeRangoConUnaTorreBlancaNoAtaca() {
         Torre defensa = new TorreBlanca(new Posicion(0,0));
         defensa.avanzarTurno();
-        Enemigo enemigoFueraDeRango = new Hormiga(new Posicion(10,1));
-        List<Enemigo> enemigos = new ArrayList<>();
-        Mapa mapa = Mockito.mock(Mapa.class);
-        when(mapa.obtenerEnemigosEnRango(defensa.rango())).thenReturn(enemigos);
+        defensa.avanzarTurno();
+        Pasarela unaPasarela = new Pasarela(new Posicion(7 ,1));
+        unaPasarela.recibirEnemigo(new Hormiga());
 
-        defensa.defender(mapa);
+        if(unaPasarela.defensaEstaEnRango(defensa)) {
+            defensa.defender(unaPasarela.obtenerEnemigoAAtacar());
+        }
 
-        assertFalse(enemigoFueraDeRango.estaMuerta());
+        assert(unaPasarela.contieneEnemigos());
     }
 
     @Test
@@ -51,16 +43,14 @@ public class DefensaTest {
         Torre defensa = new TorrePlateada(new Posicion(0,0));
         defensa.avanzarTurno();
         defensa.avanzarTurno();
+        Pasarela unaPasarela = new Pasarela(new Posicion(2 ,1));
+        unaPasarela.recibirEnemigo(new Hormiga());
 
-        Enemigo enemigoEnRango = new Hormiga(new Posicion(2 ,1));
-        List<Enemigo> enemigos = new ArrayList<>();
-        enemigos.add(enemigoEnRango);
-        Mapa mapa = Mockito.mock(Mapa.class);
-        when(mapa.obtenerEnemigosEnRango(defensa.rango())).thenReturn(enemigos);
+        if(unaPasarela.defensaEstaEnRango(defensa)) {
+            defensa.defender(unaPasarela.obtenerEnemigoAAtacar());
+        }
 
-        defensa.defender(mapa);
-        assert(enemigoEnRango.estaMuerta());
-
+        assertFalse(unaPasarela.contieneEnemigos());
     }
 
     @Test
@@ -68,15 +58,14 @@ public class DefensaTest {
         Torre defensa = new TorrePlateada(new Posicion(0,0));
         defensa.avanzarTurno();
         defensa.avanzarTurno();
+        Pasarela unaPasarela = new Pasarela(new Posicion(7 ,1));
+        unaPasarela.recibirEnemigo(new Hormiga());
 
-        Enemigo enemigoFueraDeRango = new Hormiga(new Posicion(10,1));
-        List<Enemigo> enemigos = new ArrayList<>();
-        Mapa mapa = Mockito.mock(Mapa.class);
-        when(mapa.obtenerEnemigosEnRango(defensa.rango())).thenReturn(enemigos);
+        if(unaPasarela.defensaEstaEnRango(defensa)) {
+            defensa.defender(unaPasarela.obtenerEnemigoAAtacar());
+        }
 
-        defensa.defender(mapa);
-
-        assertFalse(enemigoFueraDeRango.estaMuerta());
+        assert(unaPasarela.contieneEnemigos());
     }
 
 }

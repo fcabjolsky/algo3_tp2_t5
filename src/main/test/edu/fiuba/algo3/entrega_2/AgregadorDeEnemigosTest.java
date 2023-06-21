@@ -46,7 +46,8 @@ public class AgregadorDeEnemigosTest {
 
         assertTrue(inicio.laCantidadDeEnemigosEsIgualA(cantidadEsperada));
     }
-    
+
+
     @Test 
     public void luegoDe12TurnosSeComienzaAleerDeNuevoElArchivoJsonCorrespondiente() {
     	

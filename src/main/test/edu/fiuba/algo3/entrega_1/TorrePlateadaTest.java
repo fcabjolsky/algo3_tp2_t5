@@ -14,10 +14,9 @@ public class TorrePlateadaTest {
         Posicion posicion = new Posicion(0,0);
 
         TorrePlateada torre = new TorrePlateada(posicion);
-        Enemigo enemigo = new Hormiga(posicion);
+        Enemigo enemigo = new Hormiga();
 
-        Mapa mapa = Mockito.mock(Mapa.class);
-        assertThrows(DefensaNoOperativa.class, () -> torre.defender(mapa));
+        assertThrows(DefensaNoOperativa.class, () -> torre.defender(enemigo));
 
     }
 
@@ -29,10 +28,9 @@ public class TorrePlateadaTest {
         TorrePlateada torre = new TorrePlateada(posicion);
         torre.avanzarTurno();
 
-        Enemigo enemigo = new Hormiga(posicion);
-        Mapa mapa = Mockito.mock(Mapa.class);
+        Enemigo enemigo = new Hormiga();
 
-        assertThrows(DefensaNoOperativa.class, () -> torre.defender(mapa));
+        assertThrows(DefensaNoOperativa.class, () -> torre.defender(enemigo));
     }
 
     @Test
@@ -40,13 +38,12 @@ public class TorrePlateadaTest {
         Posicion posicion = new Posicion(0,0);
 
         TorrePlateada torre = new TorrePlateada(posicion);
-        Enemigo enemigo = new Hormiga(posicion);
+        Enemigo enemigo = new Hormiga();
 
         torre.avanzarTurno();
         torre.avanzarTurno();
 
-        Mapa mapa = Mockito.mock(Mapa.class);
-        assertDoesNotThrow(() -> torre.defender(mapa));
+        assertDoesNotThrow(() -> torre.defender(enemigo));
     }
 
 }
