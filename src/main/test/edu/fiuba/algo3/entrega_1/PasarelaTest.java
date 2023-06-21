@@ -52,6 +52,21 @@ public class PasarelaTest {
 	}
 
 	@Test
+	public void unaPasarelaDevuelveCorrectamenteElEnemigoADaniar() {
+		Pasarela pasarela = new Pasarela(new Posicion(1,1));
+		Enemigo hormigaMuerta = new Hormiga();
+		hormigaMuerta.recibirDanio(1);
+		pasarela.recibirEnemigo(hormigaMuerta);
+		Enemigo araniaSobreviviente = new Arania();
+		araniaSobreviviente.recibirDanio(1);
+		pasarela.recibirEnemigo(araniaSobreviviente);
+
+		Enemigo araniaSobrevivienteEsperada = pasarela.obtenerEnemigoADaniar();
+
+		assertFalse(araniaSobrevivienteEsperada.estaMuerta());
+	}
+
+	@Test
 	public void unaPasarelaDevuelveFalsoSiUnaDefensaNoEstaEnSuRango() {
 		Pasarela pasarela = new Pasarela(new Posicion(0,0));
 		Defensa torre = new TorreBlanca(new Posicion(6,0));
