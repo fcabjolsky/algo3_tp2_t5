@@ -15,13 +15,14 @@ public class ProcesoDeDefensa {
 
     public Pasarela obtenerPasarelaADefender(Defensa defensa, List<Pasarela> pasarelas) {
         List<Pasarela> pasarelasEnRango = this.obtenerPasarelasEnRango(defensa, pasarelas);
-        return pasarelasEnRango.get(0);
+        Random randomIndex = new Random();
+        return pasarelasEnRango.get(randomIndex.nextInt(pasarelas.size()));
     }
 
     public void procesarDefensa(List<Pasarela> pasarelasConEnemigos, List<Defensa> defensas) {
         for (Defensa defensa : defensas ) {
             Pasarela pasarelaADefender = this.obtenerPasarelaADefender(defensa, pasarelasConEnemigos);
-            defensa.defender(pasarelaADefender.obtenerEnemigoAAtacar());
+            defensa.defender(pasarelaADefender.obtenerEnemigoADaniar());
             defensa.avanzarTurno();
         }
     }
