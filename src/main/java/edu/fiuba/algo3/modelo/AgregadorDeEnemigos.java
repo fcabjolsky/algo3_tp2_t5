@@ -61,10 +61,10 @@ public class AgregadorDeEnemigos{
 
     public void agregarEnemigosAObservador(List<Enemigo> enemigos, Posicion posicion){
         for (int i = 0;  i < this.hormigasNuevas ; i++){
-            enemigos.add(new Hormiga(posicion));
+            enemigos.add(new Hormiga());
         }
         for (int j = 0;  j < this.araniasNuevas ; j++) {
-            enemigos.add(new Arania(posicion));
+            enemigos.add(new Arania());
         }
     }
 }
