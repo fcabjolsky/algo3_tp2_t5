@@ -1,15 +1,10 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.Posicion;
-
-import java.io.IOException;
 import java.util.ArrayList;
-
-import java.util.Collection;
 
 import java.util.List;
 
-public class Pasarela implements Observador{
+public class Pasarela implements Observador, Transitable{
 	private AgregadorDeEnemigos observable;
   	private List<Enemigo> enemigos;
   	private Posicion posicion;
@@ -31,11 +26,8 @@ public class Pasarela implements Observador{
 		return false;
 	}
 
-	public Posicion getPosicion() {
-		return this.posicion;
-	}
 
-	public boolean contieneEnemigos() {
+	public boolean contieneEnemigos() { //tal vez se deberia llamar contieneEnemigosVivos
 		if (this.enemigos.isEmpty()) {
 			return false;
 		}
@@ -49,41 +41,8 @@ public class Pasarela implements Observador{
 		}
 	}
 
-	public void agregarEnemigo(Enemigo enemigo){
+	public void recibirEnemigo(Enemigo enemigo){
 		this.enemigos.add(enemigo);
-		enemigo.avanzar(this.posicion);
-	}
-
-	public void moverEnemigosA(Pasarela otraPasarela){
-		List<Enemigo> enMovimiento = new ArrayList<>();
-		List<Enemigo> estaticos = new ArrayList<>();
-
-		for (Enemigo enemigo : enemigos){
-			if(enemigo.enMovimiento()){
-				enMovimiento.add(enemigo);
-			}else{
-				estaticos.add(enemigo);
-			}
-		}
-
-		for (Enemigo enemigo : enMovimiento){
-			otraPasarela.agregarEnemigo(enemigo);
-		}
-
-		this.enemigos = estaticos;
-
-		for (Enemigo enemigo : enemigos){
-			enemigo.resetearAvance();
-		}
-
-	}
-
-	public boolean estaEnRango(Rango unRango) {
-		return unRango.estaEnRango(this.posicion);
-	}
-
-	public List<Enemigo> obtenerEnemigos() {
-		return this.enemigos;
 	}
 
 	public void actualizar(){
@@ -94,5 +53,24 @@ public class Pasarela implements Observador{
 		return ((int)enemigos.size() == numeroDeEnemigos);
 	}
 
+    public boolean defensaEstaEnRango(Defensa defensa) {
+		return defensa.estaEnRango(this.posicion);
+    }
 
+	public Enemigo obtenerEnemigoAAtacar() {
+		return this.enemigos.get(0);
+	}
+
+	public void moverEnemigosA(Transitable siguienteParcela) { //esto tal vez pueda hacerse de manera mas eficiente
+		int i = 0;
+		while (this.enemigos.iterator().hasNext()) {
+			Enemigo e = this.enemigos.get(i);
+			e.avanzar(siguienteParcela);
+			this.enemigos.remove(e);
+			i++;
+		}
+
+
+	}
 }
+
