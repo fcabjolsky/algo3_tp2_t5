@@ -1,10 +1,10 @@
 package edu.fiuba.algo3.modelo;
 
-public class EnemigoEnMovimiento implements EstadoEnemigo{
+public class EnMovimiento implements Movible {
 
     private int movimientosRestantes;
 
-    public EnemigoEnMovimiento(int velocidad) {
+    public EnMovimiento(int velocidad) {
         this.movimientosRestantes = velocidad;
     }
 
@@ -12,8 +12,8 @@ public class EnemigoEnMovimiento implements EstadoEnemigo{
         return this.movimientosRestantes > 0;
     }
     @Override
-    public void movermeA(Enemigo enemigoEnMovimiento, Pasarela otraPasarela) {
-        otraPasarela.agregarEnemigo(enemigoEnMovimiento);
+    public void moverA(Enemigo enemigo, Transitable transitable) {
+        transitable.recibirEnemigo(enemigo);
         this.movimientosRestantes --;
     }
 
