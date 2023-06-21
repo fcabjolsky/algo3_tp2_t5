@@ -4,10 +4,7 @@ package edu.fiuba.algo3.modelo;
 public class Tierra {
 	
 	private Defensa defensa;
-	
-	
-	
-	
+
 	private Boolean puedoConstruir(){
 		return this.defensa==null;
 	}
