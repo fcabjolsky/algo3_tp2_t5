@@ -1,10 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
-public class EnemigoInmovilizado implements EstadoEnemigo {
-
+public class Inmovilizado implements Movible {
 
     @Override
-    public void movermeA(Enemigo enemigo, Pasarela otraPasarela) {}
+    public void moverA(Enemigo enemigo, Transitable otraPasarela) {}
 
     @Override
     public boolean puedoSeguirMoviendome() {
