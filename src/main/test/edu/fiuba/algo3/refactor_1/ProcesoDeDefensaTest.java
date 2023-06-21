@@ -12,16 +12,31 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ProcesoDeDefensaTest {
 
     @Test
+    public void procesoDeDefensaDevuelveLasParcelasEnRangoYEstasNoEstanVacias() {
+        ProcesoDeDefensa proceso = new ProcesoDeDefensa();
+        List<Pasarela> pasarelas = new ArrayList<>();
+        Pasarela unaPasarela = new Pasarela(new Posicion(0,0));
+        unaPasarela.recibirEnemigo(new Hormiga());
+        pasarelas.add(unaPasarela);
+        Defensa defensa = new TorreBlanca(new Posicion(1,0));
+
+        List<Pasarela> pasarelasEnRango = proceso.obtenerPasarelasEnRango(defensa, pasarelas);
+
+        assertFalse(pasarelasEnRango.isEmpty());
+    }
+
+    @Test
     public void procesoDeDefensaFiltraCorrectamenteLasParcelasEnRangoDeLaDefensa() {
         ProcesoDeDefensa proceso = new ProcesoDeDefensa();
         List<Pasarela> pasarelas = new ArrayList<>();
         Pasarela unaPasarela = new Pasarela(new Posicion(0,0));
         unaPasarela.recibirEnemigo(new Hormiga());
+        pasarelas.add(unaPasarela);
         Defensa defensa = new TorreBlanca(new Posicion(1,0));
 
-        List<Pasarela> pasarelaEnRango = proceso.obtenerPasarelasEnRango(defensa, pasarelas);
+        List<Pasarela> pasarelasEnRango = proceso.obtenerPasarelasEnRango(defensa, pasarelas);
 
-        for(Pasarela p : pasarelaEnRango) {
+        for(Pasarela p : pasarelasEnRango) {
             assertTrue(p.contieneEnemigos());
         }
     }
@@ -33,26 +48,62 @@ public class ProcesoDeDefensaTest {
         List<Pasarela> pasarelas = new ArrayList<>();
         Pasarela unaPasarela = new Pasarela(new Posicion(0,0));
         unaPasarela.recibirEnemigo(new Hormiga());
+        pasarelas.add(unaPasarela);
         Defensa defensa = new TorreBlanca(new Posicion(1,0));
 
         Pasarela pasarelaADefender = proceso.obtenerPasarelaADefender(defensa, pasarelas);
 
         assertTrue(pasarelaADefender.contieneEnemigos());
     }
-    /*
+
     @Test
-    public void procesoDeDefensaProcesaCorrectamenteLasDefensaYDaniaLosEnemigosCorrectamente() {
-        List<Pasarela> pasarelas = new ArrayList<>();
-        Pasarela pasarela = new Pasarela(new Posicion(0,0));
-        Defensa torre = new TorreBlanca(new Posicion(1,1));
-        torre.avanzarTurno();
-        List<Defensa> defensas = new ArrayList<>();
-        defensas.add(torre);
-        pasarelas.add(pasarela);
+    public void procesoDeDefensaFiltraUnaParcelaADefenderQueContieneUnEnemigoValidoParaRecibirDanio() {
         ProcesoDeDefensa proceso = new ProcesoDeDefensa();
+        List<Pasarela> pasarelas = new ArrayList<>();
+        Pasarela unaPasarela = new Pasarela(new Posicion(0,0));
+        unaPasarela.recibirEnemigo(new Hormiga());
+        pasarelas.add(unaPasarela);
+        Defensa defensa = new TorreBlanca(new Posicion(1,0));
+        defensa.avanzarTurno();
+
+        Pasarela pasarelaADefender = proceso.obtenerPasarelaADefender(defensa, pasarelas);
+        defensa.defender(pasarelaADefender.obtenerEnemigoADaniar());
+
+        assertFalse(pasarelaADefender.contieneEnemigos());
+    }
+
+
+    @Test
+    public void procesoDeDefensaDaniaLosEnemigosRecienCuandoLasDefensasEstanActivas() {
+        ProcesoDeDefensa proceso = new ProcesoDeDefensa();
+        List<Pasarela> pasarelas = new ArrayList<>();
+        List<Defensa> defensas = new ArrayList<>();
+        Pasarela unaPasarela = new Pasarela(new Posicion(0,0));
+        unaPasarela.recibirEnemigo(new Hormiga());
+        pasarelas.add(unaPasarela);
+        Defensa defensa = new TorreBlanca(new Posicion(1,0));
+        defensas.add(defensa);
 
         proceso.procesarDefensa(pasarelas, defensas);
 
-        assertFalse(pasarela.contieneEnemigos());
-    }*/
+        assertTrue(unaPasarela.contieneEnemigos());
+    }
+
+    @Test
+    public void procesoDeDefensaProcesaCorrectamenteLasDefensaYDaniaLosEnemigosCorrectamente() {
+        ProcesoDeDefensa proceso = new ProcesoDeDefensa();
+        List<Pasarela> pasarelas = new ArrayList<>();
+        List<Defensa> defensas = new ArrayList<>();
+        Pasarela unaPasarela = new Pasarela(new Posicion(0,0));
+        unaPasarela.recibirEnemigo(new Hormiga());
+        pasarelas.add(unaPasarela);
+        Defensa defensa = new TorreBlanca(new Posicion(1,0));
+        defensas.add(defensa);
+
+        proceso.procesarDefensa(pasarelas, defensas);
+        proceso.procesarDefensa(pasarelas, defensas);
+
+        assertFalse(unaPasarela.contieneEnemigos());
+    }
+
 }
