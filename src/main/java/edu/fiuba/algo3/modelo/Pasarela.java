@@ -57,8 +57,14 @@ public class Pasarela implements Observador, Transitable{
 		return defensa.estaEnRango(this.posicion);
     }
 
-	public Enemigo obtenerEnemigoAAtacar() {
-		return this.enemigos.get(0);
+	public Enemigo obtenerEnemigoADaniar() {
+		int i = 0;
+		Enemigo enemigo = this.enemigos.get(i);
+		while (enemigo.estaMuerta()) {
+			i++;
+			enemigo = this.enemigos.get(i);
+		}
+		return enemigo;
 	}
 
 	public void moverEnemigosA(Transitable siguienteParcela) { //esto tal vez pueda hacerse de manera mas eficiente
