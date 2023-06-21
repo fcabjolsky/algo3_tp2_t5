@@ -2,22 +2,22 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TorrePlateadaTest {
 
     @Test
     public void test01UnaTorrePlateadaSeConstruyeYNoEstaOperativa(){
+
         Posicion posicion = new Posicion(0,0);
 
         TorrePlateada torre = new TorrePlateada(posicion);
         Enemigo enemigo = new Hormiga();
+        torre.defender(enemigo);
 
-        assertThrows(DefensaNoOperativa.class, () -> torre.defender(enemigo));
-
+        assertFalse(enemigo.estaMuerta());
     }
 
     @Test
@@ -27,23 +27,24 @@ public class TorrePlateadaTest {
 
         TorrePlateada torre = new TorrePlateada(posicion);
         torre.avanzarTurno();
-
         Enemigo enemigo = new Hormiga();
+        torre.defender(enemigo);
 
-        assertThrows(DefensaNoOperativa.class, () -> torre.defender(enemigo));
+        assertFalse(enemigo.estaMuerta());
     }
 
     @Test
     public void test03UnaTorrePlateadaSeConstruyeYLuegoDePasarDosTurnosEstaOperativa(){
+
         Posicion posicion = new Posicion(0,0);
 
         TorrePlateada torre = new TorrePlateada(posicion);
+        torre.avanzarTurno();
+        torre.avanzarTurno();
         Enemigo enemigo = new Hormiga();
+        torre.defender(enemigo);
 
-        torre.avanzarTurno();
-        torre.avanzarTurno();
-
-        assertDoesNotThrow(() -> torre.defender(enemigo));
+        assertTrue(enemigo.estaMuerta());
     }
 
 }
