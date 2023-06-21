@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Mapa {
     private Enemigo enemigo1;
@@ -53,23 +54,13 @@ public class Mapa {
     }
 
     public void agregarEnemigo(Enemigo enemigo1) {
-        pasarelas.get(0).agregarEnemigo(enemigo1);
+        pasarelas.get(0).recibirEnemigo(enemigo1);
     }
 
     public void pasarTurno() {
         for (int i = 0; i < pasarelas.size()-1; i++){
             pasarelas.get(i).moverEnemigosA(pasarelas.get(i+1));
         }
-    }
-
-    public List<Enemigo> obtenerEnemigosEnRango(Rango unRango) {
-        List<Enemigo> enemigos = new ArrayList<>();
-        for (Pasarela pasarela:this.pasarelas) {
-            if (pasarela.estaEnRango(unRango)) {
-                enemigos.addAll(pasarela.obtenerEnemigos());
-            }
-        }
-        return enemigos;
     }
 
     public boolean contieneEnemigos() {
@@ -79,5 +70,21 @@ public class Mapa {
             }
         }
         return false;
+    }
+
+    public List<Pasarela> obtenerPasarelasConEnemigos() {
+
+        List<Pasarela> pasarelasConEnemigos = this.pasarelas.stream().
+                filter(pasarela -> pasarela.contieneEnemigos()).
+                collect(Collectors.toList());
+        return pasarelasConEnemigos;
+    }
+
+    public List<Transitable> obtenerParcelasTransitables() {
+        List<Transitable> parcelasTransitables = this.pasarelas.stream()
+                .filter(parcela -> parcela instanceof Transitable)
+                .map(parcela-> (Transitable) parcela)
+                .collect(Collectors.toList());
+        return parcelasTransitables;
     }
 }
