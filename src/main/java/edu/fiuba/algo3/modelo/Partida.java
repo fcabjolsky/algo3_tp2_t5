@@ -16,6 +16,7 @@ public class Partida extends Observable {
         this.jugador = jugador;
         this.turno = new Turno(jugador, mapa);
     }
+
     public Partida(Mapa mapa, Jugador jugador, Observador logger) {
         this.logger = logger;
         this.mapa = mapa;
@@ -24,6 +25,11 @@ public class Partida extends Observable {
         this.agregarObservador(logger);
         turno.agregarObservador(this.logger);
     }
+    /*public void jugar() {
+        while (!this.turno.ganoLaPartida()) {
+            this.turno;
+        }
+    }*/
 
     public String juegoGanado() {
         this.setearCambiado();

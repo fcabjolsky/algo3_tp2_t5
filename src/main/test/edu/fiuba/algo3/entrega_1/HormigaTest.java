@@ -1,27 +1,13 @@
 package edu.fiuba.algo3.entrega_1;
 
-
-import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.Pasarela;
-import edu.fiuba.algo3.modelo.Hormiga;
-import edu.fiuba.algo3.modelo.Rango;
-import edu.fiuba.algo3.modelo.EnemigoMuerto;
-import edu.fiuba.algo3.*;
-
-
-
+import edu.fiuba.algo3.modelo.*;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class HormigaTest {
     @Test
     public void recibirDanioUnoMataLaHormiga() {
-        Hormiga hormiga = new Hormiga(new Posicion(0, 0));;
+        Hormiga hormiga = new Hormiga();
 
         hormiga.recibirDanio(1);
 
@@ -30,7 +16,7 @@ public class HormigaTest {
 
     @Test
     public void recibirDanioCeroNoMataLaHormiga() {
-        Hormiga hormiga = new Hormiga(new Posicion(0, 0));;
+        Hormiga hormiga = new Hormiga();
 
         hormiga.recibirDanio(0);
 
@@ -39,7 +25,7 @@ public class HormigaTest {
 
     @Test
     public void recibirDanioDosMataALaHormiga() {
-        Hormiga hormiga = new Hormiga(new Posicion(0, 0));;
+        Hormiga hormiga = new Hormiga();
 
         hormiga.recibirDanio(2);
 
@@ -48,46 +34,39 @@ public class HormigaTest {
 
     @Test
     public void recibirDanioEnHormigaMuertaLanzaExcepcion() {
-        Hormiga hormiga = new Hormiga(new Posicion(0, 0));;
+        Hormiga hormiga = new Hormiga();;
 
         hormiga.recibirDanio(2);
 
         assertThrows(EnemigoMuerto.class, () -> hormiga.recibirDanio(2));
     }
-    @Test
-    public void hormigaEnRangoDevuelveTrue() {
-        Posicion p = new Posicion(0, 0);
 
-        Hormiga hormiga = new Hormiga(p);
-        Rango r = Mockito.mock(Rango.class);
-        when(r.estaEnRango(p)).thenReturn(true);
-
-        assert(hormiga.estaEnRango(r));
-    }
-    @Test
-    public void hormigaQueNoEstaEnRangoDevuelveFalse() {
-        Posicion p = new Posicion(0, 0);
-
-        Hormiga hormiga = new Hormiga(p);
-        Rango r = Mockito.mock(Rango.class);
-        when(r.estaEnRango(p)).thenReturn(false);
-
-        assertFalse(hormiga.estaEnRango(r));
-    }
     @Test
     public void hormigaAvanzaAlaParcelaCorrespondiente() {
-    	 
-    	Posicion p0 = new Posicion(0, 0);
-    	Posicion p1 = new Posicion(1,0);
-    	
-    	Pasarela pasarelaLargada = new Pasarela(p0);
-    	Pasarela pasarelaSiguiente = new Pasarela(p1);
-    	
-    	Hormiga hormiga = new Hormiga(p0);
-    	
-    	hormiga.avanzar(p1);
-    	assertEquals(pasarelaSiguiente.getPosicion(), hormiga.getPosicion());	
-    	
+
+    	Pasarela pasarelaLargada = new Pasarela(new Posicion(0, 0));
+    	Pasarela pasarelaSiguiente = new Pasarela(new Posicion(1,0));
+    	Hormiga hormiga = new Hormiga();
+
+        pasarelaLargada.recibirEnemigo(hormiga);
+    	hormiga.avanzar(pasarelaSiguiente);
+
+        assertTrue(pasarelaSiguiente.contieneEnemigos());
+    }
+
+    @Test
+    public void unaHormigaSeMueveUnaPasarelasPeroNoSeMueveAUnaSegundaPasarela() {
+        Pasarela pasarelaLargada = new Pasarela(new Posicion(0,0));
+        Pasarela pasarela1 = new Pasarela(new Posicion(1,0));
+        Pasarela pasarela2 = new Pasarela(new Posicion(2,0));
+
+        Hormiga hormiga = new Hormiga();
+        pasarelaLargada.recibirEnemigo(hormiga);
+
+        hormiga.avanzar(pasarela1);
+        hormiga.avanzar(pasarela2);
+
+        assertFalse(pasarela2.contieneEnemigos());
     }
     
 }

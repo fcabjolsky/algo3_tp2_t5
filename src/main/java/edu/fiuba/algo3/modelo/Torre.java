@@ -25,8 +25,8 @@ public abstract class Torre implements Defensa {
     }
 
     @Override
-    public void defender(Mapa mapa) {
-        this.estado.defender(mapa, this.danio, this.rango);
+    public void defender(Enemigo enemigo) {
+        this.estado.defender(enemigo, this.danio);
     }
 
     public boolean puedeConstruir(int creditos) {
@@ -39,12 +39,13 @@ public abstract class Torre implements Defensa {
         estado = estado.avanzarTurno();
     }
 
-
-    public Posicion posicion() {
-        return this.rango.posicion();
+    public boolean estaEnRango(Posicion unaPosicion) {
+        return this.rango.estaEnRango(unaPosicion); //esto podria pasar a ser responsabilidad de la defensa directamente
     }
 
     public Rango rango(){
         return this.rango;
     }
 }
+
+

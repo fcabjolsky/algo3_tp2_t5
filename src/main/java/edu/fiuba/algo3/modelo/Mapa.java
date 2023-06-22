@@ -9,6 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Mapa {
     
@@ -23,9 +25,8 @@ public class Mapa {
         this.tierras = tierras;
     }
     
-    public void agregarEnemigo(Enemigo enemigo1) {
-        pasarelas.stream().findFirst().get().agregarEnemigo(enemigo1);
-        //pasarelas.get(0).agregarEnemigo(enemigo1);
+    public void agregarEnemigo(Enemigo enemigo) {
+        pasarelas.stream().findFirst().get().recibirEnemigo(enemigo);
     }
 
     public void pasarTurno() {
@@ -34,15 +35,6 @@ public class Mapa {
         }
     }
 
-    public List<Enemigo> obtenerEnemigosEnRango(Rango unRango) {
-        List<Enemigo> enemigos = new ArrayList<>();
-        for (Pasarela pasarela:this.pasarelas) {
-            if (pasarela.estaEnRango(unRango)) {
-                enemigos.addAll(pasarela.obtenerEnemigos());
-            }
-        }
-        return enemigos;
-    }
 
     public boolean contieneEnemigos() {
         for(Pasarela pasarela : this.pasarelas) {
@@ -52,15 +44,33 @@ public class Mapa {
         }
         return false;
     }
-    
-    public List<Pasarela> getPasarelas(){
-    	return this.pasarelas;
+
+    public List<Pasarela> obtenerPasarelasConEnemigos() {
+
+        List<Pasarela> pasarelasConEnemigos = this.pasarelas.stream().
+                filter(pasarela -> pasarela.contieneEnemigos()).
+                collect(Collectors.toList());
+        return pasarelasConEnemigos;
     }
-    public List<Rocoso> getRocoso(){
-    	return this.rocosos;
+
+    public List<Transitable> obtenerParcelasTransitables() {
+        List<Transitable> parcelasTransitables = this.pasarelas.stream()
+                .filter(parcela -> parcela instanceof Transitable)
+                .map(parcela-> (Transitable) parcela)
+                .collect(Collectors.toList());
+        return parcelasTransitables;
+
     }
-    
-    public List<Tierra> getTierra(){
-    	return this.tierras;
+
+    public List<Rocoso> getRocoso() {
+        return this.rocosos;
     }
+
+    public List<Tierra> getTierra() {
+        return this.tierras;
+    }
+    public List<Pasarela> getPasarelas() {
+        return this.pasarelas;
+    }
+
 }

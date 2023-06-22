@@ -1,16 +1,22 @@
 package edu.fiuba.algo3.entrega_1;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import edu.fiuba.algo3.modelo.Enemigo;
-import edu.fiuba.algo3.modelo.Torre;
-import edu.fiuba.algo3.modelo.Pasarela;
-import edu.fiuba.algo3.modelo.Hormiga;
-import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.TorreBlanca;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import edu.fiuba.algo3.modelo.*;
 import org.junit.jupiter.api.Test;
-import edu.fiuba.algo3.modelo.Posicion;
 
 public class PasarelaTest {
+
+	@Test
+	public void unaPasarelaRecibeEnemigosCorrectamente() {
+		Pasarela pasarela = new Pasarela(new Posicion(0,0));
+
+		pasarela.recibirEnemigo(new Hormiga());
+
+		assertTrue(pasarela.contieneEnemigos());
+
+	}
 	@Test
     public void noEsPosibleConstruirDefesasSobrePasarela() {
     	//Arrange
@@ -35,14 +41,73 @@ public class PasarelaTest {
 
 	@Test
 	public void unaPasarelaDevuelveFalsoSiTodosLosEnemigosQueContieneEstanMuertos() {
-
 		Pasarela pasarela = new Pasarela(new Posicion(1,1));
-		Enemigo hormigaMuerta = new Hormiga(new Posicion(1, 1));
+		Enemigo hormigaMuerta = new Hormiga();
 		hormigaMuerta.recibirDanio(1);
-		pasarela.agregarEnemigo(hormigaMuerta);
+		pasarela.recibirEnemigo(hormigaMuerta);
 
 		boolean resultado = pasarela.contieneEnemigos();
 
 		assertFalse(resultado);
 	}
+
+	@Test
+	public void unaPasarelaDevuelveCorrectamenteElEnemigoADaniar() {
+		Pasarela pasarela = new Pasarela(new Posicion(1,1));
+		Enemigo hormigaMuerta = new Hormiga();
+		hormigaMuerta.recibirDanio(1);
+		pasarela.recibirEnemigo(hormigaMuerta);
+		Enemigo araniaSobreviviente = new Arania();
+		araniaSobreviviente.recibirDanio(1);
+		pasarela.recibirEnemigo(araniaSobreviviente);
+
+		Enemigo araniaSobrevivienteEsperada = pasarela.obtenerEnemigoADaniar();
+
+		assertFalse(araniaSobrevivienteEsperada.estaMuerta());
+	}
+
+	@Test
+	public void unaPasarelaDevuelveFalsoSiUnaDefensaNoEstaEnSuRango() {
+		Pasarela pasarela = new Pasarela(new Posicion(0,0));
+		Defensa torre = new TorreBlanca(new Posicion(6,0));
+
+		boolean resultado = pasarela.defensaEstaEnRango(torre);
+
+		assertFalse(resultado);
+
+	}
+
+	@Test
+	public void unaPasarelaDevuelveVerdaderoSiUnaDefensaNoEstaEnSuRango() {
+		Pasarela pasarela = new Pasarela(new Posicion(0,0));
+		Defensa torre = new TorreBlanca(new Posicion(2,0));
+
+		boolean resultado = pasarela.defensaEstaEnRango(torre);
+
+		assertTrue(resultado);
+
+	}
+
+	@Test
+	public void unaPasarelaMueveLosEnemigosQueTieneAUnaParcela() {
+		Pasarela pasarela = new Pasarela(new Posicion(0,0));
+		Pasarela siguientePasarela = new Pasarela(new Posicion(1,1));
+
+		pasarela.recibirEnemigo(new Hormiga());
+		pasarela.moverEnemigosA(siguientePasarela);
+
+		assertTrue(siguientePasarela.contieneEnemigos());
+	}
+
+	@Test
+	public void unaPasarelaNoContieneMasEnemigosLuegoDeMoverlosALaSiguiente() {
+		Pasarela pasarela = new Pasarela(new Posicion(0,0));
+		Pasarela siguientePasarela = new Pasarela(new Posicion(1,1));
+
+		pasarela.recibirEnemigo(new Hormiga());
+		pasarela.moverEnemigosA(siguientePasarela);
+
+		assertFalse(pasarela.contieneEnemigos());
+	}
+
 }

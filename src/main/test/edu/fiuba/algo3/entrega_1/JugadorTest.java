@@ -68,7 +68,7 @@ public class JugadorTest {
     public void AlDestruir3EnemigosHormigasSeLeAsignanAlJugadorLosCreditosCorrespondientes(){
         Jugador jugador = new Jugador();
         Posicion posicion= new Posicion(1, 2);
-        Hormiga hormiga = new Hormiga(posicion);
+        Hormiga hormiga = new Hormiga();
         Jugador jugadorEsperado = new Jugador(20, 103);
         Contador muertesDeHormigas = new Contador();
 
@@ -82,7 +82,7 @@ public class JugadorTest {
     public void AlDestruir11EnemigosHormigasSeLeAsignanAlJugadorLosCreditosCorrespondientes(){
         Jugador jugador = new Jugador();
         Posicion posicion= new Posicion(1, 2);
-        Hormiga hormiga = new Hormiga(posicion);
+        Hormiga hormiga = new Hormiga();
         Jugador jugadorEsperado = new Jugador(20, 112);
         Contador muertesDeHormigas = new Contador();
 
@@ -105,7 +105,7 @@ public class JugadorTest {
     public void AlDestruirUnEnemigoAraniaSeLeAsignanAlJugadorCreditos(){
         Jugador jugador = new Jugador();
         Posicion posicion= new Posicion(1, 2);
-        Arania arania = new Arania(posicion);
+        Arania arania = new Arania();
         Jugador jugadorOriginal = new Jugador(20, 100);
         Contador muertesDeAranias = new Contador();
 

@@ -10,8 +10,7 @@ public class Tierra {
 	public Tierra(Posicion posicion) {
 		this.posicion = posicion;
 	}
-	
-	
+
 	private Boolean puedoConstruir(){
 		return this.defensa==null;
 	}
