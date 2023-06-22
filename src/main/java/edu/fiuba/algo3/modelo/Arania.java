@@ -17,8 +17,6 @@ public class Arania extends Enemigo {
         jugador.sumarCreditos(darRecompensa());
     }
 
-  /*public Posicion getPosicion() {
-    	return this.posicion;
-    }*/
-   
+    
+
 }
