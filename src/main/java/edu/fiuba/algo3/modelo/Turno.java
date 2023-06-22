@@ -25,6 +25,7 @@ public class Turno {
     private void defenderseDeEnemigos() {
         ProcesoDeDefensa procesoDeDefensa = new ProcesoDeDefensa();
         procesoDeDefensa.procesarDefensa(this.mapa.obtenerPasarelasConEnemigos(), this.jugador.obtenerDefensas());
+
     }
 
     private void construirDefensas() {
