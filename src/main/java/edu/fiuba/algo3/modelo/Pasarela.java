@@ -5,22 +5,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Pasarela implements Observador, Transitable{
-	private AgregadorDeEnemigos observable;
+public class Pasarela implements Transitable{
   	private List<Enemigo> enemigos;
   	private Posicion posicion;
-
 
 	public Pasarela(Posicion posicion) {
 		this.posicion = posicion;
 		this.enemigos = new ArrayList<>();
-	}
-
-	public Pasarela(Posicion posicion, AgregadorDeEnemigos observable) {
-		this.posicion = posicion;
-		this.enemigos = new ArrayList<>();
-		this.observable = observable;
-		observable.agregarObservador(this);
 	}
 
 	public boolean agregarDefensa(Defensa defensa){
@@ -44,10 +35,6 @@ public class Pasarela implements Observador, Transitable{
 
 	public void recibirEnemigo(Enemigo enemigo){
 		this.enemigos.add(enemigo);
-	}
-
-	public void actualizar(){
-		observable.agregarEnemigosAObservador(this.enemigos, this.posicion);
 	}
 
 	public boolean laCantidadDeEnemigosEsIgualA(int numeroDeEnemigos){

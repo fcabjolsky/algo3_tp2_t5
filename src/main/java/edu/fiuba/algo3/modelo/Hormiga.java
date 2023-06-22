@@ -5,11 +5,7 @@ public class Hormiga extends Enemigo {
         this.energia = 1;
         this.velocidad = 1;
         this.estado = new EnMovimiento(this.velocidad);
-    }
-
-    
-    public int getVelocidad() {
-    	return this.velocidad;
+        this.danio = 1;
     }
 
     public void morir(Jugador jugador, Contador cantidadDehormigasMuertas){
@@ -20,4 +16,5 @@ public class Hormiga extends Enemigo {
             jugador.sumarCreditos(1);
         }
     }
+
 }

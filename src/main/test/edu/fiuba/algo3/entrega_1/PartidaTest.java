@@ -20,7 +20,7 @@ public class PartidaTest {
         pasarelas.add(pasarela);
 
         Mapa mapa = new Mapa(pasarelas, new ArrayList<Rocoso>(), new ArrayList<Tierra>());
-        Partida partida = new Partida(mapa, new Jugador());
+        Partida partida = new Partida(mapa, new Jugador(), new Logger());
 
         String stringEsperado = "GANASTE";
 

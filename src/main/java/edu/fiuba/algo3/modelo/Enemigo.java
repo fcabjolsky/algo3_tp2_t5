@@ -4,6 +4,7 @@ public abstract class Enemigo {
     protected int energia;
     protected int velocidad;
     protected Movible estado;
+    protected int danio;
 
     public void recibirDanio(int unDanio) {
         if (this.estaMuerta()) {
@@ -28,4 +29,9 @@ public abstract class Enemigo {
     public void avanzarTurno() {
         this.estado = new EnMovimiento(this.velocidad);
     }
+
+    public int atacar(){
+        return this.danio;
+    }
+
 }

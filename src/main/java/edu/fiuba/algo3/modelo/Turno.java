@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.List;
 
-public class Turno {
+public class Turno extends Observable {
 
     private final Jugador jugador;
     private final Mapa mapa;

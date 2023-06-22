@@ -9,14 +9,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Mapa {
-    private Enemigo enemigo1;
+    
     private List<Pasarela> pasarelas;
     private List<Rocoso> rocosos;
     private List<Tierra> tierras;
-    private String informacionDeMapa;
 
 
     public Mapa(List<Pasarela> pasarelas, List<Rocoso> rocosos, List<Tierra> tierras) {
@@ -24,38 +24,17 @@ public class Mapa {
         this.rocosos = rocosos;
         this.tierras = tierras;
     }
+    
+    public void agregarEnemigo(Enemigo enemigo) {
+        pasarelas.stream().findFirst().get().recibirEnemigo(enemigo);
+    }
 
-    public Mapa(String urlInformacionDeMapa) {
-        try {
-            this.informacionDeMapa = new String(Files.readAllBytes(Paths.get(urlInformacionDeMapa)));
-        } catch (IOException e) {
-            throw new NoSeEncontroElArchivoJSON();
+    public void pasarTurno() {
+        for (int i = 0; i < pasarelas.size()-1; i++){
+            pasarelas.get(i).moverEnemigosA(pasarelas.get(i+1));
         }
     }
 
-    public void obtenerInformacionDelMapa(){
-        try {
-            JSONArray mapa = new JSONArray(this.informacionDeMapa);
-            for (int i = 0; i < mapa.length(); i++) {
-                JSONObject objeto = mapa.getJSONObject(i);
-                for (int j = 1; j < 16; j++) {
-                    String numeroDeFila = String.valueOf(j);
-                    System.out.println("El Numero de fila es: " + numeroDeFila);
-                    JSONArray fila = objeto.getJSONObject("Mapa").getJSONArray(numeroDeFila);
-                    for (int k = 0; k < fila.length(); k++) {
-                        String parcela = fila.getString(k);
-                        System.out.println("La parcela es:" +parcela);
-                    }
-                }
-            }
-        } catch (JSONException e) {
-            throw new ElFormatoDeJSONNoEsValido();
-        }
-    }
-
-    public void agregarEnemigo(Enemigo enemigo1) {
-        pasarelas.get(0).recibirEnemigo(enemigo1);
-    }
 
     public boolean contieneEnemigos() {
         for(Pasarela pasarela : this.pasarelas) {
@@ -80,5 +59,18 @@ public class Mapa {
                 .map(parcela-> (Transitable) parcela)
                 .collect(Collectors.toList());
         return parcelasTransitables;
+
     }
+
+    public List<Rocoso> getRocoso() {
+        return this.rocosos;
+    }
+
+    public List<Tierra> getTierra() {
+        return this.tierras;
+    }
+    public List<Pasarela> getPasarelas() {
+        return this.pasarelas;
+    }
+
 }

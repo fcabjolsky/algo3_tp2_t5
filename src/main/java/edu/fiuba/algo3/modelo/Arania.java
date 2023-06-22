@@ -6,6 +6,7 @@ public class Arania extends Enemigo {
         this.energia = 2;
         this.velocidad = 2;
         this.estado = new EnMovimiento(this.velocidad);
+        this.danio = 2;
     }
   
     private int darRecompensa(){
@@ -16,7 +17,5 @@ public class Arania extends Enemigo {
     public void morir(Jugador jugador, Contador muertesDeArañas){
         jugador.sumarCreditos(darRecompensa());
     }
-
-    
 
 }
