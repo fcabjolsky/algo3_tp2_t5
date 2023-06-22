@@ -58,7 +58,7 @@ public class CreadorMapaJsonTest {
 
 
 
-
+    /*
     @Test
     public void elJugadorConUnoDeVidaMuereLuegoDeLosTurnosCorrespondientes() {
 
@@ -92,7 +92,7 @@ public class CreadorMapaJsonTest {
 
         assertTrue(t.getJugador() ==0 );
     }
-   /* @Test
+    @Test
    public void elJugadorConVeinteDeVidaMuereLuegoDeLosTurnosCorrespondientesYlosEnemigsoSeSpawneanCadaTurno() {
         String urlInfomacionDelMapa = "src/main/java/edu/fiuba/algo3/modelo/mapa.json";
         CreadorMapaJson creadorDeMapa = new CreadorMapaJson(urlInfomacionDelMapa);
