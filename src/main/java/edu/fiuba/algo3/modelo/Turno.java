@@ -34,6 +34,10 @@ public class Turno extends Observable {
             defensa.avanzarTurno();
         }
     }
+
+    public int getJugador(){
+        return this.jugador.getVida();
+    }
 }
 
 

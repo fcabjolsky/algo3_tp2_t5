@@ -6,6 +6,7 @@ public abstract class Enemigo {
     protected int velocidad;
 
     protected int contadorAvance;
+    protected int danio;
 
     public Enemigo(Posicion posicion) {
         this.posicion = posicion;
@@ -52,4 +53,9 @@ public abstract class Enemigo {
             }
         }
     }
+
+    public int atacar(){
+        return this.danio;
+    }
+
 }

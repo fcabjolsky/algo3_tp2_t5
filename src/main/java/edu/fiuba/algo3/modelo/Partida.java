@@ -2,15 +2,17 @@ package edu.fiuba.algo3.modelo;
 
 public class Partida extends Observable {
 
+
     private final Mapa mapa;
 
     private final Jugador jugador;
     private Observador logger;
 
     private Turno turno;
-
+  
+    
     public Partida(Mapa mapa, Jugador jugador) {
-        this.mapa = mapa;
+    	this.mapa = mapa;
         this.jugador = jugador;
         this.turno = new Turno(jugador, mapa);
     }
@@ -32,5 +34,8 @@ public class Partida extends Observable {
         this.notificarObservadores("Seguir Jugando");
         return "SEGUIR JUGANDO";
     }
+   
+
+    
 
 }

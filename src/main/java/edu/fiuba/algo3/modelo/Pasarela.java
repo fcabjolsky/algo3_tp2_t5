@@ -82,4 +82,5 @@ public class Pasarela{
 		return ((int)enemigos.size() == numeroDeEnemigos);
 	}
 
+
 }
