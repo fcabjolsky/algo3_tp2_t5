@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class Pasarela implements Observador, Transitable{
@@ -67,16 +68,12 @@ public class Pasarela implements Observador, Transitable{
 		return enemigo;
 	}
 
-	public void moverEnemigosA(Transitable siguienteParcela) { //esto tal vez pueda hacerse de manera mas eficiente
-		int i = 0;
-		while (this.enemigos.iterator().hasNext()) {
-			Enemigo e = this.enemigos.get(i);
-			e.avanzar(siguienteParcela);
-			this.enemigos.remove(e);
-			i++;
+	public void moverEnemigosA(Transitable siguienteParcela) {
+		Iterator<Enemigo> iterador = this.enemigos.iterator();
+		while (iterador.hasNext()) {
+			iterador.next().avanzar(siguienteParcela);
+			iterador.remove();
 		}
-
-
 	}
 }
 
