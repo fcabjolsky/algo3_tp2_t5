@@ -29,12 +29,6 @@ public class Mapa {
         pasarelas.stream().findFirst().get().recibirEnemigo(enemigo);
     }
 
-    public void pasarTurno() {
-        for (int i = 0; i < pasarelas.size()-1; i++){
-            pasarelas.get(i).moverEnemigosA(pasarelas.get(i+1));
-        }
-    }
-
 
     public boolean contieneEnemigos() {
         for(Pasarela pasarela : this.pasarelas) {
