@@ -23,7 +23,6 @@ public class ProcesoDeDefensa {
         for (Defensa defensa : defensas ) {
             Pasarela pasarelaADefender = this.obtenerPasarelaADefender(defensa, pasarelasConEnemigos);
             defensa.defender(pasarelaADefender.obtenerEnemigoADaniar());
-            defensa.avanzarTurno();
         }
     }
 }

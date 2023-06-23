@@ -16,5 +16,4 @@ public class Hormiga extends Enemigo {
             jugador.sumarCreditos(1);
         }
     }
-
 }
