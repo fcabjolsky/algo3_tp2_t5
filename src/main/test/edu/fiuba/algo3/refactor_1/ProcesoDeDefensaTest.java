@@ -72,7 +72,6 @@ public class ProcesoDeDefensaTest {
         assertFalse(pasarelaADefender.contieneEnemigos());
     }
 
-
     @Test
     public void procesoDeDefensaDaniaLosEnemigosRecienCuandoLasDefensasEstanActivas() {
         ProcesoDeDefensa proceso = new ProcesoDeDefensa();
@@ -98,9 +97,10 @@ public class ProcesoDeDefensaTest {
         unaPasarela.recibirEnemigo(new Hormiga());
         pasarelas.add(unaPasarela);
         Defensa defensa = new TorreBlanca(new Posicion(1,0));
+        defensa.avanzarTurno();
+        defensa.avanzarTurno();
         defensas.add(defensa);
 
-        proceso.procesarDefensa(pasarelas, defensas);
         proceso.procesarDefensa(pasarelas, defensas);
 
         assertFalse(unaPasarela.contieneEnemigos());
