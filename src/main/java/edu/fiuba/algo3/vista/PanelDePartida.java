@@ -9,16 +9,16 @@ public class PanelDePartida extends JPanel implements Runnable{
 
     final int maximoDeColumnas = 15;
     final int maximoDeFilas = 15;
-
     final static int anchoDePantalla = 795;
     final static int altoDePantalla = 600;
-    final int tamanioDelTileAncho = anchoDePantalla/maximoDeColumnas;
-
-    final int tamanioDelTileAlto = altoDePantalla/maximoDeFilas;
+    final int tamanioDelTileAncho = (anchoDePantalla/maximoDeColumnas) - 5;
+    final int tamanioDelTileAlto = (altoDePantalla/maximoDeFilas);
     private Thread threadJuego;
-
-    edu.fiuba.algo3.vista.TileManager paisaje = new TileManager(this);
+    private TileManager paisaje;
     public PanelDePartida(){
+        String url = "src/main/java/edu/fiuba/algo3/modelo/mapa.json";
+        this.paisaje = new TileManager(this, url);
+        this.setLayout(null);
         this.setPreferredSize(new Dimension(this.anchoDePantalla, this.altoDePantalla));
         this.setDoubleBuffered(true);
         this.setBackground(Color.BLACK);
