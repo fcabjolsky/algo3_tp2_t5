@@ -34,4 +34,7 @@ public abstract class Enemigo {
         return this.danio;
     }
 
+    public boolean sePuedeMover() {
+       return this.estado.puedoSeguirMoviendome();
+    }
 }
