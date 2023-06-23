@@ -24,9 +24,13 @@ public class RocosoView extends Entidad {
     }
 
 
-
     public void draw(Graphics2D grafico, PanelDePartida panelDePartida){
         grafico.drawImage(tile.imagen, posicion.getCoordenadaX(), posicion.getCoordenadaY(),
                 panelDePartida.tamanioDelTileAncho, panelDePartida.tamanioDelTileAlto, null);
+    }
+
+    @Override
+    public Entidad devolverNuevaInstancia(Posicion posicion) {
+        return (new RocosoView(posicion));
     }
 }

@@ -29,4 +29,9 @@ public class PasarelaView extends Entidad {
                 panelDePartida.tamanioDelTileAncho, panelDePartida.tamanioDelTileAlto, null);
     }
 
+    @Override
+    public Entidad devolverNuevaInstancia(Posicion posicion) {
+        return (new PasarelaView(posicion));
+    }
+
 }

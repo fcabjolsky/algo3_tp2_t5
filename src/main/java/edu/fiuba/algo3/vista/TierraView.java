@@ -16,7 +16,6 @@ public class TierraView extends Entidad {
             this.tile = new Tile();
             this.posicion = posicion;
             this.tile.imagen = ImageIO.read(getClass().getResource("/tierra.png"));
-            System.out.println("x:"+this.posicion.getCoordenadaX()+" y:"+this.posicion.getCoordenadaY());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -25,5 +24,10 @@ public class TierraView extends Entidad {
     public void draw(Graphics2D grafico, PanelDePartida panelDePartida){
         grafico.drawImage(tile.imagen, posicion.getCoordenadaX(), posicion.getCoordenadaY(),
                 panelDePartida.tamanioDelTileAncho, panelDePartida.tamanioDelTileAlto, null);
+    }
+
+    @Override
+    public Entidad devolverNuevaInstancia(Posicion posicion) {
+        return (new TierraView(posicion));
     }
 }
