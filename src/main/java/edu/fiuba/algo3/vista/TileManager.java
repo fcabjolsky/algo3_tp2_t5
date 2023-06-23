@@ -1,31 +1,57 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.vista.Entidad;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.function.Consumer;
 
 public class TileManager {
 
     private PanelDePartida panelDePartida;
     private ArrayList<edu.fiuba.algo3.vista.Entidad> paisajes;
+    private String[][] mapa;
+    private HashMap<String, Entidad> parcelas;
+    private String informacionDeMapa;
 
-    public TileManager(PanelDePartida panelDePartida) {
-        this.panelDePartida = panelDePartida;
-        this.paisajes = new ArrayList();
-        this.inicializarPaisaje();
+
+    public TileManager(PanelDePartida panelDePartida, String urlInformacionDeMapa) {
+        try{
+            this.informacionDeMapa = new String(Files.readAllBytes(Paths.get(urlInformacionDeMapa)));
+            this.panelDePartida = panelDePartida;
+            this.paisajes = new ArrayList();
+            this.mapa = new String[panelDePartida.maximoDeColumnas][panelDePartida.maximoDeFilas];
+            this.inicializarDiccionario();
+            this.cargarMapa();
+            this.inicializarPaisaje();
+        } catch (IOException e) {
+            throw new NoSeEncontroElArchivoJSON();
+        }
+
+    }
+
+    public void inicializarDiccionario(){
+        this.parcelas = new HashMap<>();
+        Posicion posicion = new Posicion(0,0);
+        this.parcelas.put("Pasarela", new PasarelaView(posicion));
+        this.parcelas.put("Rocoso", new RocosoView(posicion));
+        this.parcelas.put("Tierra", new TierraView(posicion));
     }
 
     public void inicializarPaisaje(){
-        int col = 0;
-        int fil = 0;
-        int x = 0;
-        int y = 0;
+        int col = 0, fil = 0, x = 0, y = 0;
         while(panelDePartida.maximoDeColumnas > col && panelDePartida.maximoDeFilas > fil){
-            paisajes.add(new PasarelaView(new Posicion(x,y)));
+            String parcela = this.mapa[fil][col];
+            paisajes.add(this.parcelas.get(parcela).devolverNuevaInstancia(new Posicion(x, y)));
             col++;
             x += panelDePartida.tamanioDelTileAncho;
             if (col == panelDePartida.maximoDeColumnas){
@@ -40,5 +66,22 @@ public class TileManager {
        for (Entidad paisaje : paisajes){
            paisaje.draw(grafico, this.panelDePartida);
        }
+    }
+
+    public void cargarMapa(){
+        JSONObject json = new JSONObject(this.informacionDeMapa);
+        JSONObject mapa = json.getJSONObject("Mapa");
+        for(String fila: mapa.keySet()){
+            int numeroFila = Integer.parseInt(fila) - 1;
+            JSONArray fil = mapa.getJSONArray(fila);
+            for(int i  = 0; i < fil.length(); i++) {
+                this.mapa[numeroFila][i] = fil.getString(i);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        String url = "src/main/java/edu/fiuba/algo3/modelo/mapa.json";
+        TileManager t = new TileManager(new PanelDePartida(), url);
     }
 }
