@@ -42,15 +42,12 @@ public class PartidaViewController extends JFrame{
     }
 
     public void setStyleButton(String url, JButton boton, int ancho, int alto, int x, int y ){
+        ImageIcon fondo = new ImageIcon((new ImageIcon(getClass().getResource(url))).getImage().getScaledInstance(ancho, alto , Image.SCALE_SMOOTH));
         boton.setBounds(x, y, ancho, alto);
-        boton.setIcon(setFondoBoton(boton, url));
+        boton.setIcon(fondo);
         boton.setBorderPainted(false);
         boton.setBackground(new Color(0,0,0,10));
 
-    }
-
-    public Icon setFondoBoton(JButton boton, String url){
-        return new ImageIcon((new ImageIcon(getClass().getResource(url))).getImage().getScaledInstance(boton.getWidth(), boton.getHeight(), Image.SCALE_SMOOTH));
     }
 
     void inicializarListenersSalir(JButton boton){
@@ -78,11 +75,13 @@ public class PartidaViewController extends JFrame{
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                setFondoBoton(boton, "/botonSalirPresionado");
+
             }
 
             @Override
-            public void mouseExited(MouseEvent e){setFondoBoton(boton, "/botonSalirSoltado.png");}
+            public void mouseExited(MouseEvent e){
+                setStyleButton("/botonSalirSoltado.png",boton, 75, 30, 720, 0);
+            }
         });
     }
 
