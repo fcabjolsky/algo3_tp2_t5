@@ -80,8 +80,4 @@ public class TileManager {
         }
     }
 
-    public static void main(String[] args) {
-        String url = "src/main/java/edu/fiuba/algo3/modelo/mapa.json";
-        TileManager t = new TileManager(new PanelDePartida(), url);
-    }
 }
