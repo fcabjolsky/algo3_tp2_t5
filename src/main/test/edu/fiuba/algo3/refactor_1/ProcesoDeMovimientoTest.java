@@ -65,4 +65,5 @@ public class ProcesoDeMovimienoTest {
         assertTrue(parcelaMetaArania.contieneEnemigos());
         assertTrue(parcelaMetaArania.contieneEnemigos());
     }
+
 }
