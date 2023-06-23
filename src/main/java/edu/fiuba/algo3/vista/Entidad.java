@@ -13,4 +13,6 @@ public abstract class Entidad {
     public void setPosicion(Posicion posicion) {
         this.posicion = posicion;
     }
+
+    public abstract Entidad devolverNuevaInstancia(Posicion posicion);
 }
