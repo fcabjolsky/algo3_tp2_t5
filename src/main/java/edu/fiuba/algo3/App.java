@@ -1,6 +1,5 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.vista.PanelDePartida;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,7 +9,6 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
-import edu.fiuba.algo3.vista.PanelDePartida;
 public class App extends Application {
 
     final static int anchoDePantalla = 795;
