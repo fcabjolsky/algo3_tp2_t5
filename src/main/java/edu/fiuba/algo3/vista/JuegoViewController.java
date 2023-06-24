@@ -44,7 +44,7 @@ public class JuegoViewController extends Stage{
     }
     @FXML
     void botonIniciarPartidaOnAction(javafx.event.ActionEvent event) {
-        edu.fiuba.algo3.vista.PartidaViewController partida = new PartidaViewController();
+        PartidaViewController partida = new PartidaViewController("src/main/java/edu/fiuba/algo3/modelo/mapa.json");
         partida.setLocationRelativeTo(null);
         partida.setVisible(true);
         cerrarVentana();
