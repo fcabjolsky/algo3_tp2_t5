@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.vista.PanelDePartida;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.effect.*;
@@ -11,8 +9,6 @@ import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.StageStyle;
@@ -35,7 +31,7 @@ public class EntradaViewController extends Stage{
             Parent root = FXMLLoader.load(getClass().getResource("/JuegoView.fxml"));
             Stage juegoStage = new Stage();
             juegoStage.initStyle(StageStyle.UNDECORATED);
-            juegoStage.setScene(new Scene(root, edu.fiuba.algo3.vista.PanelDePartida.anchoDePantalla, PanelDePartida.altoDePantalla));
+            juegoStage.setScene(new Scene(root, PartidaViewController.anchoDePantalla, PartidaViewController.altoDePantalla));
             juegoStage.show();
             Stage stage = (Stage) this.botonJugar.getScene().getWindow();
             stage.close();
