@@ -68,4 +68,12 @@ public class Mapa {
     }
 
     public Pasarela getPasarelaFinal(){ return this.pasarelas.get( this.pasarelas.size() - 1 ); }
+
+    public void reseteaAlosEnemigos(){
+        List<Pasarela> listPasarelas = obtenerPasarelasConEnemigos();
+        for(Pasarela pasarela : listPasarelas){
+            pasarela.resetearTurnoEnemigos();
+        }
+    }
+
 }

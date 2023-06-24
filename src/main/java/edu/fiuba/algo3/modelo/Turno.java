@@ -54,6 +54,7 @@ public class Turno extends Observable {
         if(pf.contieneEnemigos()){
             pf.daniarJugador(this.jugador);
         }
+        mapa.reseteaAlosEnemigos();
     }
 
     public void insertarEnemigosNuevos(){

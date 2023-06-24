@@ -73,5 +73,11 @@ public class Pasarela implements Transitable{
 			j.perderVida(e.atacar());
 		}
 	}
+
+	public void resetearTurnoEnemigos(){
+		for(Enemigo enemigo : this.enemigos){
+				enemigo.avanzarTurno();
+		}
+	}
 }
 
