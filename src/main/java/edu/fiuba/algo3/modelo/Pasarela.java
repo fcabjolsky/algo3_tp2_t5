@@ -62,5 +62,11 @@ public class Pasarela implements Transitable{
 			iterador.remove();
 		}
 	}
+
+	public void daniarJugador(Jugador j){
+		for(Enemigo e : this.enemigos){
+			j.perderVida(e.atacar());
+		}
+	}
 }
 

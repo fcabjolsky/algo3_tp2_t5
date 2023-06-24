@@ -6,10 +6,14 @@ public class Turno extends Observable {
 
     private final Jugador jugador;
     private final Mapa mapa;
+    private final AgregadorDeEnemigos creadorEnemigos;
+    private int numeroTurno;
 
     public Turno(Jugador jugador, Mapa mapa) {
        this.jugador = jugador;
        this.mapa = mapa;
+       this.creadorEnemigos = new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigos.json", this.mapa);
+       this.numeroTurno = 1;
     }
 
     private void moverEnemigos() {
@@ -38,6 +42,18 @@ public class Turno extends Observable {
     public void siguienteTurno() {
         this.moverEnemigos();
         this.defenderseDeEnemigos();
+    }
+
+    public void siguienteTurno2(){
+        this.moverEnemigos();
+        Pasarela pf = this.mapa.getPasarelaFinal();
+        if(pf.contieneEnemigos()){
+            pf.daniarJugador(this.jugador);
+        }
+    }
+
+    public void insertarEnemigosNuevos(){
+        this.creadorEnemigos.obtenerInformacionDeNuevosEnemigos(this.numeroTurno);
     }
 }
 

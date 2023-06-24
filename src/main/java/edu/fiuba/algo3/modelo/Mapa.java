@@ -73,4 +73,5 @@ public class Mapa {
         return this.pasarelas;
     }
 
+    public Pasarela getPasarelaFinal(){ return this.pasarelas.get( this.pasarelas.size() - 1 ); }
 }
