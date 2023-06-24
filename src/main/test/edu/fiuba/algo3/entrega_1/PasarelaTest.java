@@ -110,4 +110,16 @@ public class PasarelaTest {
 		assertFalse(pasarela.contieneEnemigos());
 	}
 
+	@Test
+	public void unaPasarelaSoloMueveLosEnemigosQuePuedenHacerloALaSiguientePasarela() {
+		Pasarela pasarela = new Pasarela(new Posicion(0,0));
+		Pasarela siguientePasarela = new Pasarela(new Posicion(1,1));
+		Hormiga hormigaInmovil = new Hormiga();
+		hormigaInmovil.avanzar(pasarela);
+
+		pasarela.moverEnemigosA(siguientePasarela);
+
+		assertTrue(pasarela.contieneEnemigos());
+	}
+
 }

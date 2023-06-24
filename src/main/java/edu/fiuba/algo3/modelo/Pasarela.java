@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Pasarela implements Transitable{
   	private List<Enemigo> enemigos;
@@ -56,10 +57,14 @@ public class Pasarela implements Transitable{
 	}
 
 	public void moverEnemigosA(Transitable siguienteParcela) {
-		Iterator<Enemigo> iterador = this.enemigos.iterator();
+		List<Enemigo> enemigosQuePuedenSeguirMoviendose = this.enemigos.stream().
+				filter(enemigo -> enemigo.sePuedeMover()).
+				collect(Collectors.toList());
+		Iterator<Enemigo> iterador = enemigosQuePuedenSeguirMoviendose.iterator();
 		while (iterador.hasNext()) {
-			iterador.next().avanzar(siguienteParcela);
-			iterador.remove();
+			Enemigo e = iterador.next();
+			e.avanzar(siguienteParcela);
+			this.enemigos.remove(e);
 		}
 	}
 

@@ -42,6 +42,10 @@ public class Turno extends Observable {
     public void siguienteTurno() {
         this.moverEnemigos();
         this.defenderseDeEnemigos();
+        if (ganoLaPartida()) {
+            throw new JuegoGanado();
+        }
+        this.construirDefensas();
     }
 
     public void siguienteTurno2(){
