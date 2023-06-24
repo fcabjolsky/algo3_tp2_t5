@@ -53,8 +53,10 @@ public class Turno extends Observable {
         Pasarela pf = this.mapa.getPasarelaFinal();
         if(pf.contieneEnemigos()){
             pf.daniarJugador(this.jugador);
+            pf.eliminarEnemigos();
         }
         mapa.reseteaAlosEnemigos();
+        this.numeroTurno++;
     }
 
     public void insertarEnemigosNuevos(){
