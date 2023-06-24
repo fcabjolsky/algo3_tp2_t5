@@ -1,90 +1,71 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.vista.PanelDePartida;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
+public class PartidaViewController extends JFrame {
+    final static int anchoDePantalla = 795;
+    final static int altoDePantalla = 600;
+    final int maximoDeColumnas = 15;
+    final int maximoDeFilas = 15;
+    final int tamanioDelTileAncho = (anchoDePantalla/maximoDeColumnas) - 5;
+    final int tamanioDelTileAlto = (altoDePantalla/maximoDeFilas);
 
-public class PartidaViewController extends JFrame{
+    private JPanel panelBotones;
+    private JPanel mapa;
 
-    JPanel panelDePartida = new PanelDePartida();
+    private ParcelaManager paisaje;
 
-    public PartidaViewController(){
+    JButton botonAgregarTorreBlanca;
+    JButton botonAgregarTorrePlateada;
+    JButton botonAgregarTrampaArena;
+    JButton botonSalirYGuardar;
 
+    public PartidaViewController(String urlInformacionDeMapa){
         int anchoDeBoton = 75;
         int altoDeBoton = 75;
-        JButton botonAgregarTorreBlanca = new JButton();
-        JButton botonAgregarTorrePlateada = new JButton();
-        JButton botonAgregarTrampaArena = new JButton();
-        JButton botonSalirYGuardar = new JButton();
 
-        this.setStyleButton("/botonSalirSoltado.png", botonSalirYGuardar, anchoDeBoton, 30, 720, 0);
-        this.setStyleButton("/botonTorreBlanca.png", botonAgregarTorreBlanca, anchoDeBoton, altoDeBoton, 720, 40);
-        this.setStyleButton("/botonTorrePlateada.png", botonAgregarTorrePlateada, anchoDeBoton, altoDeBoton, 720, 125);
-        this.setStyleButton("/botonTrampaArena.png", botonAgregarTrampaArena, anchoDeBoton, altoDeBoton, 720, 210);
+        this.setPreferredSize(new Dimension(this.anchoDePantalla, this.altoDePantalla));
+        this.setLayout(null);
 
-        panelDePartida.add(botonSalirYGuardar);
-        panelDePartida.add(botonSalirYGuardar);
-        panelDePartida.add(botonAgregarTorreBlanca);
-        panelDePartida.add(botonAgregarTorrePlateada);
-        panelDePartida.add(botonAgregarTrampaArena);
+        this.panelBotones = new JPanel();
+        this.panelBotones.setLayout(null);
+        this.panelBotones.setBounds(720, 0, 75, altoDePantalla);
+        this.panelBotones.setBackground(Color.BLACK);
 
-        this.add(this.panelDePartida);
+        this.mapa = new JPanel(new GridLayout(this.maximoDeFilas, this.maximoDeColumnas));
+        this.inicializarContenedorDeMapa(urlInformacionDeMapa);
+
+        this.botonSalirYGuardar = setStyleButton("/botonSalirSoltado.png",anchoDeBoton, 30,0,0);
+        this.botonAgregarTorreBlanca = setStyleButton("/botonTorreBlanca.png",anchoDeBoton, altoDeBoton,0,40);
+        this.botonAgregarTorrePlateada = setStyleButton("/botonTorreBlanca.png",anchoDeBoton, altoDeBoton,0, 125);
+        this.botonAgregarTrampaArena = setStyleButton("/botonTorreBlanca.png",anchoDeBoton, altoDeBoton,0, 210);
+
+        this.panelBotones.add(botonAgregarTorreBlanca);
+        this.panelBotones.add(botonSalirYGuardar);
+        this.panelBotones.add(botonAgregarTorrePlateada);
+        this.panelBotones.add(botonAgregarTrampaArena);
+
+        this.add(this.panelBotones);
+        this.add(this.mapa);
         this.setUndecorated(true);
         this.pack();
-        inicializarListenersSalir(botonSalirYGuardar);
     }
 
-    public void setStyleButton(String url, JButton boton, int ancho, int alto, int x, int y ){
-        ImageIcon fondo = new ImageIcon((new ImageIcon(getClass().getResource(url))).getImage().getScaledInstance(ancho, alto , Image.SCALE_SMOOTH));
+    private void inicializarContenedorDeMapa(String urlInformacionDeMapa){
+        this.mapa.setBounds(0, 0, anchoDePantalla - 75 , altoDePantalla);
+        this.paisaje = new ParcelaManager(this.mapa, urlInformacionDeMapa, this.maximoDeColumnas, this.maximoDeFilas);
+        this.paisaje.inicializarPaisaje(this.mapa,this.tamanioDelTileAlto, this.tamanioDelTileAncho);
+    }
+
+    public JButton setStyleButton(String url, int ancho, int alto, int x, int y ){
+        JButton boton = new JButton();
+        Icon fondo = new ImageIcon(new ImageIcon(getClass().getResource(url)).getImage().getScaledInstance(ancho, alto, Image.SCALE_SMOOTH));
         boton.setBounds(x, y, ancho, alto);
         boton.setIcon(fondo);
-        boton.setBorderPainted(false);
         boton.setBackground(new Color(0,0,0,10));
-
+        return boton;
     }
-
-    void inicializarListenersSalir(JButton boton){
-        boton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
-        boton.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                dispose();
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                boton.setLocation(boton.getX(), boton.getY() - 5);
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                boton.setLocation(boton.getX(), boton.getY() + 5);
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e){
-                setStyleButton("/botonSalirSoltado.png",boton, 75, 30, 720, 0);
-            }
-        });
-    }
-
-
 
 }
