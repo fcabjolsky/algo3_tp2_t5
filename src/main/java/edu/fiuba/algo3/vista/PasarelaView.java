@@ -1,24 +1,25 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.modelo.Posicion;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
 
 public class PasarelaView extends Entidad {
 
-    public PasarelaView(Posicion posicion, int anchoTile, int altoTile) {
-        super(posicion, anchoTile, altoTile);
-        try{
-            super.imagen = ImageIO.read(getClass().getResource("/pasarela.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    private TorreView torre;
+    public PasarelaView(int anchoTile, int altoTile, int x, int y) {
+        super(anchoTile, altoTile, x, y);
+        super.imagen = new Image(PasarelaView.class.getResourceAsStream("/pasarela3.png"));
+        this.torre = new TorreView("/torreBlanca.png", anchoTile, altoTile, x, y);
+        this.setFill(new ImagePattern(super.imagen));
     }
 
     @Override
-    public Entidad devolverNuevaInstancia(Posicion posicion, int altoTile, int anchoTile) {
-        return (new PasarelaView(posicion, anchoTile, altoTile));
+    public Entidad devolverNuevaInstancia(int anchoTile, int altoTile, int x, int y) {
+        return (new PasarelaView(anchoTile, altoTile, x, y));
     }
 
 }

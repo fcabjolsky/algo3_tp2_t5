@@ -7,6 +7,7 @@ import edu.fiuba.algo3.vista.Conexion;
 import edu.fiuba.algo3.vista.PartidaViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Lighting;
@@ -15,6 +16,8 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -44,10 +47,14 @@ public class JuegoViewController extends Stage{
     }
     @FXML
     void botonIniciarPartidaOnAction(javafx.event.ActionEvent event) {
-        PartidaViewController partida = new PartidaViewController("src/main/java/edu/fiuba/algo3/modelo/mapa.json");
-        partida.setLocationRelativeTo(null);
-        partida.setVisible(true);
-        cerrarVentana();
+        PartidaViewController controller = new PartidaViewController();
+        Scene scene = controller.InicializarPartidaView("src/main/java/edu/fiuba/algo3/modelo/mapa.json");
+        Stage partida = new Stage();
+        partida.initStyle(StageStyle.UNDECORATED);
+        partida.setScene(scene);
+        partida.show();
+        Stage stage = (Stage) this.botonSalir.getScene().getWindow();
+        stage.close();
     }
 
     @FXML

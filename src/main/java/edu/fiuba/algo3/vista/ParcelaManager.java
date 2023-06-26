@@ -1,11 +1,10 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.modelo.*;
+import javafx.scene.layout.GridPane;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -19,7 +18,7 @@ public class ParcelaManager {
     private int maximoDeColumnas;
     private int maximoDeFilas;
 
-    public ParcelaManager(Container mapa, String urlInformacionDeMapa, int maximoDeColumnas, int maximoDeFilas) {
+    public ParcelaManager(GridPane mapa, String urlInformacionDeMapa, int maximoDeColumnas, int maximoDeFilas) {
         try{
             this.informacionDeMapa = new String(Files.readAllBytes(Paths.get(urlInformacionDeMapa)));
             this.maximoDeColumnas = maximoDeColumnas;
@@ -34,17 +33,17 @@ public class ParcelaManager {
 
     public void inicializarDiccionario(){
         this.parcelas = new HashMap<>();
-        Posicion posicion = new Posicion(0,0);
-        this.parcelas.put("Pasarela", new PasarelaView(posicion, 0, 0));
-        this.parcelas.put("Rocoso", new RocosoView(posicion, 0, 0));
-        this.parcelas.put("Tierra", new TierraView(posicion, 0, 0));
+        this.parcelas.put("Pasarela", new PasarelaView(0, 0, 0, 0));
+        this.parcelas.put("Rocoso", new RocosoView(0, 0, 0, 0));
+        this.parcelas.put("Tierra", new TierraView(0, 0, 0, 0));
     }
 
-    public void inicializarPaisaje(JPanel mapa, int altoTile, int anchoTile){
+    public void inicializarPaisaje(GridPane mapa, int altoTile, int anchoTile){
         for (int x = 0; x < this.maximoDeFilas; x++) {
             for (int y = 0; y < this.maximoDeColumnas; y++) {
                 String parcela = this.mapa[x][y];
-                mapa.add(this.parcelas.get(parcela).devolverNuevaInstancia(new Posicion(x, y), anchoTile, altoTile));
+                Entidad e = this.parcelas.get(parcela).devolverNuevaInstancia(anchoTile, altoTile, y, x);
+                mapa.add(e, y, x);
             }
         }
     }
