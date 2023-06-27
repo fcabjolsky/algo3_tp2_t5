@@ -1,25 +1,17 @@
 package edu.fiuba.algo3.vista;
 
 
-import edu.fiuba.algo3.modelo.Posicion;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
-import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.net.URL;
 
 
@@ -31,14 +23,11 @@ public class PartidaViewController{
     final int tamanioDelTileAncho = (anchoDePantalla/maximoDeColumnas) - 5;
     final int tamanioDelTileAlto = (altoDePantalla/maximoDeFilas);
 
-    static Posicion posicionParcela = new Posicion(0,0);
+    static Entidad parcelaElegida;
     @FXML
     private Pane panelBotones;
     @FXML
     private GridPane mapa;
-
-    @FXML
-    private GridPane torres;
     private ParcelaManager paisaje;
 
     public Scene InicializarPartidaView(String urlInformacionDeMapa){
@@ -54,9 +43,9 @@ public class PartidaViewController{
         this.setEstiloBoton("/botonTorrePlateada.png", botonAgregarTorrePlateada,-8 , 255, altoDeBoton);
         this.setEstiloBoton("/botonTrampaArena.png", botonAgregarTrampaArena, -8, 340, altoDeBoton);
 
-        this.inicializarListenersBotonAgregar(botonAgregarTorreBlanca);
-        this.inicializarListenersBotonAgregar(botonAgregarTorrePlateada);
-        this.inicializarListenersBotonAgregar(botonAgregarTrampaArena);
+        this.inicializarListenersBotonAgregar(botonAgregarTorreBlanca, "/torreBlanca.png");
+        this.inicializarListenersBotonAgregar(botonAgregarTorrePlateada, "/torrePlateada2.png");
+        this.inicializarListenersBotonAgregar(botonAgregarTrampaArena, "/trampaArena.png");
         this.inicializarListenersBotonSalir(botonSalirYGuardar);
 
         this.panelBotones = new Pane(botonSalirYGuardar, botonAgregarTorreBlanca, botonAgregarTorrePlateada, botonAgregarTrampaArena);
@@ -69,12 +58,6 @@ public class PartidaViewController{
 
 
         this.mapa = new GridPane();
-        this.torres = new GridPane();
-        this.torres.setBackground(Background.EMPTY);
-        this.torres.setLayoutX(0);
-        this.torres.setLayoutY(0);
-        this.torres.setPrefHeight(altoDePantalla);
-        this.torres.setPrefWidth(anchoDePantalla - 75);
 
         this.inicializarContenedorDeMapa(urlInformacionDeMapa);
 
@@ -106,13 +89,13 @@ public class PartidaViewController{
     }
 
     private void agregarTorreAMapa(String urlImagenTorre){
-        System.out.println(posicionParcela.getCoordenadaX());
-        int x = posicionParcela.getCoordenadaX();
-        int y = posicionParcela.getCoordenadaY();
-        TorreView torreAAgregar = new TorreView(urlImagenTorre, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y);
-        this.torres.getChildren().add(torreAAgregar);
+        int x = (int)parcelaElegida.getX();
+        int y = (int)parcelaElegida.getY();
+        DefensaView torreAAgregar = new DefensaView(urlImagenTorre, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y);
+        ((TierraView)parcelaElegida).setTorre(torreAAgregar);
+        this.mapa.add(torreAAgregar, x, y);
     }
-    private void inicializarListenersBotonAgregar(Button boton){
+    private void inicializarListenersBotonAgregar(Button boton, String urlImagenDefensa){
         boton.addEventHandler(MouseEvent.MOUSE_ENTERED,
                 e -> {
                     boton.setEffect(new DropShadow());
@@ -124,7 +107,7 @@ public class PartidaViewController{
                 });
         boton.addEventHandler(MouseEvent.MOUSE_CLICKED,
                 e -> {
-                    agregarTorreAMapa("/torreBlanca.png");
+                    agregarTorreAMapa(urlImagenDefensa);
                 });
     }
     private void inicializarListenersBotonSalir(Button boton){

@@ -21,8 +21,8 @@ public abstract class Entidad extends Rectangle{
         inicializarListeners();
     }
     public abstract Entidad devolverNuevaInstancia(int anchoTile, int altoTile, int x, int y);
-    public void asignarPosicionAAgregable(){
-        PartidaViewController.posicionParcela = new Posicion((int)this.getX(),(int)this.getY());
+    public void asignarParcelaElegida(){
+        PartidaViewController.parcelaElegida = this;
     }
 
     public void inicializarListeners(){
@@ -38,8 +38,7 @@ public abstract class Entidad extends Rectangle{
                 });
         this.addEventHandler(MouseEvent.MOUSE_CLICKED,
                 e -> {
-                    asignarPosicionAAgregable();
-                    System.out.println("Se asigno "+ PartidaViewController.posicionParcela.getCoordenadaY());
+                    asignarParcelaElegida();
                 });
     }
 }

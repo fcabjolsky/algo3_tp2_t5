@@ -9,11 +9,9 @@ import java.io.IOException;
 
 public class PasarelaView extends Entidad {
 
-    private TorreView torre;
     public PasarelaView(int anchoTile, int altoTile, int x, int y) {
         super(anchoTile, altoTile, x, y);
         super.imagen = new Image(PasarelaView.class.getResourceAsStream("/pasarela3.png"));
-        this.torre = new TorreView("/torreBlanca.png", anchoTile, altoTile, x, y);
         this.setFill(new ImagePattern(super.imagen));
     }
 

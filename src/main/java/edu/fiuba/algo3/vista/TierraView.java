@@ -1,22 +1,18 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.modelo.Posicion;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 
-import javax.imageio.ImageIO;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Random;
-
 public class TierraView extends Entidad {
 
+    private DefensaView torre;
     public TierraView(int anchoTile, int altoTile, int x, int y) {
         super(anchoTile, altoTile, x, y);
         super.imagen = inicializarImagenesDeTierra();
         this.setFill(new ImagePattern(super.imagen));
+    }
+    public void setTorre(DefensaView torre){
+        this.torre = torre;
     }
 
     private Image inicializarImagenesDeTierra(){
