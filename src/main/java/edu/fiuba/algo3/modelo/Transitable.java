@@ -5,5 +5,6 @@ public interface Transitable {
 
     public void moverEnemigosA(Transitable otraParcela);
 
-    public boolean contieneEnemigos();
+    public boolean contieneEnemigosVivos();
+
 }

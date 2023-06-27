@@ -2,14 +2,18 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.List;
 
-public class Turno extends Observable {
+public class Turno extends Observable implements Turneable {
 
     private final Jugador jugador;
     private final Mapa mapa;
+    private AgregadorDeEnemigos creadorEnemigos;
+    private int numeroDeTurno;
 
     public Turno(Jugador jugador, Mapa mapa) {
        this.jugador = jugador;
        this.mapa = mapa;
+       this.creadorEnemigos = new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigos.json", this.mapa);
+       this.numeroDeTurno = 1;
     }
 
     private void moverEnemigos() {
@@ -35,13 +39,20 @@ public class Turno extends Observable {
         }
     }
 
+    public void avanzarTurno() {
+        this.mapa.avanzarTurno();
+        this.jugador.avanzarTurno();//ac
+        this.numeroDeTurno ++;
+    }
+
     public void siguienteTurno() {
+        this.creadorEnemigos.obtenerInformacionDeNuevosEnemigos(this.numeroDeTurno);
         this.moverEnemigos();
         this.defenderseDeEnemigos();
         if (ganoLaPartida()) {
             throw new JuegoGanado();
         }
-        this.construirDefensas();
+        this.avanzarTurno();
     }
 }
 
