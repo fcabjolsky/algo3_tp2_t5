@@ -1,18 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-public class Mapa {
+public class Mapa implements Turneable {
     
     private List<Pasarela> pasarelas;
     private List<Rocoso> rocosos;
@@ -32,7 +23,7 @@ public class Mapa {
 
     public boolean contieneEnemigos() {
         for(Pasarela pasarela : this.pasarelas) {
-            if(pasarela.contieneEnemigos()) {
+            if(pasarela.contieneEnemigosVivos()) {
                 return true;
             }
         }
@@ -42,7 +33,7 @@ public class Mapa {
     public List<Pasarela> obtenerPasarelasConEnemigos() {
 
         List<Pasarela> pasarelasConEnemigos = this.pasarelas.stream().
-                filter(pasarela -> pasarela.contieneEnemigos()).
+                filter(pasarela -> pasarela.contieneEnemigosVivos()).
                 collect(Collectors.toList());
         return pasarelasConEnemigos;
     }
@@ -67,4 +58,14 @@ public class Mapa {
         return this.pasarelas;
     }
 
+    @Override
+    public void avanzarTurno() { //esto podria ser tanto para las parcelasTierra como para las parcelasPasarela
+        List<Turneable> parcelasTurneables = this.pasarelas.stream()
+                .filter(parcela -> parcela instanceof Turneable)
+                .map(parcela-> (Turneable) parcela)
+                .collect(Collectors.toList());
+        for(Turneable parcela : parcelasTurneables) {
+            parcela.avanzarTurno();
+        }
+    }
 }
