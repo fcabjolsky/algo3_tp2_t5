@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Pasarela implements Transitable{
+public class Pasarela implements Transitable, Turneable{
   	private List<Enemigo> enemigos;
   	private Posicion posicion;
 
@@ -20,7 +20,7 @@ public class Pasarela implements Transitable{
 	}
 
 
-	public boolean contieneEnemigos() { //tal vez se deberia llamar contieneEnemigosVivos
+	public boolean contieneEnemigosVivos() { //tal vez se deberia llamar contieneEnemigosVivos
 		if (this.enemigos.isEmpty()) {
 			return false;
 		}
@@ -48,6 +48,9 @@ public class Pasarela implements Transitable{
 
 	public Enemigo obtenerEnemigoADaniar() {
 		int i = 0;
+		if(!this.enemigos.isEmpty()) {
+
+		}
 		Enemigo enemigo = this.enemigos.get(i);
 		while (enemigo.estaMuerta()) {
 			i++;
@@ -65,6 +68,13 @@ public class Pasarela implements Transitable{
 			Enemigo e = iterador.next();
 			e.avanzar(siguienteParcela);
 			this.enemigos.remove(e);
+		}
+	}
+
+	@Override
+	public void avanzarTurno() {
+		for (Enemigo enemigo : this.enemigos) {
+			enemigo.avanzarTurno();
 		}
 	}
 }
