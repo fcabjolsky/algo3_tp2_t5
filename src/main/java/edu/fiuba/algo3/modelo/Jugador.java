@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Jugador {
+public class Jugador implements Turneable{
     private int vida = 20;
     private int creditos = 100;
     private List <Defensa> defensas = new ArrayList();
@@ -66,4 +66,20 @@ public class Jugador {
     public List<Defensa> obtenerDefensas() {
         return this.defensas;
     }
+
+    public void construirDefensa(Defensa nuevaDefensa) {
+        if (nuevaDefensa.puedeConstruir(this.creditos)) {
+            defensas.add(nuevaDefensa);
+        }
+        else{
+            throw new NoDisponeDeSuficientesCreditos();
+        }
+    }
+
+    public void avanzarTurno() {
+        for (Defensa defensa : this.defensas) {
+            defensa.avanzarTurno();
+        }
+    }
+
 }
