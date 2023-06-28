@@ -28,7 +28,10 @@ public class PartidaViewController{
     private Pane panelBotones;
     @FXML
     private GridPane mapa;
+
     private ParcelaManager paisaje;
+    @FXML
+    private AnchorPane contenedor;
 
     public Scene InicializarPartidaView(String urlInformacionDeMapa){
         int altoDeBoton = 75;
@@ -43,7 +46,7 @@ public class PartidaViewController{
         this.setEstiloBoton("/botonTorrePlateada.png", botonAgregarTorrePlateada,-8 , 255, altoDeBoton);
         this.setEstiloBoton("/botonTrampaArena.png", botonAgregarTrampaArena, -8, 340, altoDeBoton);
 
-        this.inicializarListenersBotonAgregar(botonAgregarTorreBlanca, "/torreBlanca.png");
+        this.inicializarListenersBotonAgregar(botonAgregarTorreBlanca, "/torreBlanca2.png");
         this.inicializarListenersBotonAgregar(botonAgregarTorrePlateada, "/torrePlateada2.png");
         this.inicializarListenersBotonAgregar(botonAgregarTrampaArena, "/trampaArena.png");
         this.inicializarListenersBotonSalir(botonSalirYGuardar);
@@ -56,14 +59,13 @@ public class PartidaViewController{
         this.panelBotones.setBorder(Border.EMPTY);
         this.panelBotones.setStyle("-fx-background-image: url('/fondoPiedra.jpg'); -fx-background-size: 90 "+altoDePantalla+";");
 
-
         this.mapa = new GridPane();
-
         this.inicializarContenedorDeMapa(urlInformacionDeMapa);
 
-        AnchorPane contenedor = new AnchorPane(this.mapa, this.panelBotones);
+        this.contenedor = new AnchorPane();
+        this.contenedor.getChildren().addAll(this.mapa, this.panelBotones);
 
-        Scene partida = new Scene(contenedor);
+        Scene partida = new Scene(this.contenedor);
 
         return partida;
     }
@@ -91,9 +93,10 @@ public class PartidaViewController{
     private void agregarTorreAMapa(String urlImagenTorre){
         int x = (int)parcelaElegida.getX();
         int y = (int)parcelaElegida.getY();
-        DefensaView torreAAgregar = new DefensaView(urlImagenTorre, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y);
+        TorreView torreAAgregar = new TorreView(urlImagenTorre, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y);
         ((TierraView)parcelaElegida).setTorre(torreAAgregar);
         this.mapa.add(torreAAgregar, x, y);
+        torreAAgregar.update(this.contenedor, this.mapa, 0, 1);
     }
     private void inicializarListenersBotonAgregar(Button boton, String urlImagenDefensa){
         boton.addEventHandler(MouseEvent.MOUSE_ENTERED,
@@ -127,6 +130,7 @@ public class PartidaViewController{
                     stage.close();
                 });
     }
+
 }
 
 
