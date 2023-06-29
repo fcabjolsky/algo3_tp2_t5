@@ -16,7 +16,7 @@ public class Logger implements Observador {
     }
     @Override
     public void actualizar(Observable observable, Object argument) {
-        if (this.active) {
+        if (this.active && (argument instanceof  String)) {
             System.out.println(argument);
         }
     }
