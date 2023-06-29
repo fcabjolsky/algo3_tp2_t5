@@ -18,4 +18,9 @@ public class Arania extends Enemigo {
         jugador.sumarCreditos(darRecompensa());
     }
 
+    @Override
+    public String toString() {
+        return "Arania";
+    }
+
 }

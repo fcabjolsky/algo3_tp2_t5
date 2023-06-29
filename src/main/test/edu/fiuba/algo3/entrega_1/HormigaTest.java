@@ -68,5 +68,11 @@ public class HormigaTest {
 
         assertFalse(pasarela2.contieneEnemigosVivos());
     }
-    
+
+    @Test
+    public void toStringDevuelveElIdentificadorDelEnemigo() {
+        Hormiga hormiga = new Hormiga();
+        assertEquals("Hormiga", hormiga.toString());
+    }
+
 }
