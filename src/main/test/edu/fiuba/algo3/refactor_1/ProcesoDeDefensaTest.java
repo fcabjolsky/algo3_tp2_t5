@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ProcesoDeDefensaTest {
 
     @Test
-    public void procesoDeDefensaDevuelveLasParcelasEnRangoYEstasNoEstanVacias() {
+    public void procesoDeDefensaDevuelveLasParcelasEnRangoQueTienenEnemigosVivosYEstasNoEstanVacias() {
         ProcesoDeDefensa proceso = new ProcesoDeDefensa();
         List<Pasarela> pasarelas = new ArrayList<>();
         Pasarela unaPasarela = new Pasarela(new Posicion(0,0));
@@ -20,26 +20,49 @@ public class ProcesoDeDefensaTest {
         pasarelas.add(unaPasarela);
         Defensa defensa = new TorreBlanca(new Posicion(1,0));
 
-        List<Pasarela> pasarelasEnRango = proceso.obtenerPasarelasEnRango(defensa, pasarelas);
+        List<Pasarela> pasarelasEnRangoConEnemigosVivos = proceso.obtenerPasarelasEnRangoConEnemigosVivos(defensa, pasarelas);
 
-        assertFalse(pasarelasEnRango.isEmpty());
+        assertFalse(pasarelasEnRangoConEnemigosVivos.isEmpty());
+    }
+
+
+    @Test
+    public void procesoDeDefensaDevuelveLasParcelasEnRangoQueTienenEnemigosVivosPeroEstaSoloTieneEnemigosMuertosPorEndeEstaVacia() {
+        ProcesoDeDefensa proceso = new ProcesoDeDefensa();
+        List<Pasarela> pasarelas = new ArrayList<>();
+        Pasarela unaPasarela = new Pasarela(new Posicion(0,0));
+        Enemigo enemigoMuerto = new Hormiga();
+        enemigoMuerto.recibirDanio(1);
+        unaPasarela.recibirEnemigo(enemigoMuerto);
+        pasarelas.add(unaPasarela);
+        Defensa defensa = new TorreBlanca(new Posicion(1,0));
+
+        List<Pasarela> pasarelasEnRangoConEnemigosVivos = proceso.obtenerPasarelasEnRangoConEnemigosVivos(defensa, pasarelas);
+
+        assertTrue(pasarelasEnRangoConEnemigosVivos.isEmpty());
     }
 
     @Test
-    public void procesoDeDefensaFiltraCorrectamenteLasParcelasEnRangoDeLaDefensa() {
+    public void procesoDeDefensaDevuelveLasParcelasEnRangoQueTienenEnemigosVivosPeroSoloDevuelveAquellasQueTienenEnemigosVivosCorrectamente() {
         ProcesoDeDefensa proceso = new ProcesoDeDefensa();
         List<Pasarela> pasarelas = new ArrayList<>();
-        Pasarela unaPasarela = new Pasarela(new Posicion(0,0));
-        unaPasarela.recibirEnemigo(new Hormiga());
-        pasarelas.add(unaPasarela);
+        Pasarela pasarelaConEnemigoMuerto = new Pasarela(new Posicion(0,0));
+        Pasarela pasarelaConEnemigoVivo = new Pasarela(new Posicion(0,1));
+        Enemigo enemigoMuerto = new Hormiga();
+        enemigoMuerto.recibirDanio(1);
+        pasarelaConEnemigoMuerto.recibirEnemigo(enemigoMuerto);
+        pasarelaConEnemigoVivo.recibirEnemigo(new Hormiga());
+        pasarelas.add(pasarelaConEnemigoMuerto);
+        pasarelas.add(pasarelaConEnemigoVivo);
         Defensa defensa = new TorreBlanca(new Posicion(1,0));
 
-        List<Pasarela> pasarelasEnRango = proceso.obtenerPasarelasEnRango(defensa, pasarelas);
-
-        for(Pasarela p : pasarelasEnRango) {
-            assertTrue(p.contieneEnemigos());
+        List<Pasarela> pasarelasEnRangoConEnemigosVivos = proceso.obtenerPasarelasEnRangoConEnemigosVivos(defensa, pasarelas);
+        for (Pasarela pasarela : pasarelasEnRangoConEnemigosVivos) {
+            assertTrue(pasarela.contieneEnemigosVivos());
         }
+
     }
+
 
 
     @Test
@@ -53,7 +76,7 @@ public class ProcesoDeDefensaTest {
 
         Pasarela pasarelaADefender = proceso.obtenerPasarelaADefender(defensa, pasarelas);
 
-        assertTrue(pasarelaADefender.contieneEnemigos());
+        assertTrue(pasarelaADefender.contieneEnemigosVivos());
     }
 
     @Test
@@ -69,7 +92,7 @@ public class ProcesoDeDefensaTest {
         Pasarela pasarelaADefender = proceso.obtenerPasarelaADefender(defensa, pasarelas);
         defensa.defender(pasarelaADefender.obtenerEnemigoADaniar());
 
-        assertFalse(pasarelaADefender.contieneEnemigos());
+        assertFalse(pasarelaADefender.contieneEnemigosVivos());
     }
 
     @Test
@@ -85,7 +108,7 @@ public class ProcesoDeDefensaTest {
 
         proceso.procesarDefensa(pasarelas, defensas);
 
-        assertTrue(unaPasarela.contieneEnemigos());
+        assertTrue(unaPasarela.contieneEnemigosVivos());
     }
 
     @Test
@@ -103,7 +126,7 @@ public class ProcesoDeDefensaTest {
 
         proceso.procesarDefensa(pasarelas, defensas);
 
-        assertFalse(unaPasarela.contieneEnemigos());
+        assertFalse(unaPasarela.contieneEnemigosVivos());
     }
 
 }

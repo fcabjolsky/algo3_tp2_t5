@@ -14,7 +14,7 @@ public class PasarelaTest {
 
 		pasarela.recibirEnemigo(new Hormiga());
 
-		assertTrue(pasarela.contieneEnemigos());
+		assertTrue(pasarela.contieneEnemigosVivos());
 
 	}
 	@Test
@@ -34,7 +34,7 @@ public class PasarelaTest {
 
 		Pasarela pasarela = new Pasarela(new Posicion(0,0));
 
-		boolean resultado = pasarela.contieneEnemigos();
+		boolean resultado = pasarela.contieneEnemigosVivos();
 
 		assertFalse(resultado);
 	}
@@ -46,7 +46,7 @@ public class PasarelaTest {
 		hormigaMuerta.recibirDanio(1);
 		pasarela.recibirEnemigo(hormigaMuerta);
 
-		boolean resultado = pasarela.contieneEnemigos();
+		boolean resultado = pasarela.contieneEnemigosVivos();
 
 		assertFalse(resultado);
 	}
@@ -96,7 +96,7 @@ public class PasarelaTest {
 		pasarela.recibirEnemigo(new Hormiga());
 		pasarela.moverEnemigosA(siguientePasarela);
 
-		assertTrue(siguientePasarela.contieneEnemigos());
+		assertTrue(siguientePasarela.contieneEnemigosVivos());
 	}
 
 	@Test
@@ -107,7 +107,7 @@ public class PasarelaTest {
 		pasarela.recibirEnemigo(new Hormiga());
 		pasarela.moverEnemigosA(siguientePasarela);
 
-		assertFalse(pasarela.contieneEnemigos());
+		assertFalse(pasarela.contieneEnemigosVivos());
 	}
 
 	@Test
@@ -119,7 +119,7 @@ public class PasarelaTest {
 
 		pasarela.moverEnemigosA(siguientePasarela);
 
-		assertTrue(pasarela.contieneEnemigos());
+		assertTrue(pasarela.contieneEnemigosVivos());
 	}
 
 }

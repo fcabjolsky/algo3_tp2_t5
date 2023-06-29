@@ -4,13 +4,8 @@ import edu.fiuba.algo3.modelo.*;
 
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 
 public class AraniaTest {
     @Test
@@ -58,7 +53,7 @@ public class AraniaTest {
 
         arania.avanzar(pasarelaSiguiente);
 
-        assertTrue(pasarelaSiguiente.contieneEnemigos());
+        assertTrue(pasarelaSiguiente.contieneEnemigosVivos());
     }
 
     @Test
@@ -75,6 +70,6 @@ public class AraniaTest {
         arania.avanzar(pasarela2);
         arania.avanzar(pasarela3);
 
-        assertFalse(pasarela3.contieneEnemigos());
+        assertFalse(pasarela3.contieneEnemigosVivos());
     }
 }

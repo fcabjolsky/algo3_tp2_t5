@@ -4,8 +4,6 @@ import edu.fiuba.algo3.modelo.*;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -53,7 +51,7 @@ public class CreadorMapaJsonTest {
         //"act inyecta los enemigos"
         agregadorDeEnemigos.obtenerInformacionDeNuevosEnemigos(1);
      
-        assertTrue(mapa.getPasarelas().get(0).contieneEnemigos());
+        assertTrue(mapa.getPasarelas().get(0).contieneEnemigosVivos());
     }
 
 

@@ -6,23 +6,29 @@ import java.util.Random;
 
 public class ProcesoDeDefensa {
 
-    public List<Pasarela> obtenerPasarelasEnRango(Defensa defensa, List<Pasarela> pasarelas) {
-        List<Pasarela> pasarelasEnRango = pasarelas.stream().
+    public List<Pasarela> obtenerPasarelasEnRangoConEnemigosVivos(Defensa defensa, List<Pasarela> pasarelas) {
+        List<Pasarela> pasarelasEnRangoConEnemigosVivos = pasarelas.stream().
                 filter(pasarela -> pasarela.defensaEstaEnRango(defensa)).
+                filter(pasarela -> pasarela.contieneEnemigosVivos()).
                 collect(Collectors.toList());
-        return pasarelasEnRango;
+        return pasarelasEnRangoConEnemigosVivos;
     }
 
     public Pasarela obtenerPasarelaADefender(Defensa defensa, List<Pasarela> pasarelas) {
-        List<Pasarela> pasarelasEnRango = this.obtenerPasarelasEnRango(defensa, pasarelas);
+        List<Pasarela> pasarelasEnRangoConEnemigosVivos = this.obtenerPasarelasEnRangoConEnemigosVivos(defensa, pasarelas);
         Random randomIndex = new Random();
-        return pasarelasEnRango.get(randomIndex.nextInt(pasarelas.size()));
+        return pasarelasEnRangoConEnemigosVivos.get(randomIndex.nextInt(pasarelasEnRangoConEnemigosVivos.size()));
     }
 
     public void procesarDefensa(List<Pasarela> pasarelasConEnemigos, List<Defensa> defensas) {
         for (Defensa defensa : defensas ) {
-            Pasarela pasarelaADefender = this.obtenerPasarelaADefender(defensa, pasarelasConEnemigos);
-            defensa.defender(pasarelaADefender.obtenerEnemigoADaniar());
+            if (!this.obtenerPasarelasEnRangoConEnemigosVivos(defensa, pasarelasConEnemigos).isEmpty()) {
+                Pasarela pasarelaADefender = this.obtenerPasarelaADefender(defensa, pasarelasConEnemigos);
+                defensa.defender(pasarelaADefender.obtenerEnemigoADaniar());
+                }
+            }
         }
-    }
 }
+
+
+

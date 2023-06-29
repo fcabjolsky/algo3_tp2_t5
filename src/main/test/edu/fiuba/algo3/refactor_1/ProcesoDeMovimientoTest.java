@@ -23,8 +23,8 @@ public class ProcesoDeMovimientoTest {
 
         procesoDeMovimiento.procesarMovimiento(parcelasTransitables);
 
-        assertFalse(parcelaLargada.contieneEnemigos());
-        assertTrue(parcelaMeta.contieneEnemigos());
+        assertFalse(parcelaLargada.contieneEnemigosVivos());
+        assertTrue(parcelaMeta.contieneEnemigosVivos());
     }
 
     @Test
@@ -41,9 +41,9 @@ public class ProcesoDeMovimientoTest {
 
         procesoDeMovimiento.procesarMovimiento(parcelasTransitables);
 
-        assertFalse(parcelaLargada.contieneEnemigos());
-        assertFalse(parcelaLargada.contieneEnemigos());
-        assertTrue(parcelaMeta.contieneEnemigos());
+        assertFalse(parcelaLargada.contieneEnemigosVivos());
+        assertFalse(parcelaLargada.contieneEnemigosVivos());
+        assertTrue(parcelaMeta.contieneEnemigosVivos());
     }
 
     @Test
@@ -61,9 +61,9 @@ public class ProcesoDeMovimientoTest {
 
         procesoDeMovimiento.procesarMovimiento(parcelasTransitables);
 
-        assertFalse(parcelaLargada.contieneEnemigos());
-        assertTrue(parcelaMetaArania.contieneEnemigos());
-        assertTrue(parcelaMetaArania.contieneEnemigos());
+        assertFalse(parcelaLargada.contieneEnemigosVivos());
+        assertTrue(parcelaMetaArania.contieneEnemigosVivos());
+        assertTrue(parcelaMetaArania.contieneEnemigosVivos());
     }
 
 }

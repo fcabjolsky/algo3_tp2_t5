@@ -183,7 +183,7 @@ public class MapaTest {
         List<Pasarela> pasarelasConEnemigos = mapa.obtenerPasarelasConEnemigos();
 
         for (Pasarela p : pasarelasConEnemigos) {
-            assertTrue(p.contieneEnemigos());
+            assertTrue(p.contieneEnemigosVivos());
         }
     }
 
@@ -201,7 +201,7 @@ public class MapaTest {
             t.moverEnemigosA(pasarelaQueContendraEnemigos);
         }
 
-        assertTrue(pasarelaQueContendraEnemigos.contieneEnemigos());
+        assertTrue(pasarelaQueContendraEnemigos.contieneEnemigosVivos());
     }
     
 }

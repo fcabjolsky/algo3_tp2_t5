@@ -51,7 +51,7 @@ public class HormigaTest {
         pasarelaLargada.recibirEnemigo(hormiga);
     	hormiga.avanzar(pasarelaSiguiente);
 
-        assertTrue(pasarelaSiguiente.contieneEnemigos());
+        assertTrue(pasarelaSiguiente.contieneEnemigosVivos());
     }
 
     @Test
@@ -66,7 +66,7 @@ public class HormigaTest {
         hormiga.avanzar(pasarela1);
         hormiga.avanzar(pasarela2);
 
-        assertFalse(pasarela2.contieneEnemigos());
+        assertFalse(pasarela2.contieneEnemigosVivos());
     }
     
 }

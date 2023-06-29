@@ -5,42 +5,47 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 
 public class TurnoTest2 {
 
     @Test
-    public void turnoArrojaCorrectamenteLaExcepcionJuegoGanadoAlVericarQueNoHayMasEnemigosEnElMapa() {
-        Mapa mapa = new Mapa(new ArrayList<Pasarela>(), new ArrayList<Rocoso>(), new ArrayList<Tierra>());
-        Turno turno = new Turno(new Jugador(), mapa);
-        boolean resultado = false;
+    public void turnoArrojaCorrectamenteLaExcepcionJuegoGanadoAlVerificarQueTodosLosEnemigosEnElMapaEstanMuertosLuegoDeDosTurno() {
+        Jugador jugador = new Jugador();
+        jugador.construirDefensa(new TorreBlanca(new Posicion(1,1)));
+        jugador.construirDefensa(new TorreBlanca(new Posicion(2,1)));
+        jugador.construirDefensa(new TorreBlanca(new Posicion(1,3)));
+        jugador.construirDefensa(new TorreBlanca(new Posicion(2,3)));
+        List<Pasarela> pasarelas = new ArrayList<>();
+        pasarelas.add(new Pasarela(new Posicion(1,2)));
+        pasarelas.add(new Pasarela(new Posicion(2,2)));
+        pasarelas.add(new Pasarela(new Posicion(3,2)));
+        Turno turno = new Turno(jugador, new Mapa(pasarelas, null, null));
 
-        try { turno.siguienteTurno();
-        } catch (JuegoGanado juegoGanado) {
-            resultado = true;
-        }
+        turno.siguienteTurno();
 
-        assertTrue(resultado);
+        assertThrows(JuegoGanado.class, () -> {
+            turno.siguienteTurno();
+        });
     }
 
     @Test
-    public void turnoArrojaCorrectamenteLaExcepcionJuegoGanadoAlVerificarQueTodosLosEnemigosEnElMapaEstanMuertos() {
+    public void turnoNoArrojaUnaExcepcionJuegoGanadoPuesAunHayEnemigosEnElMapaEnElSegundoTurno() {
+        Jugador jugador = new Jugador();
+        jugador.construirDefensa(new TorreBlanca(new Posicion(1,1)));
         List<Pasarela> pasarelas = new ArrayList<>();
-        Pasarela pasarela = new Pasarela(new Posicion(1,1));
-        Enemigo hormigaMuerta = new Hormiga();
-        hormigaMuerta.recibirDanio(1);
-        pasarela.recibirEnemigo(hormigaMuerta);
-        pasarelas.add(pasarela);
-        Mapa mapa = new Mapa(pasarelas, null, null);
-        Turno turno = new Turno(new Jugador(), mapa);
-        boolean resultado = false;
+        pasarelas.add(new Pasarela(new Posicion(1,2)));
+        pasarelas.add(new Pasarela(new Posicion(2,2)));
+        pasarelas.add(new Pasarela(new Posicion(3,2)));
+        Turno turno = new Turno(jugador, new Mapa(pasarelas, null, null));
 
-        try { turno.siguienteTurno();
-        } catch (JuegoGanado juegoGanado) {
-            resultado = true;
-        }
+        turno.siguienteTurno();
 
-        assertTrue(resultado);
+        assertDoesNotThrow(() -> {
+            turno.siguienteTurno();
+        });
     }
 
 }
