@@ -205,7 +205,7 @@ public class MapaTest {
         assertTrue(pasarelaQueContendraEnemigos.contieneEnemigosVivos());
     }
 
-    @Test void seNotificaElAgregadoDeUnaHormiga() {
+    @Test public void seNotificaElAgregadoDeUnaHormiga() {
         List<Pasarela> pasarelas = new ArrayList<>();
         pasarelas.add(new Pasarela(new Posicion(0,0)));
 
@@ -217,7 +217,7 @@ public class MapaTest {
         Mockito.verify(loggerMock, Mockito.times(1)).actualizar(mapa, "Agregando enemigo: Hormiga");
     }
 
-    @Test void seNotificaElAgregadoDeUnaArania() {
+    @Test public void seNotificaElAgregadoDeUnaArania() {
         List<Pasarela> pasarelas = new ArrayList<>();
         pasarelas.add(new Pasarela(new Posicion(0,0)));
 
