@@ -77,6 +77,7 @@ public class Partida extends Observable implements Turneable{
             this.setearCambiado();
             this.notificarObservadores("Ganaste");
         }
+    }
 
 
 
