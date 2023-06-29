@@ -76,4 +76,9 @@ public class Mapa {
         }
     }
 
+    /*public void moverEnemigos(){
+        filtrar pasarelas con enemigos
+        por cada pasarela se pasa a si mismo
+    }*/
+
 }
