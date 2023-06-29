@@ -67,4 +67,18 @@ public class Mapa {
         return this.pasarelas;
     }
 
+    public Pasarela getPasarelaFinal(){ return this.pasarelas.get( this.pasarelas.size() - 1 ); }
+
+    public void reseteaAlosEnemigos(){
+        List<Pasarela> listPasarelas = obtenerPasarelasConEnemigos();
+        for(Pasarela pasarela : listPasarelas){
+            pasarela.resetearTurnoEnemigos();
+        }
+    }
+
+    /*public void moverEnemigos(){
+        filtrar pasarelas con enemigos
+        por cada pasarela se pasa a si mismo
+    }*/
+
 }

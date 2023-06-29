@@ -56,7 +56,15 @@ public class Pasarela implements Transitable{
 		return enemigo;
 	}
 
+
 	public void moverEnemigosA(Transitable siguienteParcela) {
+		if(siguienteParcela==null){
+			Iterator<Enemigo> enemigosAeliminar = this.enemigos.iterator();
+			while(enemigosAeliminar.hasNext()){
+				Enemigo e = enemigosAeliminar.next();
+				this.enemigos.remove(e);
+			}
+		}
 		List<Enemigo> enemigosQuePuedenSeguirMoviendose = this.enemigos.stream().
 				filter(enemigo -> enemigo.sePuedeMover()).
 				collect(Collectors.toList());
@@ -66,6 +74,22 @@ public class Pasarela implements Transitable{
 			e.avanzar(siguienteParcela);
 			this.enemigos.remove(e);
 		}
+	}
+
+	public void daniarJugador(Jugador j){
+		for(Enemigo e : this.enemigos){
+			j.perderVida(e.atacar());
+		}
+	}
+
+	public void resetearTurnoEnemigos(){
+		for(Enemigo enemigo : this.enemigos){
+				enemigo.avanzarTurno();
+		}
+	}
+
+	public void eliminarEnemigos(){
+		this.enemigos.clear();
 	}
 }
 
