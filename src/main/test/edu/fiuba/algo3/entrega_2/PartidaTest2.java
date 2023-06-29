@@ -24,9 +24,6 @@ public class PartidaTest2 {
         Mockito.verify(loggerMock, Mockito.times(1)).actualizar(partida, "Ganaste");
     }
 
-
-
-
    @Test
     public void esLaEntidadCorrespondienteDeCrearElMapaYdevuelveUnTurno(){
         Jugador j = new Jugador();
@@ -36,9 +33,5 @@ public class PartidaTest2 {
 
         assert(t.getClass() == Turno.class);
     }
-
-
-
-
 
 }

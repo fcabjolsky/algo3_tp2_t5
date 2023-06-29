@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Mapa implements Turneable {
+public class Mapa extends Observable implements Turneable {
     
     private List<Pasarela> pasarelas;
     private List<Rocoso> rocosos;
@@ -17,6 +17,8 @@ public class Mapa implements Turneable {
     }
     
     public void agregarEnemigo(Enemigo enemigo) {
+        this.notificarObservadores(enemigo);
+        this.notificarObservadores("Agregando enemigo: " + enemigo.toString());
         pasarelas.stream().findFirst().get().recibirEnemigo(enemigo);
     }
 
