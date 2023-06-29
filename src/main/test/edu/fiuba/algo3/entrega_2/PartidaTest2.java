@@ -11,10 +11,10 @@ public class PartidaTest2 {
     @Test
     public void seSimulaUnaPartidaConElMapaYLosEnemigosCorrespondientesEnLaQueElJugadorGana() { //supongo que la posicion de la primer pasarela es (10 , 8) hay que soluicionar el lector del mapa
         Jugador jugador = new Jugador();
-        jugador.construirDefensa(new TorreBlanca(new Posicion(9,8)));
-        jugador.construirDefensa(new TorreBlanca(new Posicion(11,8)));
-        jugador.construirDefensa(new TorreBlanca(new Posicion(9,10)));
-        jugador.construirDefensa(new TorreBlanca(new Posicion(9,11)));
+        jugador.construirDefensa(new TorreBlanca(new Posicion(1,0)));
+        jugador.construirDefensa(new TorreBlanca(new Posicion(0,2)));
+        jugador.construirDefensa(new TorreBlanca(new Posicion(1,2)));
+        jugador.construirDefensa(new TorreBlanca(new Posicion(3,0)));
         Observador loggerMock = Mockito.mock(Logger.class);
         Partida partida = new Partida(jugador, loggerMock);
 
