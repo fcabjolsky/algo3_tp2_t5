@@ -56,27 +56,16 @@ public class CreadorMapaJsonTest {
 
 
 
-    /*
+/*
     @Test
     public void elJugadorConUnoDeVidaMuereLuegoDeLosTurnosCorrespondientes() {
-
-        //la partida tiene que crear el jugador, llamar al creador de mapa y crear el
-        // turno
-
         String urlInfomacionDelMapa = "src/main/java/edu/fiuba/algo3/modelo/mapa.json";
         CreadorMapaJson creadorDeMapa = new CreadorMapaJson(urlInfomacionDelMapa);
         Mapa mapa = creadorDeMapa.crearMapa();
-
-
         String urlInfomacionDeEnemigos = "src/main/java/edu/fiuba/algo3/modelo/enemigos.json";
         AgregadorDeEnemigos agregadorDeEnemigos = new AgregadorDeEnemigos(urlInfomacionDeEnemigos, mapa);
-
-
         Jugador jugador = new Jugador(1,0);
-        System.out.println(jugador.getVida());
         Turno t = new Turno(jugador, mapa);
-        int i = 0;
-
 
         //TODO: el jugador tiene que morir automaticamente cuando llegan los enemigos a la ultima pasarella
         agregadorDeEnemigos.obtenerInformacionDeNuevosEnemigos(1);

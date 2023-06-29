@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.entrega_2;
 
+
 import edu.fiuba.algo3.modelo.*;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -22,5 +23,22 @@ public class PartidaTest2 {
 
         Mockito.verify(loggerMock, Mockito.times(1)).actualizar(partida, "Ganaste");
     }
+
+
+
+
+   @Test
+    public void esLaEntidadCorrespondienteDeCrearElMapaYdevuelveUnTurno(){
+        Jugador j = new Jugador();
+        Partida p = new Partida(j);
+
+        Turno t = p.empezarPartida();
+
+        assert(t.getClass() == Turno.class);
+    }
+
+
+
+
 
 }

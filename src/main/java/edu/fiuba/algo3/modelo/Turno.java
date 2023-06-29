@@ -6,19 +6,24 @@ public class Turno extends Observable implements Turneable {
 
     private final Jugador jugador;
     private final Mapa mapa;
-    private AgregadorDeEnemigos creadorEnemigos;
-    private int numeroDeTurno;
+
+    private final AgregadorDeEnemigos creadorEnemigos;
+    private int numeroTurno;
+
 
     public Turno(Jugador jugador, Mapa mapa) {
        this.jugador = jugador;
        this.mapa = mapa;
        this.creadorEnemigos = new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigos.json", this.mapa);
-       this.numeroDeTurno = 1;
+       this.numeroTurno = 1;
     }
 
     private void moverEnemigos() {
+        //this.mapa.moverEnemigos();
+
         ProcesoDeMovimiento procesoDeMovimiento = new ProcesoDeMovimiento();
         procesoDeMovimiento.procesarMovimiento(this.mapa.obtenerParcelasTransitables());
+
     }
 
 
@@ -42,17 +47,32 @@ public class Turno extends Observable implements Turneable {
     public void avanzarTurno() {
         this.mapa.avanzarTurno();
         this.jugador.avanzarTurno();//ac
-        this.numeroDeTurno ++;
+        this.numeroTurno ++;
     }
 
     public void siguienteTurno() {
-        this.creadorEnemigos.obtenerInformacionDeNuevosEnemigos(this.numeroDeTurno);
+        this.creadorEnemigos.obtenerInformacionDeNuevosEnemigos(this.numeroTurno);
         this.moverEnemigos();
         this.defenderseDeEnemigos();
         if (ganoLaPartida()) {
             throw new JuegoGanado();
         }
         this.avanzarTurno();
+    }
+
+    public void siguienteTurno2(){
+        this.moverEnemigos();
+        Pasarela pf = this.mapa.getPasarelaFinal();
+        if(pf.contieneEnemigos()){
+            pf.daniarJugador(this.jugador);
+            pf.eliminarEnemigos();
+        }
+        mapa.reseteaAlosEnemigos();
+        this.numeroTurno++;
+    }
+
+    public void insertarEnemigosNuevos(){
+        this.creadorEnemigos.obtenerInformacionDeNuevosEnemigos(this.numeroTurno);
     }
 }
 

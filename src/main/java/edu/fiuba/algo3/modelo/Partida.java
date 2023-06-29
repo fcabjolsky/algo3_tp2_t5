@@ -1,8 +1,12 @@
 package edu.fiuba.algo3.modelo;
 
+
 public class Partida extends Observable implements Turneable{
 
-    private final Mapa mapa; //esto podria salir de aca y estar dentro de Turno directamente
+
+
+
+    private Mapa mapa;
 
     private final Jugador jugador;
     private Observador logger;
@@ -10,10 +14,18 @@ public class Partida extends Observable implements Turneable{
     private CreadorMapaJson creadorMapa;
 
 
-    public Partida(Mapa mapa, Jugador jugador) {//hace alusion al empezarPartida, que el jugador tenga una partida en vez de un turno, a la que le diga avanzarTurno
+
+   
+
+    public Partida(Mapa mapa, Jugador jugador) {
+
     	this.mapa = mapa;
         this.jugador = jugador;
         this.turno = new Turno(jugador, mapa);
+    }
+
+    public Partida(Jugador jugador){
+        this.jugador = jugador;
     }
 
     public Partida(Mapa mapa, Jugador jugador, Observador logger) {
@@ -56,6 +68,7 @@ public class Partida extends Observable implements Turneable{
         return "SEGUIR JUGANDO";
     }
 
+
     @Override
     public void avanzarTurno() {
         try {
@@ -65,5 +78,12 @@ public class Partida extends Observable implements Turneable{
             this.notificarObservadores("Ganaste");
         }
 
+
+
+    public Turno empezarPartida() {
+        this.creadorMapa = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json");
+        this.mapa = this.creadorMapa.crearMapa();
+        this.turno = new Turno(this.jugador, this.mapa);
+        return this.turno;
     }
 }
