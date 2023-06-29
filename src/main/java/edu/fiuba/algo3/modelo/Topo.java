@@ -23,6 +23,18 @@ public class Topo extends Enemigo{
 
     @Override
     public void avanzar(Transitable siguienteTransitable){
-        /*actualizar su velocidad si el contador esta en 5 -> 2y en 11 -> 3*/
+        this.estado.moverA(this, siguienteTransitable);
+        if(!this.estado.puedoSeguirMoviendome()) {
+            this.estado = new Inmovilizado();
+            return;
+        }
+        this.cantidadMovimientos.aumentar();
+        if(this.cantidadMovimientos.esMayorA(5)  && this.cantidadMovimientos.esMenorA(11)) {
+            this.velocidad = 2;
+        }
+        if(this.cantidadMovimientos.esMayorA(11)){
+            this.velocidad = 3;
+
+        }
     }
 }
