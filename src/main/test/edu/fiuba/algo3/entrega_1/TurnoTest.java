@@ -36,7 +36,7 @@ public class TurnoTest {
 
         turno.siguienteTurno();
 
-        assertTrue(pasarelaQueTendraEnemigos.contieneEnemigos());
+        assertTrue(pasarelaQueTendraEnemigos.contieneEnemigosVivos());
 
 
     }

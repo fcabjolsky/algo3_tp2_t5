@@ -20,7 +20,7 @@ public class DefensaTest {
            defensa.defender(unaPasarela.obtenerEnemigoADaniar());
        }
 
-       assertFalse(unaPasarela.contieneEnemigos());
+       assertFalse(unaPasarela.contieneEnemigosVivos());
     }
 
     @Test
@@ -35,7 +35,7 @@ public class DefensaTest {
             defensa.defender(unaPasarela.obtenerEnemigoADaniar());
         }
 
-        assert(unaPasarela.contieneEnemigos());
+        assert(unaPasarela.contieneEnemigosVivos());
     }
 
     @Test
@@ -50,7 +50,7 @@ public class DefensaTest {
             defensa.defender(unaPasarela.obtenerEnemigoADaniar());
         }
 
-        assertFalse(unaPasarela.contieneEnemigos());
+        assertFalse(unaPasarela.contieneEnemigosVivos());
     }
 
     @Test
@@ -65,7 +65,7 @@ public class DefensaTest {
             defensa.defender(unaPasarela.obtenerEnemigoADaniar());
         }
 
-        assert(unaPasarela.contieneEnemigos());
+        assert(unaPasarela.contieneEnemigosVivos());
     }
 
 }

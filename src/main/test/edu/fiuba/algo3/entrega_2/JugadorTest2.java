@@ -1,9 +1,9 @@
 package edu.fiuba.algo3.entrega_2;
 
-import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.Partida;
-import edu.fiuba.algo3.modelo.Turno;
+
+import edu.fiuba.algo3.modelo.*;
 import org.junit.jupiter.api.Test;
+
 
 public class JugadorTest2 {
     @Test
@@ -52,6 +52,7 @@ public class JugadorTest2 {
         }
         assert (numeroTurno == 24);
     }
+
 
 
 }

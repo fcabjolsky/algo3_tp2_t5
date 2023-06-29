@@ -6,7 +6,7 @@ import edu.fiuba.algo3.modelo.TorreEnConstruccion;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class Torre implements Defensa {
+public abstract class Torre implements Defensa, Turneable {
 
     protected Rango rango;
     protected int danio;
