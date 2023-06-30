@@ -15,6 +15,16 @@ public class Observable {
         }
     }
 
+    public void agregarObservadores(ArrayList<Observador> observadores) {
+        for (Observador observador: observadores) {
+            this.agregarObservador(observador);
+        }
+    }
+
+    public void replicarObservadores(Observable observable) {
+        this.agregarObservadores(observable.observadores);
+    }
+
     public void notificarObservadores(Object argument) {
         for (Observador observador : this.observadores) {
             observador.actualizar(this, argument);

@@ -13,13 +13,17 @@ public class TorreBlanca extends Torre {
     }
 
     public Defensa construir(Jugador jugador, Posicion posicion) {
-        TorreBlanca torreADevolver = new TorreBlanca(posicion);
         if (jugador.puedeConstruir(super.costo)){
             jugador.restarCreditos(super.costo);
-             return (new TorreBlanca(posicion));
+             return this;
         }else{
             throw new NoDisponeDeSuficientesCreditos();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Torre Blanca";
     }
 
 }

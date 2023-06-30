@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Jugador implements Turneable{
+public class Jugador extends Observable implements Turneable{
     private int vida = 20;
     private int creditos = 100;
     private List <Defensa> defensas = new ArrayList();
 
-    public Jugador() {
-    }
+    public Jugador() {}
 
     public Jugador(int vida, int creditos) {
         this.vida = vida;
@@ -31,6 +30,7 @@ public class Jugador implements Turneable{
     
     public void construir(Defensa defensa, Posicion posicion){
         if (defensa.puedeConstruir(this.creditos)) {
+            this.notificarObservadores("Agregando defensa: " + defensa.toString());
             Defensa nuevaDefensa = defensa.construir(this, posicion);
             defensas.add(nuevaDefensa);
         }
@@ -48,6 +48,7 @@ public class Jugador implements Turneable{
     }
 
     public void perderVida(int danio){
+        this.notificarObservadores("Jugador fua atacado con danio: " + danio);
         this.vida -= danio;
     }
 
@@ -69,6 +70,8 @@ public class Jugador implements Turneable{
 
     public void construirDefensa(Defensa nuevaDefensa) {
         if (nuevaDefensa.puedeConstruir(this.creditos)) {
+            this.notificarObservadores("Agregando defensa: " + nuevaDefensa.toString());
+            nuevaDefensa.empezarAConstruir();
             defensas.add(nuevaDefensa);
         }
         else{

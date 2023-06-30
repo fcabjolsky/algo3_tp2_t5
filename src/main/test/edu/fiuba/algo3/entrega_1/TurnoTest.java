@@ -30,6 +30,7 @@ public class TurnoTest {
         Pasarela pasarelaQueTendraEnemigos = new Pasarela(new Posicion(0,1));
         pasarelas.add(new Pasarela(new Posicion(0, 0)));
         pasarelas.add(pasarelaQueTendraEnemigos);
+        pasarelas.add(new Pasarela(new Posicion(0, 2)));
         Mapa mapa = new Mapa(pasarelas, new ArrayList<Rocoso>(), new ArrayList<Tierra>());
         mapa.agregarEnemigo(new Hormiga());
         Turno turno = new Turno(new Jugador(), mapa);

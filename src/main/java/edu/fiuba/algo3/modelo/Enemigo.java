@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-public abstract class Enemigo {
+public abstract class Enemigo extends Observable {
     protected int energia;
     protected int velocidad;
     protected Movible estado;
@@ -11,6 +11,7 @@ public abstract class Enemigo {
             throw new EnemigoMuerto();
         }
         this.energia -= unDanio;
+        this.notificarObservadores("Enemigo " + this.toString() + " recibe danio " + unDanio + " Vida restante " + this.energia);
     }
 
     public boolean estaMuerta() {
@@ -20,10 +21,7 @@ public abstract class Enemigo {
     public abstract void morir(Jugador jugador, Contador cantidadDeMuertes);
 
     public void avanzar(Transitable siguienteTransitable) {
-        this.estado.moverA(this, siguienteTransitable);
-        if(!this.estado.puedoSeguirMoviendome()) {
-            this.estado = new Inmovilizado();
-        }
+        this.estado = this.estado.moverA(this, siguienteTransitable);
     }
 
     public void avanzarTurno() {

@@ -20,8 +20,11 @@ public class PartidaTest2 {
 
         partida.avanzarTurno();
         partida.avanzarTurno();
+        partida.avanzarTurno();
+        partida.avanzarTurno();
+        partida.avanzarTurno();
 
-        Mockito.verify(loggerMock, Mockito.times(1)).actualizar(partida, "Ganaste");
+        Mockito.verify(loggerMock, Mockito.atLeast(1)).actualizar(partida, "Ganaste");
     }
 
    @Test

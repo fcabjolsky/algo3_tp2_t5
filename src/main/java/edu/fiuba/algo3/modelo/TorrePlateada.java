@@ -18,4 +18,9 @@ public class TorrePlateada extends Torre{
         }
         throw new NoDisponeDeSuficientesCreditos();
     }
+
+    @Override
+    public String toString() {
+        return "Torre Plateada";
+    }
 }

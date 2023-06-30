@@ -12,4 +12,5 @@ public interface Defensa {
 
     public boolean estaEnRango(Posicion unaPosicion);
 
+    public void empezarAConstruir();
 }
