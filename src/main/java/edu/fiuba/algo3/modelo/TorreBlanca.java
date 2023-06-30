@@ -12,10 +12,11 @@ public class TorreBlanca extends Torre {
         super(1, 10, 1);
     }
 
-    public Defensa construir(Jugador jugador, Posicion posicion) {
+    public Defensa construir(Jugador jugador) {
         if (jugador.puedeConstruir(super.costo)){
             jugador.restarCreditos(super.costo);
-             return this;
+            this.empezarAConstruir();
+            return this;
         }else{
             throw new NoDisponeDeSuficientesCreditos();
         }

@@ -86,7 +86,7 @@ public class TurnoTest {
         assert(enemigo1.estaMuerta());
          */
         Jugador jugador = new Jugador();
-        jugador.construir(new TorreBlanca(), new Posicion(1,1));
+        jugador.construirDefensa(new TorreBlanca(new Posicion(1,1)));
         ArrayList<Pasarela> pasarelas = new ArrayList<Pasarela>();
         pasarelas.add(new Pasarela(new Posicion(0, 0)));
         pasarelas.add(new Pasarela(new Posicion(0, 1)));

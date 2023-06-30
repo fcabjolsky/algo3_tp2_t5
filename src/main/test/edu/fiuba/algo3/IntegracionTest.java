@@ -17,9 +17,9 @@ public class IntegracionTest {
         partida.avanzarTurno();
         //segundo turno construyo una torre
         // Aca se necesita instancear una defejnsa
-        Torre torreBlana = new TorreBlanca(new Posicion(0, 3));
-        torreBlana.agregarObservador(logger);
-        jugador.construirDefensa(torreBlana);
+        Torre torreBlanca = new TorreBlanca(new Posicion(0, 3));
+        torreBlanca.agregarObservador(logger);
+        jugador.construirDefensa(torreBlanca);
         partida.avanzarTurno();
         // avanzo otro turno hasta morir
         while (!jugador.estaMuerto()) {
@@ -60,5 +60,6 @@ public class IntegracionTest {
         while (!partida.ganoPartida()) {
             partida.avanzarTurno();
         }
+        partida.avanzarTurno();
     }
 }

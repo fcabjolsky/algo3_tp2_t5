@@ -20,8 +20,7 @@ public abstract class Torre extends Observable implements Defensa, Turneable {
         this.danio = danio;
     }
 
-    @Override
-    public void empezarAConstruir() {
+    protected void empezarAConstruir() {
         TorreEnConstruccion torreEnConstruccion = new TorreEnConstruccion(tiempoDeConstruccion);
         torreEnConstruccion.replicarObservadores(this);
         this.estado = torreEnConstruccion;

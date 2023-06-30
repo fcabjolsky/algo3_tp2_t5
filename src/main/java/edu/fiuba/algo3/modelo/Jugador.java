@@ -28,16 +28,6 @@ public class Jugador extends Observable implements Turneable{
       return (costo <= this.creditos);
     }
     
-    public void construir(Defensa defensa, Posicion posicion){
-        if (defensa.puedeConstruir(this.creditos)) {
-            this.notificarObservadores("Agregando defensa: " + defensa.toString());
-            Defensa nuevaDefensa = defensa.construir(this, posicion);
-            defensas.add(nuevaDefensa);
-        }
-        else{
-            throw new NoDisponeDeSuficientesCreditos();
-        }
-    }
 
     public void sumarCreditos(int creditos){
         this.creditos += creditos;
@@ -59,7 +49,7 @@ public class Jugador extends Observable implements Turneable{
         }
         return false;
     }
-  
+
     public boolean estaMuerto() {
        return this.vida <= 0;
     }
@@ -71,7 +61,7 @@ public class Jugador extends Observable implements Turneable{
     public void construirDefensa(Defensa nuevaDefensa) {
         if (nuevaDefensa.puedeConstruir(this.creditos)) {
             this.notificarObservadores("Agregando defensa: " + nuevaDefensa.toString());
-            nuevaDefensa.empezarAConstruir();
+            nuevaDefensa.construir(this);
             defensas.add(nuevaDefensa);
         }
         else{
