@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
 public interface Defensa {
-    
-    public Defensa construir(Jugador jugador, Posicion posicion);
+
+    public Defensa construir(Jugador jugador);
 
     public void defender(Enemigo enemigo);
 

@@ -47,10 +47,11 @@ public class Turno extends Observable implements Turneable {
     public void avanzarTurno() {
         this.mapa.avanzarTurno();
         this.jugador.avanzarTurno();//ac
-        this.numeroTurno ++;
+        this.daniarJugador();
     }
 
     public void siguienteTurno() {
+        this.notificarObservadores("Turno: " + this.numeroTurno);
         this.creadorEnemigos.obtenerInformacionDeNuevosEnemigos(this.numeroTurno);
         this.moverEnemigos();
         this.defenderseDeEnemigos();
@@ -58,21 +59,16 @@ public class Turno extends Observable implements Turneable {
             throw new JuegoGanado();
         }
         this.avanzarTurno();
+        this.numeroTurno++;
     }
 
-    public void siguienteTurno2(){
-        this.moverEnemigos();
+    public void daniarJugador(){
         Pasarela pf = this.mapa.getPasarelaFinal();
         if(pf.contieneEnemigosVivos()){
             pf.daniarJugador(this.jugador);
             pf.eliminarEnemigos();
         }
         mapa.reseteaAlosEnemigos();
-        this.numeroTurno++;
-    }
-
-    public void insertarEnemigosNuevos(){
-        this.creadorEnemigos.obtenerInformacionDeNuevosEnemigos(this.numeroTurno);
     }
 }
 
