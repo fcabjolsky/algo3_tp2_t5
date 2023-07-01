@@ -65,7 +65,7 @@ public class Turno extends Observable implements Turneable {
     public void daniarJugador(){
         Pasarela pf = this.mapa.getPasarelaFinal();
         if(pf.contieneEnemigosVivos()){
-            pf.daniarJugador(this.jugador);
+            pf.daniarJugador(this.jugador, this.numeroTurno);
             pf.eliminarEnemigos();
         }
         mapa.reseteaAlosEnemigos();
