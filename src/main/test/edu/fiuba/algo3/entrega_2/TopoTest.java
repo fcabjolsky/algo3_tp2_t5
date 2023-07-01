@@ -15,7 +15,8 @@ public class TopoTest {
         Topo t = new Topo();
         assertEquals(5, t.atacar(3));
     }
-    @Test void cuandoElTopoLlegaAlFinalAtacaConCincoDeDanioSiElNumeroDeTurnoEsPar(){
+    @Test
+    public void cuandoElTopoLlegaAlFinalAtacaConCincoDeDanioSiElNumeroDeTurnoEsPar(){
         Topo t = new Topo();
         assertEquals(2, t.atacar(2));
     }
