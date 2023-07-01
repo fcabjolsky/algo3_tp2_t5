@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.*;
 import org.junit.jupiter.api.Assertions;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -203,5 +204,28 @@ public class MapaTest {
 
         assertTrue(pasarelaQueContendraEnemigos.contieneEnemigosVivos());
     }
-    
+
+    @Test public void seNotificaElAgregadoDeUnaHormiga() {
+        List<Pasarela> pasarelas = new ArrayList<>();
+        pasarelas.add(new Pasarela(new Posicion(0,0)));
+
+        Observador loggerMock = Mockito.mock(Logger.class);
+        Mapa mapa = new Mapa(pasarelas, null, null);
+        mapa.agregarObservador(loggerMock);
+        Enemigo hormiga = new Hormiga();
+        mapa.agregarEnemigo(hormiga);
+        Mockito.verify(loggerMock, Mockito.times(1)).actualizar(mapa, "Agregando enemigo: Hormiga");
+    }
+
+    @Test public void seNotificaElAgregadoDeUnaArania() {
+        List<Pasarela> pasarelas = new ArrayList<>();
+        pasarelas.add(new Pasarela(new Posicion(0,0)));
+
+        Observador loggerMock = Mockito.mock(Logger.class);
+        Mapa mapa = new Mapa(pasarelas, null, null);
+        mapa.agregarObservador(loggerMock);
+        Enemigo arania = new Arania();
+        mapa.agregarEnemigo(arania);
+        Mockito.verify(loggerMock, Mockito.times(1)).actualizar(mapa, "Agregando enemigo: Arania");
+    }
 }

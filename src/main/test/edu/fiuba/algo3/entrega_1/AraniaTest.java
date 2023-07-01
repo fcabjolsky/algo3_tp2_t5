@@ -72,4 +72,10 @@ public class AraniaTest {
 
         assertFalse(pasarela3.contieneEnemigosVivos());
     }
+
+    @Test
+    public void toStringDevuelveElIdentificadorDelEnemigo() {
+        Arania arania = new Arania();
+        assertEquals("Arania", arania.toString());
+    }
 }

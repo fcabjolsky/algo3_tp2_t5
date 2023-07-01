@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Observable {
 
     private final ArrayList<Observador> observadores;
-    private boolean cambiado;
 
     public Observable() {
         this.observadores = new ArrayList<Observador>();
@@ -16,16 +15,20 @@ public class Observable {
         }
     }
 
-    public void notificarObservadores(Object argument) {
-        if (this.cambiado) {
-            for (Observador observador : this.observadores) {
-                observador.actualizar(this, argument);
-            }
+    public void agregarObservadores(ArrayList<Observador> observadores) {
+        for (Observador observador: observadores) {
+            this.agregarObservador(observador);
         }
-        this.cambiado = false;
     }
-    public void setearCambiado() {
-        this.cambiado = true;
+
+    public void replicarObservadores(Observable observable) {
+        this.agregarObservadores(observable.observadores);
+    }
+
+    public void notificarObservadores(Object argument) {
+        for (Observador observador : this.observadores) {
+            observador.actualizar(this, argument);
+        }
     }
 
 }

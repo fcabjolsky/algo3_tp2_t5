@@ -12,9 +12,13 @@ public class EnMovimiento implements Movible {
         return this.movimientosRestantes > 0;
     }
     @Override
-    public void moverA(Enemigo enemigo, Transitable transitable) {
+    public Movible moverA(Enemigo enemigo, Transitable transitable) {
         transitable.recibirEnemigo(enemigo);
         this.movimientosRestantes --;
+        if (this.puedoSeguirMoviendome()) {
+            return this;
+        }
+        return new Inmovilizado();
     }
 
 

@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo;
 public class Inmovilizado implements Movible {
 
     @Override
-    public void moverA(Enemigo enemigo, Transitable otraPasarela) {}
+    public Movible moverA(Enemigo enemigo, Transitable otraPasarela) {return this;}
 
     @Override
     public boolean puedoSeguirMoviendome() {
