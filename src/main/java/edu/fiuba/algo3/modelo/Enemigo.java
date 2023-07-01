@@ -17,7 +17,7 @@ public abstract class Enemigo {
         return this.energia <= 0;
     }
 
-    public abstract void morir(Jugador jugador, Contador cantidadDeMuertes);
+    public abstract void morir(Jugador jugador);
 
     public void avanzar(Transitable siguienteTransitable) {
         this.estado.moverA(this, siguienteTransitable);

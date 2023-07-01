@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Mapa implements Turneable {
-    
+
     private List<Pasarela> pasarelas;
     private List<Rocoso> rocosos;
     private List<Tierra> tierras;
@@ -15,15 +15,15 @@ public class Mapa implements Turneable {
         this.rocosos = rocosos;
         this.tierras = tierras;
     }
-    
+
     public void agregarEnemigo(Enemigo enemigo) {
         pasarelas.stream().findFirst().get().recibirEnemigo(enemigo);
     }
 
 
     public boolean contieneEnemigos() {
-        for(Pasarela pasarela : this.pasarelas) {
-            if(pasarela.contieneEnemigosVivos()) {
+        for (Pasarela pasarela : this.pasarelas) {
+            if (pasarela.contieneEnemigosVivos()) {
                 return true;
             }
         }
@@ -41,7 +41,7 @@ public class Mapa implements Turneable {
     public List<Transitable> obtenerParcelasTransitables() {
         List<Transitable> parcelasTransitables = this.pasarelas.stream()
                 .filter(parcela -> parcela instanceof Transitable)
-                .map(parcela-> (Transitable) parcela)
+                .map(parcela -> (Transitable) parcela)
                 .collect(Collectors.toList());
         return parcelasTransitables;
 
@@ -54,18 +54,20 @@ public class Mapa implements Turneable {
     public List<Tierra> getTierra() {
         return this.tierras;
     }
+
     public List<Pasarela> getPasarelas() {
         return this.pasarelas;
     }
 
     @Override
-    public void avanzarTurno() { //esto podria ser tanto para las parcelasTierra como para las parcelasPasarela
+    public void avanzarTurno() {
         List<Turneable> parcelasTurneables = this.pasarelas.stream()
                 .filter(parcela -> parcela instanceof Turneable)
-                .map(parcela-> (Turneable) parcela)
+                .map(parcela -> (Turneable) parcela)
                 .collect(Collectors.toList());
-        for(Turneable parcela : parcelasTurneables) {
+        for (Turneable parcela : parcelasTurneables) {
             parcela.avanzarTurno();
         }
     }
+
 }
