@@ -87,9 +87,9 @@ public class Pasarela implements Transitable, Turneable{
 		}
 	}
 
-	public void daniarJugador(Jugador j){
+	public void daniarJugador(Jugador j, int numeroTurno){
 		for(Enemigo e : this.enemigos){
-			j.perderVida(e.atacar());
+			j.perderVida(e.atacar(numeroTurno));
 		}
 	}
 

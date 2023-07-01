@@ -28,7 +28,7 @@ public abstract class Enemigo extends Observable {
         this.estado = new EnMovimiento(this.velocidad);
     }
 
-    public int atacar(){
+    public int atacar(int numeroTurno){
         return this.danio;
     }
 

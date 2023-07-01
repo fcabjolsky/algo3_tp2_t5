@@ -65,6 +65,7 @@ public class AgregadorDeEnemigos {
 
     private Enemigo crearEnemigo(String enemigo) {
         EnemigoFactory factory = this.enemigosExistentes.get(enemigo);
+        //depende del enemigo q seas mando o no el turno
         return factory.create();
     }
 
