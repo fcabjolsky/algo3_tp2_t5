@@ -2,6 +2,8 @@ package edu.fiuba.algo3.modelo;
 
 public class Arania extends Enemigo {
 
+    private ContadorDeMuertesDeHormiga contadorDeMuertesDeArania;
+
     public Arania() {
         this.energia = 2;
         this.velocidad = 2;
@@ -14,7 +16,7 @@ public class Arania extends Enemigo {
         return recompensa;
     }
 
-    public void morir(Jugador jugador, Contador muertesDeArañas){
+    public void morir(Jugador jugador){
         jugador.sumarCreditos(darRecompensa());
     }
 

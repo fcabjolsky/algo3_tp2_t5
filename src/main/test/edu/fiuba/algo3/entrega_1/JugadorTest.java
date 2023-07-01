@@ -67,36 +67,34 @@ public class JugadorTest {
     @Test
     public void AlDestruir3EnemigosHormigasSeLeAsignanAlJugadorLosCreditosCorrespondientes(){
         Jugador jugador = new Jugador();
-        Posicion posicion= new Posicion(1, 2);
         Hormiga hormiga = new Hormiga();
         Jugador jugadorEsperado = new Jugador(20, 103);
-        Contador muertesDeHormigas = new Contador();
+        ContadorDeMuertesDeHormiga.obtenerContador().resetearContador();
 
-        hormiga.morir(jugador, muertesDeHormigas);
-        hormiga.morir(jugador, muertesDeHormigas);
-        hormiga.morir(jugador, muertesDeHormigas);
+        hormiga.morir(jugador);
+        hormiga.morir(jugador);
+        hormiga.morir(jugador);
 
         assertEquals(jugadorEsperado, jugador);
     }
     @Test
     public void AlDestruir11EnemigosHormigasSeLeAsignanAlJugadorLosCreditosCorrespondientes(){
         Jugador jugador = new Jugador();
-        Posicion posicion= new Posicion(1, 2);
         Hormiga hormiga = new Hormiga();
         Jugador jugadorEsperado = new Jugador(20, 112);
-        Contador muertesDeHormigas = new Contador();
+        ContadorDeMuertesDeHormiga.obtenerContador().resetearContador();
 
-        hormiga.morir(jugador, muertesDeHormigas);
-        hormiga.morir(jugador, muertesDeHormigas);
-        hormiga.morir(jugador, muertesDeHormigas);
-        hormiga.morir(jugador, muertesDeHormigas);
-        hormiga.morir(jugador, muertesDeHormigas);
-        hormiga.morir(jugador, muertesDeHormigas);
-        hormiga.morir(jugador, muertesDeHormigas);
-        hormiga.morir(jugador, muertesDeHormigas);
-        hormiga.morir(jugador, muertesDeHormigas);
-        hormiga.morir(jugador, muertesDeHormigas);
-        hormiga.morir(jugador, muertesDeHormigas);
+        hormiga.morir(jugador);
+        hormiga.morir(jugador);
+        hormiga.morir(jugador);
+        hormiga.morir(jugador);
+        hormiga.morir(jugador);
+        hormiga.morir(jugador);
+        hormiga.morir(jugador);
+        hormiga.morir(jugador);
+        hormiga.morir(jugador);
+        hormiga.morir(jugador);
+        hormiga.morir(jugador);
 
         assertEquals(jugadorEsperado, jugador);
     }
@@ -104,12 +102,10 @@ public class JugadorTest {
     @Test
     public void AlDestruirUnEnemigoAraniaSeLeAsignanAlJugadorCreditos(){
         Jugador jugador = new Jugador();
-        Posicion posicion= new Posicion(1, 2);
         Arania arania = new Arania();
         Jugador jugadorOriginal = new Jugador(20, 100);
-        Contador muertesDeAranias = new Contador();
 
-        arania.morir(jugador, muertesDeAranias);
+        arania.morir(jugador);
 
         assertNotEquals(jugadorOriginal, jugador);
     }

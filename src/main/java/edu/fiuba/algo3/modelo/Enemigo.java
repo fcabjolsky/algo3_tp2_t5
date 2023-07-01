@@ -18,7 +18,7 @@ public abstract class Enemigo extends Observable {
         return this.energia <= 0;
     }
 
-    public abstract void morir(Jugador jugador, Contador cantidadDeMuertes);
+    public abstract void morir(Jugador jugador);
 
     public void avanzar(Transitable siguienteTransitable) {
         this.estado = this.estado.moverA(this, siguienteTransitable);

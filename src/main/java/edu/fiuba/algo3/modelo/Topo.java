@@ -11,7 +11,7 @@ public class Topo extends Enemigo{
     }
 
     @Override
-    public void morir(Jugador jugador, Contador cantidadDeMuertes) {
+    public void morir(Jugador jugador) {
     }
 
     @Override
@@ -32,7 +32,7 @@ public class Topo extends Enemigo{
     @Override
     public void avanzar(Transitable siguienteTransitable){
         this.estado = this.estado.moverA(this, siguienteTransitable);
-        this.cantidadMovimientos.aumentar();
+        this.cantidadMovimientos.incrementar();
         if(this.cantidadMovimientos.esMayorA(5)  && this.cantidadMovimientos.esMenorA(11)) {
             this.velocidad = 2;
         }
