@@ -11,6 +11,7 @@ public class TorreView extends DefensaView{
         ataque = new DisparoAnimacion(this, anchoTile, altoTile);
     }
 
+    @Override
     public void update(Pane contenedor, GridPane mapa, int posicionParcelaAtacadaX, int posicionParcelaAtacadaY){
         ataque.realizarAtaque(contenedor, mapa, posicionParcelaAtacadaX, posicionParcelaAtacadaY);
     }
