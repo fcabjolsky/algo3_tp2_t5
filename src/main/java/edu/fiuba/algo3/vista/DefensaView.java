@@ -3,7 +3,7 @@ package edu.fiuba.algo3.vista;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
-public class DefensaView extends Region {
+public abstract class DefensaView extends Region {
 
     private Image imagen;
     public DefensaView(String urlTorreImagen, int anchoTile, int altoTile, int x, int y) {
@@ -18,4 +18,5 @@ public class DefensaView extends Region {
                 new BackgroundSize(anchoTile, altoTile, false, false, true, true));
         this.setBackground(new Background(fondo));
     }
+    public abstract void update(Pane contenedor, GridPane mapa, int posicionParcelaAtacadaX, int posicionParcelaAtacadaY);
 }
