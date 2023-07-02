@@ -9,42 +9,34 @@ import javafx.util.Duration;
 
 import java.util.ArrayList;
 
-public class DisparoAnimacion extends Region{
-
-    DefensaView torre;
-    int anchoTile;
-    int altoTile;
+public class DisparoAnimacion extends DefensaAtaquesView{
 
     ArrayList<Background> imagenesExplosion;
 
     public DisparoAnimacion(DefensaView torre, int anchoTile, int altoTile) {
-        this.setBackground(this.nuevoFondoDeImagen("/disparo.png"));
-        this.torre = torre;
+        super(torre, anchoTile, altoTile);
+        this.setPrefWidth(anchoTile / 2);
+        this.setPrefHeight(altoTile / 2);
+        this.setBackground(super.nuevoFondoDeImagen("/disparo.png"));
         this.imagenesExplosion = new ArrayList<>();
         this.inicializarImagenesExplocion();
-        this.setLayoutX(torre.getLayoutX() * anchoTile);
-        this.setLayoutY(torre.getLayoutY() * altoTile);
-        this.anchoTile = anchoTile;
-        this.altoTile = altoTile;
-        System.out.println(this.getLayoutX() +" : "+ this.getLayoutY());
-        this.setPrefWidth(anchoTile/2);
-        this.setPrefHeight(altoTile/2);
-        this.setVisible(false);
+
     }
 
     private void inicializarImagenesExplocion(){
-        this.imagenesExplosion.add(this.nuevoFondoDeImagen("/explosion1.png"));
-        this.imagenesExplosion.add(this.nuevoFondoDeImagen("/explosion2.png"));
-        this.imagenesExplosion.add(this.nuevoFondoDeImagen("/explosion3.png"));
-        this.imagenesExplosion.add(this.nuevoFondoDeImagen("/explosion4.png"));
-        this.imagenesExplosion.add(this.nuevoFondoDeImagen("/explosion5.png"));
-        this.imagenesExplosion.add(this.nuevoFondoDeImagen("/explosion7.png"));
+        this.imagenesExplosion.add(super.nuevoFondoDeImagen("/explosion1.png"));
+        this.imagenesExplosion.add(super.nuevoFondoDeImagen("/explosion2.png"));
+        this.imagenesExplosion.add(super.nuevoFondoDeImagen("/explosion3.png"));
+        this.imagenesExplosion.add(super.nuevoFondoDeImagen("/explosion4.png"));
+        this.imagenesExplosion.add(super.nuevoFondoDeImagen("/explosion5.png"));
+        this.imagenesExplosion.add(super.nuevoFondoDeImagen("/explosion7.png"));
     }
 
     public void realizarAtaque(Pane contenedor, GridPane mapa, int posicionParcelaAtacadaX, int posicionParcelaAtacadaY) {
+        super.reproducirSonido("/disparo2.mp3", 2, 1);
         this.setVisible(true);
         TranslateTransition animacion = new TranslateTransition(Duration.millis(600), this);
-        Entidad pasarelaAtacada = this.devolverParcela(mapa, posicionParcelaAtacadaX, posicionParcelaAtacadaY);
+        Entidad pasarelaAtacada = super.devolverParcela(mapa, posicionParcelaAtacadaX, posicionParcelaAtacadaY);
         double posicionAtacadaX = pasarelaAtacada.getLayoutX() ;
         double posicionAtacadaY = pasarelaAtacada.getLayoutY() ;
         double recorridoAtacarX = posicionAtacadaX - this.getLayoutX() + 15;
@@ -53,17 +45,20 @@ public class DisparoAnimacion extends Region{
         animacion.setToX(recorridoAtacarX);
         animacion.setToY(recorridoAtacarY);
         animacion.setCycleCount(2);
+        animacion.setDelay(Duration.millis(200));
         animacion.setOnFinished( (finish) -> {this.transicionExplosion();});
         animacion.play();
 
         contenedor.getChildren().add(this);
     }
     private void transicionExplosion(){
-        this.setBackground(this.nuevoFondoDeImagen("/explosion1.png"));
+        this.setBackground(this.imagenesExplosion.get(0));
+        this.reproducirSonido("/explosion.mp3", 1, 1);
         ScaleTransition explocionAnimacion = new ScaleTransition(Duration.millis(600), this);
         explocionAnimacion.setToX(3);
         explocionAnimacion.setToY(3);
         explocionAnimacion.setCycleCount(1);
+        explocionAnimacion.setDelay(Duration.millis(200));
         explocionAnimacion.play();
         explocionAnimacion.setOnFinished( (finish) -> {this.transicionDesaparecer(0);});
     }
@@ -83,45 +78,5 @@ public class DisparoAnimacion extends Region{
             desaparecer.setCycleCount(1);
             desaparecer.play();
         }
-    }
-
-    private Background nuevoFondoDeImagen(String urlImagen){
-        Image imagen = (new Image(DisparoAnimacion.class.getResourceAsStream(urlImagen)));
-        BackgroundImage fondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER,
-                new BackgroundSize(this.getPrefWidth(), this.getPrefHeight(), false, false, true, true));
-        return new Background(fondo);
-    }
-
-    private Node obtenerParcelaDeMapa(GridPane mapa, int x, int y) {
-        ObservableList<Node> parcelas = mapa.getChildren();
-        for (Node nodo : parcelas) {
-            Integer columnaIndex = GridPane.getColumnIndex(nodo);
-            Integer filaIndex = GridPane.getRowIndex(nodo);
-            if (columnaIndex == null){
-                columnaIndex = 0;
-            }
-            if (filaIndex == null){
-                filaIndex = 0;
-            }
-            if (columnaIndex == x && filaIndex == y){
-                return nodo;
-            }
-        }
-        return null;
-    }
-    private Entidad devolverParcela(GridPane mapa, int posicionParcelaAtacadaX, int posicionParcelaAtacadaY){
-        Entidad parcelaADevolver = null;
-        try {
-            parcelaADevolver = (PasarelaView)this.obtenerParcelaDeMapa(mapa, posicionParcelaAtacadaX, posicionParcelaAtacadaY);
-        }catch(ClassCastException errorDeClase){
-            try {
-                parcelaADevolver = (TierraView)this.obtenerParcelaDeMapa(mapa, posicionParcelaAtacadaX, posicionParcelaAtacadaY);
-            }catch(ClassCastException errorDeClase2){
-                parcelaADevolver = (RocosoView)this.obtenerParcelaDeMapa(mapa, posicionParcelaAtacadaX, posicionParcelaAtacadaY);
-            }
-        }
-        return parcelaADevolver;
     }
 }
