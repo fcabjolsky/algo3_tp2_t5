@@ -38,30 +38,9 @@ public class PartidaViewController{
     private Creditos creditosPersonaje;
 
     public Scene InicializarPartidaView(String urlInformacionDeMapa){
-        int altoDeBoton = 75;
 
-        Button botonSalirYGuardar = new Button();
-        Button botonAgregarTorreBlanca = new Button();
-        Button botonAgregarTorrePlateada = new Button();
-        Button botonAgregarTrampaArena = new Button();
-
-        this.setEstiloBoton("/botonSalirSoltado.png",botonSalirYGuardar, -8, -7, 40);
-        this.setEstiloBoton("/botonTorreBlanca.png", botonAgregarTorreBlanca, -8, 170, altoDeBoton);
-        this.setEstiloBoton("/botonTorrePlateada.png", botonAgregarTorrePlateada,-8 , 255, altoDeBoton);
-        this.setEstiloBoton("/botonTrampaArena.png", botonAgregarTrampaArena, -8, 340, altoDeBoton);
-
-        this.inicializarListenersBotonAgregar(botonAgregarTorreBlanca, "/torreBlanca2.png", true);
-        this.inicializarListenersBotonAgregar(botonAgregarTorrePlateada, "/torrePlateada2.png", true);
-        this.inicializarListenersBotonAgregar(botonAgregarTrampaArena, "/trampaArena.png", false);
-        this.inicializarListenersBotonSalir(botonSalirYGuardar);
-
-        this.panelBotones = new Pane(botonSalirYGuardar, botonAgregarTorreBlanca, botonAgregarTorrePlateada, botonAgregarTrampaArena);
-        this.panelBotones.setPrefHeight(altoDePantalla);
-        this.panelBotones.setPrefWidth(75);
-        this.panelBotones.setLayoutX(720);
-        this.panelBotones.setLayoutY(0);
-        this.panelBotones.setBorder(Border.EMPTY);
-        this.panelBotones.setStyle("-fx-background-image: url('/fondoPiedra.jpg'); -fx-background-size: 90 "+altoDePantalla+";");
+        this.inicializarBotones();
+        this.inicializarPanelBotones();
 
         this.mapa = new GridPane();
         this.inicializarContenedorDeMapa(urlInformacionDeMapa);
@@ -76,6 +55,40 @@ public class PartidaViewController{
         Scene partida = new Scene(this.contenedor);
 
         return partida;
+    }
+
+    private void inicializarBotones(){
+        int altoDeBoton = 75;
+
+        Button botonSalirYGuardar = new Button();
+        Button botonPasarTurno = new Button();
+        Button botonAgregarTorreBlanca = new Button();
+        Button botonAgregarTorrePlateada = new Button();
+        Button botonAgregarTrampaArena = new Button();
+
+        this.setEstiloBoton("/botonSalirSoltado.png",botonSalirYGuardar, -8, -7, 40);
+        this.setEstiloBoton("/botonPasarTurnoSoltado.png",botonPasarTurno, -8, 500, altoDeBoton);
+        this.setEstiloBoton("/botonTorreBlanca.png", botonAgregarTorreBlanca, -8, 170, altoDeBoton);
+        this.setEstiloBoton("/botonTorrePlateada.png", botonAgregarTorrePlateada,-8 , 255, altoDeBoton);
+        this.setEstiloBoton("/botonTrampaArena.png", botonAgregarTrampaArena, -8, 340, altoDeBoton);
+
+        this.inicializarListenersBotonAgregar(botonAgregarTorreBlanca, "/torreBlanca2.png", true);
+        this.inicializarListenersBotonAgregar(botonAgregarTorrePlateada, "/torrePlateada2.png", true);
+        this.inicializarListenersBotonAgregar(botonAgregarTrampaArena, "/trampaArena.png", false);
+        this.inicializarListenersBotonSalir(botonSalirYGuardar);
+        this.inicializarListenersBotonPasarTurno(botonPasarTurno);
+
+        this.panelBotones = new Pane(botonSalirYGuardar, botonAgregarTorreBlanca,
+                botonAgregarTorrePlateada, botonAgregarTrampaArena, botonPasarTurno);
+    }
+
+    private void inicializarPanelBotones(){
+        this.panelBotones.setPrefHeight(altoDePantalla);
+        this.panelBotones.setPrefWidth(75);
+        this.panelBotones.setLayoutX(720);
+        this.panelBotones.setLayoutY(0);
+        this.panelBotones.setBorder(Border.EMPTY);
+        this.panelBotones.setStyle("-fx-background-image: url('/fondoPiedra.jpg'); -fx-background-size: 90 "+altoDePantalla+";");
     }
 
     private void inicializarContenedorDeMapa(String urlInformacionDeMapa){
@@ -98,7 +111,7 @@ public class PartidaViewController{
         boton.setLayoutY(y);
     }
     private void agregarDefensaAlMapa(String urlImagenDeDefensa, boolean esTorre){
-        DefensaView defensaAAgregar = null;
+        DefensaView defensaAAgregar;
         int x = (int)parcelaElegida.getX();
         int y = (int)parcelaElegida.getY();
         if(esTorre){
@@ -107,9 +120,6 @@ public class PartidaViewController{
             defensaAAgregar = new TrampaArenaView(urlImagenDeDefensa, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y);
         }
         this.mapa.add(defensaAAgregar, x, y);
-        defensaAAgregar.update(this.contenedor, this.mapa, 0, 1);
-        this.vidaPersonaje.perderVida(15);
-        this.creditosPersonaje.sumarCreditos(20);
     }
 
 
@@ -145,6 +155,24 @@ public class PartidaViewController{
                     stage.close();
                 });
     }
+
+    private void inicializarListenersBotonPasarTurno(Button boton){
+        boton.addEventHandler(MouseEvent.MOUSE_ENTERED,
+                e -> {
+                    setEstiloBoton("/botonPasarTurnoPresionado.png", boton,-8, 500, 75);
+                    boton.setEffect(new DropShadow());
+                });
+        boton.addEventHandler(MouseEvent.MOUSE_EXITED,
+                e -> {
+                    setEstiloBoton("/botonPasarTurnoSoltado.png", boton,-8, 500, 75);
+                    boton.setEffect(null);
+                });
+        boton.addEventHandler(MouseEvent.MOUSE_CLICKED,
+                e -> {
+
+                });
+    }
+
 
 }
 
