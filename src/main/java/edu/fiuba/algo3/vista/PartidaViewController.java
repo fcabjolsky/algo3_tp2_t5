@@ -28,7 +28,11 @@ public class PartidaViewController{
     private Pane panelBotones;
     @FXML
     private GridPane mapa;
+    
+    private AnchorPane contenedor;
     private ParcelaManager paisaje;
+
+    private EnemigoView enemigo; //ahora cuando todavia no esta unido el modelo
 
     public Scene InicializarPartidaView(String urlInformacionDeMapa){
         int altoDeBoton = 75;
@@ -37,18 +41,21 @@ public class PartidaViewController{
         Button botonAgregarTorreBlanca = new Button();
         Button botonAgregarTorrePlateada = new Button();
         Button botonAgregarTrampaArena = new Button();
+        Button botonPasarTurno = new Button();
 
         this.setEstiloBoton("/botonSalirSoltado.png",botonSalirYGuardar, -8, -7, 40);
         this.setEstiloBoton("/botonTorreBlanca.png", botonAgregarTorreBlanca, -8, 170, altoDeBoton);
         this.setEstiloBoton("/botonTorrePlateada.png", botonAgregarTorrePlateada,-8 , 255, altoDeBoton);
         this.setEstiloBoton("/botonTrampaArena.png", botonAgregarTrampaArena, -8, 340, altoDeBoton);
+        this.setEstiloBotonPasarTurno(botonPasarTurno);
 
         this.inicializarListenersBotonAgregar(botonAgregarTorreBlanca, "/torreBlanca.png");
         this.inicializarListenersBotonAgregar(botonAgregarTorrePlateada, "/torrePlateada2.png");
         this.inicializarListenersBotonAgregar(botonAgregarTrampaArena, "/trampaArena.png");
         this.inicializarListenersBotonSalir(botonSalirYGuardar);
+        this.inicializarListenersBotonPasarTurno(botonPasarTurno);
 
-        this.panelBotones = new Pane(botonSalirYGuardar, botonAgregarTorreBlanca, botonAgregarTorrePlateada, botonAgregarTrampaArena);
+        this.panelBotones = new Pane(botonSalirYGuardar, botonAgregarTorreBlanca, botonAgregarTorrePlateada, botonAgregarTrampaArena, botonPasarTurno);
         this.panelBotones.setPrefHeight(altoDePantalla);
         this.panelBotones.setPrefWidth(75);
         this.panelBotones.setLayoutX(720);
@@ -61,7 +68,7 @@ public class PartidaViewController{
 
         this.inicializarContenedorDeMapa(urlInformacionDeMapa);
 
-        AnchorPane contenedor = new AnchorPane(this.mapa, this.panelBotones);
+        this.contenedor = new AnchorPane(this.mapa, this.panelBotones);
 
         Scene partida = new Scene(contenedor);
 
@@ -88,12 +95,50 @@ public class PartidaViewController{
         boton.setLayoutY(y);
     }
 
+    private void setEstiloBotonPasarTurno(Button botonPasarTurno){
+        botonPasarTurno.setLayoutX(-8);
+        botonPasarTurno.setLayoutY(430);
+        botonPasarTurno.setStyle("    -fx-background-color: #9b2e2a;"+
+                "    -fx-text-fill: white;");
+        botonPasarTurno.setText("Pasar turno");
+
+    }
+
     private void agregarTorreAMapa(String urlImagenTorre){
         int x = (int)parcelaElegida.getX();
         int y = (int)parcelaElegida.getY();
         DefensaView torreAAgregar = new DefensaView(urlImagenTorre, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y);
         ((TierraView)parcelaElegida).setTorre(torreAAgregar);
         this.mapa.add(torreAAgregar, x, y);
+    }
+
+    private void mostrarNuevosEnemigos(){
+        this.enemigo =new EnemigoView("/spriteHormiga.png", this.tamanioDelTileAncho, this.tamanioDelTileAlto,
+                1*this.tamanioDelTileAncho,0*tamanioDelTileAlto);
+        contenedor.getChildren().add(enemigo);
+    }
+
+    private void avanzarViejosEnemigos(){
+        this.enemigo.moverseAbajo(6*tamanioDelTileAlto);
+        this.enemigo.moverseDerecha(8*tamanioDelTileAncho);
+        this.enemigo.moverseAbajo(10*tamanioDelTileAlto);
+    }
+
+    private void inicializarListenersBotonPasarTurno(Button boton){
+        boton.addEventHandler(MouseEvent.MOUSE_ENTERED,
+                e -> {
+                    boton.setEffect(new DropShadow());
+                    boton.setEffect(new Glow());
+                });
+        boton.addEventHandler(MouseEvent.MOUSE_EXITED,
+                e -> {
+                    boton.setEffect(null);
+                });
+        boton.addEventHandler(MouseEvent.MOUSE_CLICKED,
+                e -> {
+                    mostrarNuevosEnemigos();
+                    avanzarViejosEnemigos();
+                });
     }
     private void inicializarListenersBotonAgregar(Button boton, String urlImagenDefensa){
         boton.addEventHandler(MouseEvent.MOUSE_ENTERED,
