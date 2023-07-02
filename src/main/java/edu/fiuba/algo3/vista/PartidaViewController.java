@@ -28,13 +28,37 @@ public class PartidaViewController{
     private Pane panelBotones;
     @FXML
     private GridPane mapa;
-    
-    private AnchorPane contenedor;
     private ParcelaManager paisaje;
+    @FXML
+    private AnchorPane contenedor;
+
+    private BarraDeVida vidaPersonaje;
+
+    private Creditos creditosPersonaje;
 
     private EnemigoView enemigo; //ahora cuando todavia no esta unido el modelo
 
     public Scene InicializarPartidaView(String urlInformacionDeMapa){
+
+        this.inicializarBotones();
+        this.inicializarPanelBotones();
+
+        this.mapa = new GridPane();
+        this.inicializarContenedorDeMapa(urlInformacionDeMapa);
+
+        this.vidaPersonaje = new BarraDeVida();
+        this.creditosPersonaje = new Creditos();
+
+        this.contenedor = new AnchorPane();
+        this.contenedor.getChildren().addAll(this.mapa, this.panelBotones);
+        this.contenedor.getChildren().addAll(this.vidaPersonaje, this.creditosPersonaje);
+
+        Scene partida = new Scene(this.contenedor);
+
+        return partida;
+    }
+
+    private void inicializarBotones(){
         int altoDeBoton = 75;
 
         Button botonSalirYGuardar = new Button();
@@ -44,18 +68,24 @@ public class PartidaViewController{
         Button botonPasarTurno = new Button();
 
         this.setEstiloBoton("/botonSalirSoltado.png",botonSalirYGuardar, -8, -7, 40);
+        this.setEstiloBoton("/botonPasarTurnoSoltado.png",botonPasarTurno, -8, 500, altoDeBoton);
         this.setEstiloBoton("/botonTorreBlanca.png", botonAgregarTorreBlanca, -8, 170, altoDeBoton);
         this.setEstiloBoton("/botonTorrePlateada.png", botonAgregarTorrePlateada,-8 , 255, altoDeBoton);
         this.setEstiloBoton("/botonTrampaArena.png", botonAgregarTrampaArena, -8, 340, altoDeBoton);
-        this.setEstiloBotonPasarTurno(botonPasarTurno);
 
-        this.inicializarListenersBotonAgregar(botonAgregarTorreBlanca, "/torreBlanca.png");
-        this.inicializarListenersBotonAgregar(botonAgregarTorrePlateada, "/torrePlateada2.png");
-        this.inicializarListenersBotonAgregar(botonAgregarTrampaArena, "/trampaArena.png");
+
+        this.inicializarListenersBotonAgregar(botonAgregarTorreBlanca, "/torreBlanca2.png", true);
+        this.inicializarListenersBotonAgregar(botonAgregarTorrePlateada, "/torrePlateada2.png", true);
+        this.inicializarListenersBotonAgregar(botonAgregarTrampaArena, "/trampaArena.png", false);
         this.inicializarListenersBotonSalir(botonSalirYGuardar);
         this.inicializarListenersBotonPasarTurno(botonPasarTurno);
 
-        this.panelBotones = new Pane(botonSalirYGuardar, botonAgregarTorreBlanca, botonAgregarTorrePlateada, botonAgregarTrampaArena, botonPasarTurno);
+        this.panelBotones = new Pane(botonSalirYGuardar, botonAgregarTorreBlanca,
+                botonAgregarTorrePlateada, botonAgregarTrampaArena, botonPasarTurno);
+    }
+
+    private void inicializarPanelBotones(){
+
         this.panelBotones.setPrefHeight(altoDePantalla);
         this.panelBotones.setPrefWidth(75);
         this.panelBotones.setLayoutX(720);
@@ -63,16 +93,6 @@ public class PartidaViewController{
         this.panelBotones.setBorder(Border.EMPTY);
         this.panelBotones.setStyle("-fx-background-image: url('/fondoPiedra.jpg'); -fx-background-size: 90 "+altoDePantalla+";");
 
-
-        this.mapa = new GridPane();
-
-        this.inicializarContenedorDeMapa(urlInformacionDeMapa);
-
-        this.contenedor = new AnchorPane(this.mapa, this.panelBotones);
-
-        Scene partida = new Scene(contenedor);
-
-        return partida;
     }
 
     private void inicializarContenedorDeMapa(String urlInformacionDeMapa){
@@ -95,21 +115,16 @@ public class PartidaViewController{
         boton.setLayoutY(y);
     }
 
-    private void setEstiloBotonPasarTurno(Button botonPasarTurno){
-        botonPasarTurno.setLayoutX(-8);
-        botonPasarTurno.setLayoutY(430);
-        botonPasarTurno.setStyle("    -fx-background-color: #9b2e2a;"+
-                "    -fx-text-fill: white;");
-        botonPasarTurno.setText("Pasar turno");
-
-    }
-
-    private void agregarTorreAMapa(String urlImagenTorre){
+    private void agregarDefensaAlMapa(String urlImagenDeDefensa, boolean esTorre){
+        DefensaView defensaAAgregar;
         int x = (int)parcelaElegida.getX();
         int y = (int)parcelaElegida.getY();
-        DefensaView torreAAgregar = new DefensaView(urlImagenTorre, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y);
-        ((TierraView)parcelaElegida).setTorre(torreAAgregar);
-        this.mapa.add(torreAAgregar, x, y);
+        if(esTorre){
+            defensaAAgregar = new TorreView(urlImagenDeDefensa, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y);
+        }else{
+            defensaAAgregar = new TrampaArenaView(urlImagenDeDefensa, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y);
+        }
+        this.mapa.add(defensaAAgregar, x, y);
     }
 
     private void mostrarNuevosEnemigos(){
@@ -124,7 +139,8 @@ public class PartidaViewController{
         this.enemigo.moverseAbajo(10*tamanioDelTileAlto);
     }
 
-    private void inicializarListenersBotonPasarTurno(Button boton){
+    private void inicializarListenersBotonAgregar(Button boton, String urlImagenDefensa, boolean esTorre){
+
         boton.addEventHandler(MouseEvent.MOUSE_ENTERED,
                 e -> {
                     boton.setEffect(new DropShadow());
@@ -136,23 +152,7 @@ public class PartidaViewController{
                 });
         boton.addEventHandler(MouseEvent.MOUSE_CLICKED,
                 e -> {
-                    mostrarNuevosEnemigos();
-                    avanzarViejosEnemigos();
-                });
-    }
-    private void inicializarListenersBotonAgregar(Button boton, String urlImagenDefensa){
-        boton.addEventHandler(MouseEvent.MOUSE_ENTERED,
-                e -> {
-                    boton.setEffect(new DropShadow());
-                    boton.setEffect(new Glow());
-                });
-        boton.addEventHandler(MouseEvent.MOUSE_EXITED,
-                e -> {
-                    boton.setEffect(null);
-                });
-        boton.addEventHandler(MouseEvent.MOUSE_CLICKED,
-                e -> {
-                    agregarTorreAMapa(urlImagenDefensa);
+                    agregarDefensaAlMapa(urlImagenDefensa, esTorre);
                 });
     }
     private void inicializarListenersBotonSalir(Button boton){
@@ -172,6 +172,26 @@ public class PartidaViewController{
                     stage.close();
                 });
     }
+
+    private void inicializarListenersBotonPasarTurno(Button boton){
+        boton.addEventHandler(MouseEvent.MOUSE_ENTERED,
+                e -> {
+                    setEstiloBoton("/botonPasarTurnoPresionado.png", boton,-8, 500, 75);
+                    boton.setEffect(new DropShadow());
+                });
+        boton.addEventHandler(MouseEvent.MOUSE_EXITED,
+                e -> {
+                    setEstiloBoton("/botonPasarTurnoSoltado.png", boton,-8, 500, 75);
+                    boton.setEffect(null);
+                });
+        boton.addEventHandler(MouseEvent.MOUSE_CLICKED,
+                e -> {
+                    mostrarNuevosEnemigos();
+                    avanzarViejosEnemigos();
+                });
+    }
+
+
 }
 
 
