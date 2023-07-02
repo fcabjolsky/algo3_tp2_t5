@@ -29,6 +29,11 @@
             <version>${javafx-version}</version>
         </dependency>
         <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>${javafx-version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>${junit.jupiter.version}</version>
@@ -152,12 +157,13 @@
         </plugins>
         <resources>
             <resource>
-                <directory>src/main/java/edu/fiuba/algo3/vista</directory>
+                <directory>src/main/resources</directory>
                 <includes>
                     <include>**/*.fxml</include>
                     <include>**/*.jpg</include>
                     <include>**/*.png</include>
                     <include>**/*.css</include>
+                    <include>**/*.mp3</include>
                 </includes>
             </resource>
         </resources>
