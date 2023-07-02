@@ -19,14 +19,14 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 
-public class EnemigoView extends ImageView {
+public abstract class EnemigoView extends ImageView {
 
-    private BufferedImage img;
-    private ArrayList<Image> sprites = new ArrayList<>();
-    private TranslateTransition translateTransitionDerecha;
-    private TranslateTransition translateTransitionAbajo;
-    private Queue<MovimientoEnemigoView> colaMovimientos;
-    private boolean enMovimiento;
+    protected BufferedImage img;
+    protected ArrayList<Image> sprites = new ArrayList<>();
+    protected TranslateTransition translateTransitionDerecha;
+    protected TranslateTransition translateTransitionAbajo;
+    protected Queue<MovimientoEnemigoView> colaMovimientos;
+    protected boolean enMovimiento;
     public EnemigoView(String urlEnemigoImagen, int anchoTile, int altoTile, int x, int y) {
 
         this.colaMovimientos = new LinkedList<>();
@@ -40,7 +40,7 @@ public class EnemigoView extends ImageView {
 
         loadSprites();
 
-        setImage(sprites.get(0));
+        setImage(imagenMovimientoAbajo());
         setX(x);
         setY(y);
         setFitHeight((double)altoTile);
@@ -57,7 +57,7 @@ public class EnemigoView extends ImageView {
             procesarProximoMovimiento();
         });
 
-        agregarMovimiento(new MovimientoEnemigoView(translateTransitionDerecha, sprites.get(2)));
+        agregarMovimiento(new MovimientoEnemigoView(translateTransitionDerecha, imagenMovimientoDerecha()));
 
 
     }
@@ -71,7 +71,7 @@ public class EnemigoView extends ImageView {
             procesarProximoMovimiento();
         });
 
-        agregarMovimiento(new MovimientoEnemigoView(translateTransitionAbajo, sprites.get(0)));
+        agregarMovimiento(new MovimientoEnemigoView(translateTransitionAbajo, imagenMovimientoAbajo()));
     }
 
     public void agregarMovimiento(MovimientoEnemigoView movimiento){
@@ -79,7 +79,7 @@ public class EnemigoView extends ImageView {
         procesarProximoMovimiento();
     }
 
-    private void procesarProximoMovimiento(){
+    protected void procesarProximoMovimiento(){
 
         if(!this.enMovimiento && !this.colaMovimientos.isEmpty()) {
             MovimientoEnemigoView proximoMovimiento = colaMovimientos.poll();
@@ -91,17 +91,7 @@ public class EnemigoView extends ImageView {
     }
 
 
-    private void loadSprites(){
-        for (int i = 0; i < 1; i++){
-            for (int j = 0; j < 4; j++){
-                BufferedImage subimg = img.getSubimage(i*125,j*125,125,125);
-                Image nueva = convertirImagen(subimg);
-                sprites.add(nueva);
-            }
-        }
-    }
-
-    private Image convertirImagen(BufferedImage imagen){
+    protected Image convertirImagen(BufferedImage imagen){
         int ancho = imagen.getWidth();
         int largo = imagen.getHeight();
 
@@ -120,5 +110,10 @@ public class EnemigoView extends ImageView {
 
         return nueva;
     }
+
+    protected abstract void loadSprites();
+
+    protected abstract Image imagenMovimientoAbajo();
+    protected abstract Image imagenMovimientoDerecha();
 
 }

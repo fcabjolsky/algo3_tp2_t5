@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.vista;
 
 
+import edu.fiuba.algo3.modelo.Hormiga;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -128,7 +129,7 @@ public class PartidaViewController{
     }
 
     private void mostrarNuevosEnemigos(){
-        this.enemigo =new EnemigoView("/spriteHormiga.png", this.tamanioDelTileAncho, this.tamanioDelTileAlto,
+        this.enemigo =new AraniaView(this.tamanioDelTileAncho, this.tamanioDelTileAlto,
                 1*this.tamanioDelTileAncho,0*tamanioDelTileAlto);
         contenedor.getChildren().add(enemigo);
     }
