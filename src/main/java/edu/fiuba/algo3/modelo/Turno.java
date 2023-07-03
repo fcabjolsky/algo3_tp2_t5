@@ -6,7 +6,6 @@ public class Turno extends Observable implements Turneable {
 
     private final Jugador jugador;
     private final Mapa mapa;
-
     private final AgregadorDeEnemigos creadorEnemigos;
     private ContadorDeTurno contadorDeTurno;
 
