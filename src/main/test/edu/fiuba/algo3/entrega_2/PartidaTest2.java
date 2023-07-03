@@ -10,7 +10,7 @@ public class PartidaTest2 {
 
     @Test
     public void seSimulaUnaPartidaConElMapaYLosEnemigosCorrespondientesEnLaQueElJugadorGana() {
-        Jugador jugador = new Jugador();
+        Jugador jugador = new Jugador("Jugador1");
         jugador.construirDefensa(new TorreBlanca(new Posicion(1,0)));
         jugador.construirDefensa(new TorreBlanca(new Posicion(0,2)));
         jugador.construirDefensa(new TorreBlanca(new Posicion(1,2)));
@@ -29,7 +29,7 @@ public class PartidaTest2 {
 
    @Test
     public void esLaEntidadCorrespondienteDeCrearElMapaYdevuelveUnTurno(){
-        Jugador j = new Jugador();
+        Jugador j = new Jugador("Jugador1");
         Partida p = new Partida(j);
 
         Turno t = p.empezarPartida();

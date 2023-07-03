@@ -13,7 +13,7 @@ public class TurnoTest2 {
 
     @Test
     public void turnoArrojaCorrectamenteLaExcepcionJuegoGanadoAlVerificarQueTodosLosEnemigosEnElMapaEstanMuertosLuegoDeDosTurno() {
-        Jugador jugador = new Jugador();
+        Jugador jugador = new Jugador("Jugador1");
         jugador.construirDefensa(new TorreBlanca(new Posicion(1,1)));
         jugador.construirDefensa(new TorreBlanca(new Posicion(2,1)));
         jugador.construirDefensa(new TorreBlanca(new Posicion(1,3)));
@@ -33,7 +33,7 @@ public class TurnoTest2 {
 
     @Test
     public void turnoNoArrojaUnaExcepcionJuegoGanadoPuesAunHayEnemigosEnElMapaEnElSegundoTurno() {
-        Jugador jugador = new Jugador();
+        Jugador jugador = new Jugador("Jugador1");
         jugador.construirDefensa(new TorreBlanca(new Posicion(1,1)));
         List<Pasarela> pasarelas = new ArrayList<>();
         pasarelas.add(new Pasarela(new Posicion(1,2)));

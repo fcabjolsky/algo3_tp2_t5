@@ -3,12 +3,15 @@ package edu.fiuba.algo3;
 import edu.fiuba.algo3.modelo.*;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class IntegracionTest {
     @Test
     public void simularUnaPartidaCompletaPerdida() {
         //Inicializacions
         Logger logger = new Logger();
-        Jugador jugador = new Jugador();
+        Jugador jugador = new Jugador("Jugador1");
         jugador.agregarObservador(logger);
         Partida partida = new Partida(jugador, logger);
 
@@ -31,7 +34,7 @@ public class IntegracionTest {
     public void simularUnaPartidaCompletaGanada() {
         //Inicializacions
         Logger logger = new Logger();
-        Jugador jugador = new Jugador();
+        Jugador jugador = new Jugador("Jugador1");
         jugador.agregarObservador(logger);
         Partida partida = new Partida(jugador, logger);
 
@@ -62,4 +65,38 @@ public class IntegracionTest {
         }
         partida.avanzarTurno();
     }
+
+    @Test
+    public void simularUnaPartidaGanadaEnLaQueElJugadorVaRecolectandoLasRecompensasCorrectamente() {
+        //Inicializacions
+        Logger logger = new Logger();
+        Jugador jugador = new Jugador("Jugador1");
+        jugador.agregarObservador(logger);
+        Partida partida = new Partida(jugador, logger);
+
+
+        //primer turno
+        jugador.construirDefensa(new TorrePlateada(new Posicion(0,7)));
+        partida.avanzarTurno();
+        //segundo turno construyo una torre
+        // Aca se necesita instancear una defejnsa
+        jugador.construirDefensa(new TorrePlateada(new Posicion(1,9)));
+        partida.avanzarTurno();
+        jugador.construirDefensa(new TorrePlateada(new Posicion(1,8)));
+        partida.avanzarTurno();
+        jugador.construirDefensa(new TorrePlateada(new Posicion(5,0)));
+        partida.avanzarTurno();
+        jugador.construirDefensa(new TorrePlateada(new Posicion(6,0)));
+        partida.avanzarTurno();
+        assertThrows(NoDisponeDeSuficientesCreditos.class, () -> jugador.construirDefensa(new TorreBlanca(new Posicion(0,0))));
+
+        partida.avanzarTurno();
+        partida.avanzarTurno();
+        partida.avanzarTurno();
+        partida.avanzarTurno();
+        partida.avanzarTurno();
+
+        assertDoesNotThrow(() -> jugador.construirDefensa(new TorreBlanca(new Posicion(0,0))));
+    }
+
 }
