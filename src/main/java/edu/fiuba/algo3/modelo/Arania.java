@@ -23,4 +23,5 @@ public class Arania extends Enemigo {
         return "Arania";
     }
 
+    public void restaurarVelocidad(){ this.velocidad=2; }
 }

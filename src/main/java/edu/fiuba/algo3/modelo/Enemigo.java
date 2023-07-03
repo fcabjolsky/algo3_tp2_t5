@@ -35,4 +35,10 @@ public abstract class Enemigo extends Observable {
     public boolean sePuedeMover() {
        return this.estado.puedoSeguirMoviendome();
     }
+
+    public boolean equalsVelocidad(Enemigo e){ return this.velocidad == e.velocidad;}
+
+    public void afectarVelocidadPorFactor(float factor){ this.velocidad = (int)(this.velocidad * factor); };
+
+    public abstract void restaurarVelocidad();
 }

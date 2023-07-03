@@ -20,4 +20,6 @@ public class Hormiga extends Enemigo {
     public String toString() {
         return "Hormiga";
     }
+
+    public void restaurarVelocidad(){ this.velocidad=1; }
 }
