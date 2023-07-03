@@ -30,22 +30,22 @@ public class CreadorMapaJson implements CreadorDeMapa{
 		try {
             JSONObject json = new JSONObject(this.informacionDeMapa);          
 			JSONObject mapa = json.getJSONObject("Mapa");
-			
-            for(String fila: mapa.keySet()) {
-            	int numeroFila = Integer.parseInt(fila) - 1;
-            	JSONArray fil = mapa.getJSONArray(fila);
-            	for(int i  = 0; i < fil.length(); i++) {
-            		if(fil.getString(i).equals("Rocoso")) {
-            			Rocoso roc = new Rocoso(new Posicion(numeroFila, i));
+			int numeroDeFila = 1;
+			while (mapa.has(String.valueOf(numeroDeFila))) {
+            	JSONArray fil = mapa.getJSONArray(String.valueOf(numeroDeFila));
+            	for(int columna  = 0; columna < fil.length(); columna++) {
+            		if(fil.getString(columna).equals("Rocoso")) {
+            			Rocoso roc = new Rocoso(new Posicion(numeroDeFila - 1, columna));
             			rocoso.add(roc);
-            		}else if(fil.getString(i).equals("Tierra")) {
-            			Tierra tir = new Tierra(new Posicion(numeroFila, i));
+            		}else if(fil.getString(columna).equals("Tierra")) {
+            			Tierra tir = new Tierra(new Posicion(numeroDeFila - 1, columna));
             			tierra.add(tir);
             		}else {
-            			Pasarela pas = new Pasarela(new Posicion(numeroFila, i));
+            			Pasarela pas = new Pasarela(new Posicion(numeroDeFila - 1, columna));
             			pasarela.add(pas);
             		}
             	}
+				numeroDeFila++;
             }
         } catch (JSONException e) {
         	System.out.println(e.getMessage());

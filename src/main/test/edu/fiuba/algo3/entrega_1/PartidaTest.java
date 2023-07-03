@@ -14,9 +14,9 @@ public class PartidaTest {
     public void test01UnJugadorGanaLaPartidaSiNoHayMasEnemigosVivos() {
         List<Pasarela> pasarelas = new ArrayList<>();
         Pasarela pasarela = new Pasarela(new Posicion(1,1));
-        Enemigo hormigaMuerta = new Hormiga(new Posicion(1, 1));
+        Enemigo hormigaMuerta = new Hormiga();
         hormigaMuerta.recibirDanio(1);
-        pasarela.agregarEnemigo(hormigaMuerta);
+        pasarela.recibirEnemigo(hormigaMuerta);
         pasarelas.add(pasarela);
 
         Mapa mapa = new Mapa(pasarelas, new ArrayList<Rocoso>(), new ArrayList<Tierra>());
