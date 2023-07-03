@@ -11,30 +11,49 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TopoTest {
 
     @Test
-    public void cuandoElTopoLlegaAlFinalAtacaConDosDeDanioSiElNumeroDeTurnoEsImpar(){
+    public void cuandoElTopoLlegaAlFinalAtacaConDosDeDanioSiElNumeroDeTurnoEsImpar() {
         Topo t = new Topo();
-        assertEquals(5, t.atacar(3));
+        ContadorDeTurno.obtenerContador().resetearContador();
+        ContadorDeTurno.obtenerContador().incrementar();
+
+        assertEquals(5, t.atacar());
     }
     @Test
-    public void cuandoElTopoLlegaAlFinalAtacaConCincoDeDanioSiElNumeroDeTurnoEsPar(){
+    public void cuandoElTopoLlegaAlFinalAtacaConCincoDeDanioSiElNumeroDeTurnoEsPar() {
         Topo t = new Topo();
-        assertEquals(2, t.atacar(2));
+        ContadorDeTurno.obtenerContador().resetearContador();
+        ContadorDeTurno.obtenerContador().incrementar();
+        ContadorDeTurno.obtenerContador().incrementar();
+
+        assertEquals(2, t.atacar());
     }
     @Test
-    public void elTopoNoMuereSiRecibeCienDeDanio(){
+    public void elTopoNoMuereSiRecibeCienDeDanio() {
         Topo t = new Topo();
         t.recibirDanio(100);
         assert(!t.estaMuerta());
     }
     @Test
-    public void elTopoNoMuereSiRecibeDanioInfinito(){
+    public void elTopoNoMuereSiRecibeDanioInfinito() {
         Topo t = new Topo();
         t.recibirDanio(47847328);
         assert(!t.estaMuerta());
     }
+
+    @Test
+    public void elTopoNoDaUnaRecompensaPorqueNoPuedeMorir() {
+        Topo topo = new Topo();
+        int recompensaEsperada;
+
+        topo.recibirDanio(47847328);
+        recompensaEsperada = topo.darRecompensa();
+
+        assertEquals(recompensaEsperada, 0);
+    }
     @Test
     public void elTopoCambiaSuVelocidadDependiendoDeLosTurnosPasados(){
         Topo tp = new Topo();
+        ContadorDeTurno.obtenerContador().resetearContador();
         int i = 0;
         LinkedList<Transitable> tlist = new LinkedList<Transitable>();
         ProcesoDeMovimiento pm = new ProcesoDeMovimiento();
@@ -46,6 +65,7 @@ public class TopoTest {
         for(i=0;i<11;i++){
             pm.procesarMovimiento(tlist);
             tp.avanzarTurno();
+            ContadorDeTurno.obtenerContador().incrementar();
         }
         assert(tlist.getLast().contieneEnemigosVivos());
     }

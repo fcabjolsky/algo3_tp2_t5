@@ -9,7 +9,7 @@ import org.mockito.Mockito;
 public class PartidaTest2 {
 
     @Test
-    public void seSimulaUnaPartidaConElMapaYLosEnemigosCorrespondientesEnLaQueElJugadorGana() { //supongo que la posicion de la primer pasarela es (10 , 8) hay que soluicionar el lector del mapa
+    public void seSimulaUnaPartidaConElMapaYLosEnemigosCorrespondientesEnLaQueElJugadorGana() {
         Jugador jugador = new Jugador();
         jugador.construirDefensa(new TorreBlanca(new Posicion(1,0)));
         jugador.construirDefensa(new TorreBlanca(new Posicion(0,2)));

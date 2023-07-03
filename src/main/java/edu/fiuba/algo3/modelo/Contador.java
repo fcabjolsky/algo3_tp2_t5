@@ -5,7 +5,7 @@ public class Contador {
     protected int valor;
 
     public void incrementar() {
-        valor++;
+        this.valor++;
     }
 
     public boolean esMayorA(int unValor) {

@@ -34,7 +34,7 @@ public class PasarelaTest {
 
 		Pasarela pasarela = new Pasarela(new Posicion(0,0));
 
-		boolean resultado = pasarela.contieneEnemigosVivos();
+		boolean resultado = pasarela.contieneEnemigos();
 
 		assertFalse(resultado);
 	}
