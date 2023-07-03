@@ -1,10 +1,9 @@
 package edu.fiuba.algo3.entrega_1;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import edu.fiuba.algo3.modelo.*;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PasarelaTest {
 
@@ -85,6 +84,23 @@ public class PasarelaTest {
 		boolean resultado = pasarela.defensaEstaEnRango(torre);
 
 		assertTrue(resultado);
+
+	}
+
+	@Test
+	public void unaPasarelaRecolectaCorrectamenteLosCreditosDeLosEnemigosMuertosQueContiene() {
+		Pasarela pasarela = new Pasarela(new Posicion(0,0));
+		Enemigo enemigoMuerto = new Hormiga();
+		Enemigo enemigoEliminado = new Arania();
+		enemigoMuerto.nuevoEstado(new EstadoMuerto());
+		enemigoEliminado.nuevoEstado(new EstadoEliminado());
+		pasarela.recibirEnemigo(enemigoMuerto);
+		pasarela.recibirEnemigo(enemigoEliminado);
+		pasarela.recibirEnemigo(new Topo());
+
+		int recompensaEsperada = pasarela.recolectarRecompensas();
+
+		assertEquals(recompensaEsperada, 1);
 
 	}
 
