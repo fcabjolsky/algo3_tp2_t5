@@ -2,16 +2,15 @@ package edu.fiuba.algo3.modelo;
 
 public class Arania extends Enemigo {
 
-    private ContadorDeMuertesDeHormiga contadorDeMuertesDeArania;
-
     public Arania() {
+        super();
         this.energia = 2;
         this.velocidad = 2;
         this.estado = new EnMovimiento(this.velocidad);
         this.danio = 2;
     }
   
-    private int darRecompensa(){
+    public int darRecompensa(){
         int recompensa = (int)(Math.random()*10+1);
         return recompensa;
     }
