@@ -4,6 +4,7 @@ public class Hormiga extends Enemigo {
 
     private ContadorDeMuertesDeHormiga contadorDeMuertesDeHormiga;
     public Hormiga() {
+        super();
         this.energia = 1;
         this.velocidad = 1;
         this.estado = new EnMovimiento(this.velocidad);
@@ -19,6 +20,16 @@ public class Hormiga extends Enemigo {
             jugador.sumarCreditos(1);
         }
     }
+
+    @Override
+    public int darRecompensa() {
+        this.contadorDeMuertesDeHormiga.incrementar();
+        if (this.contadorDeMuertesDeHormiga.esMayorA(10)) {
+            return 2;
+        }
+        return 1;
+    }
+
     @Override
     public String toString() {
         return "Hormiga";
