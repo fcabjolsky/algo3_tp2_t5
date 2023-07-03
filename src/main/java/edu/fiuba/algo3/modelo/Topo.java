@@ -2,12 +2,23 @@ package edu.fiuba.algo3.modelo;
 
 public class Topo extends Enemigo{
     Contador cantidadMovimientos;
+    private ContadorDeTurno contadorDeTurno;
     public Topo(){
+        super();
         this.cantidadMovimientos = new Contador();
         this.velocidad = 1;
         this.estado = new EnMovimiento(this.velocidad);
         this.danio = 2;
         this.energia = 1;
+        this.contadorDeTurno = ContadorDeTurno.obtenerContador();
+    }
+
+    private boolean esPar() {
+        return (this.contadorDeTurno.obtenerValor() % 2) == 0;
+    }
+
+    @Override
+    public void recibirDanio(int unDanio) {
     }
 
     @Override
@@ -15,19 +26,17 @@ public class Topo extends Enemigo{
     }
 
     @Override
-    public int atacar(int numeroTurno){
-        if(esPar(numeroTurno)){
+    public int darRecompensa() {
+        return 0;
+    }
+
+    @Override
+    public int atacar(){
+        if(this.esPar()){
             return this.danio;
         }
         return 5;
     }
-
-    private boolean esPar(int numeroTurno) {
-        return (numeroTurno % 2) == 0;
-    }
-
-    @Override
-    public void recibirDanio(int unDanio){}
 
     @Override
     public void avanzar(Transitable siguienteTransitable){
@@ -40,4 +49,5 @@ public class Topo extends Enemigo{
             this.velocidad = 3;
         }
     }
+
 }
