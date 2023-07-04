@@ -9,6 +9,7 @@ public abstract class Enemigo extends Observable {
 
     protected int danio;
 
+    protected AtaqueEnemigo ataqueEnemigo;
     private EstadoEnemigo estadoEnemigo;
 
     public Enemigo() {
