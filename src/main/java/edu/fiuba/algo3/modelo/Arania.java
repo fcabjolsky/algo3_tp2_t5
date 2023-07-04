@@ -7,6 +7,7 @@ public class Arania extends Enemigo {
         this.energia = 2;
         this.velocidad = 2;
         this.estado = new EnMovimiento(this.velocidad);
+        this.ataqueEnemigo = new AtaqueEnemigoNormal();
         this.danio = 2;
     }
   
