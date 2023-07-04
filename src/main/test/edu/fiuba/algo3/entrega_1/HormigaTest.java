@@ -33,6 +33,23 @@ public class HormigaTest {
     }
 
     @Test
+    public void unaHormigaAtacaCorrectamenteCausandoUnoDeDanio() {
+        Hormiga hormiga = new Hormiga();
+
+        assertEquals(hormiga.atacar(), 1);
+    }
+
+    @Test
+    public void laHormigaLuegoDeAtacarUnaVezQuedaEnEstadoEliminadoYPorEndeAlAtacarUnaSegundaVezDevuelveDanioCero(){
+        Hormiga hormiga = new Hormiga();
+
+        hormiga.atacar();
+
+        assertEquals(hormiga.atacar(), 0);
+    }
+
+
+    @Test
     public void unaHormigaMuertaDevuelveCorrectamenteLaRecompensaCuandoSeMataronMenosDe10Hormigas() {
         Hormiga hormiga = new Hormiga();
         hormiga.nuevoEstado(new EstadoMuerto());
