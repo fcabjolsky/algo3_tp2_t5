@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.LinkedList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class TopoTest {
@@ -27,6 +28,16 @@ public class TopoTest {
 
         assertEquals(2, t.atacar());
     }
+
+    @Test
+    public void elTopoLuegoDeAtacarUnaVezQuedaEnEstadoEliminadoYPorEndeAlAtacarUnaSegundaVezDevuelveDanioCero(){
+        Topo t = new Topo();
+
+        t.atacar();
+
+        assertEquals(t.atacar(), 0);
+    }
+
     @Test
     public void elTopoNoMuereSiRecibeCienDeDanio() {
         Topo t = new Topo();
