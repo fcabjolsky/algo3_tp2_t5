@@ -8,6 +8,7 @@ public class Hormiga extends Enemigo {
         this.energia = 1;
         this.velocidad = 1;
         this.estado = new EnMovimiento(this.velocidad);
+        this.ataqueEnemigo = new AtaqueEnemigoNormal();
         this.danio = 1;
         this.contadorDeMuertesDeHormiga = ContadorDeMuertesDeHormiga.obtenerContador();
     }
