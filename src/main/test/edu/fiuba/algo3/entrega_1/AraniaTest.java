@@ -36,6 +36,23 @@ public class AraniaTest {
     }
 
     @Test
+    public void unaAraniaAtacaCorrectamenteCausandoDosDeDanio() {
+        Arania arania = new Arania();
+
+        assertEquals(arania.atacar(), 2);
+    }
+
+    @Test
+    public void laAraniaLuegoDeAtacarUnaVezQuedaEnEstadoEliminadoYPorEndeAlAtacarUnaSegundaVezDevuelveDanioCero(){
+        Arania arania = new Arania();
+
+        arania.atacar();
+
+        assertEquals(arania.atacar(), 0);
+    }
+
+
+    @Test
     public void unaAraniaMuertaDevuelveCorrectamenteLaRecompensa() {
         Arania arania = new Arania();
         arania.nuevoEstado(new EstadoMuerto());
