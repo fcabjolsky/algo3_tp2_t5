@@ -25,8 +25,8 @@ public class EstadoVivo implements EstadoEnemigo {
 
     @Override
     public int atacar() {
-        this.enemigo.nuevoEstado(new EstadoMuerto());
-        return this.enemigo.danio;
+        this.enemigo.nuevoEstado(new EstadoEliminado());
+        return this.enemigo.ataqueEnemigo.atacar(this.enemigo.danio);
     }
 
     @Override
