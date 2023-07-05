@@ -4,8 +4,6 @@ import edu.fiuba.algo3.modelo.*;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -53,32 +51,21 @@ public class CreadorMapaJsonTest {
         //"act inyecta los enemigos"
         agregadorDeEnemigos.obtenerInformacionDeNuevosEnemigos(1);
      
-        assertTrue(mapa.getPasarelas().get(0).contieneEnemigos());
+        assertTrue(mapa.getPasarelas().get(0).contieneEnemigosVivos());
     }
 
 
 
-    /*
+/*
     @Test
     public void elJugadorConUnoDeVidaMuereLuegoDeLosTurnosCorrespondientes() {
-
-        //la partida tiene que crear el jugador, llamar al creador de mapa y crear el
-        // turno
-
         String urlInfomacionDelMapa = "src/main/java/edu/fiuba/algo3/modelo/mapa.json";
         CreadorMapaJson creadorDeMapa = new CreadorMapaJson(urlInfomacionDelMapa);
         Mapa mapa = creadorDeMapa.crearMapa();
-
-
         String urlInfomacionDeEnemigos = "src/main/java/edu/fiuba/algo3/modelo/enemigos.json";
         AgregadorDeEnemigos agregadorDeEnemigos = new AgregadorDeEnemigos(urlInfomacionDeEnemigos, mapa);
-
-
         Jugador jugador = new Jugador(1,0);
-        System.out.println(jugador.getVida());
         Turno t = new Turno(jugador, mapa);
-        int i = 0;
-
 
         //TODO: el jugador tiene que morir automaticamente cuando llegan los enemigos a la ultima pasarella
         agregadorDeEnemigos.obtenerInformacionDeNuevosEnemigos(1);
