@@ -1,12 +1,13 @@
 package edu.fiuba.algo3.modelo;
 
-
 public class Tierra implements Turneable {
 	
 	private Defensa defensa;
 	private Posicion posicion;
+  
 	public Tierra() {
 	}
+  
 	public Tierra(Posicion posicion) {
 		this.posicion = posicion;
 	}
@@ -27,4 +28,5 @@ public class Tierra implements Turneable {
 	public void avanzarTurno() {
 		this.defensa.avanzarTurno();
 	}
+
 }

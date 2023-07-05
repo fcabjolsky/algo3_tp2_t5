@@ -5,11 +5,11 @@ public class Posicion {
 
     private int coordenadaY;
 
-    private int getCoordenadaX() {
+    public int getCoordenadaX() {
        return this.coordenadaX;
     }
 
-    private int getCoordenadaY() {
+    public int getCoordenadaY() {
         return this.coordenadaY;
     }
 
