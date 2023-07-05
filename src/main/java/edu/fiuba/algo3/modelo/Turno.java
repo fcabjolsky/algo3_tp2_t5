@@ -13,7 +13,7 @@ public class Turno extends Observable implements Turneable {
     public Turno(Jugador jugador, Mapa mapa) {
        this.jugador = jugador;
        this.mapa = mapa;
-       this.creadorEnemigos = new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigos.json", this.mapa);
+       this.creadorEnemigos = new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json", this.mapa);
        this.contadorDeTurno = ContadorDeTurno.obtenerContador();
        this.inicializarContadores();
        this.contadorDeTurno.incrementar();
@@ -80,7 +80,6 @@ public class Turno extends Observable implements Turneable {
         Pasarela pf = this.mapa.getPasarelaFinal();
         if(pf.contieneEnemigosVivos()){
             pf.daniarJugador(this.jugador);
-            pf.eliminarEnemigos();
         }
         mapa.reseteaAlosEnemigos();
     }

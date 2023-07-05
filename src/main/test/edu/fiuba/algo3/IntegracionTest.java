@@ -57,10 +57,31 @@ public class IntegracionTest {
         torreBlana2.agregarObservador(logger);
         jugador.construirDefensa(torreBlana2);
         partida.avanzarTurno();
+        // construyo otra torer
+        torreBlana2 = new TorreBlanca(new Posicion(2, 0));
+        torreBlana2.agregarObservador(logger);
+        jugador.construirDefensa(torreBlana2);
+        partida.avanzarTurno();
+        torreBlana2 = new TorreBlanca(new Posicion(3, 0));
+        torreBlana2.agregarObservador(logger);
+        jugador.construirDefensa(torreBlana2);
+        partida.avanzarTurno();
+        torreBlana2 = new TorreBlanca(new Posicion(4, 0));
+        torreBlana2.agregarObservador(logger);
+        jugador.construirDefensa(torreBlana2);
+        partida.avanzarTurno();
+        torreBlana2 = new TorreBlanca(new Posicion(5, 0));
+        torreBlana2.agregarObservador(logger);
+        jugador.construirDefensa(torreBlana2);
+        partida.avanzarTurno();
+        torreBlana2 = new TorreBlanca(new Posicion(7, 0));
+        torreBlana2.agregarObservador(logger);
+        jugador.construirDefensa(torreBlana2);
+        partida.avanzarTurno();
 
 
         // avanzo otro turno hasta morir
-        while (!partida.ganoPartida()) {
+        while (!partida.ganoPartida() && !jugador.estaMuerto()) {
             partida.avanzarTurno();
         }
         partida.avanzarTurno();
@@ -90,6 +111,14 @@ public class IntegracionTest {
         partida.avanzarTurno();
         assertThrows(NoDisponeDeSuficientesCreditos.class, () -> jugador.construirDefensa(new TorreBlanca(new Posicion(0,0))));
 
+        partida.avanzarTurno();
+        partida.avanzarTurno();
+        partida.avanzarTurno();
+        partida.avanzarTurno();
+        partida.avanzarTurno();
+        partida.avanzarTurno();
+        partida.avanzarTurno();
+        partida.avanzarTurno();
         partida.avanzarTurno();
         partida.avanzarTurno();
         partida.avanzarTurno();

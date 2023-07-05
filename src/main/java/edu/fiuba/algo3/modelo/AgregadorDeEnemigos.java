@@ -37,6 +37,11 @@ public class AgregadorDeEnemigos {
                         return new Hormiga();
                     }
                 });
+                put("topo", new EnemigoFactory() {
+                    public Enemigo create() {
+                        return new Topo();
+                    }
+                });
             }});
             this.informacionDeEnemigos = new String(Files.readAllBytes(Paths.get(URLinformacionDeEnemigos)));
             this.mapa = mapa;
@@ -66,14 +71,19 @@ public class AgregadorDeEnemigos {
     private Enemigo crearEnemigo(String enemigo) {
         EnemigoFactory factory = this.enemigosExistentes.get(enemigo);
         //depende del enemigo q seas mando o no el turno
-        return factory.create();
+        if (factory != null) {
+            return factory.create();
+        }
+        return null;
     }
 
 
     public void agregarEnemigosAMapa(Mapa mapa, String especie, int cantidad) {
         for (int i = 0; i < cantidad; i++) {
-
-            mapa.agregarEnemigo(this.crearEnemigo(especie));
+            Enemigo enemigoAAgregar = this.crearEnemigo(especie);
+            if (enemigoAAgregar != null) {
+                mapa.agregarEnemigo(enemigoAAgregar);
+            }
         }
     }
 }
