@@ -119,6 +119,11 @@ public class IntegracionTest {
         partida.avanzarTurno();
         partida.avanzarTurno();
         partida.avanzarTurno();
+        partida.avanzarTurno();
+        partida.avanzarTurno();
+        partida.avanzarTurno();
+        partida.avanzarTurno();
+        partida.avanzarTurno();
 
         assertDoesNotThrow(() -> jugador.construirDefensa(new TorreBlanca(new Posicion(0,0))));
     }
