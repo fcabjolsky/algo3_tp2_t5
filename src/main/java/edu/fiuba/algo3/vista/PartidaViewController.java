@@ -129,7 +129,7 @@ public class PartidaViewController{
     }
 
     private void mostrarNuevosEnemigos(){
-        this.enemigo =new AraniaView(this.tamanioDelTileAncho, this.tamanioDelTileAlto,
+        this.enemigo =new TopoView(this.tamanioDelTileAncho, this.tamanioDelTileAlto,
                 1*this.tamanioDelTileAncho,0*tamanioDelTileAlto);
         contenedor.getChildren().add(enemigo);
     }
