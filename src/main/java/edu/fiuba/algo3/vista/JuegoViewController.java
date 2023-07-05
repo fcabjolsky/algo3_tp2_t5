@@ -1,10 +1,5 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.Mapa;
-import edu.fiuba.algo3.modelo.Partida;
-import edu.fiuba.algo3.vista.Conexion;
-import edu.fiuba.algo3.vista.PartidaViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,10 +16,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.LinkedList;
 
 public class JuegoViewController extends Stage{
 
@@ -35,19 +26,11 @@ public class JuegoViewController extends Stage{
     private ImageView imagenFondo;
 
     @FXML
-    private Button botonCargarPartida;
-
-    @FXML
     private Button botonIniciarPartida;
 
     @FXML
     private Button botonSalir;
 
-
-    @FXML
-    void botonCargarPartidaOnAction(javafx.event.ActionEvent event) {
-
-    }
     @FXML
     void botonIniciarPartidaOnAction(javafx.event.ActionEvent event) {
         try {
@@ -127,24 +110,6 @@ public class JuegoViewController extends Stage{
         this.setEstiloBotonSoltado(this.botonIniciarPartida, event);
     }
 
-    @FXML
-    void setOnMouseEnteredBotonCargarPartida(MouseEvent event) {
-        this.setHoverEntradaBoton(this.botonCargarPartida);
-    }
-    @FXML
-    void setOnMouseExitedBotonCargarPartida(MouseEvent event) {
-        this.setHoverSalidaBoton(this.botonCargarPartida);
-    }
-
-    @FXML
-    void setOnMousePressedBotonCargarPartida(MouseEvent event) {
-        this.setEstiloBotonPresionado(this.botonCargarPartida, event);
-    }
-
-    @FXML
-    void setOnMouseReleasedBotonCargarPartida(MouseEvent event) {
-        this.setEstiloBotonSoltado(this.botonCargarPartida, event);
-    }
 
     @FXML
     void setOnMouseEnteredBotonSalir(MouseEvent event) {
@@ -165,32 +130,5 @@ public class JuegoViewController extends Stage{
     void setOnMouseReleasedBotonSalir(MouseEvent event) {
         this.setEstiloBotonSoltado(this.botonSalir, event);
     }
-
-
-
-
-
-    /*public LinkedList<Partida> obtenerTodasLasPartidas(){
-        LinkedList<Partida> listaDePartidas = new LinkedList<>();
-        String sql = "SELECT * FROM partida";
-        try {
-            edu.fiuba.algo3.vista.Conexion c = new Conexion();
-            Connection conexion = c.getConexion();
-            Statement stm = conexion.createStatement();
-            ResultSet rs = stm.executeQuery(sql);
-            while (rs.next()) {
-                Mapa mapa = (Mapa)rs.getObject(1);
-                Jugador jugador = (Jugador)rs.getObject(2);
-                Partida partida = new Partida(mapa, jugador);
-                listaDePartidas.add(partida);
-            }
-            conexion.close();
-            stm.close();
-            rs.close();
-        } catch (Exception e) {
-            System.out.println("Ha ocurrido un error al obtener la lista de Partidas");
-        }
-        return listaDePartidas;
-    }*/
 
 }
