@@ -36,12 +36,39 @@ public class AraniaTest {
     }
 
     @Test
-    public void recibirDanioEnAraniaMuertaLanzaExcepcion() {
+    public void unaAraniaAtacaCorrectamenteCausandoDosDeDanio() {
         Arania arania = new Arania();
 
-        arania.recibirDanio(2);
+        assertEquals(arania.atacar(), 2);
+    }
 
-        assertThrows(EnemigoMuerto.class, () -> arania.recibirDanio(2));
+    @Test
+    public void laAraniaLuegoDeAtacarUnaVezQuedaEnEstadoEliminadoYPorEndeAlAtacarUnaSegundaVezDevuelveDanioCero(){
+        Arania arania = new Arania();
+
+        arania.atacar();
+
+        assertEquals(arania.atacar(), 0);
+    }
+
+
+    @Test
+    public void unaAraniaMuertaDevuelveCorrectamenteLaRecompensa() {
+        Arania arania = new Arania();
+        arania.nuevoEstado(new EstadoMuerto());
+
+        int recompensaEsperada = arania.morir();
+
+        assertTrue(recompensaEsperada >= 1 && recompensaEsperada <= 10);
+    }
+
+    @Test
+    public void unaAraniaVivaDevuelveRecompensa0PuesSoloLasAraniasMuertasDevuelvenRecompensa() {
+        Arania arania = new Arania();
+
+        int recompensaEsperada = arania.morir();
+
+        assertEquals(recompensaEsperada, 0);
     }
 
     @Test
@@ -78,4 +105,5 @@ public class AraniaTest {
         Arania arania = new Arania();
         assertEquals("Arania", arania.toString());
     }
+
 }

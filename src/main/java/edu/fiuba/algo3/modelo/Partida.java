@@ -25,6 +25,7 @@ public class Partida extends Observable implements Turneable{
         this.logger = logger;
         this.empezarPartida();
     }
+
     private void agregarObservadores() {
         if (this.logger == null) {
             return;

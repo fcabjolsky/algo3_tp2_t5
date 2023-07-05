@@ -33,17 +33,58 @@ public class HormigaTest {
     }
 
     @Test
-    public void recibirDanioEnHormigaMuertaLanzaExcepcion() {
-        Hormiga hormiga = new Hormiga();;
+    public void unaHormigaAtacaCorrectamenteCausandoUnoDeDanio() {
+        Hormiga hormiga = new Hormiga();
 
-        hormiga.recibirDanio(2);
+        assertEquals(hormiga.atacar(), 1);
+    }
 
-        assertThrows(EnemigoMuerto.class, () -> hormiga.recibirDanio(2));
+    @Test
+    public void laHormigaLuegoDeAtacarUnaVezQuedaEnEstadoEliminadoYPorEndeAlAtacarUnaSegundaVezDevuelveDanioCero(){
+        Hormiga hormiga = new Hormiga();
+
+        hormiga.atacar();
+
+        assertEquals(hormiga.atacar(), 0);
+    }
+
+
+    @Test
+    public void unaHormigaMuertaDevuelveCorrectamenteLaRecompensaCuandoSeMataronMenosDe10Hormigas() {
+        Hormiga hormiga = new Hormiga();
+        hormiga.nuevoEstado(new EstadoMuerto());
+        ContadorDeMuertesDeHormiga.obtenerContador().resetearContador();
+
+        int recompensaEsperada = hormiga.morir();
+
+        assertEquals(recompensaEsperada ,1);
+    }
+
+    @Test
+    public void unaHormigaMuertaDevuelveCorrectamenteLaRecompensaCuandoSeMataronMasDe10Hormigas() {
+        Hormiga hormiga = new Hormiga();
+        hormiga.nuevoEstado(new EstadoMuerto());
+        ContadorDeMuertesDeHormiga.obtenerContador().resetearContador();
+
+        for (int i = 0; i < 10; i++) {
+            ContadorDeMuertesDeHormiga.obtenerContador().incrementar();
+        }
+        int recompensaEsperada = hormiga.morir();
+
+        assertEquals(recompensaEsperada, 2);
+    }
+
+    @Test
+    public void unaHormigaVivaDevuelveRecompensa0PuesSoloLasHormigasMuertasDevuelvenRecompensa() {
+        Hormiga hormiga = new Hormiga();
+
+        int recompensaEsperada = hormiga.morir();
+
+        assertEquals(recompensaEsperada, 0);
     }
 
     @Test
     public void hormigaAvanzaAlaParcelaCorrespondiente() {
-
     	Pasarela pasarelaLargada = new Pasarela(new Posicion(0, 0));
     	Pasarela pasarelaSiguiente = new Pasarela(new Posicion(1,0));
     	Hormiga hormiga = new Hormiga();

@@ -19,19 +19,26 @@ public class Pasarela implements Transitable, Turneable{
 		return false;
 	}
 
+	public boolean contieneEnemigos() {
+		return !this.enemigos.isEmpty();
+	}
 
-	public boolean contieneEnemigosVivos() { //tal vez se deberia llamar contieneEnemigosVivos
-		if (this.enemigos.isEmpty()) {
-			return false;
-		}
-		else {
-			for (Enemigo enemigo : this.enemigos) {
-				if (!enemigo.estaMuerta()) {
+	public boolean contieneEnemigosVivos() {
+		for (Enemigo enemigo : this.enemigos) {
+			if (!enemigo.estaMuerta()) {
 					return true;
-				}
 			}
-			return false;
 		}
+		return false;
+	}
+
+	@Override
+	public int recolectarRecompensas() {
+		int recompensaTotal = 0;
+		for (Enemigo enemigo : this.enemigos) {
+			recompensaTotal += enemigo.morir();
+		}
+		return recompensaTotal;
 	}
 
 	public void recibirEnemigo(Enemigo enemigo){
@@ -87,9 +94,9 @@ public class Pasarela implements Transitable, Turneable{
 		}
 	}
 
-	public void daniarJugador(Jugador j, int numeroTurno){
+	public void daniarJugador(Jugador j) {
 		for(Enemigo e : this.enemigos){
-			j.perderVida(e.atacar(numeroTurno));
+			j.perderVida(e.atacar());
 		}
 	}
 
