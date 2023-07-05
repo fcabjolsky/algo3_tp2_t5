@@ -81,7 +81,7 @@ public class IntegracionTest {
 
 
         // avanzo otro turno hasta morir
-        while (!partida.ganoPartida()) {
+        while (!partida.ganoPartida() && !jugador.estaMuerto()) {
             partida.avanzarTurno();
         }
         partida.avanzarTurno();
@@ -111,6 +111,9 @@ public class IntegracionTest {
         partida.avanzarTurno();
         assertThrows(NoDisponeDeSuficientesCreditos.class, () -> jugador.construirDefensa(new TorreBlanca(new Posicion(0,0))));
 
+        partida.avanzarTurno();
+        partida.avanzarTurno();
+        partida.avanzarTurno();
         partida.avanzarTurno();
         partida.avanzarTurno();
         partida.avanzarTurno();
