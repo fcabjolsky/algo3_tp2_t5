@@ -170,7 +170,7 @@ public class JuegoViewController extends Stage{
 
 
 
-    public LinkedList<Partida> obtenerTodasLasPartidas(){
+    /*public LinkedList<Partida> obtenerTodasLasPartidas(){
         LinkedList<Partida> listaDePartidas = new LinkedList<>();
         String sql = "SELECT * FROM partida";
         try {
@@ -191,6 +191,6 @@ public class JuegoViewController extends Stage{
             System.out.println("Ha ocurrido un error al obtener la lista de Partidas");
         }
         return listaDePartidas;
-    }
+    }*/
 
 }
