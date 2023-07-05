@@ -28,7 +28,7 @@ public class ElegirNombreViewController {
     }
     @FXML
     void botonEmpezarOnAction(ActionEvent event) {
-        if (textNombre.getCharacters().length() < 6){
+        if (textNombre.getCharacters().toString().trim().length() < 6){
             Alert alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setHeaderText(null);
             alerta.setTitle("Error");
