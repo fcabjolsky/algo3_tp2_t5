@@ -10,5 +10,5 @@ public class Contador {
     public boolean esMayorA(int numero){
         return this.actual > numero;
     }
-
+    public boolean esMenorA(int numero){return this.actual<numero;}
 }

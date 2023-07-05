@@ -1,61 +1,38 @@
 package edu.fiuba.algo3.modelo;
 
-public abstract class Enemigo {
+public abstract class Enemigo extends Observable {
     protected int energia;
-    protected Posicion posicion;
     protected int velocidad;
-
-    protected int contadorAvance;
+    protected Movible estado;
     protected int danio;
 
-    public Enemigo(Posicion posicion) {
-        this.posicion = posicion;
-        this.contadorAvance = -1;
-    }
     public void recibirDanio(int unDanio) {
         if (this.estaMuerta()) {
             throw new EnemigoMuerto();
         }
         this.energia -= unDanio;
+        this.notificarObservadores("Enemigo " + this.toString() + " recibe danio " + unDanio + " Vida restante " + this.energia);
     }
 
     public boolean estaMuerta() {
         return this.energia <= 0;
     }
 
-    public boolean estaEnRango(Rango unRango) {
-        return unRango.estaEnRango(this.posicion);
-    }
-
     public abstract void morir(Jugador jugador, Contador cantidadDeMuertes);
-  
-    public Posicion obtenerPosicion() {
-        return this.posicion;
+
+    public void avanzar(Transitable siguienteTransitable) {
+        this.estado = this.estado.moverA(this, siguienteTransitable);
     }
 
-    public boolean enMovimiento(){
-        return (contadorAvance < velocidad);
+    public void avanzarTurno() {
+        this.estado = new EnMovimiento(this.velocidad);
     }
 
-    public void avanzar(Posicion siguientePosicion) {
-        this.posicion = siguientePosicion;
-        this.contadorAvance++;
-    }
-  
-    public void resetearAvance(){
-        this.contadorAvance = 0;
-    }
-
-    public void agregarEnemigoAMapa(String especie, Mapa mapa, int cantidad){
-        if ((this.toString()).equalsIgnoreCase(especie)){
-            for (int i = 0; i < cantidad; i++) {
-                mapa.agregarEnemigo(this);
-            }
-        }
-    }
-
-    public int atacar(){
+    public int atacar(int numeroTurno){
         return this.danio;
     }
 
+    public boolean sePuedeMover() {
+       return this.estado.puedoSeguirMoviendome();
+    }
 }
