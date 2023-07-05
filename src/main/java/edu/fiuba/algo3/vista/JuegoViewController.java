@@ -1,12 +1,9 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.Mapa;
-import edu.fiuba.algo3.modelo.Partida;
-import edu.fiuba.algo3.vista.Conexion;
-import edu.fiuba.algo3.vista.PartidaViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
@@ -18,10 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.LinkedList;
+import java.io.IOException;
 
 public class JuegoViewController extends Stage{
 
@@ -32,29 +26,23 @@ public class JuegoViewController extends Stage{
     private ImageView imagenFondo;
 
     @FXML
-    private Button botonCargarPartida;
-
-    @FXML
     private Button botonIniciarPartida;
 
     @FXML
     private Button botonSalir;
 
-
-    @FXML
-    void botonCargarPartidaOnAction(javafx.event.ActionEvent event) {
-
-    }
     @FXML
     void botonIniciarPartidaOnAction(javafx.event.ActionEvent event) {
-        PartidaViewController controller = new PartidaViewController();
-        Scene scene = controller.InicializarPartidaView("src/main/java/edu/fiuba/algo3/modelo/mapa.json");
-        Stage partida = new Stage();
-        partida.initStyle(StageStyle.UNDECORATED);
-        partida.setScene(scene);
-        partida.show();
-        Stage stage = (Stage) this.botonSalir.getScene().getWindow();
-        stage.close();
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/ElegirNombreView.fxml"));
+            Stage juegoStage = new Stage();
+            juegoStage.initStyle(StageStyle.UNDECORATED);
+            juegoStage.setScene(new Scene(root, PartidaViewController.anchoDePantalla, PartidaViewController.altoDePantalla));
+            juegoStage.show();
+            cerrarVentana();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -122,24 +110,6 @@ public class JuegoViewController extends Stage{
         this.setEstiloBotonSoltado(this.botonIniciarPartida, event);
     }
 
-    @FXML
-    void setOnMouseEnteredBotonCargarPartida(MouseEvent event) {
-        this.setHoverEntradaBoton(this.botonCargarPartida);
-    }
-    @FXML
-    void setOnMouseExitedBotonCargarPartida(MouseEvent event) {
-        this.setHoverSalidaBoton(this.botonCargarPartida);
-    }
-
-    @FXML
-    void setOnMousePressedBotonCargarPartida(MouseEvent event) {
-        this.setEstiloBotonPresionado(this.botonCargarPartida, event);
-    }
-
-    @FXML
-    void setOnMouseReleasedBotonCargarPartida(MouseEvent event) {
-        this.setEstiloBotonSoltado(this.botonCargarPartida, event);
-    }
 
     @FXML
     void setOnMouseEnteredBotonSalir(MouseEvent event) {
@@ -159,33 +129,6 @@ public class JuegoViewController extends Stage{
     @FXML
     void setOnMouseReleasedBotonSalir(MouseEvent event) {
         this.setEstiloBotonSoltado(this.botonSalir, event);
-    }
-
-
-
-
-
-    public LinkedList<Partida> obtenerTodasLasPartidas(){
-        LinkedList<Partida> listaDePartidas = new LinkedList<>();
-        String sql = "SELECT * FROM partida";
-        try {
-            edu.fiuba.algo3.vista.Conexion c = new Conexion();
-            Connection conexion = c.getConexion();
-            Statement stm = conexion.createStatement();
-            ResultSet rs = stm.executeQuery(sql);
-            while (rs.next()) {
-                Mapa mapa = (Mapa)rs.getObject(1);
-                Jugador jugador = (Jugador)rs.getObject(2);
-                Partida partida = new Partida(mapa, jugador);
-                listaDePartidas.add(partida);
-            }
-            conexion.close();
-            stm.close();
-            rs.close();
-        } catch (Exception e) {
-            System.out.println("Ha ocurrido un error al obtener la lista de Partidas");
-        }
-        return listaDePartidas;
     }
 
 }
