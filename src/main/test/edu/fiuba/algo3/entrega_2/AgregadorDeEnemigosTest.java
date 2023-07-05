@@ -46,7 +46,7 @@ public class AgregadorDeEnemigosTest {
 
     @Test
     public void SeObtieneLaInformacionDeUnArchivoValidoHastaElPrimerTurnoYLaCantidadDeEnemigosEsLaEsperada(){
-        String urlInfomacionDeEnemigos = "src/main/java/edu/fiuba/algo3/modelo/enemigos.json";
+        String urlInfomacionDeEnemigos = "src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json";
         List<Pasarela> pasarelas = new ArrayList<>();
         Pasarela inicio = new Pasarela((new Posicion(0,0)));
         pasarelas.add(inicio);
@@ -63,21 +63,21 @@ public class AgregadorDeEnemigosTest {
     @Test 
     public void luegoDe12TurnosSeComienzaAleerDeNuevoElArchivoJsonCorrespondiente() {
 
-        String urlInfomacionDeEnemigos = "src/main/java/edu/fiuba/algo3/modelo/enemigos.json";
+        String urlInfomacionDeEnemigos = "src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json";
         List<Pasarela> pasarelas = new ArrayList<>();
         Pasarela inicio = new Pasarela((new Posicion(0,0)));
         pasarelas.add(inicio);
         Mapa mapa = new Mapa(pasarelas, new ArrayList<>(), new ArrayList<>());
         AgregadorDeEnemigos agregadorDeEnemigos = new AgregadorDeEnemigos(urlInfomacionDeEnemigos, mapa);
 
-        int cantidadEsperada = 22;
+        int cantidadEsperada = 17;
         for(int i = 1; i < 14; i++) {
         	agregadorDeEnemigos.obtenerInformacionDeNuevosEnemigos(i);
         }
-        
+
 
         assertTrue(inicio.laCantidadDeEnemigosEsIgualA(cantidadEsperada));
-    	
+
     }
     
     @Test
@@ -95,10 +95,10 @@ public class AgregadorDeEnemigosTest {
         	agregadorDeEnemigos.obtenerInformacionDeNuevosEnemigos(i);
         }
         assertTrue(inicio.laCantidadDeEnemigosEsIgualA(cantidadEsperada));
-    	
+
     }
-    
-    
-    
+
+
+
 
 }

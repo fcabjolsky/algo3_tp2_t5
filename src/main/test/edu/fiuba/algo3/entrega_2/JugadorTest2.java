@@ -33,7 +33,7 @@ public class JugadorTest2 {
             t.siguienteTurno();
             numeroTurno++;
         }
-        assertEquals(24, numeroTurno);
+        assertEquals(25, numeroTurno);
     }
 
 
