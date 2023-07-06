@@ -54,7 +54,7 @@ public class Jugador extends Observable implements Turneable{
     }
 
     public void perderVida(int danio){
-        this.notificarObservadores("Jugador fua atacado con danio: " + danio);
+        this.notificarObservadores(danio);
         this.vida -= danio;
     }
 
@@ -75,8 +75,7 @@ public class Jugador extends Observable implements Turneable{
     }
 
     public void construirDefensa(Defensa nuevaDefensa) {
-        if (nuevaDefensa.puedeConstruir(this.creditos)) {
-            this.notificarObservadores("Agregando defensa: " + nuevaDefensa.toString());
+        if (nuevaDefensa.puedeConstruir(this.creditos)){
             nuevaDefensa.construir(this);
             defensas.add(nuevaDefensa);
         }

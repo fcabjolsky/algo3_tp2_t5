@@ -32,7 +32,7 @@ public class Partida extends Observable implements Turneable{
         }
         this.agregarObservador(this.logger);
         this.mapa.agregarObservador(this.logger);
-        turno.agregarObservador(this.logger);
+        this.turno.agregarObservador(this.logger);
     }
 
     public boolean ganoPartida() {
@@ -62,6 +62,7 @@ public class Partida extends Observable implements Turneable{
     @Override
     public void avanzarTurno() {
         try {
+            System.out.println(this.turno);
             this.turno.siguienteTurno();
         } catch (JuegoGanado juegoGanado) {
             this.notificarObservadores("Ganaste");
@@ -69,9 +70,11 @@ public class Partida extends Observable implements Turneable{
     }
 
     public Turno empezarPartida() {
+        System.out.println("entro a crear el mapa");
         this.creadorMapa = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json");
         this.mapa = this.creadorMapa.crearMapa();
         this.turno = new Turno(this.jugador, this.mapa);
+        System.out.println(turno);
         this.agregarObservadores();
         return this.turno;
     }
