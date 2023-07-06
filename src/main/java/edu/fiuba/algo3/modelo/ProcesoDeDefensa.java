@@ -24,7 +24,7 @@ public class ProcesoDeDefensa {
         for (Defensa defensa : defensas ) {
             if (!this.obtenerPasarelasEnRangoConEnemigosVivos(defensa, pasarelasConEnemigos).isEmpty()) {
                 Pasarela pasarelaADefender = this.obtenerPasarelaADefender(defensa, pasarelasConEnemigos);
-                defensa.defender(pasarelaADefender.obtenerEnemigoADaniar());
+                defensa.defender(pasarelaADefender);
                 }
             }
         }
