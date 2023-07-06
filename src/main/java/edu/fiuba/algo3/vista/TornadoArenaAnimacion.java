@@ -17,11 +17,10 @@ public class TornadoArenaAnimacion extends DefensaAtaquesView{
     }
 
     @Override
-    public void realizarAtaque(Pane contenedor, GridPane mapa, int posicionParcelaAtacadaX, int posicionParcelaAtacadaY) {
+    public void realizarAtaque(Entidad pasarelaAtacada) {
         this.setVisible(true);
         super.reproducirSonido("/viento.mp3", 1, 1);
         TranslateTransition animacion = new TranslateTransition(Duration.millis(900), this);
-        Entidad pasarelaAtacada = this.devolverParcela(mapa, posicionParcelaAtacadaX, posicionParcelaAtacadaY);
         double posicionAtacadaX = pasarelaAtacada.getLayoutX() ;
 
         animacion.setToX(posicionAtacadaX - 20);
@@ -43,7 +42,5 @@ public class TornadoArenaAnimacion extends DefensaAtaquesView{
             desaparecer.setCycleCount(1);
             desaparecer.play();
         });
-
-        contenedor.getChildren().add(this);
     }
 }

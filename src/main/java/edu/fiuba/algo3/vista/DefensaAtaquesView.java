@@ -16,41 +16,11 @@ import java.io.File;
 public abstract class DefensaAtaquesView extends Region {
 
     public DefensaAtaquesView(DefensaView torre, int anchoTile, int altoTile) {
-        this.setVisible(false);
+        this.setVisible(true);
         this.setLayoutX(torre.getLayoutX() * anchoTile);
         this.setLayoutY(torre.getLayoutY() * altoTile);
     }
 
-    private Node obtenerParcelaDeMapa(GridPane mapa, int x, int y) {
-        ObservableList<Node> parcelas = mapa.getChildren();
-        for (Node nodo : parcelas) {
-            Integer columnaIndex = GridPane.getColumnIndex(nodo);
-            Integer filaIndex = GridPane.getRowIndex(nodo);
-            if (columnaIndex == null){
-                columnaIndex = 0;
-            }
-            if (filaIndex == null){
-                filaIndex = 0;
-            }
-            if (columnaIndex == x && filaIndex == y){
-                return nodo;
-            }
-        }
-        return null;
-    }
-    protected Entidad devolverParcela(GridPane mapa, int posicionParcelaAtacadaX, int posicionParcelaAtacadaY){
-        Entidad parcelaADevolver = null;
-        try {
-            parcelaADevolver = (PasarelaView)this.obtenerParcelaDeMapa(mapa, posicionParcelaAtacadaX, posicionParcelaAtacadaY);
-        }catch(ClassCastException errorDeClase){
-            try {
-                parcelaADevolver = (TierraView)this.obtenerParcelaDeMapa(mapa, posicionParcelaAtacadaX, posicionParcelaAtacadaY);
-            }catch(ClassCastException errorDeClase2){
-                parcelaADevolver = (RocosoView)this.obtenerParcelaDeMapa(mapa, posicionParcelaAtacadaX, posicionParcelaAtacadaY);
-            }
-        }
-        return parcelaADevolver;
-    }
     protected Background nuevoFondoDeImagen(String urlImagen){
         Image imagen = (new Image(DisparoAnimacion.class.getResourceAsStream(urlImagen)));
         BackgroundImage fondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT,
@@ -59,7 +29,7 @@ public abstract class DefensaAtaquesView extends Region {
                 new BackgroundSize(this.getPrefWidth(), this.getPrefHeight(), false, false, true, true));
         return new Background(fondo);
     }
-    public abstract void realizarAtaque(Pane contenedor, GridPane mapa, int posicionParcelaAtacadaX, int posicionParcelaAtacadaY);
+    public abstract void realizarAtaque(Entidad pasarelaAtacada);
 
     protected void reproducirSonido(String urlSonido, int veces, int velocidad){
 

@@ -1,19 +1,22 @@
 package edu.fiuba.algo3.vista;
 
-import javafx.scene.image.Image;
-import javafx.scene.layout.*;
+
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 public class TrampaArenaView extends DefensaView{
 
     private TornadoArenaAnimacion ataque;
 
-    public TrampaArenaView(String urlTorreImagen, int anchoTile, int altoTile, int x, int y) {
-        super(urlTorreImagen, anchoTile, altoTile, x, y);
+    public TrampaArenaView(String urlTorreImagen, int anchoTile, int altoTile, int x, int y, Pane contenedor, GridPane mapa) {
+        super(urlTorreImagen, anchoTile, altoTile, x, y, mapa);
         this.ataque = new TornadoArenaAnimacion(this, anchoTile, altoTile);
+        contenedor.getChildren().add(this.ataque);
     }
 
     @Override
-    public void update(Pane contenedor, GridPane mapa, int posicionParcelaAtacadaX, int posicionParcelaAtacadaY){
-        this.ataque.realizarAtaque(contenedor, mapa, posicionParcelaAtacadaX, posicionParcelaAtacadaY);
+    public void update(Entidad pasarelaAtacada){
+        this.ataque.realizarAtaque(pasarelaAtacada);
     }
+
 }
