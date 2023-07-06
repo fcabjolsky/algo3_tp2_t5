@@ -3,36 +3,32 @@ package edu.fiuba.algo3.modelo;
 public class Topo extends Enemigo{
     Contador cantidadMovimientos;
     public Topo(){
+        super();
         this.cantidadMovimientos = new Contador();
         this.velocidad = 1;
         this.estado = new EnMovimiento(this.velocidad);
+        this.ataqueEnemigo = new AtaqueEnemigoSegunParidadDeTurno();
         this.danio = 2;
         this.energia = 1;
     }
 
     @Override
-    public void morir(Jugador jugador, Contador cantidadDeMuertes) {
+    public void recibirDanio(int unDanio) {
     }
 
     @Override
-    public int atacar(int numeroTurno){
-        if(esPar(numeroTurno)){
-            return this.danio;
-        }
-        return 5;
-    }
-
-    private boolean esPar(int numeroTurno) {
-        return (numeroTurno % 2) == 0;
+    public void morir(Jugador jugador) {
     }
 
     @Override
-    public void recibirDanio(int unDanio){}
+    public int darRecompensa() {
+        return 0;
+    }
 
     @Override
     public void avanzar(Transitable siguienteTransitable){
         this.estado = this.estado.moverA(this, siguienteTransitable);
-        this.cantidadMovimientos.aumentar();
+        this.cantidadMovimientos.incrementar();
         if(this.cantidadMovimientos.esMayorA(5)  && this.cantidadMovimientos.esMenorA(11)) {
             this.velocidad = 2;
         }
@@ -41,5 +37,4 @@ public class Topo extends Enemigo{
         }
     }
 
-    public void restaurarVelocidad(){ this.velocidad=1; }
 }

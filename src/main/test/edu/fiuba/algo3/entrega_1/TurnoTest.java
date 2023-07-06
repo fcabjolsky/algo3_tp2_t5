@@ -33,7 +33,7 @@ public class TurnoTest {
         pasarelas.add(new Pasarela(new Posicion(0, 2)));
         Mapa mapa = new Mapa(pasarelas, new ArrayList<Rocoso>(), new ArrayList<Tierra>());
         mapa.agregarEnemigo(new Hormiga());
-        Turno turno = new Turno(new Jugador(), mapa);
+        Turno turno = new Turno(new Jugador("Jugador1"), mapa);
 
         turno.siguienteTurno();
 
@@ -45,7 +45,7 @@ public class TurnoTest {
     @Test
     public void unJugadorQueEliminaTodosLosEnemigosDevuelveVerdadero() {
         Mapa mapa = new Mapa(new ArrayList<Pasarela>(), new ArrayList<Rocoso>(), new ArrayList<Tierra>());
-        Turno turno = new Turno(new Jugador(), mapa);
+        Turno turno = new Turno(new Jugador("Jugador1"), mapa);
 
         boolean resultado = turno.ganoLaPartida();
 
@@ -57,103 +57,16 @@ public class TurnoTest {
         List<Pasarela> pasarelas = new ArrayList<>();
         Pasarela pasarela = new Pasarela(new Posicion(1,1));
         Enemigo hormigaMuerta = new Hormiga();
-        hormigaMuerta.recibirDanio(1);
+        hormigaMuerta.nuevoEstado(new EstadoMuerto());
         pasarela.recibirEnemigo(hormigaMuerta);
         pasarelas.add(pasarela);
 
         Mapa mapa = new Mapa(pasarelas, new ArrayList<Rocoso>(), new ArrayList<Tierra>());
-        Turno turno = new Turno(new Jugador(), mapa);
+        Turno turno = new Turno(new Jugador("Jugador1"), mapa);
 
         boolean resultado = turno.ganoLaPartida();
 
         Assertions.assertTrue(resultado);
     }
-  
-    public void pasarTurnoYUnaTorreAtacaAUnEnemigo() { //creo que deberia en ProcesoDeDefensaTest
-        /*Jugador jugador = new Jugador();
-        Torre torre = new TorreBlanca();
-        jugador.construir(torre, new Posicion(1,1));
-        ArrayList<Pasarela> pasarelas = new ArrayList<Pasarela>();
-        pasarelas.add(new Pasarela(new Posicion(0, 0)));
-        pasarelas.add(new Pasarela(new Posicion(0, 1)));
-        Mapa mapa = new Mapa(pasarelas, new ArrayList<Rocoso>(), new ArrayList<Tierra>());
-
-        Enemigo enemigo1 = new Hormiga(new Posicion(0, 0));
-        mapa.agregarEnemigo(enemigo1);
-        Turno turno = new Turno(jugador, mapa);
-        turno.construirDefensas();
-        turno.defenderseDeEnemigos();
-        assert(enemigo1.estaMuerta());
-         */
-        Jugador jugador = new Jugador();
-        jugador.construirDefensa(new TorreBlanca(new Posicion(1,1)));
-        ArrayList<Pasarela> pasarelas = new ArrayList<Pasarela>();
-        pasarelas.add(new Pasarela(new Posicion(0, 0)));
-        pasarelas.add(new Pasarela(new Posicion(0, 1)));
-        Mapa mapa = new Mapa(pasarelas, new ArrayList<Rocoso>(), new ArrayList<Tierra>());
-        Enemigo enemigo = new Hormiga();
-        mapa.agregarEnemigo(enemigo);
-        Turno turno = new Turno(jugador, mapa);
-
-        turno.siguienteTurno();
-
-        assertTrue(enemigo.estaMuerta());
-
-    }
-
-    /*@Test
-    public void seConstruyeUnaTorrePlateadaPasaUnTurnoYNoEstaOperativa(){ //creo que deberia ir en ProcesoDeDefensaTest
-        Jugador jugador = new Jugador();
-        Torre torre = new TorrePlateada();
-        jugador.construir(torre, new Posicion(1,1));
-        Mapa mapa = new Mapa(new ArrayList<>(), new ArrayList<Rocoso>(), new ArrayList<Tierra>());
-        Turno turno = new Turno(jugador, mapa);
-
-        turno.construirDefensas();
-
-        assertThrows(DefensaNoOperativa.class, () -> turno.defenderseDeEnemigos());
-
-    }
-
-    @Test
-    public void seConstruyeUnaTorrePlateadaPasanDosTurnosYEstaOperativa() { //creo que deberia ir en ProcesoDeDefensa
-        Jugador jugador = new Jugador();
-        Torre torre = new TorrePlateada();
-        jugador.construir(torre, new Posicion(1,1));
-        Mapa mapa = new Mapa(new ArrayList<>(), new ArrayList<Rocoso>(), new ArrayList<Tierra>());
-        Turno turno = new Turno(jugador, mapa);
-
-        turno.construirDefensas();
-        turno.construirDefensas();
-
-        assertDoesNotThrow(() -> turno.defenderseDeEnemigos());
-
-    }
-
-    @Test
-    public void seConstruyeUnaTorreBlancaYNoEstaOperativa() { // creoq ue deberia ir en ProcesoDeDefensaTest
-        Jugador jugador = new Jugador();
-        Torre torre = new TorreBlanca();
-        jugador.construir(torre, new Posicion(1,1));
-        Mapa mapa = new Mapa(new ArrayList<>(), new ArrayList<Rocoso>(), new ArrayList<Tierra>());
-        Turno turno = new Turno(jugador, mapa);
-
-        assertThrows(DefensaNoOperativa.class, () -> turno.defenderseDeEnemigos());
-
-    }
-
-    @Test
-    public void seConstruyeUnaTorreBlancaPasaUnTurnoYEstaOperativa(){ //creo que deberia ir en ProcesoDeDefensaTest
-        Jugador jugador = new Jugador();
-        Torre torre = new TorreBlanca();
-        jugador.construir(torre, new Posicion(1,1));
-        Mapa mapa = new Mapa(new ArrayList<>(), new ArrayList<Rocoso>(), new ArrayList<Tierra>());
-        Turno turno = new Turno(jugador, mapa);
-
-        turno.construirDefensas();
-
-        assertDoesNotThrow(() -> turno.defenderseDeEnemigos());
-
-    }*/
 
 }

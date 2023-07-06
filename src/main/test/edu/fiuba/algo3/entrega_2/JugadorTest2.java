@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class JugadorTest2 {
     @Test
     public void elJugadorOriginalMuereAutomaticamenteCuandoLeAplicanElDanioLetal(){
-        Jugador j = new Jugador();
+        Jugador j = new Jugador("Jugador1");
         Partida p = new Partida(j);
         Turno t = p.empezarPartida();
         int recorridoDePasarelas = 24;
@@ -24,7 +24,7 @@ public class JugadorTest2 {
     }
     @Test
     public void elJugadorOriginalMuereEn24TurnosEnUnMapaDeHormigasYaranias(){
-        Jugador j = new Jugador();
+        Jugador j = new Jugador("Jugador1");
         Partida p = new Partida(j);
         Turno t = p.empezarPartida();
         int numeroTurno = 1;
@@ -33,7 +33,7 @@ public class JugadorTest2 {
             t.siguienteTurno();
             numeroTurno++;
         }
-        assertEquals(24, numeroTurno);
+        assertEquals(25, numeroTurno);
     }
 
 

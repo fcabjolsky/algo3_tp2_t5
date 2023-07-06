@@ -8,12 +8,28 @@ public class Jugador extends Observable implements Turneable{
     private int vida = 20;
     private int creditos = 100;
     private List <Defensa> defensas = new ArrayList();
+    private String nombre;
 
-    public Jugador() {}
+    public Jugador(String unNombre) {
+        if (!this.validarNombre(unNombre)) {
+            throw new NombreInvalido();
+        }
+    }
 
-    public Jugador(int vida, int creditos) {
+    public Jugador(int vida, int creditos, String unNombre) {
         this.vida = vida;
         this.creditos = creditos;
+        if (!this.validarNombre(unNombre)) {
+            throw new NombreInvalido();
+        }
+    }
+
+    private boolean validarNombre(String unNombre) {
+        if (unNombre.trim().length() >= 6) {
+            this.nombre = unNombre;
+            return true;
+        }
+        return false;
     }
 
     public int getVida() {

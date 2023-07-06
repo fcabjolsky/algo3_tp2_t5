@@ -7,4 +7,5 @@ public interface Transitable {
 
     public boolean contieneEnemigosVivos();
 
+    int recolectarRecompensas();
 }
