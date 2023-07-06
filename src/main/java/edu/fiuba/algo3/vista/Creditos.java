@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.modelo.Observable;
+import edu.fiuba.algo3.modelo.Observador;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,7 +14,7 @@ import javafx.scene.text.FontWeight;
 
 import java.net.URL;
 
-public class Creditos extends Label{
+public class Creditos extends Label implements Observador {
     private int creditos;
 
     public Creditos(){
@@ -42,5 +44,12 @@ public class Creditos extends Label{
 
     private void actualizarCreditos(){
         this.setText(Integer.toString(this.creditos));
+    }
+
+    @Override
+    public void actualizar(Observable observable, Object argument) {
+        int creditos = (int)argument;
+        sumarCreditos(creditos);
+        actualizarCreditos();
     }
 }

@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.modelo.Observable;
+import edu.fiuba.algo3.modelo.Observador;
 import javafx.geometry.Insets;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
@@ -9,7 +11,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class BarraDeVida extends Region{
+public class BarraDeVida extends Region implements Observador {
 
     final int vidaInicial = 20;
     float vidaActual = 20;
@@ -43,5 +45,11 @@ public class BarraDeVida extends Region{
         }else{
             this.setPrefWidth(acortarBarra);
         }
+    }
+
+    @Override
+    public void actualizar(Observable observable, Object argument) {
+        int danio = (int)argument;
+        perderVida(danio);
     }
 }
