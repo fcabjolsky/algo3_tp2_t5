@@ -4,7 +4,7 @@ public interface Defensa {
 
     public Defensa construir(Jugador jugador);
 
-    public void defender(Enemigo enemigo);
+    public void defender(Pasarela pasarela);
 
     public boolean puedeConstruir(int creditos);
 
