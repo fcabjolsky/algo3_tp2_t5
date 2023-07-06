@@ -8,6 +8,11 @@ public class TorreBlanca extends Torre {
         this.rango = new Rango(3, posicion);
     }
 
+    public TorreBlanca(Posicion posicion, Observador observador) {
+        super(1, 10, 1, observador);
+        this.rango = new Rango(3, posicion);
+    }
+
     public TorreBlanca() {
         super(1, 10, 1);
     }
