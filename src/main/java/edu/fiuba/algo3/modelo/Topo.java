@@ -37,4 +37,5 @@ public class Topo extends Enemigo{
         }
     }
 
+    public void restaurarVelocidad(){ this.velocidad=1; }
 }
