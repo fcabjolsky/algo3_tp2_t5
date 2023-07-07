@@ -18,7 +18,7 @@ public class PartidaTest2 {
         Observador loggerMock = Mockito.mock(Logger.class);
         CreadorMapaJson creadorMapa = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json");
         Mapa mapa = creadorMapa.crearMapa();
-        Turno turno = new Turno(jugador, mapa);
+        Turno turno = new Turno(jugador, mapa, new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json", mapa));
         Partida partida = new Partida(jugador, mapa, turno);
         partida.agregarObservador(loggerMock);
 

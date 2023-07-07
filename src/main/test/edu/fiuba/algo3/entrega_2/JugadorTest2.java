@@ -13,7 +13,7 @@ public class JugadorTest2 {
         Jugador j = new Jugador("Jugador1");
         CreadorMapaJson creadorMapa = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json");
         Mapa mapa = creadorMapa.crearMapa();
-        Turno t = new Turno(j, mapa);
+        Turno t = new Turno(j, mapa, new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json", mapa));
         Partida p = new Partida(j, mapa, t);
         int recorridoDePasarelas = 24;
         int i = 0;
@@ -29,7 +29,7 @@ public class JugadorTest2 {
         Jugador j = new Jugador("Jugador1");
         CreadorMapaJson creadorMapa = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json");
         Mapa mapa = creadorMapa.crearMapa();
-        Turno t = new Turno(j, mapa);
+        Turno t = new Turno(j, mapa, new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json", mapa));
         Partida p = new Partida(j, mapa, t);
         int numeroTurno = 1;
 

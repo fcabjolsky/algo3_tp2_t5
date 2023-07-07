@@ -14,7 +14,7 @@ public class IntegracionTest {
         Jugador jugador = new Jugador("Jugador1");
         CreadorMapaJson creadorMapa = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json");
         Mapa mapa = creadorMapa.crearMapa();
-        Turno turno = new Turno(jugador, mapa);
+        Turno turno = new Turno(jugador, mapa, new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json", mapa));
         jugador.agregarObservador(logger);
         Partida partida = new Partida(jugador, mapa, turno);
         partida.agregarObservador(logger);
@@ -40,7 +40,7 @@ public class IntegracionTest {
         Jugador jugador = new Jugador("Jugador1");
         CreadorMapaJson creadorMapa = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json");
         Mapa mapa = creadorMapa.crearMapa();
-        Turno turno = new Turno(jugador, mapa);
+        Turno turno = new Turno(jugador, mapa, new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json", mapa));
         jugador.agregarObservador(logger);
         Partida partida = new Partida(jugador, mapa, turno);
         partida.agregarObservador(logger);
@@ -101,7 +101,7 @@ public class IntegracionTest {
         Jugador jugador = new Jugador("Jugador1");
         CreadorMapaJson creadorMapa = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json");
         Mapa mapa = creadorMapa.crearMapa();
-        Turno turno = new Turno(jugador, mapa);
+        Turno turno = new Turno(jugador, mapa, new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json", mapa));
         jugador.agregarObservador(logger);
         Partida partida = new Partida(jugador, mapa, turno);
         partida.agregarObservador(logger);

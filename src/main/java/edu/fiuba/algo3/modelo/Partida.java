@@ -16,14 +16,13 @@ public class Partida extends Observable implements Turneable{
         this.logger = logger;
         this.mapa = mapa;
         this.jugador = jugador;
-        this.turno = new Turno(jugador, mapa);
+        this.turno = new Turno(jugador, mapa, new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json", mapa));
     }
 
     public Partida(Jugador jugador, Mapa mapa, Turno turno) {
         this.jugador = jugador;
         this.mapa = mapa;
         this.turno = turno;
-        this.empezarPartida();
     }
 
     private void agregarObservadores() {
@@ -66,10 +65,5 @@ public class Partida extends Observable implements Turneable{
         } catch (JuegoGanado juegoGanado) {
             this.notificarObservadores("Ganaste");
         }
-    }
-
-    public Turno empezarPartida() {
-        //mover
-        return this.turno;
     }
 }

@@ -10,14 +10,14 @@ public class Turno extends Observable implements Turneable {
     private ContadorDeTurno contadorDeTurno;
 
 
-    public Turno(Jugador jugador, Mapa mapa) {
-       this.jugador = jugador;
-       this.mapa = mapa;
-       //mover
-       this.creadorEnemigos = new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json", this.mapa);
-       this.contadorDeTurno = ContadorDeTurno.obtenerContador();
-       this.inicializarContadores();
-       this.contadorDeTurno.incrementar();
+    public Turno(Jugador jugador, Mapa mapa, AgregadorDeEnemigos creadorDeEnemigos) {
+        this.jugador = jugador;
+        this.mapa = mapa;
+       //this.creadorEnemigos = new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json", this.mapa);
+        this.creadorEnemigos = creadorDeEnemigos;
+        this.contadorDeTurno = ContadorDeTurno.obtenerContador();
+        this.inicializarContadores();
+        this.contadorDeTurno.incrementar();
     }
 
     private void inicializarContadores() {
