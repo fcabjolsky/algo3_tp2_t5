@@ -11,14 +11,14 @@ public class TorreView extends DefensaView implements Observador{
 
     private DisparoAnimacion ataque;
     public TorreView(String urlTorreImagen, int anchoTile, int altoTile, int x, int y, Pane contenedor, GridPane mapa) {
-        super(urlTorreImagen, anchoTile, altoTile, x, y, mapa);
-        this.ataque = new DisparoAnimacion(this, anchoTile, altoTile);
-        contenedor.getChildren().add(this.ataque);
+        super(urlTorreImagen, anchoTile, altoTile, x, y, mapa, contenedor);
     }
 
     @Override
     public void update(Entidad pasarelaAtacada){
-        this.ataque.realizarAtaque(pasarelaAtacada);
+        System.out.println("la posicion de la torre es: "+this.getLayoutX());
+        this.ataque = new DisparoAnimacion(this, super.anchoTile, super.altoTile);
+        this.ataque.realizarAtaque(pasarelaAtacada, super.contenedor);
     }
 
 
