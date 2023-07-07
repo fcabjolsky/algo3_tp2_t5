@@ -12,9 +12,12 @@ public class IntegracionTest {
         //Inicializacions
         Logger logger = new Logger();
         Jugador jugador = new Jugador("Jugador1");
+        CreadorMapaJson creadorMapa = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json");
+        Mapa mapa = creadorMapa.crearMapa();
+        Turno turno = new Turno(jugador, mapa);
         jugador.agregarObservador(logger);
-        Partida partida = new Partida(jugador, logger);
-
+        Partida partida = new Partida(jugador, mapa, turno);
+        partida.agregarObservador(logger);
 
         //primer turno no construyo torres
         partida.avanzarTurno();
@@ -35,8 +38,12 @@ public class IntegracionTest {
         //Inicializacions
         Logger logger = new Logger();
         Jugador jugador = new Jugador("Jugador1");
+        CreadorMapaJson creadorMapa = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json");
+        Mapa mapa = creadorMapa.crearMapa();
+        Turno turno = new Turno(jugador, mapa);
         jugador.agregarObservador(logger);
-        Partida partida = new Partida(jugador, logger);
+        Partida partida = new Partida(jugador, mapa, turno);
+        partida.agregarObservador(logger);
 
 
         //primer turno no construyo torres
@@ -92,8 +99,12 @@ public class IntegracionTest {
         //Inicializacions
         Logger logger = new Logger();
         Jugador jugador = new Jugador("Jugador1");
+        CreadorMapaJson creadorMapa = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json");
+        Mapa mapa = creadorMapa.crearMapa();
+        Turno turno = new Turno(jugador, mapa);
         jugador.agregarObservador(logger);
-        Partida partida = new Partida(jugador, logger);
+        Partida partida = new Partida(jugador, mapa, turno);
+        partida.agregarObservador(logger);
 
 
         //primer turno

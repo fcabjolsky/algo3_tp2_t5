@@ -11,8 +11,10 @@ public class JugadorTest2 {
     @Test
     public void elJugadorOriginalMuereAutomaticamenteCuandoLeAplicanElDanioLetal(){
         Jugador j = new Jugador("Jugador1");
-        Partida p = new Partida(j);
-        Turno t = p.empezarPartida();
+        CreadorMapaJson creadorMapa = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json");
+        Mapa mapa = creadorMapa.crearMapa();
+        Turno t = new Turno(j, mapa);
+        Partida p = new Partida(j, mapa, t);
         int recorridoDePasarelas = 24;
         int i = 0;
 
@@ -25,8 +27,10 @@ public class JugadorTest2 {
     @Test
     public void elJugadorOriginalMuereEn24TurnosEnUnMapaDeHormigasYaranias(){
         Jugador j = new Jugador("Jugador1");
-        Partida p = new Partida(j);
-        Turno t = p.empezarPartida();
+        CreadorMapaJson creadorMapa = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json");
+        Mapa mapa = creadorMapa.crearMapa();
+        Turno t = new Turno(j, mapa);
+        Partida p = new Partida(j, mapa, t);
         int numeroTurno = 1;
 
         while(!j.estaMuerto()){
