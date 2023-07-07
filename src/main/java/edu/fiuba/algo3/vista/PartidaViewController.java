@@ -145,10 +145,9 @@ public class PartidaViewController{
 
     private TorreView agregarTorreBlancaAMapa(String urlImagenDeDefensa, int x, int y){
         try {
-            TorreBlanca torre = new TorreBlanca(new Posicion(x, y));
-            this.controladorJuego.agregarDefensaAPartida(torre, this.creditosPersonaje);
             TorreView torreBlanca = new TorreView(urlImagenDeDefensa, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y, this.contenedor, this.mapa);
-            torre.agregarObservador(torreBlanca);
+            TorreBlanca torre = new TorreBlanca(new Posicion(x, y), torreBlanca);
+            this.controladorJuego.agregarDefensaAPartida(torre, this.creditosPersonaje);
             return torreBlanca;
         } catch (NoDisponeDeSuficientesCreditos e) {
             throw new NoDisponeDeSuficientesCreditos();
@@ -157,10 +156,9 @@ public class PartidaViewController{
 
     private TorreView agregarTorrePlateadaAMapa(String urlImagenDeDefensa, int x, int y){
         try {
-            TorrePlateada torre = new TorrePlateada(new Posicion(x, y));
-            this.controladorJuego.agregarDefensaAPartida(torre, this.creditosPersonaje);
             TorreView torrePlateada = new TorreView(urlImagenDeDefensa, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y, this.contenedor, this.mapa);
-            torre.agregarObservador(torrePlateada);
+            TorrePlateada torre = new TorrePlateada(new Posicion(x, y), torrePlateada);
+            this.controladorJuego.agregarDefensaAPartida(torre, this.creditosPersonaje);
             return torrePlateada;
         } catch (NoDisponeDeSuficientesCreditos e) {
             throw new NoDisponeDeSuficientesCreditos();

@@ -7,6 +7,11 @@ public class TorrePlateada extends Torre{
         this.rango = new Rango(5, posicion);
     }
 
+    public TorrePlateada (Posicion posicion, Observador observador){
+        super(2, 20, 2, observador);
+        this.rango = new Rango(5, posicion);
+    }
+
 
     public TorrePlateada() {
         super(2, 20, 2);
