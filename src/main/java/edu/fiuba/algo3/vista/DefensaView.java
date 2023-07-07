@@ -1,9 +1,10 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.modelo.Observador;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
-public abstract class DefensaView extends Region {
+public abstract class DefensaView extends Region implements Observador {
 
     private Image imagen;
     public DefensaView(String urlTorreImagen, int anchoTile, int altoTile, int x, int y) {

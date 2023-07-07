@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo;
 
 public class Partida extends Observable implements Turneable{
     private Mapa mapa;
-    private final Jugador jugador;
+    private Jugador jugador;
     private Observador logger;
     private Turno turno;
     private CreadorMapaJson creadorMapa;
@@ -13,19 +13,23 @@ public class Partida extends Observable implements Turneable{
     }
 
     public Partida(Mapa mapa, Jugador jugador, Observador logger) {
-        this.logger = logger;
+        //this.logger = logger;
         this.mapa = mapa;
         this.jugador = jugador;
         this.turno = new Turno(jugador, mapa);
-        this.agregarObservadores();
+        //this.agregarObservadores();
     }
-
+    public Partida(Mapa mapa, Jugador jugador, Turno turno) {
+        this.mapa = mapa;
+        this.jugador = jugador;
+        this.turno = turno;
+    }
     public Partida(Jugador jugador, Observador logger) {
         this.jugador = jugador;
         this.logger = logger;
         this.empezarPartida();
     }
-
+/*
     private void agregarObservadores() {
         if (this.logger == null) {
             return;
@@ -33,7 +37,9 @@ public class Partida extends Observable implements Turneable{
         this.agregarObservador(this.logger);
         this.mapa.agregarObservador(this.logger);
         turno.agregarObservador(this.logger);
-    }
+    }*/
+
+
 
     public boolean ganoPartida() {
         return this.turno.ganoLaPartida();
@@ -69,10 +75,12 @@ public class Partida extends Observable implements Turneable{
     }
 
     public Turno empezarPartida() {
-        this.creadorMapa = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json");
-        this.mapa = this.creadorMapa.crearMapa();
-        this.turno = new Turno(this.jugador, this.mapa);
-        this.agregarObservadores();
+        //this.creadorMapa = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json");
+        //this.mapa = this.creadorMapa.crearMapa();
+        //this.turno = new Turno(this.jugador, this.mapa);
+        //this.agregarObservadores();
         return this.turno;
     }
+
+
 }

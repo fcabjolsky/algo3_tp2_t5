@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.modelo.Observable;
+import edu.fiuba.algo3.modelo.Observador;
+import edu.fiuba.algo3.modelo.Posicion;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -19,7 +22,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 
-public abstract class EnemigoView extends ImageView {
+public abstract class EnemigoView extends ImageView implements Observador {
 
     protected BufferedImage img;
     protected ArrayList<Image> sprites = new ArrayList<>();
@@ -27,7 +30,11 @@ public abstract class EnemigoView extends ImageView {
     protected TranslateTransition translateTransitionAbajo;
     protected Queue<MovimientoEnemigoView> colaMovimientos;
     protected boolean enMovimiento;
+    protected final int anchoTile;
+    protected final int altoTile;
     public EnemigoView(String urlEnemigoImagen, int anchoTile, int altoTile, int x, int y) {
+        this.altoTile = altoTile;
+        this.anchoTile = anchoTile;
 
         this.colaMovimientos = new LinkedList<>();
         this.enMovimiento = false;
@@ -41,17 +48,17 @@ public abstract class EnemigoView extends ImageView {
         loadSprites();
 
         setImage(imagenMovimientoAbajo());
-        setX(x);
-        setY(y);
+        setX(x*this.anchoTile);
+        setY(y*this.altoTile);
         setFitHeight((double)altoTile);
         setFitWidth((double)anchoTile);
 
     }
 
-    public void moverseDerecha(int nuevaX) {
+    protected void moverseDerecha(int nuevaX) {
 
-        translateTransitionDerecha = new TranslateTransition(Duration.seconds(2),this);
-        translateTransitionDerecha.setToX(nuevaX - getX());
+        translateTransitionDerecha = new TranslateTransition(Duration.seconds(1),this);
+        translateTransitionDerecha.setToX(nuevaX*this.anchoTile - getX());
         translateTransitionDerecha.setOnFinished(event -> {
             this.enMovimiento = false;
             procesarProximoMovimiento();
@@ -62,10 +69,10 @@ public abstract class EnemigoView extends ImageView {
 
     }
 
-    public void moverseAbajo(int nuevaY){
+    protected void moverseAbajo(int nuevaY){
 
         translateTransitionAbajo = new TranslateTransition(Duration.seconds(2),this);
-        translateTransitionAbajo.setToY(nuevaY-getY());
+        translateTransitionAbajo.setToY(nuevaY*this.altoTile-getY());
         translateTransitionAbajo.setOnFinished(event -> {
             this.enMovimiento = false;
             procesarProximoMovimiento();
@@ -115,5 +122,17 @@ public abstract class EnemigoView extends ImageView {
 
     protected abstract Image imagenMovimientoAbajo();
     protected abstract Image imagenMovimientoDerecha();
+
+    @Override
+    public void actualizar(Observable observable, Object argument) {
+        if(argument instanceof Posicion){
+            if(((Posicion) argument).getCoordenadaX() > getX()/this.anchoTile){
+                this.moverseDerecha(((Posicion) argument).getCoordenadaX());
+            }
+            if(((Posicion) argument).getCoordenadaY() > getY()/this.altoTile){
+                this.moverseAbajo(((Posicion) argument).getCoordenadaY());
+            }
+        }
+    }
 
 }

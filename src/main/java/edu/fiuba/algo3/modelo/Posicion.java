@@ -23,4 +23,9 @@ public class Posicion {
         float componenteY =(float)Math.pow(this.getCoordenadaY() - otraPosicion.getCoordenadaY(), 2);
         return (float)Math.sqrt(componenteX + componenteY);
     }
+
+    @Override
+    public String toString() {
+        return ("(" + this.coordenadaX + " , " + this.coordenadaY + ")");
+    }
 }

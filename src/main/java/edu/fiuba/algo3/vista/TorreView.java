@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.modelo.Observable;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -14,5 +15,10 @@ public class TorreView extends DefensaView{
     @Override
     public void update(Pane contenedor, GridPane mapa, int posicionParcelaAtacadaX, int posicionParcelaAtacadaY){
         ataque.realizarAtaque(contenedor, mapa, posicionParcelaAtacadaX, posicionParcelaAtacadaY);
+    }
+
+    @Override
+    public void actualizar(Observable observable, Object argument) {
+
     }
 }

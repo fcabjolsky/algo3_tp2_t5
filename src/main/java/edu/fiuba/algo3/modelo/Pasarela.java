@@ -43,6 +43,8 @@ public class Pasarela implements Transitable, Turneable{
 
 	public void recibirEnemigo(Enemigo enemigo){
 		this.enemigos.add(enemigo);
+		enemigo.notificarObservadores(enemigo.toString() + " se movio a " + this.posicion.toString());
+		enemigo.notificarObservadores(this.posicion);
 	}
 
 	public boolean laCantidadDeEnemigosEsIgualA(int numeroDeEnemigos){

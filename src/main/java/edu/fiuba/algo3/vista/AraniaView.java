@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.modelo.Observable;
 import javafx.scene.image.Image;
 
 import java.awt.image.BufferedImage;
@@ -30,4 +31,5 @@ public class AraniaView extends EnemigoView{
     protected Image imagenMovimientoDerecha() {
         return this.sprites.get(2);
     }
+
 }

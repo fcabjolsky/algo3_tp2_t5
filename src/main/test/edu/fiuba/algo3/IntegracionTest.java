@@ -11,9 +11,16 @@ public class IntegracionTest {
     public void simularUnaPartidaCompletaPerdida() {
         //Inicializacions
         Logger logger = new Logger();
+
         Jugador jugador = new Jugador("Jugador1");
+        Mapa mapa = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json").crearMapa();
+        Turno turno = new Turno(jugador, mapa);
+
         jugador.agregarObservador(logger);
-        Partida partida = new Partida(jugador, logger);
+        mapa.agregarObservador(logger);
+        turno.agregarObservador(logger);
+
+        Partida partida = new Partida(mapa, jugador, turno);
 
 
         //primer turno no construyo torres
@@ -34,9 +41,16 @@ public class IntegracionTest {
     public void simularUnaPartidaCompletaGanada() {
         //Inicializacions
         Logger logger = new Logger();
+
         Jugador jugador = new Jugador("Jugador1");
+        Mapa mapa = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json").crearMapa();
+        Turno turno = new Turno(jugador, mapa);
+
         jugador.agregarObservador(logger);
-        Partida partida = new Partida(jugador, logger);
+        mapa.agregarObservador(logger);
+        turno.agregarObservador(logger);
+
+        Partida partida = new Partida(mapa, jugador, turno);
 
 
         //primer turno no construyo torres
@@ -91,9 +105,16 @@ public class IntegracionTest {
     public void simularUnaPartidaGanadaEnLaQueElJugadorVaRecolectandoLasRecompensasCorrectamente() {
         //Inicializacions
         Logger logger = new Logger();
+
         Jugador jugador = new Jugador("Jugador1");
+        Mapa mapa = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json").crearMapa();
+        Turno turno = new Turno(jugador, mapa);
+
         jugador.agregarObservador(logger);
-        Partida partida = new Partida(jugador, logger);
+        mapa.agregarObservador(logger);
+        turno.agregarObservador(logger);
+
+        Partida partida = new Partida(mapa, jugador, turno);
 
 
         //primer turno

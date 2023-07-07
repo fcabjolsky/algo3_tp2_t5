@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.vista;
 
 
-import edu.fiuba.algo3.modelo.Hormiga;
+import edu.fiuba.algo3.modelo.*;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 
 
-public class PartidaViewController{
+public class PartidaViewController implements Observador {
     final static int anchoDePantalla = 795;
     final static int altoDePantalla = 600;
     final int maximoDeColumnas = 15;
@@ -39,7 +39,15 @@ public class PartidaViewController{
 
     private EnemigoView enemigo; //ahora cuando todavia no esta unido el modelo
 
+
+    private Logger logger;
+    private Jugador jugadorModelo;
+    private Partida partidaModelo;
+
+
     public Scene InicializarPartidaView(String urlInformacionDeMapa){
+
+        this.inicializarModelo();
 
         this.inicializarBotones();
         this.inicializarPanelBotones();
@@ -59,6 +67,22 @@ public class PartidaViewController{
         return partida;
     }
 
+    private void inicializarModelo(){
+        this.logger = new Logger();
+
+        this.jugadorModelo = new Jugador("Jugador1");
+        Mapa mapaModelo = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json").crearMapa();
+        Turno turnoModelo = new Turno(this.jugadorModelo, mapaModelo);
+
+        this.jugadorModelo.agregarObservador(this.logger);
+        mapaModelo.agregarObservador(this.logger);
+        turnoModelo.agregarObservador(this.logger);
+
+        mapaModelo.agregarObservador(this);
+
+        this.partidaModelo = new Partida(mapaModelo, this.jugadorModelo, turnoModelo);
+    }
+
     private void inicializarBotones(){
         int altoDeBoton = 75;
 
@@ -75,9 +99,9 @@ public class PartidaViewController{
         this.setEstiloBoton("/botonTrampaArena.png", botonAgregarTrampaArena, -8, 340, altoDeBoton);
 
 
-        this.inicializarListenersBotonAgregar(botonAgregarTorreBlanca, "/torreBlanca2.png", true);
-        this.inicializarListenersBotonAgregar(botonAgregarTorrePlateada, "/torrePlateada2.png", true);
-        this.inicializarListenersBotonAgregar(botonAgregarTrampaArena, "/trampaArena.png", false);
+        this.inicializarListenersBotonAgregarTorre (botonAgregarTorreBlanca, "/torreBlanca2.png");
+        this.inicializarListenersBotonAgregarTorre (botonAgregarTorrePlateada, "/torrePlateada2.png");
+        this.inicializarListenersBotonAgregarTrampaArena (botonAgregarTrampaArena);
         this.inicializarListenersBotonSalir(botonSalirYGuardar);
         this.inicializarListenersBotonPasarTurno(botonPasarTurno);
 
@@ -115,33 +139,29 @@ public class PartidaViewController{
         boton.setLayoutX(x);
         boton.setLayoutY(y);
     }
+    private void agregarTorreAlMapa(String urlImagenDeDefensa, Torre torreModelo, int x, int y){
 
-    private void agregarDefensaAlMapa(String urlImagenDeDefensa, boolean esTorre){
-        DefensaView defensaAAgregar;
-        int x = (int)parcelaElegida.getX();
-        int y = (int)parcelaElegida.getY();
-        if(esTorre){
-            defensaAAgregar = new TorreView(urlImagenDeDefensa, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y);
-        }else{
-            defensaAAgregar = new TrampaArenaView(urlImagenDeDefensa, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y);
-        }
-        this.mapa.add(defensaAAgregar, x, y);
+        DefensaView torreVista = new TorreView(urlImagenDeDefensa, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y);
+        this.mapa.add(torreVista, x, y);
+
+        torreModelo.agregarObservador(logger);
+        torreModelo.agregarObservador(torreVista);
+
+        this.jugadorModelo.construirDefensa(torreModelo);
     }
 
-    private void mostrarNuevosEnemigos(){
-        this.enemigo =new TopoView(this.tamanioDelTileAncho, this.tamanioDelTileAlto,
-                1*this.tamanioDelTileAncho,0*tamanioDelTileAlto);
-        contenedor.getChildren().add(enemigo);
+    private void agregarTrampaArenaAlMapa(TrampaArena trampaModelo, int x, int y){
+
+        DefensaView trampaVista = new TrampaArenaView("/trampaArena.png", this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y);
+        this.mapa.add(trampaVista, x, y);
+
+        trampaModelo.agregarObservador(logger);
+        trampaModelo.agregarObservador(trampaVista);
+
+        this.jugadorModelo.construirDefensa(trampaModelo);
     }
 
-    private void avanzarViejosEnemigos(){
-        this.enemigo.moverseAbajo(6*tamanioDelTileAlto);
-        this.enemigo.moverseDerecha(8*tamanioDelTileAncho);
-        this.enemigo.moverseAbajo(10*tamanioDelTileAlto);
-    }
-
-    private void inicializarListenersBotonAgregar(Button boton, String urlImagenDefensa, boolean esTorre){
-
+    private void inicializarEfectosBotonAgregar(Button boton){
         boton.addEventHandler(MouseEvent.MOUSE_ENTERED,
                 e -> {
                     boton.setEffect(new DropShadow());
@@ -151,11 +171,32 @@ public class PartidaViewController{
                 e -> {
                     boton.setEffect(null);
                 });
+    }
+    private void inicializarListenersBotonAgregarTrampaArena(Button boton){
+
+        inicializarEfectosBotonAgregar(boton);
         boton.addEventHandler(MouseEvent.MOUSE_CLICKED,
                 e -> {
-                    agregarDefensaAlMapa(urlImagenDefensa, esTorre);
-                });
+                    int x = (int)parcelaElegida.getX();
+                    int y = (int)parcelaElegida.getY();
+                    TrampaArena trampaArena = new TrampaArena(new Posicion (x,y));
+                    this.agregarTrampaArenaAlMapa(trampaArena, x,y);
+                }
+        );
     }
+    private void inicializarListenersBotonAgregarTorre(Button boton, String urlImagenTorre){
+
+        inicializarEfectosBotonAgregar(boton);
+        boton.addEventHandler(MouseEvent.MOUSE_CLICKED,
+                e -> {
+                    int x = (int)parcelaElegida.getX();
+                    int y = (int)parcelaElegida.getY();
+                    Torre torreBlanca = new TorreBlanca(new Posicion(x, y));
+                    this.agregarTorreAlMapa(urlImagenTorre, torreBlanca, x,y);
+                }
+                );
+    }
+
     private void inicializarListenersBotonSalir(Button boton){
         boton.addEventHandler(MouseEvent.MOUSE_ENTERED,
                 e -> {
@@ -187,12 +228,35 @@ public class PartidaViewController{
                 });
         boton.addEventHandler(MouseEvent.MOUSE_CLICKED,
                 e -> {
-                    mostrarNuevosEnemigos();
-                    avanzarViejosEnemigos();
+                    this.partidaModelo.avanzarTurno();
                 });
     }
 
 
+    @Override
+    public void actualizar(Observable observable, Object argument) {
+        if(argument instanceof Hormiga){
+            enemigo =new HormigaView(this.tamanioDelTileAncho, this.tamanioDelTileAlto,
+                    0,1);
+            ((Enemigo)(argument)).agregarObservador(enemigo);
+            ((Enemigo)(argument)).agregarObservador(logger);
+            contenedor.getChildren().add(enemigo);
+        }
+        if(argument instanceof Arania){
+            enemigo =new AraniaView(this.tamanioDelTileAncho, this.tamanioDelTileAlto,
+                    0,1);
+            ((Enemigo)(argument)).agregarObservador(enemigo);
+            ((Enemigo)(argument)).agregarObservador(logger);
+            contenedor.getChildren().add(enemigo);
+        }
+        if(argument instanceof Topo){
+            enemigo =new TopoView(this.tamanioDelTileAncho, this.tamanioDelTileAlto,
+                    0,1);
+            ((Enemigo)(argument)).agregarObservador(enemigo);
+            ((Enemigo)(argument)).agregarObservador(logger);
+            contenedor.getChildren().add(enemigo);
+        }
+    }
 }
 
 
