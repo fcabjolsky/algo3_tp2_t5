@@ -10,6 +10,8 @@ public interface Defensa {
 
     public void avanzarTurno();
 
+    public int getCosto();
+
     public boolean estaEnRango(Posicion unaPosicion);
 
 }
