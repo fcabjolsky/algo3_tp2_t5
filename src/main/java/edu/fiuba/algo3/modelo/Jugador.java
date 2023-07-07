@@ -84,7 +84,8 @@ public class Jugador extends Observable implements Turneable{
     }
 
     public void construirDefensa(Defensa nuevaDefensa) {
-        if (nuevaDefensa.puedeConstruir(this.creditos)){
+        if (nuevaDefensa.puedeConstruir(this.creditos)) {
+            this.notificarObservadores("Agregando defensa: " + nuevaDefensa.toString());
             nuevaDefensa.construir(this);
             defensas.add(nuevaDefensa);
         }

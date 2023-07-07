@@ -19,6 +19,7 @@ public class Mapa extends Observable implements Turneable {
     public void agregarEnemigo(Enemigo enemigo) {
         enemigo.replicarObservadores(this);
         this.notificarObservadores(enemigo);
+        this.notificarObservadores("Agregando enemigo: " + enemigo.toString());
         pasarelas.stream().findFirst().get().recibirEnemigo(enemigo);
     }
 
