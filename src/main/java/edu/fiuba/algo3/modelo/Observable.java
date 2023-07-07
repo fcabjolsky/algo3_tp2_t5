@@ -31,4 +31,8 @@ public class Observable {
         }
     }
 
+    public void notificarObservador(Object argument, int index) {
+        observadores.get(index).actualizar(this, argument);
+    }
+
 }
