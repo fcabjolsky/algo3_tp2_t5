@@ -90,7 +90,7 @@ public class ProcesoDeDefensaTest {
         defensa.avanzarTurno();
 
         Pasarela pasarelaADefender = proceso.obtenerPasarelaADefender(defensa, pasarelas);
-        defensa.defender(pasarelaADefender.obtenerEnemigoADaniar());
+        defensa.defender(pasarelaADefender);
 
         assertFalse(pasarelaADefender.contieneEnemigosVivos());
     }
