@@ -9,14 +9,13 @@ public class TrampaArenaView extends DefensaView{
     private TornadoArenaAnimacion ataque;
 
     public TrampaArenaView(String urlTorreImagen, int anchoTile, int altoTile, int x, int y, Pane contenedor, GridPane mapa) {
-        super(urlTorreImagen, anchoTile, altoTile, x, y, mapa);
-        this.ataque = new TornadoArenaAnimacion(this, anchoTile, altoTile);
-        contenedor.getChildren().add(this.ataque);
+        super(urlTorreImagen, anchoTile, altoTile, x, y, mapa, contenedor);
     }
 
     @Override
     public void update(Entidad pasarelaAtacada){
-        this.ataque.realizarAtaque(pasarelaAtacada);
+        this.ataque = new TornadoArenaAnimacion(this, super.anchoTile, super.altoTile);
+        this.ataque.realizarAtaque( pasarelaAtacada, super.contenedor);
     }
 
 }
