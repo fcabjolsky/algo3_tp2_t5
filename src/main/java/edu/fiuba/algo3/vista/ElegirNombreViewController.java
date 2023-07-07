@@ -31,11 +31,8 @@ public class ElegirNombreViewController {
     @FXML
     void botonEmpezarOnAction(ActionEvent event) {
         if (textNombre.getText().trim().length() < 6){
-            Alert alerta = new Alert(Alert.AlertType.ERROR);
-            alerta.setHeaderText(null);
-            alerta.setTitle("Error");
-            alerta.setContentText("El nombre ingresado debe tener más de 6 caracteres");
-            alerta.showAndWait();
+            AlertaView alerta = new AlertaView();
+            alerta.lanzarAlerta("El nombre ingresado debe tener más de 6 caracteres");
         }else{
             nombreDeJugador = textNombre.getText();
             PartidaViewController controller = new PartidaViewController();
