@@ -36,7 +36,7 @@ public class PartidaViewController{
 
     private BarraDeVida vidaPersonaje;
 
-    private Creditos creditosPersonaje;
+    private CreditosView creditosPersonaje;
 
     private ControladorJuego controladorJuego;
 
@@ -53,14 +53,14 @@ public class PartidaViewController{
         this.inicializarContenedorDeMapa(urlInformacionDeMapa);
 
         this.vidaPersonaje = new BarraDeVida();
-        this.creditosPersonaje = new Creditos();
+        this.creditosPersonaje = new CreditosView();
 
         this.contenedor = new AnchorPane();
         this.contenedor.getChildren().addAll(this.mapa, this.panelBotones);
         this.contenedor.getChildren().addAll(this.vidaPersonaje, this.creditosPersonaje);
 
         this.controladorJuego = new ControladorJuego(ElegirNombreViewController.nombreDeJugador, this.contenedor, this.mapa, this.logger);
-
+        this.controladorJuego.agregarObservadoresJugador(this.creditosPersonaje, this.vidaPersonaje);
         Scene partida = new Scene(this.contenedor);
 
         return partida;
@@ -127,29 +127,44 @@ public class PartidaViewController{
         DefensaView defensaAAgregar;
         int x = (int)parcelaElegida.getX();
         int y = (int)parcelaElegida.getY();
-        if(esTorreBlanca){
-            defensaAAgregar = this.agregarTorreBlancaAMapa(urlImagenDeDefensa, x, y);
-        }else if(esTorre){
-            defensaAAgregar = this.agregarTorrePlateadaAMapa(urlImagenDeDefensa, x, y);
-        }else{
-            defensaAAgregar = new TrampaArenaView(urlImagenDeDefensa, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y, this.contenedor, this.mapa);
+        try{
+            if(esTorreBlanca){
+                defensaAAgregar = this.agregarTorreBlancaAMapa(urlImagenDeDefensa, x, y);
+            }else if(esTorre){
+                defensaAAgregar = this.agregarTorrePlateadaAMapa(urlImagenDeDefensa, x, y);
+            }else{
+                defensaAAgregar = new TrampaArenaView(urlImagenDeDefensa, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y, this.contenedor, this.mapa);
+            }
+            this.mapa.add(defensaAAgregar, x, y);
+            this.controladorJuego.agregarDefensa(defensaAAgregar);
+        }catch (NoDisponeDeSuficientesCreditos e) {
+            AlertaView alertaCreditosInsuficientes = new AlertaView();
+            alertaCreditosInsuficientes.lanzarAlerta("No dispone de suficientes creditos");
         }
-        this.mapa.add(defensaAAgregar, x, y);
-        this.controladorJuego.agregarDefensa(defensaAAgregar);
     }
 
     private TorreView agregarTorreBlancaAMapa(String urlImagenDeDefensa, int x, int y){
-        TorreView torreBlanca = new TorreView(urlImagenDeDefensa, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y, this.contenedor, this.mapa);
-        TorreBlanca torre = new TorreBlanca(new Posicion(x, y), torreBlanca);
-        this.controladorJuego.agregarDefensaAPartida(torre);
-        return torreBlanca;
+        try {
+            TorreBlanca torre = new TorreBlanca(new Posicion(x, y));
+            this.controladorJuego.agregarDefensaAPartida(torre, this.creditosPersonaje);
+            TorreView torreBlanca = new TorreView(urlImagenDeDefensa, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y, this.contenedor, this.mapa);
+            torre.agregarObservador(torreBlanca);
+            return torreBlanca;
+        } catch (NoDisponeDeSuficientesCreditos e) {
+            throw new NoDisponeDeSuficientesCreditos();
+        }
     }
 
     private TorreView agregarTorrePlateadaAMapa(String urlImagenDeDefensa, int x, int y){
-        TorreView torrePlateada = new TorreView(urlImagenDeDefensa, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y, this.contenedor, this.mapa);
-        TorrePlateada torre = new TorrePlateada(new Posicion(x, y), torrePlateada);
-        this.controladorJuego.agregarDefensaAPartida(torre);
-        return torrePlateada;
+        try {
+            TorrePlateada torre = new TorrePlateada(new Posicion(x, y));
+            this.controladorJuego.agregarDefensaAPartida(torre, this.creditosPersonaje);
+            TorreView torrePlateada = new TorreView(urlImagenDeDefensa, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y, this.contenedor, this.mapa);
+            torre.agregarObservador(torrePlateada);
+            return torrePlateada;
+        } catch (NoDisponeDeSuficientesCreditos e) {
+            throw new NoDisponeDeSuficientesCreditos();
+        }
     }
 
     private void mostrarNuevosEnemigos(){
