@@ -15,10 +15,12 @@ import java.io.File;
 
 public abstract class DefensaAtaquesView extends Region {
 
-    public DefensaAtaquesView(DefensaView torre, int anchoTile, int altoTile) {
+    public DefensaAtaquesView(DefensaView torre) {
         this.setVisible(true);
-        this.setLayoutX(torre.getLayoutX() * anchoTile);
-        this.setLayoutY(torre.getLayoutY() * altoTile);
+        System.out.println("La posicion de la torre segun el ataque es "+ torre.getLayoutX());
+        this.setLayoutX(torre.getLayoutX());
+        System.out.println("la posicion del ataque es: "+ this.getLayoutX());
+        this.setLayoutY(torre.getLayoutY());
     }
 
     protected Background nuevoFondoDeImagen(String urlImagen){
@@ -29,7 +31,7 @@ public abstract class DefensaAtaquesView extends Region {
                 new BackgroundSize(this.getPrefWidth(), this.getPrefHeight(), false, false, true, true));
         return new Background(fondo);
     }
-    public abstract void realizarAtaque(Entidad pasarelaAtacada);
+    public abstract void realizarAtaque(Entidad pasarelaAtacada, Pane contenedor);
 
     protected void reproducirSonido(String urlSonido, int veces, int velocidad){
 

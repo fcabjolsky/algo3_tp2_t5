@@ -10,8 +10,16 @@ public abstract class DefensaView extends Region {
     private Image imagen;
 
     protected GridPane mapa;
-    public DefensaView(String urlTorreImagen, int anchoTile, int altoTile, int x, int y, GridPane mapa) {
+
+    protected Pane contenedor;
+
+    int anchoTile;
+    int altoTile;
+    public DefensaView(String urlTorreImagen, int anchoTile, int altoTile, int x, int y, GridPane mapa, Pane contenedor) {
         this.imagen = new Image(DefensaView.class.getResourceAsStream(urlTorreImagen));
+        this.contenedor = contenedor;
+        this.altoTile = altoTile;
+        this.anchoTile = anchoTile;
         this.setLayoutX(x);
         this.setLayoutY(y);
         this.setHeight(altoTile);
@@ -55,6 +63,4 @@ public abstract class DefensaView extends Region {
         return parcelaADevolver;
     }
     public abstract void update(Entidad pasarelaAtacada);
-
-
 }
