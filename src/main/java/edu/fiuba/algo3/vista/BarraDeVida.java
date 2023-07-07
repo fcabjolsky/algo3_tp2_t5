@@ -49,7 +49,9 @@ public class BarraDeVida extends Region implements Observador {
 
     @Override
     public void actualizar(Observable observable, Object argument) {
-        int danio = (int)argument;
-        perderVida(danio);
+        if (argument instanceof Integer){
+            int danio = (int)argument;
+            perderVida(danio);
+        }
     }
 }

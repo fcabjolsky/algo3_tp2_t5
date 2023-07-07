@@ -46,8 +46,10 @@ public class CreditosView extends Label implements Observador {
 
     @Override
     public void actualizar(Observable observable, Object argument) {
-        int creditos = (int)argument;
-        sumarCreditos(creditos);
-        actualizarCreditos();
+        if (argument instanceof Integer){
+            int creditos = (int)argument;
+            sumarCreditos(creditos);
+            actualizarCreditos();
+        }
     }
 }
