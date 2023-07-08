@@ -35,13 +35,13 @@ public class CreadorMapaJson implements CreadorDeMapa{
             	JSONArray fil = mapa.getJSONArray(String.valueOf(numeroDeFila));
             	for(int columna  = 0; columna < fil.length(); columna++) {
             		if(fil.getString(columna).equals("Rocoso")) {
-            			Rocoso roc = new Rocoso(new Posicion(numeroDeFila - 1, columna));
+            			Rocoso roc = new Rocoso(new Posicion(columna, numeroDeFila - 1));
             			rocoso.add(roc);
             		}else if(fil.getString(columna).equals("Tierra")) {
-            			Tierra tir = new Tierra(new Posicion(numeroDeFila - 1, columna));
+            			Tierra tir = new Tierra(new Posicion(columna,numeroDeFila - 1));
             			tierra.add(tir);
             		}else {
-            			Pasarela pas = new Pasarela(new Posicion(numeroDeFila - 1, columna));
+            			Pasarela pas = new Pasarela(new Posicion(columna, numeroDeFila - 1));
             			pasarela.add(pas);
             		}
             	}

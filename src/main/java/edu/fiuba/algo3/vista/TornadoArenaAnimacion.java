@@ -10,18 +10,17 @@ import javafx.util.Duration;
 
 public class TornadoArenaAnimacion extends DefensaAtaquesView{
     public TornadoArenaAnimacion(DefensaView torre, int anchoTile, int altoTile) {
-        super(torre, anchoTile, altoTile);
+        super(torre);
         this.setPrefWidth(anchoTile);
         this.setPrefHeight(altoTile);
         this.setBackground(super.nuevoFondoDeImagen("/trampaArenaTornado.png"));
     }
 
     @Override
-    public void realizarAtaque(Pane contenedor, GridPane mapa, int posicionParcelaAtacadaX, int posicionParcelaAtacadaY) {
-        this.setVisible(true);
+    public void realizarAtaque(Entidad pasarelaAtacada, Pane contenedor) {
+        contenedor.getChildren().add(this);
         super.reproducirSonido("/viento.mp3", 1, 1);
         TranslateTransition animacion = new TranslateTransition(Duration.millis(900), this);
-        Entidad pasarelaAtacada = this.devolverParcela(mapa, posicionParcelaAtacadaX, posicionParcelaAtacadaY);
         double posicionAtacadaX = pasarelaAtacada.getLayoutX() ;
 
         animacion.setToX(posicionAtacadaX - 20);
@@ -42,8 +41,7 @@ public class TornadoArenaAnimacion extends DefensaAtaquesView{
             desaparecer.setToValue(0);
             desaparecer.setCycleCount(1);
             desaparecer.play();
+            contenedor.getChildren().remove(this);
         });
-
-        contenedor.getChildren().add(this);
     }
 }

@@ -18,6 +18,8 @@ public class ElegirNombreViewController {
     @FXML
     private TextField textNombre;
 
+    static String nombreDeJugador;
+
     public void cerrarVentana(){
         Stage stage = (Stage) this.botonSalir.getScene().getWindow();
         stage.close();
@@ -28,13 +30,11 @@ public class ElegirNombreViewController {
     }
     @FXML
     void botonEmpezarOnAction(ActionEvent event) {
-        if (textNombre.getCharacters().toString().trim().length() < 6){
-            Alert alerta = new Alert(Alert.AlertType.ERROR);
-            alerta.setHeaderText(null);
-            alerta.setTitle("Error");
-            alerta.setContentText("El nombre ingresado debe tener más de 6 caracteres");
-            alerta.showAndWait();
+        if (textNombre.getText().trim().length() < 6){
+            AlertaView alerta = new AlertaView();
+            alerta.lanzarAlerta("El nombre ingresado debe tener más de 6 caracteres");
         }else{
+            nombreDeJugador = textNombre.getText();
             PartidaViewController controller = new PartidaViewController();
             Scene scene = controller.InicializarPartidaView("src/main/java/edu/fiuba/algo3/modelo/mapa.json");
             Stage partida = new Stage();

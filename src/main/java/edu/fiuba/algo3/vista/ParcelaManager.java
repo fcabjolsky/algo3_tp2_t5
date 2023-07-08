@@ -42,8 +42,8 @@ public class ParcelaManager {
         for (int x = 0; x < this.maximoDeFilas; x++) {
             for (int y = 0; y < this.maximoDeColumnas; y++) {
                 String parcela = this.mapa[x][y];
-                Entidad e = this.parcelas.get(parcela).devolverNuevaInstancia(anchoTile, altoTile, x, y);
-                mapa.add(e, x, y);
+                Entidad e = this.parcelas.get(parcela).devolverNuevaInstancia(anchoTile, altoTile, y, x);
+                mapa.add(e, y, x);
             }
         }
     }

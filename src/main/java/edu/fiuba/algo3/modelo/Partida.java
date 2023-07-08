@@ -36,9 +36,9 @@ public class Partida extends Observable implements Turneable{
         }
         this.agregarObservador(this.logger);
         this.mapa.agregarObservador(this.logger);
-        turno.agregarObservador(this.logger);
-    }*/
 
+        this.turno.agregarObservador(this.logger);
+    }*/
 
 
     public boolean ganoPartida() {
@@ -68,6 +68,7 @@ public class Partida extends Observable implements Turneable{
     @Override
     public void avanzarTurno() {
         try {
+            System.out.println(this.turno);
             this.turno.siguienteTurno();
         } catch (JuegoGanado juegoGanado) {
             this.notificarObservadores("Ganaste");

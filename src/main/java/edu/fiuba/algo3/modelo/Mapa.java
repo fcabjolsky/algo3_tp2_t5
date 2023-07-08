@@ -23,7 +23,6 @@ public class Mapa extends Observable implements Turneable {
         pasarelas.stream().findFirst().get().recibirEnemigo(enemigo);
     }
 
-
     public boolean contieneEnemigos() {
         for (Pasarela pasarela : this.pasarelas) {
             if (pasarela.contieneEnemigosVivos()) {

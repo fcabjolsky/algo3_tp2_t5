@@ -31,4 +31,10 @@ public class Observable {
         }
     }
 
+    public void notificarObservador(Object argument, int index) {
+        if (observadores.size() > index){
+            observadores.get(index).actualizar(this, argument);
+        }
+    }
+
 }

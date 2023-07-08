@@ -15,7 +15,10 @@ public class TorrePlateadaTest {
 
         TorrePlateada torre = new TorrePlateada(posicion);
         Enemigo enemigo = new Hormiga();
-        torre.defender(enemigo);
+        Pasarela unaPasarela = new Pasarela(new Posicion(2 ,1));
+        unaPasarela.recibirEnemigo(enemigo);
+
+        torre.defender(unaPasarela);
 
         assertFalse(enemigo.estaMuerta());
     }
@@ -28,7 +31,10 @@ public class TorrePlateadaTest {
         TorrePlateada torre = new TorrePlateada(posicion);
         torre.avanzarTurno();
         Enemigo enemigo = new Hormiga();
-        torre.defender(enemigo);
+        Pasarela unaPasarela = new Pasarela(new Posicion(2 ,1));
+        unaPasarela.recibirEnemigo(enemigo);
+
+        torre.defender(unaPasarela);
 
         assertFalse(enemigo.estaMuerta());
     }
@@ -42,7 +48,10 @@ public class TorrePlateadaTest {
         torre.avanzarTurno();
         torre.avanzarTurno();
         Enemigo enemigo = new Hormiga();
-        torre.defender(enemigo);
+        Pasarela unaPasarela = new Pasarela(new Posicion(2 ,1));
+        unaPasarela.recibirEnemigo(enemigo);
+
+        torre.defender(unaPasarela);
 
         assertTrue(enemigo.estaMuerta());
     }

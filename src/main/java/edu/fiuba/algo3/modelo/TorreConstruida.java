@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 public class TorreConstruida extends Observable implements EstadoTorre {
 
     @Override
-    public void defender(Enemigo enemigo, int danio) {
-        this.notificarObservadores("Torre esta atacando a enemigo: " + enemigo.toString() + " con danio: " + danio);
-        enemigo.recibirDanio(danio);
+    public void defender(Pasarela pasarela, int danio) {
+        this.notificarObservadores(pasarela);
+        pasarela.obtenerEnemigoADaniar().recibirDanio(danio);
     }
 
     @Override

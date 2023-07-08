@@ -10,6 +10,9 @@ public class Jugador extends Observable implements Turneable{
     private List <Defensa> defensas = new ArrayList();
     private String nombre;
 
+    private int observadorDanio = 1;
+    private int observadorCreditos = 0;
+
     public Jugador(String unNombre) {
         if (!this.validarNombre(unNombre)) {
             throw new NombreInvalido();
@@ -22,6 +25,11 @@ public class Jugador extends Observable implements Turneable{
         if (!this.validarNombre(unNombre)) {
             throw new NombreInvalido();
         }
+    }
+
+    public void agregarObservadores(Observador observadorCreditos, Observador observadorDanio){
+        this.agregarObservador(observadorCreditos);
+        this.agregarObservador(observadorDanio);
     }
 
     private boolean validarNombre(String unNombre) {
@@ -46,6 +54,7 @@ public class Jugador extends Observable implements Turneable{
     
 
     public void sumarCreditos(int creditos){
+        this.notificarObservador(creditos, this.observadorCreditos);
         this.creditos += creditos;
     }
 
@@ -54,7 +63,7 @@ public class Jugador extends Observable implements Turneable{
     }
 
     public void perderVida(int danio){
-        this.notificarObservadores("Jugador fua atacado con danio: " + danio);
+        this.notificarObservador(danio, this.observadorDanio);
         this.vida -= danio;
     }
 

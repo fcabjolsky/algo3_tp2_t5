@@ -57,7 +57,7 @@ public abstract class EnemigoView extends ImageView implements Observador {
 
     protected void moverseDerecha(int nuevaX) {
 
-        translateTransitionDerecha = new TranslateTransition(Duration.seconds(1),this);
+        translateTransitionDerecha = new TranslateTransition(Duration.seconds(0.5),this);
         translateTransitionDerecha.setToX(nuevaX*this.anchoTile - getX());
         translateTransitionDerecha.setOnFinished(event -> {
             this.enMovimiento = false;
@@ -71,7 +71,7 @@ public abstract class EnemigoView extends ImageView implements Observador {
 
     protected void moverseAbajo(int nuevaY){
 
-        translateTransitionAbajo = new TranslateTransition(Duration.seconds(2),this);
+        translateTransitionAbajo = new TranslateTransition(Duration.seconds(0.5),this);
         translateTransitionAbajo.setToY(nuevaY*this.altoTile-getY());
         translateTransitionAbajo.setOnFinished(event -> {
             this.enMovimiento = false;

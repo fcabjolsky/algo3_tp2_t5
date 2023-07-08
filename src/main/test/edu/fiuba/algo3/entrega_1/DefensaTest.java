@@ -17,7 +17,7 @@ public class DefensaTest {
        unaPasarela.recibirEnemigo(new Hormiga());
 
        if(unaPasarela.defensaEstaEnRango(defensa)) {
-           defensa.defender(unaPasarela.obtenerEnemigoADaniar());
+           defensa.defender(unaPasarela);
        }
 
        assertFalse(unaPasarela.contieneEnemigosVivos());
@@ -32,7 +32,7 @@ public class DefensaTest {
         unaPasarela.recibirEnemigo(new Hormiga());
 
         if(unaPasarela.defensaEstaEnRango(defensa)) {
-            defensa.defender(unaPasarela.obtenerEnemigoADaniar());
+            defensa.defender(unaPasarela);
         }
 
         assert(unaPasarela.contieneEnemigosVivos());
@@ -47,7 +47,7 @@ public class DefensaTest {
         unaPasarela.recibirEnemigo(new Hormiga());
 
         if(unaPasarela.defensaEstaEnRango(defensa)) {
-            defensa.defender(unaPasarela.obtenerEnemigoADaniar());
+            defensa.defender(unaPasarela);
         }
 
         assertFalse(unaPasarela.contieneEnemigosVivos());
@@ -62,7 +62,7 @@ public class DefensaTest {
         unaPasarela.recibirEnemigo(new Hormiga());
 
         if(unaPasarela.defensaEstaEnRango(defensa)) {
-            defensa.defender(unaPasarela.obtenerEnemigoADaniar());
+            defensa.defender(unaPasarela);
         }
 
         assert(unaPasarela.contieneEnemigosVivos());
