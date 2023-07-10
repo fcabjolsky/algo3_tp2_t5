@@ -24,7 +24,6 @@ public class DisparoAnimacion extends DefensaAtaquesView{
         this.imagenesExplosion = new ArrayList<>();
         this.inicializarImagenesExplocion();
         this.setBackground(super.nuevoFondoDeImagen("/disparo.png"));
-
     }
 
     private void inicializarImagenesExplocion(){
@@ -36,7 +35,7 @@ public class DisparoAnimacion extends DefensaAtaquesView{
         this.imagenesExplosion.add(super.nuevoFondoDeImagen("/explosion7.png"));
     }
 
-    public void realizarAtaque(Entidad pasarelaAtacada, Pane contenedor) {
+    public void realizarAtaque(ParcelaView pasarelaAtacada, Pane contenedor) {
         contenedor.getChildren().add(this);
         super.reproducirSonido("/disparo2.mp3", 2, 1);
         TranslateTransition animacion = new TranslateTransition(Duration.millis(600), this);

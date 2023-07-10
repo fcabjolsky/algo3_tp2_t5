@@ -1,17 +1,9 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.modelo.Posicion;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 
-import javax.imageio.ImageIO;
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Random;
-
-public class RocosoView extends Entidad {
+public class RocosoView extends ParcelaView {
 
     public RocosoView(int anchoTile, int altoTile, int x, int y) {
         super(anchoTile, altoTile, x , y);
@@ -47,7 +39,7 @@ public class RocosoView extends Entidad {
         return  (new Image(RocosoView.class.getResourceAsStream("/rocoso.png")));
     }
     @Override
-    public Entidad devolverNuevaInstancia(int anchoTile, int altoTile, int x, int y) {
+    public ParcelaView devolverNuevaInstancia(int anchoTile, int altoTile, int x, int y) {
 
         return (new RocosoView(anchoTile, altoTile, x, y));
     }

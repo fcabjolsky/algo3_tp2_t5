@@ -19,12 +19,12 @@ import java.net.URL;
 public class PartidaViewController {
     final static int anchoDePantalla = 795;
     final static int altoDePantalla = 600;
-    final static int maximoDeColumnas = 15;
-    final static int maximoDeFilas = 15;
-    final static int tamanioDelTileAncho = (anchoDePantalla / maximoDeColumnas) - 5;
-    final static int tamanioDelTileAlto = (altoDePantalla / maximoDeFilas);
+    final int maximoDeColumnas = 15;
+    final int maximoDeFilas = 15;
+    final int tamanioDelTileAncho = (anchoDePantalla / maximoDeColumnas) - 5;
+    final int tamanioDelTileAlto = (altoDePantalla / maximoDeFilas);
 
-    static Entidad parcelaElegida;
+    static ParcelaView parcelaElegida;
     @FXML
     private Pane panelBotones;
     @FXML
@@ -55,7 +55,7 @@ public class PartidaViewController {
         this.contenedor.getChildren().addAll(this.mapa, this.panelBotones);
         this.contenedor.getChildren().addAll(this.vidaPersonaje, this.creditosPersonaje);
 
-        this.controladorJuego = new ControladorJuego(ElegirNombreViewController.nombreDeJugador, this.contenedor, this.mapa);
+        this.controladorJuego = new ControladorJuego(ElegirNombreViewController.nombreDeJugador, this.contenedor, this.mapa, this.tamanioDelTileAncho, this.tamanioDelTileAlto);
         this.controladorJuego.agregarObservadoresJugador(this.creditosPersonaje, this.vidaPersonaje);
         Scene partida = new Scene(this.contenedor);
 
@@ -121,20 +121,26 @@ public class PartidaViewController {
 
     private void agregarDefensaAlMapa(String urlImagenDeDefensa, boolean esTorreBlanca, boolean esTorre) {
         DefensaView defensaAAgregar;
-        int x = (int) parcelaElegida.getX();
-        int y = (int) parcelaElegida.getY();
-        try {
-            if (esTorreBlanca) {
-                defensaAAgregar = this.agregarTorreBlancaAMapa(urlImagenDeDefensa, x, y);
-            } else if (esTorre) {
-                defensaAAgregar = this.agregarTorrePlateadaAMapa(urlImagenDeDefensa, x, y);
-            } else {
-                defensaAAgregar = new TrampaArenaView(urlImagenDeDefensa, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y, this.contenedor, this.mapa);
+        if (parcelaElegida != null){
+            int x = (int) parcelaElegida.getX();
+            int y = (int) parcelaElegida.getY();
+            try {
+                if (esTorreBlanca) {
+                    defensaAAgregar = this.agregarTorreBlancaAMapa(urlImagenDeDefensa, x, y);
+                } else if (esTorre) {
+                    defensaAAgregar = this.agregarTorrePlateadaAMapa(urlImagenDeDefensa, x, y);
+                } else {
+                    defensaAAgregar = new TrampaArenaView(urlImagenDeDefensa, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y, this.contenedor, this.mapa);
+                }
+                this.mapa.add(defensaAAgregar, x, y);
+                parcelaElegida = null;
+            } catch (NoDisponeDeSuficientesCreditos e) {
+                AlertaView alertaCreditosInsuficientes = new AlertaView();
+                alertaCreditosInsuficientes.lanzarAlerta("No dispone de suficientes creditos");
             }
-            this.mapa.add(defensaAAgregar, x, y);
-        } catch (NoDisponeDeSuficientesCreditos e) {
+        }else{
             AlertaView alertaCreditosInsuficientes = new AlertaView();
-            alertaCreditosInsuficientes.lanzarAlerta("No dispone de suficientes creditos");
+            alertaCreditosInsuficientes.lanzarAlerta("Esta tierra ya esta ocupada");
         }
     }
 

@@ -32,9 +32,9 @@ public abstract class EnemigoView extends ImageView implements Observador {
     protected boolean enMovimiento;
     protected final int anchoTile;
     protected final int altoTile;
-    public EnemigoView(String urlEnemigoImagen, int x, int y) {
-        this.altoTile = PartidaViewController.tamanioDelTileAlto;
-        this.anchoTile = PartidaViewController.tamanioDelTileAncho;
+    public EnemigoView(String urlEnemigoImagen, int anchoTile, int altoTile, int x, int y) {
+        this.altoTile = altoTile;
+        this.anchoTile = anchoTile;
 
         this.colaMovimientos = new LinkedList<>();
         this.enMovimiento = false;
@@ -124,7 +124,7 @@ public abstract class EnemigoView extends ImageView implements Observador {
     protected abstract Image imagenMovimientoDerecha();
 
     @Override
-    public void actualizar(Observable observable, Object argument) {
+    public void actualizar(Observable observable, Object argument){
         if(argument instanceof Posicion){
             if(((Posicion) argument).getCoordenadaX() > getX()/this.anchoTile){
                 this.moverseDerecha(((Posicion) argument).getCoordenadaX());
@@ -133,8 +133,8 @@ public abstract class EnemigoView extends ImageView implements Observador {
                 this.moverseAbajo(((Posicion) argument).getCoordenadaY());
             }
         }
-        if(argument instanceof String && argument.equals("Enemigo eliminado")){
-            this.setVisible(false);
+        if (argument instanceof Boolean){
+            this.setImage(null);
         }
     }
 

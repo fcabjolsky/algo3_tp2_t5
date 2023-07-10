@@ -3,7 +3,7 @@ package edu.fiuba.algo3.vista;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 
-public class TierraView extends Entidad {
+public class TierraView extends ParcelaView {
 
     private DefensaView torre;
     public TierraView(int anchoTile, int altoTile, int x, int y) {
@@ -40,7 +40,7 @@ public class TierraView extends Entidad {
         return  ( new Image(TierraView.class.getResourceAsStream("/tierra.png")));
     }
     @Override
-    public Entidad devolverNuevaInstancia(int anchoTile, int altoTile, int x, int y) {
+    public ParcelaView devolverNuevaInstancia(int anchoTile, int altoTile, int x, int y) {
 
         return (new TierraView(anchoTile, altoTile, x, y));
     }

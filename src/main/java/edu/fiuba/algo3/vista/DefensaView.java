@@ -49,8 +49,8 @@ public abstract class DefensaView extends Region implements Observador {
         }
         return null;
     }
-    protected Entidad devolverParcela(GridPane mapa, int posicionParcelaAtacadaX, int posicionParcelaAtacadaY){
-        Entidad parcelaADevolver = null;
+    protected ParcelaView devolverParcela(GridPane mapa, int posicionParcelaAtacadaX, int posicionParcelaAtacadaY){
+        ParcelaView parcelaADevolver = null;
         try {
             parcelaADevolver = (PasarelaView)this.obtenerParcelaDeMapa(mapa, posicionParcelaAtacadaX, posicionParcelaAtacadaY);
         }catch(ClassCastException errorDeClase){
@@ -62,5 +62,5 @@ public abstract class DefensaView extends Region implements Observador {
         }
         return parcelaADevolver;
     }
-    public abstract void update(Entidad pasarelaAtacada);
+    public abstract void update(ParcelaView pasarelaAtacada);
 }

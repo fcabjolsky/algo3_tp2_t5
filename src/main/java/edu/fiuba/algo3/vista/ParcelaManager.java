@@ -13,7 +13,7 @@ import java.util.HashMap;
 public class ParcelaManager {
 
     private String[][] mapa;
-    private HashMap<String, Entidad> parcelas;
+    private HashMap<String, ParcelaView> parcelas;
     private String informacionDeMapa;
     private int maximoDeColumnas;
     private int maximoDeFilas;
@@ -42,7 +42,7 @@ public class ParcelaManager {
         for (int x = 0; x < this.maximoDeFilas; x++) {
             for (int y = 0; y < this.maximoDeColumnas; y++) {
                 String parcela = this.mapa[x][y];
-                Entidad e = this.parcelas.get(parcela).devolverNuevaInstancia(anchoTile, altoTile, y, x);
+                ParcelaView e = this.parcelas.get(parcela).devolverNuevaInstancia(anchoTile, altoTile, y, x);
                 mapa.add(e, y, x);
             }
         }

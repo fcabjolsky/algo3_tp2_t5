@@ -4,7 +4,6 @@ import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
 
@@ -17,7 +16,7 @@ public class TornadoArenaAnimacion extends DefensaAtaquesView{
     }
 
     @Override
-    public void realizarAtaque(Entidad pasarelaAtacada, Pane contenedor) {
+    public void realizarAtaque(ParcelaView pasarelaAtacada, Pane contenedor) {
         contenedor.getChildren().add(this);
         super.reproducirSonido("/viento.mp3", 1, 1);
         TranslateTransition animacion = new TranslateTransition(Duration.millis(900), this);

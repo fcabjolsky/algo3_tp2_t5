@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.modelo.Observable;
-import javafx.scene.image.Image;
-import javafx.scene.layout.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 public class TrampaArenaView extends DefensaView{
@@ -14,7 +12,7 @@ public class TrampaArenaView extends DefensaView{
     }
 
     @Override
-    public void update(Entidad pasarelaAtacada){
+    public void update(ParcelaView pasarelaAtacada){
         this.ataque = new TornadoArenaAnimacion(this, super.anchoTile, super.altoTile);
         this.ataque.realizarAtaque( pasarelaAtacada, super.contenedor);
     }
