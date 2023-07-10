@@ -10,8 +10,9 @@ public class Jugador extends Observable implements Turneable{
     private List <Defensa> defensas = new ArrayList();
     private String nombre;
 
-    private int observadorDanio = 1;
-    private int observadorCreditos = 0;
+    private int observadorDanio = 2;
+    private int observadorCreditos = 1;
+
 
     public Jugador(String unNombre) {
         if (!this.validarNombre(unNombre)) {
