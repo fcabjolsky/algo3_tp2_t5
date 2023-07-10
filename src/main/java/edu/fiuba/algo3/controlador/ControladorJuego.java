@@ -28,7 +28,6 @@ public class ControladorJuego implements Observador{
         this.partidaModelo = new Partida(mapaModelo, this.jugadorModelo, turnoModelo);
 
         agregarObservadoresMapa(mapaModelo);
-        agregarLogger(jugadorModelo);
         agregarLogger(turnoModelo);
         agregarObservadoresPartida();
 
@@ -46,7 +45,9 @@ public class ControladorJuego implements Observador{
         observable.agregarObservador(this.logger);
     }
     public void agregarObservadoresJugador(Observador observadorCreditos, Observador observadorDanio){
+        agregarLogger(this.jugadorModelo);
         this.jugadorModelo.agregarObservadores(observadorCreditos, observadorDanio);
+        this.jugadorModelo.agregarObservador(this);
     }
 
     public void agregarDefensaAPartida(Defensa defensa, CreditosView creditosJugador){
@@ -82,6 +83,14 @@ public class ControladorJuego implements Observador{
             ((Enemigo)(argument)).agregarObservador(enemigo);
             ((Enemigo)(argument)).agregarObservador(logger);
             contenedor.getChildren().add(enemigo);
+        }
+        if(argument instanceof String && argument == "Ganaste"){
+            AlertaView a = new AlertaView();
+            a.lanzarAlerta("Ganaste " + this.jugadorModelo.toString());
+        }
+        if(argument instanceof String && argument == "Perdiste"){
+            AlertaView a = new AlertaView();
+            a.lanzarAlerta("Perdiste " + this.jugadorModelo.toString());
         }
     }
 }

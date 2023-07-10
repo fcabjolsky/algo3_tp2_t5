@@ -103,4 +103,9 @@ public class Jugador extends Observable implements Turneable{
         }
     }
 
+    @Override
+    public String toString(){
+        return this.nombre;
+    }
+
 }
