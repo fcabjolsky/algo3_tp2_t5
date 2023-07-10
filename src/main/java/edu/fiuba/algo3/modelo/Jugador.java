@@ -10,8 +10,8 @@ public class Jugador extends Observable implements Turneable{
     private List <Defensa> defensas = new ArrayList();
     private String nombre;
 
-    private int observadorDanio = 1;
-    private int observadorCreditos = 0;
+    private int observadorDanio = 2;
+    private int observadorCreditos = 1;
 
     public Jugador(String unNombre) {
         if (!this.validarNombre(unNombre)) {
@@ -65,9 +65,6 @@ public class Jugador extends Observable implements Turneable{
     public void perderVida(int danio){
         this.notificarObservador(danio, this.observadorDanio);
         this.vida -= danio;
-        if(this.vida <= 0){
-            notificarObservadores("Perdiste");
-        }
     }
 
     public boolean equals(Object jugador) {
