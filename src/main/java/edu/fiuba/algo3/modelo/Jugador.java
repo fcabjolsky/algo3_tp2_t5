@@ -65,6 +65,9 @@ public class Jugador extends Observable implements Turneable{
     public void perderVida(int danio){
         this.notificarObservador(danio, this.observadorDanio);
         this.vida -= danio;
+        if(this.vida <= 0){
+            notificarObservadores("Perdiste");
+        }
     }
 
     public boolean equals(Object jugador) {

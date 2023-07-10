@@ -19,10 +19,10 @@ import java.net.URL;
 public class PartidaViewController {
     final static int anchoDePantalla = 795;
     final static int altoDePantalla = 600;
-    final int maximoDeColumnas = 15;
-    final int maximoDeFilas = 15;
-    final int tamanioDelTileAncho = (anchoDePantalla / maximoDeColumnas) - 5;
-    final int tamanioDelTileAlto = (altoDePantalla / maximoDeFilas);
+    final static int maximoDeColumnas = 15;
+    final static int maximoDeFilas = 15;
+    final static int tamanioDelTileAncho = (anchoDePantalla / maximoDeColumnas) - 5;
+    final static int tamanioDelTileAlto = (altoDePantalla / maximoDeFilas);
 
     static Entidad parcelaElegida;
     @FXML
@@ -55,7 +55,7 @@ public class PartidaViewController {
         this.contenedor.getChildren().addAll(this.mapa, this.panelBotones);
         this.contenedor.getChildren().addAll(this.vidaPersonaje, this.creditosPersonaje);
 
-        this.controladorJuego = new ControladorJuego(ElegirNombreViewController.nombreDeJugador, this.contenedor, this.mapa, this.tamanioDelTileAncho, this.tamanioDelTileAlto);
+        this.controladorJuego = new ControladorJuego(ElegirNombreViewController.nombreDeJugador, this.contenedor, this.mapa);
         this.controladorJuego.agregarObservadoresJugador(this.creditosPersonaje, this.vidaPersonaje);
         Scene partida = new Scene(this.contenedor);
 

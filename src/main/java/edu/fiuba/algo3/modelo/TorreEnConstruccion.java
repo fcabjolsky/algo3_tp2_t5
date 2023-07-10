@@ -12,7 +12,6 @@ public class TorreEnConstruccion extends  Observable implements EstadoTorre {
 
     @Override
     public void defender(Pasarela pasarela, int danio){
-        this.notificarObservadores("me estoy construyendo");
     }
 
     @Override

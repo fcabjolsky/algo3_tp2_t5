@@ -51,6 +51,7 @@ public class IntegracionTest {
         turno.agregarObservador(logger);
 
         Partida partida = new Partida(mapa, jugador, turno);
+        partida.agregarObservador(logger);
 
 
         //primer turno no construyo torres

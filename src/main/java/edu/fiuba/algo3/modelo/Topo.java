@@ -37,4 +37,9 @@ public class Topo extends Enemigo{
         }
     }
 
+    @Override
+    public String toString(){
+        return "Topo";
+    }
+
 }

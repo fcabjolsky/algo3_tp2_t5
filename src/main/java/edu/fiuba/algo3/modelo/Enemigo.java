@@ -52,4 +52,5 @@ public abstract class Enemigo extends Observable {
     public boolean sePuedeMover() {
        return this.estado.puedoSeguirMoviendome();
     }
+
 }

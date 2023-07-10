@@ -7,8 +7,8 @@ import java.awt.image.BufferedImage;
 
 public class HormigaView extends EnemigoView{
 
-    public HormigaView(int anchoTile, int altoTile, int x, int y){
-        super("/spriteHormiga.png", anchoTile, altoTile, x, y);
+    public HormigaView( int x, int y){
+        super("/spriteHormiga.png", x, y);
     }
 
     @Override

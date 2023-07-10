@@ -23,6 +23,7 @@ public class EstadoMuerto implements EstadoEnemigo{
     @Override
     public int morir() {
         this.enemigo.nuevoEstado(new EstadoEliminado());
+        this.enemigo.notificarObservadores("Enemigo eliminado");
         return this.enemigo.darRecompensa();
     }
 

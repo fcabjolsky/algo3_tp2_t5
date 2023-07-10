@@ -15,28 +15,28 @@ public class ControladorJuego implements Observador{
     private Logger logger;
     private Pane contenedor;
     private GridPane mapa;
-    private int anchoTile;
-    private int altoTile;
-    public ControladorJuego(String nombreDeJugador, Pane contenedor, GridPane mapa, int anchoTile, int altoTile) {
+    public ControladorJuego(String nombreDeJugador, Pane contenedor, GridPane mapa) {
 
         this.contenedor = contenedor;
         this.mapa = mapa;
-        this.anchoTile = anchoTile;
-        this.altoTile = altoTile;
 
         this.logger = new Logger();
 
         this.jugadorModelo = new Jugador(nombreDeJugador);
         Mapa mapaModelo = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json").crearMapa();
         Turno turnoModelo = new Turno(this.jugadorModelo, mapaModelo);
+        this.partidaModelo = new Partida(mapaModelo, this.jugadorModelo, turnoModelo);
 
         agregarObservadoresMapa(mapaModelo);
         agregarLogger(jugadorModelo);
         agregarLogger(turnoModelo);
+        agregarObservadoresPartida();
 
 
-        this.partidaModelo = new Partida(mapaModelo, this.jugadorModelo, turnoModelo);
-
+    }
+    public void agregarObservadoresPartida(){
+        agregarLogger(this.partidaModelo);
+        this.partidaModelo.agregarObservador(this);
     }
     public void agregarObservadoresMapa(Mapa mapa){
         agregarLogger(mapa);
@@ -51,6 +51,7 @@ public class ControladorJuego implements Observador{
 
     public void agregarDefensaAPartida(Defensa defensa, CreditosView creditosJugador){
         try{
+            agregarLogger((Torre)defensa);
             jugadorModelo.construirDefensa(defensa);
             creditosJugador.perderCreditos(defensa.getCosto());
         } catch (NoDisponeDeSuficientesCreditos e) {
@@ -65,22 +66,19 @@ public class ControladorJuego implements Observador{
     @Override
     public void actualizar(Observable observable, Object argument) {
         if(argument instanceof Hormiga){
-            EnemigoView enemigo =new HormigaView(this.anchoTile, this.altoTile,
-                    1,0);
+            EnemigoView enemigo =new HormigaView(1,0);
             ((Enemigo)(argument)).agregarObservador(enemigo);
             ((Enemigo)(argument)).agregarObservador(logger);
             contenedor.getChildren().add(enemigo);
         }
         if(argument instanceof Arania){
-            EnemigoView enemigo =new AraniaView(this.anchoTile, this.altoTile,
-                    1,0);
+            EnemigoView enemigo =new AraniaView(1,0);
             ((Enemigo)(argument)).agregarObservador(enemigo);
             ((Enemigo)(argument)).agregarObservador(logger);
             contenedor.getChildren().add(enemigo);
         }
         if(argument instanceof Topo){
-            EnemigoView enemigo =new TopoView(this.anchoTile, this.altoTile,
-                    1,0);
+            EnemigoView enemigo =new TopoView(1,0);
             ((Enemigo)(argument)).agregarObservador(enemigo);
             ((Enemigo)(argument)).agregarObservador(logger);
             contenedor.getChildren().add(enemigo);

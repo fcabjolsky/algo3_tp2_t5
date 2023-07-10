@@ -17,9 +17,7 @@ public abstract class DefensaAtaquesView extends Region {
 
     public DefensaAtaquesView(DefensaView torre) {
         this.setVisible(true);
-        System.out.println("La posicion de la torre segun el ataque es "+ torre.getLayoutX());
         this.setLayoutX(torre.getLayoutX());
-        System.out.println("la posicion del ataque es: "+ this.getLayoutX());
         this.setLayoutY(torre.getLayoutY());
     }
 

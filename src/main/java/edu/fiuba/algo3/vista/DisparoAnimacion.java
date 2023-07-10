@@ -24,7 +24,7 @@ public class DisparoAnimacion extends DefensaAtaquesView{
         this.imagenesExplosion = new ArrayList<>();
         this.inicializarImagenesExplocion();
         this.setBackground(super.nuevoFondoDeImagen("/disparo.png"));
-        System.out.println("la posicion inicial es: " + this.getLayoutX());
+
     }
 
     private void inicializarImagenesExplocion(){
@@ -38,7 +38,6 @@ public class DisparoAnimacion extends DefensaAtaquesView{
 
     public void realizarAtaque(Entidad pasarelaAtacada, Pane contenedor) {
         contenedor.getChildren().add(this);
-        System.out.println("entre 1 ");
         super.reproducirSonido("/disparo2.mp3", 2, 1);
         TranslateTransition animacion = new TranslateTransition(Duration.millis(600), this);
         double posicionAtacadaX = pasarelaAtacada.getLayoutX() ;
@@ -55,7 +54,6 @@ public class DisparoAnimacion extends DefensaAtaquesView{
         animacion.play();
     }
     private void transicionExplosion(Pane contenedor){
-        System.out.println("entre 2 ");
         this.setBackground(this.imagenesExplosion.get(0));
         this.reproducirSonido("/explosion.mp3", 1, 1);
         ScaleTransition explocionAnimacion = new ScaleTransition(Duration.millis(600), this);
@@ -70,14 +68,12 @@ public class DisparoAnimacion extends DefensaAtaquesView{
     private void transicionDesaparecer(int index, Pane contenedor){
 
         if(index < this.imagenesExplosion.size()) {
-            System.out.println("entre 3 ");
             this.setBackground(this.imagenesExplosion.get(index));
             FadeTransition desaparecer = new FadeTransition(Duration.millis(300), this);
             desaparecer.play();
             int finalIndex = index + 1;
             desaparecer.setOnFinished( (finish) -> {this.transicionDesaparecer(finalIndex, contenedor);});
         }else{
-            System.out.println("entre 4");
             this.setBackground(this.imagenesExplosion.get(index-1));
             FadeTransition desaparecer = new FadeTransition(Duration.millis(400), this);
             desaparecer.setToValue(0);

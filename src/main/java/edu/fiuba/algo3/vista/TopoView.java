@@ -7,8 +7,8 @@ import java.awt.image.BufferedImage;
 
 public class TopoView extends EnemigoView{
 
-    public TopoView(int anchoTile, int altoTile, int x, int y){
-        super("/spriteTopo.png", anchoTile, altoTile, x, y);
+    public TopoView( int x, int y){
+        super("/spriteTopo.png", x, y);
 
     }
     @Override

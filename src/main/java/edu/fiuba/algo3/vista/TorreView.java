@@ -16,7 +16,6 @@ public class TorreView extends DefensaView {
 
     @Override
     public void update(Entidad pasarelaAtacada){
-        System.out.println("la posicion de la torre es: "+this.getLayoutX());
         this.ataque = new DisparoAnimacion(this, super.anchoTile, super.altoTile);
         this.ataque.realizarAtaque(pasarelaAtacada, super.contenedor);
     }
@@ -24,12 +23,9 @@ public class TorreView extends DefensaView {
 
     @Override
     public void actualizar(Observable observable, Object argument) {
-        if (argument instanceof Pasarela){
-            Posicion posicionAtaque = ((Pasarela)argument).getPosicion();
-            System.out.println("estoy atacando a x:"+ posicionAtaque.getCoordenadaX()+ "y: "+ posicionAtaque.getCoordenadaY());
+        if (argument instanceof Pasarela) {
+            Posicion posicionAtaque = ((Pasarela) argument).getPosicion();
             this.update(this.devolverParcela(super.mapa, posicionAtaque.getCoordenadaX(), posicionAtaque.getCoordenadaY()));
-        } else if (argument instanceof  String) {
-            System.out.println(argument);
         }
     }
 }

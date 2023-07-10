@@ -61,14 +61,12 @@ public class Partida extends Observable implements Turneable{
             this.notificarObservadores("Ganaste");
             return "GANASTE";
         }
-        this.notificarObservadores("Seguir Jugando");
         return "SEGUIR JUGANDO";
     }
 
     @Override
     public void avanzarTurno() {
         try {
-            System.out.println(this.turno);
             this.turno.siguienteTurno();
         } catch (JuegoGanado juegoGanado) {
             this.notificarObservadores("Ganaste");
