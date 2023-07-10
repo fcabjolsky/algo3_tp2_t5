@@ -121,20 +121,26 @@ public class PartidaViewController {
 
     private void agregarDefensaAlMapa(String urlImagenDeDefensa, boolean esTorreBlanca, boolean esTorre) {
         DefensaView defensaAAgregar;
-        int x = (int) parcelaElegida.getX();
-        int y = (int) parcelaElegida.getY();
-        try {
-            if (esTorreBlanca) {
-                defensaAAgregar = this.agregarTorreBlancaAMapa(urlImagenDeDefensa, x, y);
-            } else if (esTorre) {
-                defensaAAgregar = this.agregarTorrePlateadaAMapa(urlImagenDeDefensa, x, y);
-            } else {
-                defensaAAgregar = new TrampaArenaView(urlImagenDeDefensa, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y, this.contenedor, this.mapa);
+        if (parcelaElegida != null){
+            int x = (int) parcelaElegida.getX();
+            int y = (int) parcelaElegida.getY();
+            try {
+                if (esTorreBlanca) {
+                    defensaAAgregar = this.agregarTorreBlancaAMapa(urlImagenDeDefensa, x, y);
+                } else if (esTorre) {
+                    defensaAAgregar = this.agregarTorrePlateadaAMapa(urlImagenDeDefensa, x, y);
+                } else {
+                    defensaAAgregar = new TrampaArenaView(urlImagenDeDefensa, this.tamanioDelTileAncho, this.tamanioDelTileAlto, x, y, this.contenedor, this.mapa);
+                }
+                this.mapa.add(defensaAAgregar, x, y);
+                parcelaElegida = null;
+            } catch (NoDisponeDeSuficientesCreditos e) {
+                AlertaView alertaCreditosInsuficientes = new AlertaView();
+                alertaCreditosInsuficientes.lanzarAlerta("No dispone de suficientes creditos");
             }
-            this.mapa.add(defensaAAgregar, x, y);
-        } catch (NoDisponeDeSuficientesCreditos e) {
+        }else{
             AlertaView alertaCreditosInsuficientes = new AlertaView();
-            alertaCreditosInsuficientes.lanzarAlerta("No dispone de suficientes creditos");
+            alertaCreditosInsuficientes.lanzarAlerta("Esta tierra ya esta ocupada");
         }
     }
 
