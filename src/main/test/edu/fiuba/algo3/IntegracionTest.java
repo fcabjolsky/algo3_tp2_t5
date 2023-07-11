@@ -119,19 +119,29 @@ public class IntegracionTest {
 
 
         //primer turno
+        System.out.println(jugador.getCreditos());
         jugador.construirDefensa(new TorrePlateada(new Posicion(0,7)));
         partida.avanzarTurno();
+        System.out.println(jugador.getCreditos());
         //segundo turno construyo una torre
         // Aca se necesita instancear una defejnsa
         jugador.construirDefensa(new TorrePlateada(new Posicion(1,9)));
         partida.avanzarTurno();
+        System.out.println(jugador.getCreditos());
+
         jugador.construirDefensa(new TorrePlateada(new Posicion(1,8)));
         partida.avanzarTurno();
+        System.out.println(jugador.getCreditos());
+
         jugador.construirDefensa(new TorrePlateada(new Posicion(5,0)));
         partida.avanzarTurno();
+        System.out.println(jugador.getCreditos());
+
         jugador.construirDefensa(new TorrePlateada(new Posicion(6,0)));
         partida.avanzarTurno();
-        assertThrows(NoDisponeDeSuficientesCreditos.class, () -> jugador.construirDefensa(new TorreBlanca(new Posicion(0,0))));
+        System.out.println(jugador.getCreditos());
+
+        assertThrows(NoDisponeDeSuficientesCreditos.class, () -> jugador.construirDefensa(new TorrePlateada(new Posicion(0,0))));
 
         partida.avanzarTurno();
         partida.avanzarTurno();
