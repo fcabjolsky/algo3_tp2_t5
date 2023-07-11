@@ -85,12 +85,10 @@ public class ControladorJuego implements Observador{
             contenedor.getChildren().add(enemigo);
         }
         if(argument instanceof String && argument == "Ganaste"){
-            AlertaView a = new AlertaView();
-            a.lanzarAlerta("Ganaste " + this.jugadorModelo.toString());
+            contenedor.getChildren().add(new FinalDePartida("Ganaste " + this.jugadorModelo.toString()));
         }
         if(argument instanceof String && argument == "Perdiste"){
-            AlertaView a = new AlertaView();
-            a.lanzarAlerta("Perdiste " + this.jugadorModelo.toString());
+            contenedor.getChildren().add(new FinalDePartida("Perdiste " + this.jugadorModelo.toString()));
         }
     }
 }
