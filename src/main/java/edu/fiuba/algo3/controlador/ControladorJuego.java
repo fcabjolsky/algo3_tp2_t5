@@ -2,9 +2,15 @@ package edu.fiuba.algo3.controlador;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.vista.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ControladorJuego implements Observador{
@@ -85,12 +91,25 @@ public class ControladorJuego implements Observador{
             contenedor.getChildren().add(enemigo);
         }
         if(argument instanceof String && argument == "Ganaste"){
-            AlertaView a = new AlertaView();
-            a.lanzarAlerta("Ganaste " + this.jugadorModelo.toString());
+            try{
+                Parent root = FXMLLoader.load(getClass().getResource("/PantallaGanasteView.fxml"));
+                Stage juegoStage = new Stage();
+                juegoStage.initStyle(StageStyle.UNDECORATED);
+                juegoStage.setScene(new Scene(root, 795, 600));
+                juegoStage.show();
+                cerrarVentana();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
         if(argument instanceof String && argument == "Perdiste"){
             AlertaView a = new AlertaView();
             a.lanzarAlerta("Perdiste " + this.jugadorModelo.toString());
         }
+    }
+
+    private void cerrarVentana(){
+        Stage cerrar = (Stage)this.contenedor.getScene().getWindow();
+        cerrar.close();
     }
 }
