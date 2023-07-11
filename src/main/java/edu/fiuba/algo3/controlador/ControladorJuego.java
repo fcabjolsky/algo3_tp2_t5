@@ -91,20 +91,23 @@ public class ControladorJuego implements Observador{
             contenedor.getChildren().add(enemigo);
         }
         if(argument instanceof String && argument == "Ganaste"){
-            try{
-                Parent root = FXMLLoader.load(getClass().getResource("/PantallaGanasteView.fxml"));
-                Stage juegoStage = new Stage();
-                juegoStage.initStyle(StageStyle.UNDECORATED);
-                juegoStage.setScene(new Scene(root, 795, 600));
-                juegoStage.show();
-                cerrarVentana();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            this.inicializarPantallasFinales("/PantallaGanasteView.fxml");
         }
         if(argument instanceof String && argument == "Perdiste"){
-            AlertaView a = new AlertaView();
-            a.lanzarAlerta("Perdiste " + this.jugadorModelo.toString());
+            this.inicializarPantallasFinales("/PantallaPerdisteView.fxml");
+        }
+    }
+
+    private void inicializarPantallasFinales(String url){
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource(url));
+            Stage juegoStage = new Stage();
+            juegoStage.initStyle(StageStyle.UNDECORATED);
+            juegoStage.setScene(new Scene(root, 795, 600));
+            juegoStage.show();
+            cerrarVentana();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
