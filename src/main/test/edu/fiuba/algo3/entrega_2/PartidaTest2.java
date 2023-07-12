@@ -16,7 +16,11 @@ public class PartidaTest2 {
         jugador.construirDefensa(new TorreBlanca(new Posicion(1,2)));
         jugador.construirDefensa(new TorreBlanca(new Posicion(3,0)));
         Observador loggerMock = Mockito.mock(Logger.class);
-        Partida partida = new Partida(jugador, loggerMock);
+        CreadorMapaJson creadorMapa = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json");
+        Mapa mapa = creadorMapa.crearMapa();
+        Turno turno = new Turno(jugador, mapa, new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json", mapa));
+        Partida partida = new Partida(jugador, mapa, turno);
+        partida.agregarObservador(loggerMock);
 
         partida.avanzarTurno();
         partida.avanzarTurno();
@@ -25,16 +29,6 @@ public class PartidaTest2 {
         partida.avanzarTurno();
 
         Mockito.verify(loggerMock, Mockito.atLeast(1)).actualizar(partida, "Ganaste");
-    }
-
-   @Test
-    public void esLaEntidadCorrespondienteDeCrearElMapaYdevuelveUnTurno(){
-        Jugador j = new Jugador("Jugador1");
-        Partida p = new Partida(j);
-
-        Turno t = p.empezarPartida();
-
-        assert(t.getClass() == Turno.class);
     }
 
 }

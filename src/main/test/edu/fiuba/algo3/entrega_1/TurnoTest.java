@@ -33,7 +33,7 @@ public class TurnoTest {
         pasarelas.add(new Pasarela(new Posicion(0, 2)));
         Mapa mapa = new Mapa(pasarelas, new ArrayList<Rocoso>(), new ArrayList<Tierra>());
         mapa.agregarEnemigo(new Hormiga());
-        Turno turno = new Turno(new Jugador("Jugador1"), mapa);
+        Turno turno = new Turno(new Jugador("Jugador1"), mapa, new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json", mapa));
 
         turno.siguienteTurno();
 
@@ -45,7 +45,7 @@ public class TurnoTest {
     @Test
     public void unJugadorQueEliminaTodosLosEnemigosDevuelveVerdadero() {
         Mapa mapa = new Mapa(new ArrayList<Pasarela>(), new ArrayList<Rocoso>(), new ArrayList<Tierra>());
-        Turno turno = new Turno(new Jugador("Jugador1"), mapa);
+        Turno turno = new Turno(new Jugador("Jugador1"), mapa, new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json", mapa));
 
         boolean resultado = turno.ganoLaPartida();
 
@@ -62,7 +62,7 @@ public class TurnoTest {
         pasarelas.add(pasarela);
 
         Mapa mapa = new Mapa(pasarelas, new ArrayList<Rocoso>(), new ArrayList<Tierra>());
-        Turno turno = new Turno(new Jugador("Jugador1"), mapa);
+        Turno turno = new Turno(new Jugador("Jugador1"), mapa, new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json", mapa));
 
         boolean resultado = turno.ganoLaPartida();
 
