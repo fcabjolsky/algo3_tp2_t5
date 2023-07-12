@@ -46,6 +46,7 @@ public abstract class Enemigo extends Observable {
     }
 
     public int atacar(){
+        this.notificarObservadores("Enemigo llego al final");
         return this.estadoEnemigo.atacar();
     }
 

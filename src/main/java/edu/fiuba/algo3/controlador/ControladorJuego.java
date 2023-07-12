@@ -21,6 +21,7 @@ public class ControladorJuego implements Observador{
     private Logger logger;
     private Pane contenedor;
     private GridPane mapa;
+    Posicion posicionInicial;
     public ControladorJuego(String nombreDeJugador, Pane contenedor, GridPane mapa) {
 
         this.contenedor = contenedor;
@@ -72,20 +73,23 @@ public class ControladorJuego implements Observador{
 
     @Override
     public void actualizar(Observable observable, Object argument) {
+        if(argument instanceof Posicion){
+            this.posicionInicial = ((Posicion)(argument));
+        }
         if(argument instanceof Hormiga){
-            EnemigoView enemigo =new HormigaView(1,0);
+            EnemigoView enemigo =new HormigaView(posicionInicial.getCoordenadaX(),posicionInicial.getCoordenadaY());
             ((Enemigo)(argument)).agregarObservador(enemigo);
             ((Enemigo)(argument)).agregarObservador(logger);
             contenedor.getChildren().add(enemigo);
         }
         if(argument instanceof Arania){
-            EnemigoView enemigo =new AraniaView(1,0);
+            EnemigoView enemigo =new AraniaView(posicionInicial.getCoordenadaX(),posicionInicial.getCoordenadaY());
             ((Enemigo)(argument)).agregarObservador(enemigo);
             ((Enemigo)(argument)).agregarObservador(logger);
             contenedor.getChildren().add(enemigo);
         }
         if(argument instanceof Topo){
-            EnemigoView enemigo =new TopoView(1,0);
+            EnemigoView enemigo =new TopoView(posicionInicial.getCoordenadaX(),posicionInicial.getCoordenadaY());
             ((Enemigo)(argument)).agregarObservador(enemigo);
             ((Enemigo)(argument)).agregarObservador(logger);
             contenedor.getChildren().add(enemigo);

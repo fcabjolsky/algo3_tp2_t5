@@ -28,7 +28,7 @@ public abstract class EnemigoView extends ImageView implements Observador {
     protected ArrayList<Image> sprites = new ArrayList<>();
     protected TranslateTransition translateTransitionDerecha;
     protected TranslateTransition translateTransitionAbajo;
-    protected Queue<MovimientoEnemigoView> colaMovimientos;
+    protected Queue<Movimiento> colaMovimientos;
     protected boolean enMovimiento;
     protected final int anchoTile;
     protected final int altoTile;
@@ -57,7 +57,7 @@ public abstract class EnemigoView extends ImageView implements Observador {
 
     protected void moverseDerecha(int nuevaX) {
 
-        translateTransitionDerecha = new TranslateTransition(Duration.seconds(0.5),this);
+        translateTransitionDerecha = new TranslateTransition(Duration.seconds(0.4),this);
         translateTransitionDerecha.setToX(nuevaX*this.anchoTile - getX());
         translateTransitionDerecha.setOnFinished(event -> {
             this.enMovimiento = false;
@@ -71,7 +71,7 @@ public abstract class EnemigoView extends ImageView implements Observador {
 
     protected void moverseAbajo(int nuevaY){
 
-        translateTransitionAbajo = new TranslateTransition(Duration.seconds(0.5),this);
+        translateTransitionAbajo = new TranslateTransition(Duration.seconds(0.4),this);
         translateTransitionAbajo.setToY(nuevaY*this.altoTile-getY());
         translateTransitionAbajo.setOnFinished(event -> {
             this.enMovimiento = false;
@@ -81,7 +81,7 @@ public abstract class EnemigoView extends ImageView implements Observador {
         agregarMovimiento(new MovimientoEnemigoView(translateTransitionAbajo, imagenMovimientoAbajo()));
     }
 
-    public void agregarMovimiento(MovimientoEnemigoView movimiento){
+    public void agregarMovimiento(Movimiento movimiento){
         this.colaMovimientos.add(movimiento);
         procesarProximoMovimiento();
     }
@@ -89,7 +89,7 @@ public abstract class EnemigoView extends ImageView implements Observador {
     protected void procesarProximoMovimiento(){
 
         if(!this.enMovimiento && !this.colaMovimientos.isEmpty()) {
-            MovimientoEnemigoView proximoMovimiento = colaMovimientos.poll();
+            Movimiento proximoMovimiento = colaMovimientos.poll();
             if (proximoMovimiento != null) {
                 this.enMovimiento = true;
                 proximoMovimiento.correrMovimiento();
@@ -134,7 +134,10 @@ public abstract class EnemigoView extends ImageView implements Observador {
             }
         }
         if(argument instanceof String && argument.equals("Enemigo eliminado")){
-            this.setVisible(false);
+            agregarMovimiento(new Desaparicion(this));
+        }
+        if(argument instanceof String && argument.equals("Enemigo llego al final")){
+            agregarMovimiento(new Desaparicion(this));
         }
     }
 
