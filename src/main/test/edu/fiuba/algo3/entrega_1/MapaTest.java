@@ -181,7 +181,7 @@ public class MapaTest {
         pasarelas.add(new Pasarela(new Posicion(3,1)));
         Mapa mapa = new Mapa(pasarelas, null, null);
 
-        List<Pasarela> pasarelasConEnemigos = mapa.obtenerPasarelasConEnemigos();
+        List<Pasarela> pasarelasConEnemigos = mapa.obtenerPasarelas();
 
         for (Pasarela p : pasarelasConEnemigos) {
             assertTrue(p.contieneEnemigosVivos());

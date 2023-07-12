@@ -33,7 +33,7 @@ public class Mapa extends Observable implements Turneable {
         return false;
     }
 
-    public List<Pasarela> obtenerPasarelasConEnemigos() {
+    public List<Pasarela> obtenerPasarelas() {
         List<Pasarela> pasarelasConEnemigos = this.pasarelas.stream().
                 filter(pasarela -> pasarela.contieneEnemigosVivos()).
                 collect(Collectors.toList());
@@ -75,7 +75,7 @@ public class Mapa extends Observable implements Turneable {
     public Pasarela getPasarelaFinal(){ return this.pasarelas.get( this.pasarelas.size() - 1 ); }
 
     public void reseteaAlosEnemigos(){
-        List<Pasarela> listPasarelas = obtenerPasarelasConEnemigos();
+        List<Pasarela> listPasarelas = obtenerPasarelas();
         for(Pasarela pasarela : listPasarelas){
             pasarela.resetearTurnoEnemigos();
         }
