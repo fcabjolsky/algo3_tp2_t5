@@ -4,17 +4,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Jugador {
+public class Jugador extends Observable implements Turneable{
     private int vida = 20;
     private int creditos = 100;
     private List <Defensa> defensas = new ArrayList();
+    private String nombre;
 
-    public Jugador() {
+    private int observadorDanio = 2;
+    private int observadorCreditos = 1;
+
+
+    public Jugador(String unNombre) {
+        if (!this.validarNombre(unNombre)) {
+            throw new NombreInvalido();
+        }
     }
 
-    public Jugador(int vida, int creditos) {
+    public Jugador(int vida, int creditos, String unNombre) {
         this.vida = vida;
         this.creditos = creditos;
+        if (!this.validarNombre(unNombre)) {
+            throw new NombreInvalido();
+        }
+    }
+
+    public void agregarObservadores(Observador observadorCreditos, Observador observadorDanio){
+        this.agregarObservador(observadorCreditos);
+        this.agregarObservador(observadorDanio);
+    }
+
+    private boolean validarNombre(String unNombre) {
+        if (unNombre.trim().length() >= 6) {
+            this.nombre = unNombre;
+            return true;
+        }
+        return false;
     }
 
     public int getVida() {
@@ -29,17 +53,9 @@ public class Jugador {
       return (costo <= this.creditos);
     }
     
-    public void construir(Defensa defensa, Posicion posicion){
-        if (defensa.puedeConstruir(this.creditos)) {
-            Defensa nuevaDefensa = defensa.construir(this, posicion);
-            defensas.add(nuevaDefensa);
-        }
-        else{
-            throw new NoDisponeDeSuficientesCreditos();
-        }
-    }
 
     public void sumarCreditos(int creditos){
+        this.notificarObservador(creditos, this.observadorCreditos);
         this.creditos += creditos;
     }
 
@@ -48,7 +64,12 @@ public class Jugador {
     }
 
     public void perderVida(int danio){
+        this.notificarObservador(danio, this.observadorDanio);
         this.vida -= danio;
+        this.notificarObservadores("Jugador recibe danio: " + danio + ", vida restante: " + this.vida);
+        if(this.vida <= 0){
+            notificarObservadores("Perdiste");
+        }
     }
 
     public boolean equals(Object jugador) {
@@ -58,7 +79,7 @@ public class Jugador {
         }
         return false;
     }
-  
+
     public boolean estaMuerto() {
        return this.vida <= 0;
     }
@@ -66,4 +87,27 @@ public class Jugador {
     public List<Defensa> obtenerDefensas() {
         return this.defensas;
     }
+
+    public void construirDefensa(Defensa nuevaDefensa) {
+        if (nuevaDefensa.puedeConstruir(this.creditos)) {
+            this.notificarObservadores("Agregando defensa: " + nuevaDefensa.toString());
+            nuevaDefensa.construir(this);
+            defensas.add(nuevaDefensa);
+        }
+        else{
+            throw new NoDisponeDeSuficientesCreditos();
+        }
+    }
+
+    public void avanzarTurno() {
+        for (Defensa defensa : this.defensas) {
+            defensa.avanzarTurno();
+        }
+    }
+
+    @Override
+    public String toString(){
+        return this.nombre;
+    }
+
 }

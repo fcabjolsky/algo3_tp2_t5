@@ -5,11 +5,11 @@ public class Posicion {
 
     private int coordenadaY;
 
-    private int getCoordenadaX() {
+    public int getCoordenadaX() {
        return this.coordenadaX;
     }
 
-    private int getCoordenadaY() {
+    public int getCoordenadaY() {
         return this.coordenadaY;
     }
 
@@ -22,5 +22,10 @@ public class Posicion {
         float componenteX =(float)Math.pow(this.getCoordenadaX() - otraPosicion.getCoordenadaX(), 2);
         float componenteY =(float)Math.pow(this.getCoordenadaY() - otraPosicion.getCoordenadaY(), 2);
         return (float)Math.sqrt(componenteX + componenteY);
+    }
+
+    @Override
+    public String toString() {
+        return ("(" + this.coordenadaX + " , " + this.coordenadaY + ")");
     }
 }

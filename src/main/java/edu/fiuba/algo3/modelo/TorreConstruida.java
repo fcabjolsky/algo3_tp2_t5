@@ -1,20 +1,12 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-public class TorreConstruida implements EstadoTorre{
+public class TorreConstruida extends Observable implements EstadoTorre {
 
     @Override
-    public void defender(Mapa mapa, int danio, Rango rango) {
-        List<Enemigo> enemigos = mapa.obtenerEnemigosEnRango(rango);
-        enemigos = enemigos
-                .stream()
-                .filter(enemigo -> !enemigo.estaMuerta())
-                .collect(Collectors.toList());
-        if (!enemigos.isEmpty()) {
-            enemigos.get(0).recibirDanio(danio);
-        }
+    public void defender(Pasarela pasarela, int danio) {
+        this.notificarObservadores("Torre ataca a enemigo en posicion " + pasarela.getPosicion().toString());
+        this.notificarObservadores(pasarela);
+        pasarela.obtenerEnemigoADaniar().recibirDanio(danio);
     }
 
     @Override

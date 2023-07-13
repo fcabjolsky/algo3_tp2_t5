@@ -8,18 +8,27 @@ public class TorreBlanca extends Torre {
         this.rango = new Rango(3, posicion);
     }
 
+    public TorreBlanca(Posicion posicion, Observador observador) {
+        super(1, 10, 1, observador);
+        this.rango = new Rango(3, posicion);
+    }
     public TorreBlanca() {
         super(1, 10, 1);
     }
 
-    public Defensa construir(Jugador jugador, Posicion posicion) {
-        TorreBlanca torreADevolver = new TorreBlanca(posicion);
+    public Defensa construir(Jugador jugador) {
         if (jugador.puedeConstruir(super.costo)){
             jugador.restarCreditos(super.costo);
-             return (new TorreBlanca(posicion));
+            this.empezarAConstruir();
+            return this;
         }else{
             throw new NoDisponeDeSuficientesCreditos();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Torre Blanca";
     }
 
 }

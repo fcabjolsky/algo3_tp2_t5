@@ -1,18 +1,14 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.Posicion;
-
 import java.util.ArrayList;
 
-import java.util.Collection;
-
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class Pasarela {
-
-  private List<Enemigo> enemigos;
-
-  private Posicion posicion;
+public class Pasarela implements Transitable, Turneable{
+  	private List<Enemigo> enemigos;
+  	private Posicion posicion;
 
 	public Pasarela(Posicion posicion) {
 		this.posicion = posicion;
@@ -23,58 +19,97 @@ public class Pasarela {
 		return false;
 	}
 
-	public Posicion getPosicion() {
-		return this.posicion;
-	}
-
 	public boolean contieneEnemigos() {
-		if (this.enemigos.isEmpty()) {
-			return false;
-		}
-		else {
-			for (Enemigo enemigo : this.enemigos) {
-				if (!enemigo.estaMuerta()) {
+		return !this.enemigos.isEmpty();
+	}
+
+	public boolean contieneEnemigosVivos() {
+		for (Enemigo enemigo : this.enemigos) {
+			if (!enemigo.estaMuerta()) {
 					return true;
-				}
 			}
-			return false;
 		}
+		return false;
 	}
 
-	public void agregarEnemigo(Enemigo enemigo){
+	@Override
+	public int recolectarRecompensas() {
+		int recompensaTotal = 0;
+		for (Enemigo enemigo : this.enemigos) {
+			recompensaTotal += enemigo.morir();
+		}
+		return recompensaTotal;
+	}
+
+	public void recibirEnemigo(Enemigo enemigo){
 		this.enemigos.add(enemigo);
-		enemigo.avanzar(this.posicion);
+		enemigo.notificarObservadores(enemigo.toString() + " se movio a " + this.posicion.toString());
+		enemigo.notificarObservadores(this.posicion);
 	}
 
-	public void moverEnemigosA(Pasarela otraPasarela){
-		List<Enemigo> enMovimiento = new ArrayList<>();
-		List<Enemigo> estaticos = new ArrayList<>();
+	public boolean laCantidadDeEnemigosEsIgualA(int numeroDeEnemigos){
+		return ((int)enemigos.size() == numeroDeEnemigos);
+	}
 
-		for (Enemigo enemigo : enemigos){
-			if(enemigo.enMovimiento()){
-				enMovimiento.add(enemigo);
-			}else{
-				estaticos.add(enemigo);
+    public boolean defensaEstaEnRango(Defensa defensa) {
+		return defensa.estaEnRango(this.posicion);
+    }
+
+	public Enemigo obtenerEnemigoADaniar() {
+		int i = 0;
+		if(!this.enemigos.isEmpty()) {
+
+		}
+		Enemigo enemigo = this.enemigos.get(i);
+		while (enemigo.estaMuerta()) {
+			i++;
+			enemigo = this.enemigos.get(i);
+		}
+		return enemigo;
+	}
+
+
+	public void moverEnemigosA(Transitable siguienteParcela) {
+		if(siguienteParcela==null){
+			Iterator<Enemigo> enemigosAeliminar = this.enemigos.iterator();
+			while(enemigosAeliminar.hasNext()){
+				Enemigo e = enemigosAeliminar.next();
+				this.enemigos.remove(e);
 			}
 		}
-
-		for (Enemigo enemigo : enMovimiento){
-			otraPasarela.agregarEnemigo(enemigo);
+		List<Enemigo> enemigosQuePuedenSeguirMoviendose = this.enemigos.stream().
+				filter(enemigo -> enemigo.sePuedeMover()).
+				collect(Collectors.toList());
+		Iterator<Enemigo> iterador = enemigosQuePuedenSeguirMoviendose.iterator();
+		while (iterador.hasNext()) {
+			Enemigo e = iterador.next();
+			e.avanzar(siguienteParcela);
+			this.enemigos.remove(e);
 		}
-
-		this.enemigos = estaticos;
-
-		for (Enemigo enemigo : enemigos){
-			enemigo.resetearAvance();
-		}
-
 	}
 
-	public boolean estaEnRango(Rango unRango) {
-		return unRango.estaEnRango(this.posicion);
+
+	@Override
+	public void avanzarTurno() {
+		for (Enemigo enemigo : this.enemigos) {
+			enemigo.avanzarTurno();
+		}
 	}
 
-	public List<Enemigo> obtenerEnemigos() {
-		return this.enemigos;
+	public void daniarJugador(Jugador j) {
+		for(Enemigo e : this.enemigos){
+			j.perderVida(e.atacar());
+		}
+	}
+
+	public void resetearTurnoEnemigos(){
+		for(Enemigo enemigo : this.enemigos){
+				enemigo.avanzarTurno();
+		}
+	}
+
+	public Posicion getPosicion() {
+		return posicion;
 	}
 }
+

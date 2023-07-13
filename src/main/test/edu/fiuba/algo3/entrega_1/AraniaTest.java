@@ -1,24 +1,16 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.Arania;
-import edu.fiuba.algo3.modelo.EnemigoMuerto;
-import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.Rango;
-import edu.fiuba.algo3.modelo.Pasarela;
+import edu.fiuba.algo3.modelo.*;
 
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AraniaTest {
     @Test
     public void recibirDanioDosMataLaArania() {
-        Arania arania = new Arania(new Posicion(0, 0));
+        Arania arania = new Arania();
 
         arania.recibirDanio(2);
 
@@ -27,7 +19,7 @@ public class AraniaTest {
 
     @Test
     public void recibirDanioUnoNoMataLaArania() {
-        Arania arania = new Arania(new Posicion(0, 0));
+        Arania arania = new Arania();
 
         arania.recibirDanio(1);
 
@@ -36,7 +28,7 @@ public class AraniaTest {
 
     @Test
     public void recibirDanioCeroNoMataLaArania() {
-        Arania arania = new Arania(new Posicion(0, 0));
+        Arania arania = new Arania();
 
         arania.recibirDanio(0);
 
@@ -44,44 +36,74 @@ public class AraniaTest {
     }
 
     @Test
-    public void recibirDanioEnAraniaMuertaLanzaExcepcion() {
-        Arania arania = new Arania(new Posicion(0, 0));
+    public void unaAraniaAtacaCorrectamenteCausandoDosDeDanio() {
+        Arania arania = new Arania();
 
-        arania.recibirDanio(2);
-
-        assertThrows(EnemigoMuerto.class, () -> arania.recibirDanio(2));
+        assertEquals(arania.atacar(), 2);
     }
+
     @Test
-    public void araniaEnRangoDevuelveTrue() {
-        Posicion p = new Posicion(0, 0);
+    public void laAraniaLuegoDeAtacarUnaVezQuedaEnEstadoEliminadoYPorEndeAlAtacarUnaSegundaVezDevuelveDanioCero(){
+        Arania arania = new Arania();
 
-        Arania arania = new Arania(p);
-        Rango r = Mockito.mock(Rango.class);
-        when(r.estaEnRango(p)).thenReturn(true);
+        arania.atacar();
 
-        assert(arania.estaEnRango(r));
+        assertEquals(arania.atacar(), 0);
     }
+
+
     @Test
-    public void araniaQueNoEstaEnRangoDevuelveFalse() {
-        Posicion p = new Posicion(0, 0);
+    public void unaAraniaMuertaDevuelveCorrectamenteLaRecompensa() {
+        Arania arania = new Arania();
+        arania.nuevoEstado(new EstadoMuerto());
 
-        Arania arania = new Arania(p);
-        Rango r = Mockito.mock(Rango.class);
-        when(r.estaEnRango(p)).thenReturn(false);
+        int recompensaEsperada = arania.morir();
 
-        assertFalse(arania.estaEnRango(r));
+        assertTrue(recompensaEsperada >= 1 && recompensaEsperada <= 10);
     }
+
     @Test
-    public void araniaSeMueveApasarelaCorrespondiente() {
-	    Posicion p0 = new Posicion(0, 0);
-		Posicion p2 = new Posicion(2,0);
-		
-		Pasarela pasarelaLargada = new Pasarela(p0);
-		Pasarela pasarelaSiguiente = new Pasarela(p2);
-		
-		Arania arania = new Arania(p0);
-		
-		arania.avanzar(p2);
-		assertEquals(pasarelaSiguiente.getPosicion(), arania.getPosicion());
+    public void unaAraniaVivaDevuelveRecompensa0PuesSoloLasAraniasMuertasDevuelvenRecompensa() {
+        Arania arania = new Arania();
+
+        int recompensaEsperada = arania.morir();
+
+        assertEquals(recompensaEsperada, 0);
     }
+
+    @Test
+    public void araniaAvanzaUnaParcelaCorrectamente() {
+        Pasarela pasarelaLargada = new Pasarela(new Posicion(0, 0));
+        Pasarela pasarelaSiguiente = new Pasarela(new Posicion(1,0));
+        Arania arania = new Arania();
+        pasarelaLargada.recibirEnemigo(arania);
+
+        arania.avanzar(pasarelaSiguiente);
+
+        assertTrue(pasarelaSiguiente.contieneEnemigosVivos());
+    }
+
+    @Test
+    public void unaAraniaSeMueveDosPasarelasPeroNoSeMueveAUnaTercerPasarela() {
+        Pasarela pasarelaLargada = new Pasarela(new Posicion(0,0));
+        Pasarela pasarela1 = new Pasarela(new Posicion(1,0));
+        Pasarela pasarela2 = new Pasarela(new Posicion(2,0));
+        Pasarela pasarela3 = new Pasarela(new Posicion(3,0));
+
+        Arania arania = new Arania();
+        pasarelaLargada.recibirEnemigo(arania);
+
+        arania.avanzar(pasarela1);
+        arania.avanzar(pasarela2);
+        arania.avanzar(pasarela3);
+
+        assertFalse(pasarela3.contieneEnemigosVivos());
+    }
+
+    @Test
+    public void toStringDevuelveElIdentificadorDelEnemigo() {
+        Arania arania = new Arania();
+        assertEquals("Arania", arania.toString());
+    }
+
 }

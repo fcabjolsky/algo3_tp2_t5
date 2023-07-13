@@ -1,13 +1,14 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class Mapa {
-    private Enemigo enemigo1;
+public class Mapa extends Observable implements Turneable {
+
     private List<Pasarela> pasarelas;
     private List<Rocoso> rocosos;
     private List<Tierra> tierras;
+
 
     public Mapa(List<Pasarela> pasarelas, List<Rocoso> rocosos, List<Tierra> tierras) {
         this.pasarelas = pasarelas;
@@ -15,32 +16,71 @@ public class Mapa {
         this.tierras = tierras;
     }
 
-    public void agregarEnemigo(Enemigo enemigo1) {
-        pasarelas.get(0).agregarEnemigo(enemigo1);
-    }
-
-    public void pasarTurno() {
-        for (int i = 0; i < pasarelas.size()-1; i++){
-            pasarelas.get(i).moverEnemigosA(pasarelas.get(i+1));
-        }
-    }
-
-    public List<Enemigo> obtenerEnemigosEnRango(Rango unRango) {
-        List<Enemigo> enemigos = new ArrayList<>();
-        for (Pasarela pasarela:this.pasarelas) {
-            if (pasarela.estaEnRango(unRango)) {
-                enemigos.addAll(pasarela.obtenerEnemigos());
-            }
-        }
-        return enemigos;
+    public void agregarEnemigo(Enemigo enemigo) {
+        this.notificarObservadores(pasarelas.stream().findFirst().get().getPosicion());
+        enemigo.replicarObservadores(this);
+        this.notificarObservadores(enemigo);
+        this.notificarObservadores("Agregando enemigo: " + enemigo.toString());
+        pasarelas.stream().findFirst().get().recibirEnemigo(enemigo);
     }
 
     public boolean contieneEnemigos() {
-        for(Pasarela pasarela : this.pasarelas) {
-            if(pasarela.contieneEnemigos()) {
+        for (Pasarela pasarela : this.pasarelas) {
+            if (pasarela.contieneEnemigosVivos()) {
                 return true;
             }
         }
         return false;
     }
+
+    public List<Pasarela> obtenerPasarelasConEnemigos() {
+        List<Pasarela> pasarelasConEnemigos = this.pasarelas.stream().
+                filter(pasarela -> pasarela.contieneEnemigosVivos()).
+                collect(Collectors.toList());
+        return pasarelasConEnemigos;
+    }
+
+    public List<Transitable> obtenerParcelasTransitables() {
+        List<Transitable> parcelasTransitables = this.pasarelas.stream()
+                .filter(parcela -> parcela instanceof Transitable)
+                .map(parcela -> (Transitable) parcela)
+                .collect(Collectors.toList());
+        return parcelasTransitables;
+
+    }
+
+    public List<Rocoso> getRocoso() {
+        return this.rocosos;
+    }
+
+    public List<Tierra> getTierra() {
+        return this.tierras;
+    }
+
+    public List<Pasarela> getPasarelas() {
+        return this.pasarelas;
+    }
+
+    @Override
+    public void avanzarTurno() {
+        List<Turneable> parcelasTurneables = this.pasarelas.stream()
+                .filter(parcela -> parcela instanceof Turneable)
+                .map(parcela -> (Turneable) parcela)
+                .collect(Collectors.toList());
+        for (Turneable parcela : parcelasTurneables) {
+            parcela.avanzarTurno();
+        }
+    }
+
+    public Pasarela getPasarelaFinal(){ return this.pasarelas.get( this.pasarelas.size() - 1 ); }
+
+    public void reseteaAlosEnemigos(){
+        List<Pasarela> listPasarelas = obtenerPasarelasConEnemigos();
+        for(Pasarela pasarela : listPasarelas){
+            pasarela.resetearTurnoEnemigos();
+        }
+    }
+
+
+
 }
