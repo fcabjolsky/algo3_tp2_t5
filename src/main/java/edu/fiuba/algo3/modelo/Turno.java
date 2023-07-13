@@ -27,8 +27,6 @@ public class Turno extends Observable implements Turneable {
 
 
     private void moverEnemigos() {
-        //this.mapa.moverEnemigos();
-
         ProcesoDeMovimiento procesoDeMovimiento = new ProcesoDeMovimiento();
         procesoDeMovimiento.procesarMovimiento(this.mapa.obtenerParcelasTransitables());
 
