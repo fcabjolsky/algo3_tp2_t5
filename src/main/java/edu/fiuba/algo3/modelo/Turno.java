@@ -1,5 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.defensa.Defensa;
+import edu.fiuba.algo3.modelo.enemigo.ContadorDeMuertesDeHormiga;
+
+import java.util.Iterator;
 import java.util.List;
 
 public class Turno extends Observable implements Turneable {
@@ -44,9 +48,15 @@ public class Turno extends Observable implements Turneable {
     }
 
     private void defenderseDeEnemigos() {
-        ProcesoDeDefensa procesoDeDefensa = new ProcesoDeDefensa();
-        procesoDeDefensa.procesarDefensa(this.mapa.obtenerPasarelas(), this.jugador.obtenerDefensas());
-
+        List<Defensa> defensas = this.jugador.obtenerDefensas();
+        Iterator<Pasarela> pasarelasIterador = this.mapa.getPasarelas().iterator();
+        for (Defensa defensa : defensas) {
+            while (pasarelasIterador.hasNext()) {
+                Pasarela pasarela = pasarelasIterador.next();
+                pasarela.daniarEnemigo(defensa);
+            }
+            pasarelasIterador = this.mapa.getPasarelas().iterator();
+        }
     }
 
     private void construirDefensas() {

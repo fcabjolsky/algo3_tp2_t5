@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.refactor_1;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.enemigo.Arania;
+import edu.fiuba.algo3.modelo.enemigo.Hormiga;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

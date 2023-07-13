@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.defensa.Defensa;
+import edu.fiuba.algo3.modelo.enemigo.Enemigo;
+
 import java.util.ArrayList;
 
 import java.util.Iterator;
@@ -49,23 +52,9 @@ public class Pasarela implements Transitable, Turneable{
 		return ((int)enemigos.size() == numeroDeEnemigos);
 	}
 
-    public boolean defensaEstaEnRango(Defensa defensa) {
+    private boolean defensaEstaEnRango(Defensa defensa) {
 		return defensa.estaEnRango(this.posicion);
     }
-
-	public Enemigo obtenerEnemigoADaniar() {
-		int i = 0;
-		if(!this.enemigos.isEmpty()) {
-
-		}
-		Enemigo enemigo = this.enemigos.get(i);
-		while (enemigo.estaMuerta()) {
-			i++;
-			enemigo = this.enemigos.get(i);
-		}
-		return enemigo;
-	}
-
 
 	public void moverEnemigosA(Transitable siguienteParcela) {
 		if(siguienteParcela==null){
@@ -105,10 +94,15 @@ public class Pasarela implements Transitable, Turneable{
 				enemigo.avanzarTurno();
 		}
 	}
-
-	public void eliminarEnemigos(){
-		this.enemigos.clear();
+	public void daniarEnemigo(Defensa defensa) {
+		if(this.defensaEstaEnRango(defensa)) {
+			if (!this.enemigos.isEmpty() && this.contieneEnemigosVivos()) {
+				Enemigo primerEnemigoVivo = this.enemigos.
+						stream().
+						filter(enemigo -> !enemigo.estaMuerta()).findFirst().get();
+				defensa.defender(primerEnemigoVivo);
+			}
+		}
 	}
-
 }
 

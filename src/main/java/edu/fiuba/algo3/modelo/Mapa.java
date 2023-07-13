@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.enemigo.Enemigo;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,10 +36,7 @@ public class Mapa extends Observable implements Turneable {
     }
 
     public List<Pasarela> obtenerPasarelas() {
-        List<Pasarela> pasarelasConEnemigos = this.pasarelas.stream().
-                filter(pasarela -> pasarela.contieneEnemigosVivos()).
-                collect(Collectors.toList());
-        return pasarelasConEnemigos;
+        return this.pasarelas;
     }
 
     public List<Transitable> obtenerParcelasTransitables() {
@@ -80,10 +79,5 @@ public class Mapa extends Observable implements Turneable {
             pasarela.resetearTurnoEnemigos();
         }
     }
-
-    /*public void moverEnemigos(){
-        filtrar pasarelas con enemigos
-        por cada pasarela se pasa a si mismo
-    }*/
 
 }

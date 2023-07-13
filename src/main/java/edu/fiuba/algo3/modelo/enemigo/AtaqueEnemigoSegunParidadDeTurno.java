@@ -1,4 +1,7 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.enemigo;
+
+import edu.fiuba.algo3.modelo.ContadorDeTurno;
+import edu.fiuba.algo3.modelo.enemigo.AtaqueEnemigo;
 
 public class AtaqueEnemigoSegunParidadDeTurno implements AtaqueEnemigo {
 

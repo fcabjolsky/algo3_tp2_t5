@@ -1,6 +1,10 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.defensa.Torre;
+import edu.fiuba.algo3.modelo.defensa.TorreBlanca;
+import edu.fiuba.algo3.modelo.defensa.TorrePlateada;
+import edu.fiuba.algo3.modelo.enemigo.Hormiga;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -16,9 +20,7 @@ public class DefensaTest {
        Pasarela unaPasarela = new Pasarela(new Posicion(2 ,1));
        unaPasarela.recibirEnemigo(new Hormiga());
 
-       if(unaPasarela.defensaEstaEnRango(defensa)) {
-           defensa.defender(unaPasarela.obtenerEnemigoADaniar());
-       }
+       unaPasarela.daniarEnemigo(defensa);
 
        assertFalse(unaPasarela.contieneEnemigosVivos());
     }
@@ -31,9 +33,7 @@ public class DefensaTest {
         Pasarela unaPasarela = new Pasarela(new Posicion(7 ,1));
         unaPasarela.recibirEnemigo(new Hormiga());
 
-        if(unaPasarela.defensaEstaEnRango(defensa)) {
-            defensa.defender(unaPasarela.obtenerEnemigoADaniar());
-        }
+        unaPasarela.daniarEnemigo(defensa);
 
         assert(unaPasarela.contieneEnemigosVivos());
     }
@@ -46,9 +46,7 @@ public class DefensaTest {
         Pasarela unaPasarela = new Pasarela(new Posicion(2 ,1));
         unaPasarela.recibirEnemigo(new Hormiga());
 
-        if(unaPasarela.defensaEstaEnRango(defensa)) {
-            defensa.defender(unaPasarela.obtenerEnemigoADaniar());
-        }
+        unaPasarela.daniarEnemigo(defensa);
 
         assertFalse(unaPasarela.contieneEnemigosVivos());
     }
@@ -61,9 +59,7 @@ public class DefensaTest {
         Pasarela unaPasarela = new Pasarela(new Posicion(7 ,1));
         unaPasarela.recibirEnemigo(new Hormiga());
 
-        if(unaPasarela.defensaEstaEnRango(defensa)) {
-            defensa.defender(unaPasarela.obtenerEnemigoADaniar());
-        }
+        unaPasarela.daniarEnemigo(defensa);
 
         assert(unaPasarela.contieneEnemigosVivos());
     }

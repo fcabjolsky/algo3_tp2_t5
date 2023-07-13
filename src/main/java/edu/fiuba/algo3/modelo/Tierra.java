@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.defensa.Defensa;
+
 public class Tierra implements Turneable {
 	
 	private Defensa defensa;

@@ -1,6 +1,10 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.defensa.Defensa;
+import edu.fiuba.algo3.modelo.defensa.Torre;
+import edu.fiuba.algo3.modelo.defensa.TorreBlanca;
+import edu.fiuba.algo3.modelo.enemigo.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,14 +22,12 @@ public class PasarelaTest {
 	}
 	@Test
     public void noEsPosibleConstruirDefesasSobrePasarela() {
-    	//Arrange
       Posicion p = new Posicion(0,0);
-		  Torre unaTorreBlanca = new TorreBlanca();
-    	Pasarela nuevoRocoso = new Pasarela(p);
+	  Torre unaTorreBlanca = new TorreBlanca(new Posicion(1,1));
+	  Pasarela nuevoRocoso = new Pasarela(p);
     	    	
-    	//Act - Assert
-    	
-    	assertFalse(nuevoRocoso.agregarDefensa(unaTorreBlanca));
+
+	  assertFalse(nuevoRocoso.agregarDefensa(unaTorreBlanca));
     }
 
 	@Test
@@ -48,43 +50,6 @@ public class PasarelaTest {
 		boolean resultado = pasarela.contieneEnemigosVivos();
 
 		assertFalse(resultado);
-	}
-
-	@Test
-	public void unaPasarelaDevuelveCorrectamenteElEnemigoADaniar() {
-		Pasarela pasarela = new Pasarela(new Posicion(1,1));
-		Enemigo hormigaMuerta = new Hormiga();
-		hormigaMuerta.recibirDanio(1);
-		pasarela.recibirEnemigo(hormigaMuerta);
-		Enemigo araniaSobreviviente = new Arania();
-		araniaSobreviviente.recibirDanio(1);
-		pasarela.recibirEnemigo(araniaSobreviviente);
-
-		Enemigo araniaSobrevivienteEsperada = pasarela.obtenerEnemigoADaniar();
-
-		assertFalse(araniaSobrevivienteEsperada.estaMuerta());
-	}
-
-	@Test
-	public void unaPasarelaDevuelveFalsoSiUnaDefensaNoEstaEnSuRango() {
-		Pasarela pasarela = new Pasarela(new Posicion(0,0));
-		Defensa torre = new TorreBlanca(new Posicion(6,0));
-
-		boolean resultado = pasarela.defensaEstaEnRango(torre);
-
-		assertFalse(resultado);
-
-	}
-
-	@Test
-	public void unaPasarelaDevuelveVerdaderoSiUnaDefensaNoEstaEnSuRango() {
-		Pasarela pasarela = new Pasarela(new Posicion(0,0));
-		Defensa torre = new TorreBlanca(new Posicion(2,0));
-
-		boolean resultado = pasarela.defensaEstaEnRango(torre);
-
-		assertTrue(resultado);
-
 	}
 
 	@Test

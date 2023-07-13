@@ -1,15 +1,15 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.defensa;
 
-public class TorrePlateada extends Torre{
+import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.NoDisponeDeSuficientesCreditos;
+import edu.fiuba.algo3.modelo.Posicion;
+
+public class TorrePlateada extends Torre {
 
     public TorrePlateada (Posicion posicion){
-        super(2, 20, 2);
-        this.rango = new Rango(5, posicion);
+        super(2, 20, new SistemaDeDefensa(2,  new Rango(5, posicion)));
     }
 
-    public TorrePlateada() {
-        super(2, 20, 2);
-    }
 
     public Defensa construir(Jugador jugador) {
         if (jugador.puedeConstruir(super.costo)){

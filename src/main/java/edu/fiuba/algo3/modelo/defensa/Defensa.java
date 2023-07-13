@@ -1,4 +1,8 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.defensa;
+
+import edu.fiuba.algo3.modelo.enemigo.Enemigo;
+import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.Posicion;
 
 public interface Defensa {
 

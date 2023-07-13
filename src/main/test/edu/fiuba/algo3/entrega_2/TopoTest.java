@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.enemigo.Topo;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;

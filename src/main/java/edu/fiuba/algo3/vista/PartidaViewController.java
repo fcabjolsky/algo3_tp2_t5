@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.vista;
 
 
-import edu.fiuba.algo3.modelo.Hormiga;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

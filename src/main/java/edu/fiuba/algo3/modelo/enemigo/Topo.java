@@ -1,15 +1,14 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.enemigo;
 
-public class Topo extends Enemigo{
+import edu.fiuba.algo3.modelo.Contador;
+import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.Transitable;
+
+public class Topo extends Enemigo {
     Contador cantidadMovimientos;
     public Topo(){
-        super();
+        super(2, 1,1 , new AtaqueEnemigoSegunParidadDeTurno());
         this.cantidadMovimientos = new Contador();
-        this.velocidad = 1;
-        this.estado = new EnMovimiento(this.velocidad);
-        this.ataqueEnemigo = new AtaqueEnemigoSegunParidadDeTurno();
-        this.danio = 2;
-        this.energia = 1;
     }
 
     @Override
@@ -37,4 +36,8 @@ public class Topo extends Enemigo{
         }
     }
 
+    @Override
+    public String toString() {
+        return "Topo";
+    }
 }
