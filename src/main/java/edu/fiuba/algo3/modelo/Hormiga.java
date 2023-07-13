@@ -24,11 +24,15 @@ public class Hormiga extends Enemigo {
 
     @Override
     public int darRecompensa() {
+        int recompensa;
         this.contadorDeMuertesDeHormiga.incrementar();
         if (this.contadorDeMuertesDeHormiga.esMayorA(10)) {
-            return 2;
+            recompensa = 2;
+        }else{
+            recompensa = 1;
         }
-        return 1;
+        this.notificarObservadores("Jugador recibe " + recompensa + " creditos");
+        return recompensa;
     }
 
     @Override

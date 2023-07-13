@@ -10,17 +10,19 @@ public class IntegracionTest {
     @Test
     public void simularUnaPartidaCompletaPerdida() {
         //Inicializacions
+
         Logger logger = new Logger();
 
         Jugador jugador = new Jugador("Jugador1");
         Mapa mapa = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json").crearMapa();
-        Turno turno = new Turno(jugador, mapa);
+        Turno turno = new Turno(jugador, mapa, new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json", mapa));
 
         jugador.agregarObservador(logger);
         mapa.agregarObservador(logger);
         turno.agregarObservador(logger);
 
-        Partida partida = new Partida(mapa, jugador, turno);
+        Partida partida = new Partida(turno);
+        partida.agregarObservador(logger);
 
 
         //primer turno no construyo torres
@@ -44,15 +46,14 @@ public class IntegracionTest {
 
         Jugador jugador = new Jugador("Jugador1");
         Mapa mapa = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json").crearMapa();
-        Turno turno = new Turno(jugador, mapa);
+        Turno turno = new Turno(jugador, mapa, new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json", mapa));
 
         jugador.agregarObservador(logger);
         mapa.agregarObservador(logger);
         turno.agregarObservador(logger);
 
-        Partida partida = new Partida(mapa, jugador, turno);
+        Partida partida = new Partida(turno);
         partida.agregarObservador(logger);
-
 
         //primer turno no construyo torres
         partida.avanzarTurno();
@@ -109,33 +110,23 @@ public class IntegracionTest {
 
         Jugador jugador = new Jugador("Jugador1");
         Mapa mapa = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json").crearMapa();
-        Turno turno = new Turno(jugador, mapa);
+        Turno turno = new Turno(jugador, mapa, new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json", mapa));
 
         jugador.agregarObservador(logger);
         mapa.agregarObservador(logger);
         turno.agregarObservador(logger);
 
-        Partida partida = new Partida(mapa, jugador, turno);
+        Partida partida = new Partida(turno);
+        partida.agregarObservador(logger);
 
 
-        //primer turno
-        jugador.construirDefensa(new TorrePlateada(new Posicion(0,7)));
-        partida.avanzarTurno();
-        //segundo turno construyo una torre
-        // Aca se necesita instancear una defejnsa
-        jugador.construirDefensa(new TorrePlateada(new Posicion(1,9)));
-        partida.avanzarTurno();
+        jugador.construirDefensa(new TorrePlateada(new Posicion(0,2)));
+        jugador.construirDefensa(new TorrePlateada(new Posicion(0,3)));
+        jugador.construirDefensa(new TorrePlateada(new Posicion(13,7)));
+        jugador.construirDefensa(new TorrePlateada(new Posicion(13,8)));
+        jugador.construirDefensa(new TorrePlateada(new Posicion(13,9)));
 
-        jugador.construirDefensa(new TorrePlateada(new Posicion(1,8)));
-        partida.avanzarTurno();
-
-        jugador.construirDefensa(new TorrePlateada(new Posicion(5,0)));
-        partida.avanzarTurno();
-
-        jugador.construirDefensa(new TorrePlateada(new Posicion(6,0)));
-        partida.avanzarTurno();
-
-        assertThrows(NoDisponeDeSuficientesCreditos.class, () -> jugador.construirDefensa(new TorrePlateada(new Posicion(0,0))));
+        assertThrows(NoDisponeDeSuficientesCreditos.class, () -> jugador.construirDefensa(new TorreBlanca(new Posicion(0,0))));
 
         partida.avanzarTurno();
         partida.avanzarTurno();
@@ -144,12 +135,7 @@ public class IntegracionTest {
         partida.avanzarTurno();
         partida.avanzarTurno();
         partida.avanzarTurno();
-        partida.avanzarTurno();
-        partida.avanzarTurno();
-        partida.avanzarTurno();
-        partida.avanzarTurno();
-        partida.avanzarTurno();
-        partida.avanzarTurno();
+
 
         assertDoesNotThrow(() -> jugador.construirDefensa(new TorreBlanca(new Posicion(0,0))));
     }

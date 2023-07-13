@@ -31,8 +31,9 @@ public class ControladorJuego implements Observador{
 
         this.jugadorModelo = new Jugador(nombreDeJugador);
         Mapa mapaModelo = new CreadorMapaJson("src/main/java/edu/fiuba/algo3/modelo/mapa.json").crearMapa();
-        Turno turnoModelo = new Turno(this.jugadorModelo, mapaModelo);
-        this.partidaModelo = new Partida(mapaModelo, this.jugadorModelo, turnoModelo);
+        Turno turnoModelo = new Turno(jugadorModelo, mapaModelo, new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json", mapaModelo));
+
+        this.partidaModelo = new Partida(turnoModelo);
 
         agregarObservadoresMapa(mapaModelo);
         agregarLogger(turnoModelo);

@@ -1,11 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.EstadoTorre;
-import edu.fiuba.algo3.modelo.TorreEnConstruccion;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
 public abstract class Torre extends Observable implements Defensa, Turneable {
     protected Rango rango;
     protected int danio;

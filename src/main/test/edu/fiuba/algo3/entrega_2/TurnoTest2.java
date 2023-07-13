@@ -22,7 +22,8 @@ public class TurnoTest2 {
         pasarelas.add(new Pasarela(new Posicion(1,2)));
         pasarelas.add(new Pasarela(new Posicion(2,2)));
         pasarelas.add(new Pasarela(new Posicion(3,2)));
-        Turno turno = new Turno(jugador, new Mapa(pasarelas, null, null));
+        Mapa mapa = new Mapa(pasarelas, null, null);
+        Turno turno = new Turno(jugador, mapa, new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json", mapa));
 
         turno.siguienteTurno();
 
@@ -39,7 +40,8 @@ public class TurnoTest2 {
         pasarelas.add(new Pasarela(new Posicion(1,2)));
         pasarelas.add(new Pasarela(new Posicion(2,2)));
         pasarelas.add(new Pasarela(new Posicion(3,2)));
-        Turno turno = new Turno(jugador, new Mapa(pasarelas, null, null));
+        Mapa mapa = new Mapa(pasarelas, null, null);
+        Turno turno = new Turno(jugador, mapa, new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json", mapa));
 
         turno.siguienteTurno();
 

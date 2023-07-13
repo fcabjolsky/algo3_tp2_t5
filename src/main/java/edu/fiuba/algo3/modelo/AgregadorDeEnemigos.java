@@ -13,8 +13,6 @@ public class AgregadorDeEnemigos {
 
     private Mapa mapa;
     private Map<String, EnemigoFactory> enemigosExistentes;
-    private int hormigasNuevas = 0;
-    private int araniasNuevas = 0;
 
     private String informacionDeEnemigos;
 
@@ -70,7 +68,6 @@ public class AgregadorDeEnemigos {
 
     private Enemigo crearEnemigo(String enemigo) {
         EnemigoFactory factory = this.enemigosExistentes.get(enemigo);
-        //depende del enemigo q seas mando o no el turno
         if (factory != null) {
             return factory.create();
         }

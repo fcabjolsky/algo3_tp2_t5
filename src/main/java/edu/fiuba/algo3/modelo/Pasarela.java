@@ -108,10 +108,6 @@ public class Pasarela implements Transitable, Turneable{
 		}
 	}
 
-	public void eliminarEnemigos(){
-		this.enemigos.clear();
-	}
-
 	public Posicion getPosicion() {
 		return posicion;
 	}
