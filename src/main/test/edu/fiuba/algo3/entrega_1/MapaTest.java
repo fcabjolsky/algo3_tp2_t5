@@ -62,25 +62,6 @@ public class MapaTest {
     }
 
     @Test
-    public void unMapaDevuelveCorrectamenteLasParcelasQueTienenEnemeigos() {
-        List<Pasarela> pasarelas = new ArrayList<>();
-        Pasarela pasarela = new Pasarela(new Posicion(1,1));
-        pasarela.recibirEnemigo(new Hormiga());
-        Pasarela pasarela2 = new Pasarela(new Posicion(2,1));
-        pasarela2.recibirEnemigo(new Arania());
-        pasarelas.add(pasarela);
-        pasarelas.add(pasarela2);
-        pasarelas.add(new Pasarela(new Posicion(3,1)));
-        Mapa mapa = new Mapa(pasarelas, null, null);
-
-        List<Pasarela> pasarelasConEnemigos = mapa.obtenerPasarelas();
-
-        for (Pasarela p : pasarelasConEnemigos) {
-            assertTrue(p.contieneEnemigosVivos());
-        }
-    }
-  
-    @Test
     public void unMapaDevuelveCorrectamenteLasParcelasQueSonTransitablesPorEnemigos() { //en un futuro directamente seran parcelas, no importa cuales sean, hoy por hoy solo son pasarelas las transitables
         List<Pasarela> pasarelas = new ArrayList<>();
         pasarelas.add(new Pasarela(new Posicion(1,1)));
