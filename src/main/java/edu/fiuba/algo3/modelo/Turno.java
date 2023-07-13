@@ -13,7 +13,6 @@ public class Turno extends Observable implements Turneable {
     public Turno(Jugador jugador, Mapa mapa, AgregadorDeEnemigos creadorDeEnemigos) {
         this.jugador = jugador;
         this.mapa = mapa;
-       //this.creadorEnemigos = new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json", this.mapa);
         this.creadorEnemigos = creadorDeEnemigos;
         this.contadorDeTurno = ContadorDeTurno.obtenerContador();
         this.inicializarContadores();
@@ -27,8 +26,6 @@ public class Turno extends Observable implements Turneable {
 
 
     private void moverEnemigos() {
-        //this.mapa.moverEnemigos();
-
         ProcesoDeMovimiento procesoDeMovimiento = new ProcesoDeMovimiento();
         procesoDeMovimiento.procesarMovimiento(this.mapa.obtenerParcelasTransitables());
 
@@ -49,13 +46,6 @@ public class Turno extends Observable implements Turneable {
         ProcesoDeDefensa procesoDeDefensa = new ProcesoDeDefensa();
         procesoDeDefensa.procesarDefensa(this.mapa.obtenerPasarelasConEnemigos(), this.jugador.obtenerDefensas());
 
-    }
-
-    private void construirDefensas() {
-        List<Defensa> defensas = this.jugador.obtenerDefensas();
-        for (Defensa defensa: defensas) {
-            defensa.avanzarTurno();
-        }
     }
 
     public void avanzarTurno() {

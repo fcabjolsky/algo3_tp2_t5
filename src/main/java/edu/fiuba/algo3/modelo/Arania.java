@@ -13,6 +13,7 @@ public class Arania extends Enemigo {
   
     public int darRecompensa(){
         int recompensa = (int)(Math.random()*10+1);
+        this.notificarObservadores("Jugador recibe " + recompensa + " creditos");
         return recompensa;
     }
 

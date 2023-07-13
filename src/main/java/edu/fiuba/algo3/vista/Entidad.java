@@ -38,8 +38,13 @@ public abstract class Entidad extends Rectangle{
                 });
         this.addEventHandler(MouseEvent.MOUSE_CLICKED,
                 e -> {
-                    System.out.println("parcela en posicion"+this.getLayoutX() + " "+ this.getLayoutY());
-                    asignarParcelaElegida();
+                    if (this instanceof TierraView){
+                        asignarParcelaElegida();
+                    }
+                    else{
+                        AlertaView parcelaInvalida = new AlertaView();
+                        parcelaInvalida.lanzarAlerta("No se puede construir en la parcela elegida");
+                    }
                 });
     }
 }

@@ -17,12 +17,12 @@ public class Mapa extends Observable implements Turneable {
     }
 
     public void agregarEnemigo(Enemigo enemigo) {
+        this.notificarObservadores(pasarelas.stream().findFirst().get().getPosicion());
         enemigo.replicarObservadores(this);
         this.notificarObservadores(enemigo);
         this.notificarObservadores("Agregando enemigo: " + enemigo.toString());
         pasarelas.stream().findFirst().get().recibirEnemigo(enemigo);
     }
-
 
     public boolean contieneEnemigos() {
         for (Pasarela pasarela : this.pasarelas) {
@@ -81,9 +81,6 @@ public class Mapa extends Observable implements Turneable {
         }
     }
 
-    /*public void moverEnemigos(){
-        filtrar pasarelas con enemigos
-        por cada pasarela se pasa a si mismo
-    }*/
+
 
 }

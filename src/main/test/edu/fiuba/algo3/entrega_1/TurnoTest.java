@@ -12,20 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TurnoTest {
     @Test
-    public void pasaUnTurnoYLosEnemigosSeMueven() { //creo que deberia ir en ProcesoDeMovimientoTest
-        /*Jugador jugador = new Jugador();
-        ArrayList<Pasarela> pasarelas = new ArrayList<Pasarela>();
-        pasarelas.add(new Pasarela(new Posicion(0, 0)));
-        pasarelas.add(new Pasarela(new Posicion(0, 1)));
-        Mapa mapa = new Mapa(pasarelas, new ArrayList<Rocoso>(), new ArrayList<Tierra>());
-
-        Enemigo enemigo1 = new Hormiga(new Posicion(0, 0));
-        mapa.agregarEnemigo(enemigo1);
-        Turno turno = new Turno(jugador, mapa);
-        turno.moverEnemigos();
-        Posicion nuevaPoscion = enemigo1.obtenerPosicion();
-
-        assertEquals(0, nuevaPoscion.calcularDistanciaA(new Posicion(0, 1)));*/
+    public void pasaUnTurnoYLosEnemigosSeMueven() {
         ArrayList<Pasarela> pasarelas = new ArrayList<Pasarela>();
         Pasarela pasarelaQueTendraEnemigos = new Pasarela(new Posicion(0,1));
         pasarelas.add(new Pasarela(new Posicion(0, 0)));

@@ -5,7 +5,7 @@ public abstract class Enemigo extends Observable {
 
     protected int velocidad;
 
-    protected Movible estado; //esto en un futuro puede ser un State dentro de Movimiento, ya que es un estado del mismo
+    protected Movible estado;
 
     protected int danio;
 
@@ -33,7 +33,7 @@ public abstract class Enemigo extends Observable {
 
     public int morir() {
         return this.estadoEnemigo.morir();
-    } //el nombre del mensaje morir() tal vez podria cambiar a uno mas representativo
+    }
 
     public abstract int darRecompensa();
 
@@ -46,10 +46,12 @@ public abstract class Enemigo extends Observable {
     }
 
     public int atacar(){
+        this.notificarObservadores("Enemigo llego al final");
         return this.estadoEnemigo.atacar();
     }
 
     public boolean sePuedeMover() {
        return this.estado.puedoSeguirMoviendome();
     }
+
 }

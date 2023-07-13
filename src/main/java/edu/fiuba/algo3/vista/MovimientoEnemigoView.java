@@ -4,7 +4,7 @@ import javafx.animation.TranslateTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class MovimientoEnemigoView {
+public class MovimientoEnemigoView implements Movimiento{
 
     private TranslateTransition movimiento;
     private Image imagenMovimiento;
@@ -15,8 +15,8 @@ public class MovimientoEnemigoView {
     }
 
     public void correrMovimiento(){
-        this.movimiento.play();
         ((ImageView)this.movimiento.getNode()).setImage(this.imagenMovimiento);
+        this.movimiento.play();
     }
 
 }

@@ -12,7 +12,7 @@ public class EstadoVivo implements EstadoEnemigo {
     @Override
     public void recibirDanio(int unDanio) {
         this.enemigo.energia -= unDanio;
-        this.enemigo.notificarObservadores("Enemigo " + this.toString() + " recibe danio " + unDanio + " Vida restante " + this.enemigo.energia);
+        this.enemigo.notificarObservadores("Enemigo recibe danio " + unDanio + ", vida restante " + this.enemigo.energia);
         if (this.enemigo.energia <= 0) {
             this.enemigo.nuevoEstado(new EstadoMuerto());
         }

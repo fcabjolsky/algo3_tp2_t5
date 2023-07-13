@@ -11,7 +11,8 @@ public class TorreEnConstruccion extends  Observable implements EstadoTorre {
     }
 
     @Override
-    public void defender(Enemigo enemigo, int danio){}
+    public void defender(Pasarela pasarela, int danio){
+    }
 
     @Override
     public EstadoTorre avanzarTurno() {

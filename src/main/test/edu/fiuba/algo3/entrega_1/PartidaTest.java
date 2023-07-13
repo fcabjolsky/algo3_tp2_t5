@@ -3,6 +3,7 @@ package edu.fiuba.algo3.entrega_1;
 import edu.fiuba.algo3.modelo.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,9 @@ public class PartidaTest {
         pasarelas.add(pasarela);
 
         Mapa mapa = new Mapa(pasarelas, new ArrayList<Rocoso>(), new ArrayList<Tierra>());
-        Partida partida = new Partida(mapa, new Jugador("Jugador1"), new Logger());
+        Jugador jugador = new Jugador("Jugador1");
+        Turno turno = new Turno(jugador, mapa, new AgregadorDeEnemigos("src/main/java/edu/fiuba/algo3/modelo/enemigosV2.json", mapa));
+        Partida partida = new Partida(turno);
 
         String stringEsperado = "GANASTE";
 
