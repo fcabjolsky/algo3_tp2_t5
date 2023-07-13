@@ -1,4 +1,6 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.enemigo;
+
+import edu.fiuba.algo3.modelo.*;
 
 public abstract class Enemigo extends Observable {
     protected int energia;
@@ -12,8 +14,13 @@ public abstract class Enemigo extends Observable {
     protected AtaqueEnemigo ataqueEnemigo;
     private EstadoEnemigo estadoEnemigo;
 
-    public Enemigo() {
+    public Enemigo(int danio, int velocidad, int energia, AtaqueEnemigo ataqueEnemigo) {
+        this.danio = danio;
+        this.velocidad = velocidad;
+        this.energia = energia;
+        this.ataqueEnemigo = ataqueEnemigo;
         this.nuevoEstado(new EstadoVivo());
+        this.estado = new EnMovimiento(velocidad);
     }
 
     public void nuevoEstado(EstadoEnemigo nuevoEstado) {
@@ -33,7 +40,7 @@ public abstract class Enemigo extends Observable {
 
     public int morir() {
         return this.estadoEnemigo.morir();
-    } //el nombre del mensaje morir() tal vez podria cambiar a uno mas representativo
+    }
 
     public abstract int darRecompensa();
 

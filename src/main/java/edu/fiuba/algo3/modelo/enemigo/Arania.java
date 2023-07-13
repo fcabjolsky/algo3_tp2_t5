@@ -1,14 +1,11 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.enemigo;
+
+import edu.fiuba.algo3.modelo.Jugador;
 
 public class Arania extends Enemigo {
 
     public Arania() {
-        super();
-        this.energia = 2;
-        this.velocidad = 2;
-        this.estado = new EnMovimiento(this.velocidad);
-        this.ataqueEnemigo = new AtaqueEnemigoNormal();
-        this.danio = 2;
+        super(2, 2,2 , new AtaqueEnemigoNormal());
     }
   
     public int darRecompensa(){

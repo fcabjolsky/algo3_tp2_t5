@@ -1,5 +1,7 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.defensa;
 
+
+import edu.fiuba.algo3.modelo.Posicion;
 
 public class Rango {
     private int radio;

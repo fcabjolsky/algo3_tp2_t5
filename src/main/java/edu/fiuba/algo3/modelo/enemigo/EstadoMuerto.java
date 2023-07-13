@@ -1,6 +1,11 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.enemigo;
 
-public class EstadoMuerto implements EstadoEnemigo{
+import edu.fiuba.algo3.modelo.Transitable;
+import edu.fiuba.algo3.modelo.enemigo.Enemigo;
+import edu.fiuba.algo3.modelo.enemigo.EstadoEliminado;
+import edu.fiuba.algo3.modelo.enemigo.EstadoEnemigo;
+
+public class EstadoMuerto implements EstadoEnemigo {
 
     private Enemigo enemigo;
 

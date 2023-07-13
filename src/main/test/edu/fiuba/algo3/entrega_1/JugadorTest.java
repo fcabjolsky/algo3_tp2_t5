@@ -2,6 +2,11 @@
 package edu.fiuba.algo3.entrega_1;
 import edu.fiuba.algo3.modelo.*;
 
+import edu.fiuba.algo3.modelo.defensa.TorreBlanca;
+import edu.fiuba.algo3.modelo.defensa.TorrePlateada;
+import edu.fiuba.algo3.modelo.enemigo.Arania;
+import edu.fiuba.algo3.modelo.enemigo.ContadorDeMuertesDeHormiga;
+import edu.fiuba.algo3.modelo.enemigo.Hormiga;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

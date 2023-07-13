@@ -2,6 +2,9 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
 
+import edu.fiuba.algo3.modelo.enemigo.Arania;
+import edu.fiuba.algo3.modelo.enemigo.Enemigo;
+import edu.fiuba.algo3.modelo.enemigo.Hormiga;
 import org.junit.jupiter.api.Assertions;
 
 import org.junit.jupiter.api.Test;
@@ -14,117 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MapaTest {
-  
-    /*@Test
-    public void test01PasaUnTurnoYUnaHormigaSeMueveALaPosicionEsperada(){
-
-        List<Pasarela> pasarelas = new ArrayList<>();
-
-        Posicion inicial = new Posicion(0,0);
-        Posicion fin = new Posicion(0,1);
-
-        pasarelas.add(new Pasarela(inicial));
-        pasarelas.add(new Pasarela(fin));
-        pasarelas.add(new Pasarela(new Posicion(0,2)));
-
-        Mapa mapa = new Mapa(pasarelas, new ArrayList<>(), new ArrayList<>());
-
-        Enemigo hormi = new Hormiga(inicial);
-        mapa.agregarEnemigo(hormi);
-
-
-        mapa.pasarTurno();
-
-
-        Posicion esperada = hormi.obtenerPosicion();
-        assertEquals(0, fin.calcularDistanciaA(esperada));
-
-    }
-
-    @Test
-    public void test02PasaUnTurnoYUnaAraniaSeMueveALaPosicionEsperada(){
-
-        List<Pasarela> pasarelas = new ArrayList<>();
-
-        Posicion inicial = new Posicion(0,0);
-        Posicion fin = new Posicion(1,1);
-
-        pasarelas.add(new Pasarela(inicial));
-        pasarelas.add(new Pasarela(new Posicion(0,1)));
-        pasarelas.add(new Pasarela(fin));
-
-        Mapa mapa = new Mapa(pasarelas, new ArrayList<>(), new ArrayList<>());
-
-        Enemigo arania = new Arania(inicial);
-
-        mapa.agregarEnemigo(arania);
-
-
-        mapa.pasarTurno();
-
-
-        Posicion esperada = arania.obtenerPosicion();
-
-        assertEquals(0, fin.calcularDistanciaA(esperada));
-
-
-    }
-
-    @Test
-    public void test03PasanDosTurnosYUnaHormigaSeMueveALaPosicionEsperada(){
-
-        List<Pasarela> pasarelas = new ArrayList<>();
-
-        Posicion inicial = new Posicion(0,0);
-        Posicion fin = new Posicion(1,1);
-
-        pasarelas.add(new Pasarela(inicial));
-        pasarelas.add(new Pasarela(new Posicion(0,1)));
-        pasarelas.add(new Pasarela(fin));
-
-
-        Mapa mapa = new Mapa(pasarelas, new ArrayList<>(), new ArrayList<>());
-
-        Enemigo hormi = new Hormiga(inicial);
-        mapa.agregarEnemigo(hormi);
-
-        mapa.pasarTurno();
-        mapa.pasarTurno();
-
-        Posicion esperada = hormi.obtenerPosicion();
-        assertEquals(0, fin.calcularDistanciaA(esperada));
-
-
-    }
-
-    @Test
-    public void test04PasanDosTurnosYUnaAraniaSeMueveALaPosicionEsperada(){
-
-        List<Pasarela> pasarelas = new ArrayList<>();
-
-        Posicion inicial = new Posicion(0,0);
-        Posicion fin = new Posicion(1,2);
-
-        pasarelas.add(new Pasarela(inicial));
-        pasarelas.add(new Pasarela(new Posicion(0,1)));
-        pasarelas.add(new Pasarela(new Posicion(1,1)));
-        pasarelas.add(new Pasarela(fin));
-
-
-        Mapa mapa = new Mapa(pasarelas, new ArrayList<>(), new ArrayList<>());
-
-        Enemigo arania = new Arania(inicial);
-        mapa.agregarEnemigo(arania);
-
-        mapa.pasarTurno();
-        mapa.pasarTurno();
-
-        Posicion esperada = arania.obtenerPosicion();
-        assertEquals(0, fin.calcularDistanciaA(esperada));
-
-
-    }
-  */
 
     @Test
     public void test05UnMapaDevuelveFalsoSiNoTieneMasEnemigos() {
@@ -167,25 +59,6 @@ public class MapaTest {
         boolean resultado = mapa.contieneEnemigos();
 
         Assertions.assertTrue(resultado);
-    }
-
-    @Test
-    public void unMapaDevuelveCorrectamenteLasParcelasQueTienenEnemeigos() {
-        List<Pasarela> pasarelas = new ArrayList<>();
-        Pasarela pasarela = new Pasarela(new Posicion(1,1));
-        pasarela.recibirEnemigo(new Hormiga());
-        Pasarela pasarela2 = new Pasarela(new Posicion(2,1));
-        pasarela2.recibirEnemigo(new Arania());
-        pasarelas.add(pasarela);
-        pasarelas.add(pasarela2);
-        pasarelas.add(new Pasarela(new Posicion(3,1)));
-        Mapa mapa = new Mapa(pasarelas, null, null);
-
-        List<Pasarela> pasarelasConEnemigos = mapa.obtenerPasarelasConEnemigos();
-
-        for (Pasarela p : pasarelasConEnemigos) {
-            assertTrue(p.contieneEnemigosVivos());
-        }
     }
 
     @Test

@@ -1,15 +1,12 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.enemigo;
+
+import edu.fiuba.algo3.modelo.Jugador;
 
 public class Hormiga extends Enemigo {
 
     private ContadorDeMuertesDeHormiga contadorDeMuertesDeHormiga;
     public Hormiga() {
-        super();
-        this.energia = 1;
-        this.velocidad = 1;
-        this.estado = new EnMovimiento(this.velocidad);
-        this.ataqueEnemigo = new AtaqueEnemigoNormal();
-        this.danio = 1;
+        super(1, 1,1 , new AtaqueEnemigoNormal());
         this.contadorDeMuertesDeHormiga = ContadorDeMuertesDeHormiga.obtenerContador();
     }
 

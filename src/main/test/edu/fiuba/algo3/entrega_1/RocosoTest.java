@@ -3,6 +3,8 @@ package edu.fiuba.algo3.entrega_1;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.defensa.Torre;
+import edu.fiuba.algo3.modelo.defensa.TorreBlanca;
 import org.junit.jupiter.api.Test;
 
 public class RocosoTest {
