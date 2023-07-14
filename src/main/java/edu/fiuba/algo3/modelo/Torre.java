@@ -5,27 +5,35 @@ public abstract class Torre extends Observable implements Defensa, Turneable {
     protected int danio;
     protected EstadoTorre estado;
     protected int costo;
-    private final int tiempoDeConstruccion;
+    protected final int tiempoDeConstruccion;
 
-    public Torre (int tiempoDeConstruccion, int costo, int danio){
+
+    public Torre (int tiempoDeConstruccion, int costo, int danio, Rango rango, Observador observador){
         this.tiempoDeConstruccion = tiempoDeConstruccion;
-        this.estado = new TorreEnConstruccion(tiempoDeConstruccion);
+        this.nuevoEstado(new TorreEnConstruccion());
         this.costo = costo;
         this.danio = danio;
-    }
-
-    public Torre (int tiempoDeConstruccion, int costo, int danio, Observador observador){
-        this.tiempoDeConstruccion = tiempoDeConstruccion;
-        this.estado = new TorreEnConstruccion(tiempoDeConstruccion);
-        this.costo = costo;
-        this.danio = danio;
+        this.rango = rango;
         this.agregarObservador(observador);
     }
 
+    public Torre (int tiempoDeConstruccion, int costo, int danio, Rango rango){
+        this.tiempoDeConstruccion = tiempoDeConstruccion;
+        this.nuevoEstado(new TorreEnConstruccion());
+        this.costo = costo;
+        this.danio = danio;
+        this.rango = rango;
+    }
+
     protected void empezarAConstruir() {
-        TorreEnConstruccion torreEnConstruccion = new TorreEnConstruccion(tiempoDeConstruccion);
+        TorreEnConstruccion torreEnConstruccion = new TorreEnConstruccion();
         torreEnConstruccion.replicarObservadores(this);
-        this.estado = torreEnConstruccion;
+        this.nuevoEstado(torreEnConstruccion);
+    }
+
+    public void nuevoEstado(EstadoTorre nuevoEstado) {
+        this.estado = nuevoEstado;
+        this.estado.setTorre(this);
     }
 
     @Override
@@ -35,7 +43,7 @@ public abstract class Torre extends Observable implements Defensa, Turneable {
 
     @Override
     public void defender(Pasarela pasarela) {
-        this.estado.defender(pasarela, this.danio);
+        this.estado.defender(pasarela);
     }
 
     public boolean puedeConstruir(int creditos) {
@@ -44,11 +52,11 @@ public abstract class Torre extends Observable implements Defensa, Turneable {
 
     @Override
     public void avanzarTurno(){
-        estado = estado.avanzarTurno();
+        this.estado.avanzarTurno();
     }
 
     public boolean estaEnRango(Posicion unaPosicion) {
-        return this.rango.estaEnRango(unaPosicion); //esto podria pasar a ser responsabilidad de la defensa directamente
+        return this.rango.estaEnRango(unaPosicion);
     }
 }
 

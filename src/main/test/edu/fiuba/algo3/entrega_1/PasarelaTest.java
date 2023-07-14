@@ -18,13 +18,10 @@ public class PasarelaTest {
 	}
 	@Test
     public void noEsPosibleConstruirDefesasSobrePasarela() {
-    	//Arrange
-      Posicion p = new Posicion(0,0);
-		  Torre unaTorreBlanca = new TorreBlanca();
-    	Pasarela nuevoRocoso = new Pasarela(p);
-    	    	
-    	//Act - Assert
-    	
+		Posicion p = new Posicion(0,0);
+		Torre unaTorreBlanca = new TorreBlanca(new Posicion(0,0));
+	  	Pasarela nuevoRocoso = new Pasarela(p);
+
     	assertFalse(nuevoRocoso.agregarDefensa(unaTorreBlanca));
     }
 

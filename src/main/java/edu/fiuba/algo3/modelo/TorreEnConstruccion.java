@@ -2,28 +2,28 @@ package edu.fiuba.algo3.modelo;
 
 public class TorreEnConstruccion extends  Observable implements EstadoTorre {
 
-    private int numeroDeTurno;
-    private int tiempoDeConstruccion;
+    private Contador contador;
+    private Torre torre;
 
-    public TorreEnConstruccion(int tiempoDeConstruccion){
-        numeroDeTurno = 0;
-        this.tiempoDeConstruccion= tiempoDeConstruccion;
+    public void setTorre(Torre torre) {
+        this.torre = torre;
+    }
+
+    public TorreEnConstruccion(){
+        this.contador = new Contador();
     }
 
     @Override
-    public void defender(Pasarela pasarela, int danio){
-    }
+    public void defender(Pasarela pasarela){}
 
     @Override
-    public EstadoTorre avanzarTurno() {
-        numeroDeTurno++;
-        if(numeroDeTurno >= tiempoDeConstruccion){
+    public void avanzarTurno() {
+        contador.incrementar();
+        if(!(contador.esMenorA(this.torre.tiempoDeConstruccion))){
             this.notificarObservadores("Se termino de construir la torre");
             TorreConstruida torreConstruida = new TorreConstruida();
             torreConstruida.replicarObservadores(this);
-            return torreConstruida;
-        }else{
-            return this;
+            this.torre.nuevoEstado(torreConstruida);;
         }
     }
 }

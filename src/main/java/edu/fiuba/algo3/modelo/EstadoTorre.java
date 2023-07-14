@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
-public interface EstadoTorre {
+public interface EstadoTorre extends Turneable {
 
-    void defender(Pasarela pasarela, int danio);
+    void defender(Pasarela pasarela);
 
-    EstadoTorre avanzarTurno();
+    public void setTorre(Torre torre);
 }
